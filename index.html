@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi Evento</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 42px;
+        }
+
+        header p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            margin-bottom: 10px;
+        }
+
+        .mesas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .mesa {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .mesa h3 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .asientos {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .asiento {
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            margin: auto;
+            cursor: pointer;
+            font-weight: bold;
+            background: #2ecc71;
+            color: white;
+        }
+
+        .asiento:hover {
+            transform: scale(1.1);
+        }
+
+        .asiento.seleccionado {
+            background: #f1c40f;
+            color: #111;
+        }
+
+        .asiento.reservado {
+            background: #e74c3c;
+            cursor: not-allowed;
+        }
+
+        .leyenda {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .leyenda-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+        }
+
+        .verde {
+            background: #2ecc71;
+        }
+
+        .amarillo {
+            background: #f1c40f;
+        }
+
+        .rojo {
+            background: #e74c3c;
+        }
+
+        .resumen {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .resumen button {
+            background: #111;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 30px;
+            }
+
+            .mesas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>MI EVENTO</h1>
+    <p>Selecciona tus asientos</p>
+    <p>📅 Fecha del evento</p>
+    <p>📍 Lugar del evento</p>
+</header>
+
+<div class="container">
+
+    <div class="section-title">
+        <h2>Selecciona tus asientos</h2>
+        <p>Los asientos verdes están disponibles.</p>
+    </div>
+
+    <div class="leyenda">
+
+        <div class="leyenda-item">
+            <div class="color verde"></div>
+            Disponible
+        </div>
+
+        <div class="leyenda-item">
+            <div class="color amarillo"></div>
+            Seleccionado
+        </div>
+
+        <div class="leyenda-item">
+            <div class="color rojo"></div>
+            Reservado
+        </div>
+
+    </div>
+
+    <div id="mesas" class="mesas"></div>
+
+</div>
+
+<div class="resumen">
+
+    <strong>Asientos seleccionados:</strong>
+
+    <div id="seleccion">
+        Ninguno
+    </div>
+
+    <button onclick="continuar()">
+        CONTINUAR
+    </button>
+
+</div>
+
+<footer>
+    Sistema de reservas
+</footer>
+
+
+<script>
+
+    const totalMesas = 42;
+    const asientosPorMesa = 10;
+
+    const mesasContainer = document.getElementById("mesas");
+
+    let seleccionados = [];
+
+
+    // Crear las 42 mesas
+
+    for (let mesa = 1; mesa <= totalMesas; mesa++) {
+
+        const mesaDiv = document.createElement("div");
+
+        mesaDiv.className = "mesa";
+
+        const titulo = document.createElement("h3");
+
+        titulo.textContent = "MESA " + mesa;
+
+        mesaDiv.appendChild(titulo);
+
+
+        const asientosDiv = document.createElement("div");
+
+        asientosDiv.className = "asientos";
+
+
+        // Crear los 10 asientos
+
+        for (let asiento = 1; asiento <= asientosPorMesa; asiento++) {
+
+            const boton = document.createElement("button");
+
+            boton.className = "asiento";
+
+            boton.textContent = asiento;
+
+            boton.dataset.mesa = mesa;
+
+            boton.dataset.asiento = asiento;
+
+
+            boton.onclick = function() {
+
+                const id = mesa + "-" + asiento;
+
+
+                if (seleccionados.includes(id)) {
+
+                    seleccionados = seleccionados.filter(
+                        item => item !== id
+                    );
+
+                    boton.classList.remove("seleccionado");
+
+                } else {
+
+                    seleccionados.push(id);
+
+                    boton.classList.add("seleccionado");
+
+                }
+
+
+                actualizarSeleccion();
+
+            };
+
+
+            asientosDiv.appendChild(boton);
+
+        }
+
+
+        mesaDiv.appendChild(asientosDiv);
+
+        mesasContainer.appendChild(mesaDiv);
+
+    }
+
+
+    function actualizarSeleccion() {
+
+        const elemento = document.getElementById("seleccion");
+
+        if (seleccionados.length === 0) {
+
+            elemento.textContent = "Ninguno";
+
+        } else {
+
+            elemento.textContent =
+                seleccionados
+                .map(item => "Mesa " + item.split("-")[0] +
+                    " - Asiento " + item.split("-")[1])
+                .join(", ");
+
+        }
+
+    }
+
+
+    function continuar() {
+
+        if (seleccionados.length === 0) {
+
+            alert("Selecciona al menos un asiento.");
+
+            return;
+
+        }
+
+
+        alert(
+            "Has seleccionado: " +
+            seleccionados.join(", ")
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
