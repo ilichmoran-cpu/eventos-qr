@@ -528,6 +528,8 @@ let seleccionados = [];
 
 async function cargarDatos() {
 
+console.log("1. cargarDatos() comenzó");
+
 try {
 
 document.getElementById("estado")
@@ -535,11 +537,17 @@ document.getElementById("estado")
 "Cargando asientos...";
 
 
+console.log("2. Consultando mesas...");
+
+
 const resultadoMesas =
 await db
 .from("mesas")
 .select("*")
 .order("numero");
+
+
+console.log("3. Resultado mesas:", resultadoMesas);
 
 
 if (resultadoMesas.error)
@@ -550,11 +558,20 @@ mesas =
 resultadoMesas.data;
 
 
+console.log("4. Mesas cargadas:", mesas.length);
+
+
+console.log("5. Consultando asientos...");
+
+
 const resultadoAsientos =
 await db
 .from("asientos")
 .select("*")
 .order("id");
+
+
+console.log("6. Resultado asientos:", resultadoAsientos);
 
 
 if (resultadoAsientos.error)
@@ -565,7 +582,13 @@ asientos =
 resultadoAsientos.data;
 
 
+console.log("7. Asientos cargados:", asientos.length);
+
+
 mostrarMesas();
+
+
+console.log("8. mostrarMesas() terminó");
 
 
 document.getElementById("estado")
@@ -573,11 +596,12 @@ document.getElementById("estado")
 "Selecciona tus asientos";
 
 
-}
+console.log("9. Todo correcto");
 
-catch(error) {
 
-console.error(error);
+} catch(error) {
+
+console.error("ERROR EN cargarDatos:", error);
 
 document.getElementById("estado")
 .textContent =
