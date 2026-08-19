@@ -3,290 +3,285 @@
 
 <head>
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>La Bikina Tickets - Reserva de Asientos</title>
-
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f5f5;
-            color: #222;
-        }
-
-        header {
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 55px 20px;
-        }
-
-        header h1 {
-            margin: 0 0 12px;
-            font-size: 42px;
-        }
-
-        header p {
-            margin: 7px 0;
-            font-size: 18px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px 120px;
-        }
-
-        .titulo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .titulo h2 {
-            margin-bottom: 10px;
-        }
-
-        .estado {
-            text-align: center;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-
-        .mesas {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(230px, 1fr));
-
-            gap: 25px;
-        }
-
-        .mesa {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-
-            box-shadow:
-                0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .mesa h3 {
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-
-        .asientos {
-            display: grid;
-            grid-template-columns:
-                repeat(5, 1fr);
-
-            gap: 12px;
-        }
-
-        .asiento {
-
-            width: 40px;
-            height: 40px;
-
-            margin: auto;
-
-            border: none;
-            border-radius: 50%;
-
-            background: #2ecc71;
-            color: white;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: 0.15s;
-        }
-
-        .asiento:hover {
-            transform: scale(1.1);
-        }
-
-        .asiento.seleccionado {
-
-            background: #f1c40f;
-            color: #111;
-
-            transform: scale(1.08);
-        }
-
-        .asiento.reservado {
-
-            background: #e74c3c;
-
-            color: white;
-
-            cursor: not-allowed;
-
-            opacity: 0.75;
-        }
-
-        .asiento.vendido {
-
-            background: #8e44ad;
-
-            cursor: not-allowed;
-        }
-
-        .asiento.utilizado {
-
-            background: #555;
-
-            cursor: not-allowed;
-        }
-
-        .leyenda {
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            gap: 25px;
-
-            flex-wrap: wrap;
-
-            margin: 30px 0;
-        }
-
-        .leyenda-item {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-        }
-
-        .circulo {
-
-            width: 18px;
-            height: 18px;
-
-            border-radius: 50%;
-        }
-
-        .disponible {
-            background: #2ecc71;
-        }
-
-        .seleccionado-color {
-            background: #f1c40f;
-        }
-
-        .reservado-color {
-            background: #e74c3c;
-        }
-
-        .resumen {
-
-            position: fixed;
-
-            left: 0;
-            right: 0;
-            bottom: 0;
-
-            background: white;
-
-            padding: 18px 20px;
-
-            box-shadow:
-                0 -5px 20px rgba(0,0,0,0.15);
-
-            text-align: center;
-
-            z-index: 100;
-        }
-
-        .resumen strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        #seleccion {
-            margin-bottom: 12px;
-        }
-
-        .boton-continuar {
-
-            background: #111;
-
-            color: white;
-
-            border: none;
-
-            padding: 14px 30px;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-
-            font-size: 16px;
-        }
-
-        .boton-continuar:hover {
-            background: #333;
-        }
-
-        .error {
-
-            background: #ffe5e5;
-
-            color: #b00000;
-
-            padding: 20px;
-
-            border-radius: 10px;
-
-            text-align: center;
-
-            margin: 20px 0;
-        }
-
-        footer {
-
-            text-align: center;
-
-            padding: 40px;
-
-            color: #777;
-        }
-
-        @media (max-width: 600px) {
-
-            header h1 {
-                font-size: 30px;
-            }
-
-            .mesas {
-                grid-template-columns: 1fr;
-            }
-
-            .asiento {
-                width: 42px;
-                height: 42px;
-            }
-        }
-
-    </style>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Reserva de Asientos</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+header {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 40px;
+}
+
+header p {
+    margin: 6px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 0 20px 150px;
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.estado {
+    text-align: center;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.mesas {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+.mesa {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.mesa h3 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.asientos {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.asiento {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    border: none;
+    border-radius: 50%;
+    background: #2ecc71;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.asiento:hover {
+    transform: scale(1.08);
+}
+
+.asiento.seleccionado {
+    background: #f1c40f;
+    color: #111;
+}
+
+.asiento.reservado {
+    background: #e74c3c;
+    cursor: not-allowed;
+}
+
+.asiento.vendido {
+    background: #8e44ad;
+    cursor: not-allowed;
+}
+
+.asiento.utilizado {
+    background: #555;
+    cursor: not-allowed;
+}
+
+.leyenda {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin: 25px;
+}
+
+.leyenda-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.circulo {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+.verde {
+    background: #2ecc71;
+}
+
+.amarillo {
+    background: #f1c40f;
+}
+
+.rojo {
+    background: #e74c3c;
+}
+
+.resumen {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 18px;
+    box-shadow: 0 -5px 20px rgba(0,0,0,.15);
+    text-align: center;
+    z-index: 100;
+}
+
+.boton {
+    background: #111;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.boton:hover {
+    background: #333;
+}
+
+/* MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 500;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.65);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-contenido {
+    background: white;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.modal-contenido h2 {
+    margin-top: 0;
+}
+
+.campo {
+    margin-bottom: 18px;
+}
+
+.campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.campo input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+.botones-modal {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.boton-cancelar {
+    flex: 1;
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    background: #ddd;
+}
+
+.boton-confirmar {
+    flex: 2;
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    background: #111;
+    color: white;
+    font-size: 16px;
+}
+
+.mensaje-exito {
+    text-align: center;
+}
+
+.codigo {
+    background: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.error {
+    background: #ffe5e5;
+    color: #b00000;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+@media(max-width:600px) {
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    .mesas {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -296,108 +291,172 @@
 
 <header>
 
-    <h1>CONCIERTO LOS INQUIETOS DE OLANCHO</h1>
+<h1>MI EVENTO</h1>
 
-    <p>Reserva tus asientos</p>
+<p>Reserva tus asientos</p>
 
-    <p>📅 30 DE OCTUBRE</p>
+<p>📅 Fecha del evento</p>
 
-    <p>📍 LA BIKINA</p>
+<p>📍 Lugar del evento</p>
 
 </header>
 
 
 <div class="container">
 
+<div class="titulo">
 
-    <div class="titulo">
+<h2>Selecciona tus asientos</h2>
 
-        <h2>Selecciona tus asientos</h2>
+<p>
+Los asientos verdes están disponibles.
+</p>
 
-        <p>
-            Los asientos verdes están disponibles.
-        </p>
-
-    </div>
-
-
-    <div class="leyenda">
-
-        <div class="leyenda-item">
-
-            <div class="circulo disponible"></div>
-
-            Disponible
-
-        </div>
+</div>
 
 
-        <div class="leyenda-item">
+<div class="leyenda">
 
-            <div class="circulo seleccionado-color"></div>
+<div class="leyenda-item">
+<div class="circulo verde"></div>
+Disponible
+</div>
 
-            Seleccionado
+<div class="leyenda-item">
+<div class="circulo amarillo"></div>
+Seleccionado
+</div>
 
-        </div>
+<div class="leyenda-item">
+<div class="circulo rojo"></div>
+Reservado
+</div>
 
-
-        <div class="leyenda-item">
-
-            <div class="circulo reservado-color"></div>
-
-            Reservado
-
-        </div>
-
-    </div>
-
-
-    <div id="estado"
-         class="estado">
-
-        Cargando mesas...
-
-    </div>
+</div>
 
 
-    <div id="error"></div>
+<div id="estado"
+     class="estado">
+
+Cargando asientos...
+
+</div>
 
 
-    <div id="mesas"
-         class="mesas">
+<div id="mesas"
+     class="mesas">
 
-    </div>
-
+</div>
 
 </div>
 
 
 <div class="resumen">
 
-    <strong>
-        Asientos seleccionados
-    </strong>
+<strong>
+Asientos seleccionados:
+</strong>
 
-    <div id="seleccion">
-        Ninguno
-    </div>
+<div id="seleccion">
+Ninguno
+</div>
 
-    <button
-        class="boton-continuar"
-        onclick="continuar()">
+<br>
 
-        CONTINUAR
+<button class="boton"
+        onclick="abrirFormulario()">
 
-    </button>
+CONTINUAR
+
+</button>
 
 </div>
 
 
-<footer>
+<!-- FORMULARIO -->
 
-    Sistema de reservas
+<div id="modal"
+     class="modal">
 
-</footer>
+<div class="modal-contenido"
+     id="modalContenido">
+
+<h2>Datos del comprador</h2>
+
+<p>
+Completa tus datos para realizar la reserva.
+</p>
+
+
+<div id="mensajeError"></div>
+
+
+<div class="campo">
+
+<label>
+Nombre completo
+</label>
+
+<input
+type="text"
+id="nombre"
+placeholder="Nombre completo">
+
+</div>
+
+
+<div class="campo">
+
+<label>
+Teléfono
+</label>
+
+<input
+type="tel"
+id="telefono"
+placeholder="9999-9999">
+
+</div>
+
+
+<div class="campo">
+
+<label>
+Correo electrónico
+</label>
+
+<input
+type="email"
+id="correo"
+placeholder="correo@email.com">
+
+</div>
+
+
+<div class="botones-modal">
+
+<button
+class="boton-cancelar"
+onclick="cerrarFormulario()">
+
+Cancelar
+
+</button>
+
+
+<button
+class="boton-confirmar"
+onclick="confirmarReserva()">
+
+CONFIRMAR RESERVA
+
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 
 
@@ -405,44 +464,28 @@
 
 
 /* =====================================================
-   CONFIGURACIÓN SUPABASE
+   SUPABASE
    ===================================================== */
 
 
 const SUPABASE_URL =
-    "https://ysismkibffhzouxacaxv.supabase.co";
+"https://ysismkibffhzouxacaxv.supabase.co";
 
 
 /*
-   IMPORTANTE:
-
-   Aquí debes pegar TU Publishable key.
-
-   NO pongas la service_role.
-
-   Debe comenzar aproximadamente con:
-
-   sb_publishable_...
-
-   o utiliza la Publishable key que aparece
-   actualmente en Supabase.
+   PEGA AQUÍ TU PUBLISHABLE KEY
 */
 
 
 const SUPABASE_KEY =
-    "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
-
-
-const { createClient } =
-    supabase;
+"sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
 
 
 const db =
-    createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
 /* =====================================================
@@ -450,12 +493,11 @@ const db =
    ===================================================== */
 
 
-let seleccionados = [];
+let mesas = [];
 
 let asientos = [];
 
-let mesas = [];
-
+let seleccionados = [];
 
 
 /* =====================================================
@@ -465,109 +507,64 @@ let mesas = [];
 
 async function cargarDatos() {
 
+try {
 
-    const estado =
-        document.getElementById("estado");
-
-
-    try {
-
-
-        estado.textContent =
-            "Conectando con el sistema...";
+document.getElementById("estado")
+.textContent =
+"Cargando asientos...";
 
 
-        /*
-           Obtener mesas
-        */
+const resultadoMesas =
+await db
+.from("mesas")
+.select("*")
+.order("numero");
 
 
-        const resultadoMesas =
-            await db
-                .from("mesas")
-                .select("*")
-                .order("numero");
+if (resultadoMesas.error)
+throw resultadoMesas.error;
 
 
-        if (resultadoMesas.error) {
-
-            throw resultadoMesas.error;
-
-        }
+mesas =
+resultadoMesas.data;
 
 
-        mesas =
-            resultadoMesas.data;
+const resultadoAsientos =
+await db
+.from("asientos")
+.select("*")
+.order("id");
 
 
-        /*
-           Obtener asientos
-        */
+if (resultadoAsientos.error)
+throw resultadoAsientos.error;
 
 
-        const resultadoAsientos =
-            await db
-                .from("asientos")
-                .select("*")
-                .order("numero");
+asientos =
+resultadoAsientos.data;
 
 
-        if (resultadoAsientos.error) {
-
-            throw resultadoAsientos.error;
-
-        }
+mostrarMesas();
 
 
-        asientos =
-            resultadoAsientos.data;
+document.getElementById("estado")
+.textContent =
+"Selecciona tus asientos";
 
-
-        /*
-           Crear pantalla
-        */
-
-
-        mostrarMesas();
-
-
-        estado.textContent =
-            "Selecciona tus asientos";
-
-
-    }
-
-    catch (error) {
-
-
-        console.error(error);
-
-
-        estado.textContent =
-            "No se pudo conectar con el sistema.";
-
-
-        document.getElementById("error")
-            .innerHTML = `
-
-                <div class="error">
-
-                    Ocurrió un error
-                    al cargar los asientos.
-
-                    <br><br>
-
-                    Revisa la configuración
-                    de Supabase.
-
-                </div>
-
-            `;
-
-    }
 
 }
 
+catch(error) {
+
+console.error(error);
+
+document.getElementById("estado")
+.textContent =
+"No se pudo cargar el sistema.";
+
+}
+
+}
 
 
 /* =====================================================
@@ -577,410 +574,549 @@ async function cargarDatos() {
 
 function mostrarMesas() {
 
+const contenedor =
+document.getElementById("mesas");
 
-    const contenedor =
-        document.getElementById("mesas");
-
-
-    contenedor.innerHTML = "";
+contenedor.innerHTML = "";
 
 
-    mesas.forEach(mesa => {
+mesas.forEach(mesa => {
+
+const mesaDiv =
+document.createElement("div");
+
+mesaDiv.className =
+"mesa";
 
 
-        const mesaDiv =
-            document.createElement("div");
+const titulo =
+document.createElement("h3");
+
+titulo.textContent =
+"MESA " + mesa.numero;
 
 
-        mesaDiv.className =
-            "mesa";
+mesaDiv.appendChild(titulo);
 
 
-        const titulo =
-            document.createElement("h3");
+const asientosDiv =
+document.createElement("div");
+
+asientosDiv.className =
+"asientos";
 
 
-        titulo.textContent =
-            "MESA " + mesa.numero;
+const asientosMesa =
+asientos.filter(
+a => a.mesa_id === mesa.id
+);
 
 
-        mesaDiv.appendChild(titulo);
+asientosMesa.forEach(asiento => {
 
 
-        const asientosDiv =
-            document.createElement("div");
+const boton =
+document.createElement("button");
+
+boton.className =
+"asiento";
+
+boton.textContent =
+asiento.numero;
 
 
-        asientosDiv.className =
-            "asientos";
+actualizarEstadoVisual(
+boton,
+asiento
+);
 
 
-        /*
-           Buscar los 10 asientos
-           pertenecientes a esta mesa.
-        */
+boton.onclick =
+() => seleccionarAsiento(
+asiento,
+boton
+);
 
 
-        const asientosMesa =
-            asientos.filter(
-                asiento =>
-                    asiento.mesa_id === mesa.id
-            );
+asientosDiv.appendChild(
+boton
+);
 
 
-        asientosMesa.forEach(asiento => {
+});
 
 
-            const boton =
-                document.createElement("button");
+mesaDiv.appendChild(
+asientosDiv
+);
+
+contenedor.appendChild(
+mesaDiv
+);
 
 
-            boton.className =
-                "asiento";
-
-
-            boton.textContent =
-                asiento.numero;
-
-
-            boton.dataset.id =
-                asiento.id;
-
-
-            boton.dataset.mesa =
-                mesa.numero;
-
-
-            boton.dataset.asiento =
-                asiento.numero;
-
-
-            /*
-               Mostrar estado real
-            */
-
-
-            actualizarColor(
-                boton,
-                asiento
-            );
-
-
-            /*
-               Evento click
-            */
-
-
-            boton.onclick =
-                function() {
-
-                    seleccionarAsiento(
-                        asiento,
-                        boton
-                    );
-
-                };
-
-
-            asientosDiv.appendChild(
-                boton
-            );
-
-
-        });
-
-
-        mesaDiv.appendChild(
-            asientosDiv
-        );
-
-
-        contenedor.appendChild(
-            mesaDiv
-        );
-
-
-    });
+});
 
 }
 
 
-
 /* =====================================================
-   COLOR DEL ASIENTO
+   ESTADO VISUAL
    ===================================================== */
 
 
-function actualizarColor(
-    boton,
-    asiento
+function actualizarEstadoVisual(
+boton,
+asiento
 ) {
 
 
-    boton.classList.remove(
-        "reservado",
-        "vendido",
-        "utilizado",
-        "seleccionado"
-    );
+boton.classList.remove(
+"reservado",
+"vendido",
+"utilizado"
+);
 
 
-    if (
-        asiento.estado ===
-        "reservado"
-    ) {
+if (
+asiento.estado === "reservado"
+) {
 
-        boton.classList.add(
-            "reservado"
-        );
+boton.classList.add(
+"reservado"
+);
 
-        boton.disabled = true;
+boton.disabled = true;
 
-    }
+}
 
+else if (
+asiento.estado === "vendido"
+) {
 
-    else if (
-        asiento.estado ===
-        "vendido"
-    ) {
+boton.classList.add(
+"vendido"
+);
 
-        boton.classList.add(
-            "vendido"
-        );
+boton.disabled = true;
 
-        boton.disabled = true;
+}
 
-    }
+else if (
+asiento.estado === "utilizado"
+) {
 
+boton.classList.add(
+"utilizado"
+);
 
-    else if (
-        asiento.estado ===
-        "utilizado"
-    ) {
+boton.disabled = true;
 
-        boton.classList.add(
-            "utilizado"
-        );
+}
 
-        boton.disabled = true;
+else {
 
-    }
+boton.disabled = false;
 
-
-    else {
-
-        boton.disabled = false;
-
-    }
-
+}
 
 }
 
 
-
 /* =====================================================
-   SELECCIONAR ASIENTO
+   SELECCIONAR
    ===================================================== */
 
 
 function seleccionarAsiento(
-    asiento,
-    boton
+asiento,
+boton
 ) {
 
 
-    /*
-       No permitir seleccionar
-       asientos que ya no estén disponibles.
-    */
+if (
+asiento.estado !== "disponible"
+) return;
 
 
-    if (
-        asiento.estado !==
-        "disponible"
-    ) {
-
-        return;
-
-    }
+const existe =
+seleccionados.find(
+a => a.id === asiento.id
+);
 
 
-    const existe =
-        seleccionados.find(
-            item =>
-                item.id === asiento.id
-        );
+if (existe) {
 
 
-    if (existe) {
+seleccionados =
+seleccionados.filter(
+a => a.id !== asiento.id
+);
 
 
-        /*
-           Quitar selección
-        */
+boton.classList.remove(
+"seleccionado"
+);
 
 
-        seleccionados =
-            seleccionados.filter(
-                item =>
-                    item.id !== asiento.id
-            );
+}
+
+else {
 
 
-        boton.classList.remove(
-            "seleccionado"
-        );
+seleccionados.push(
+asiento
+);
 
 
-    }
+boton.classList.add(
+"seleccionado"
+);
 
-    else {
-
-
-        /*
-           Agregar selección
-        */
-
-
-        seleccionados.push({
-
-            id: asiento.id,
-
-            mesa:
-                obtenerNumeroMesa(
-                    asiento.mesa_id
-                ),
-
-            asiento:
-                asiento.numero
-
-        });
-
-
-        boton.classList.add(
-            "seleccionado"
-        );
-
-
-    }
-
-
-    actualizarSeleccion();
 
 }
 
 
+actualizarResumen();
+
+}
+
 
 /* =====================================================
-   OBTENER NÚMERO DE MESA
+   RESUMEN
    ===================================================== */
 
 
-function obtenerNumeroMesa(
-    mesaId
+function actualizarResumen() {
+
+
+const elemento =
+document.getElementById(
+"seleccion"
+);
+
+
+if (
+seleccionados.length === 0
 ) {
 
+elemento.textContent =
+"Ninguno";
 
-    const mesa =
-        mesas.find(
-            m =>
-                m.id === mesaId
-        );
-
-
-    return mesa
-        ? mesa.numero
-        : "?";
+return;
 
 }
 
 
+elemento.textContent =
+seleccionados
+.map(a => {
+
+const mesa =
+mesas.find(
+m => m.id === a.mesa_id
+);
+
+return "Mesa " +
+mesa.numero +
+" - Asiento " +
+a.numero;
+
+})
+.join(" | ");
+
+}
+
 
 /* =====================================================
-   ACTUALIZAR RESUMEN
+   ABRIR FORMULARIO
    ===================================================== */
 
 
-function actualizarSeleccion() {
+function abrirFormulario() {
 
 
-    const elemento =
-        document.getElementById(
-            "seleccion"
-        );
+if (
+seleccionados.length === 0
+) {
 
+alert(
+"Selecciona al menos un asiento."
+);
 
-    if (
-        seleccionados.length === 0
-    ) {
-
-        elemento.textContent =
-            "Ninguno";
-
-        return;
-
-    }
-
-
-    elemento.textContent =
-        seleccionados
-            .map(
-                item =>
-                    "Mesa " +
-                    item.mesa +
-                    " - Asiento " +
-                    item.asiento
-            )
-            .join(" | ");
+return;
 
 }
 
 
+document.getElementById(
+"mensajeError"
+).innerHTML = "";
+
+
+document.getElementById(
+"modal"
+).style.display =
+"block";
+
+}
+
 
 /* =====================================================
-   CONTINUAR
+   CERRAR
    ===================================================== */
 
 
-function continuar() {
+function cerrarFormulario() {
+
+document.getElementById(
+"modal"
+).style.display =
+"none";
+
+}
 
 
-    if (
-        seleccionados.length === 0
-    ) {
-
-        alert(
-            "Selecciona al menos un asiento."
-        );
-
-        return;
-
-    }
+/* =====================================================
+   CREAR RESERVA
+   ===================================================== */
 
 
-    alert(
+async function confirmarReserva() {
 
-        "Asientos seleccionados:\n\n" +
 
-        seleccionados
-            .map(
-                item =>
-                    "Mesa " +
-                    item.mesa +
-                    " - Asiento " +
-                    item.asiento
-            )
-            .join("\n")
+const nombre =
+document.getElementById(
+"nombre"
+).value.trim();
 
-    );
+
+const telefono =
+document.getElementById(
+"telefono"
+).value.trim();
+
+
+const correo =
+document.getElementById(
+"correo"
+).value.trim();
+
+
+const mensaje =
+document.getElementById(
+"mensajeError"
+);
+
+
+mensaje.innerHTML = "";
+
+
+if (
+nombre === "" ||
+telefono === "" ||
+correo === ""
+) {
+
+mensaje.innerHTML = `
+<div class="error">
+Completa todos los campos.
+</div>
+`;
+
+return;
+
+}
+
+
+const boton =
+document.querySelector(
+".boton-confirmar"
+);
+
+
+boton.disabled = true;
+
+boton.textContent =
+"Procesando...";
+
+
+try {
+
+
+/*
+   Crear arreglo de IDs
+*/
+
+
+const ids =
+seleccionados.map(
+a => a.id
+);
+
+
+/*
+   Llamar a la función
+   crear_reserva de Supabase
+*/
+
+
+const resultado =
+await db.rpc(
+"crear_reserva",
+{
+
+p_nombre_cliente:
+nombre,
+
+p_telefono:
+telefono,
+
+p_email:
+correo,
+
+p_asientos:
+ids
+
+}
+);
+
+
+if (
+resultado.error
+) {
+
+throw resultado.error;
+
+}
+
+
+const datos =
+resultado.data;
+
+
+/*
+   Mostrar resultado
+*/
+
+
+let codigo =
+"Reserva creada";
+
+
+if (
+typeof datos === "object" &&
+datos !== null
+) {
+
+codigo =
+datos.codigo_reserva ||
+datos.codigo ||
+datos.reserva_id ||
+"Reserva creada";
+
+}
+
+
+document.getElementById(
+"modalContenido"
+).innerHTML = `
+
+<div class="mensaje-exito">
+
+<h2>✅ Reserva realizada</h2>
+
+<p>
+Tu reserva fue registrada correctamente.
+</p>
+
+<div class="codigo">
+${codigo}
+</div>
+
+<p>
+Guarda este código.
+</p>
+
+<button
+class="boton"
+onclick="location.reload()">
+
+FINALIZAR
+
+</button>
+
+</div>
+
+`;
+
+
+/*
+   Actualizar estados localmente
+*/
+
+
+seleccionados.forEach(
+asiento => {
+
+asiento.estado =
+"reservado";
+
+});
+
+
+seleccionados = [];
 
 
 }
 
 
+catch(error) {
+
+
+console.error(error);
+
+
+mensaje.innerHTML = `
+
+<div class="error">
+
+No fue posible realizar
+la reserva.
+
+<br><br>
+
+Es posible que uno de los
+asientos haya sido reservado
+por otra persona.
+
+</div>
+
+`;
+
+
+boton.disabled = false;
+
+boton.textContent =
+"CONFIRMAR RESERVA";
+
+
+/*
+   Volver a consultar
+   los asientos.
+*/
+
+
+await cargarDatos();
+
+
+}
+
+}
+
 
 /* =====================================================
-   INICIAR
+   INICIO
    ===================================================== */
 
 
