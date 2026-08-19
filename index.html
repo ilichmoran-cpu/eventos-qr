@@ -1067,37 +1067,141 @@ datos.reserva_id ||
 // GENERAR LOS BOLETOS QR
 // ==========================================
 
+
+const resultadoBoletos =
+    await db.rpc(
+        "generar_boletos",
+        {
+            p_reserva_id: datos.reserva_id
+        }
+    );
+
+
+if (resultadoBoletos.error) {
+
+    throw resultadoBoletos.error;
+
+}
+
+
+const boletos =
+    resultadoBoletos.data;
+
+
+// ==========================================
+// MOSTRAR LOS QR
+// ==========================================
+
+let htmlBoletos = "";
+
+
+boletos.forEach((boleto, index) => {
+
+    const mesa =
+        mesas.find(
+            m => {
+
+                const asiento =
+                    asientos.find(
+                        a => a.id === boleto.o_asiento_id
+                    );
+
+                return asiento &&
+                       m.id === asiento.mesa_id;
+
+            }
+        );
+
+
+    const asiento =
+        asientos.find(
+            a => a.id === boleto.o_asiento_id
+        );
+
+
+    htmlBoletos += `
+
+        <div class="boleto">
+
+            <h3>
+                Mesa ${mesa.numero}
+                —
+                Asiento ${asiento.numero}
+            </h3>
+
+            <div
+                id="qr-${index}"
+                class="qr">
+            </div>
+
+            <p>
+                Presenta este QR al ingresar.
+            </p>
+
+        </div>
+
+    `;
+
+});
+
+
 document.getElementById(
-"modalContenido"
+    "modalContenido"
 ).innerHTML = `
 
 <div class="mensaje-exito">
 
-<h2>✅ Reserva realizada</h2>
+    <h2>✅ Reserva confirmada</h2>
 
-<p>
-Tu reserva fue registrada correctamente.
-</p>
+    <p>
+        Tu reserva fue registrada correctamente.
+    </p>
 
-<div class="codigo">
-${codigo}
-</div>
+    <div class="codigo">
+        ${codigo}
+    </div>
 
-<p>
-Guarda este código.
-</p>
+    <h3>
+        Tus boletos
+    </h3>
 
-<button
-class="boton"
-onclick="location.reload()">
+    ${htmlBoletos}
 
-FINALIZAR
+    <br>
 
-</button>
+    <button
+        class="boton"
+        onclick="location.reload()">
+
+        FINALIZAR
+
+    </button>
 
 </div>
 
 `;
+
+
+// ==========================================
+// DIBUJAR CADA QR
+// ==========================================
+
+boletos.forEach(
+    (boleto, index) => {
+
+        new QRCode(
+            document.getElementById(
+                `qr-${index}`
+            ),
+            {
+                text: boleto.o_token,
+                width: 220,
+                height: 220
+            }
+        );
+
+    }
+);
 
 
 /*
