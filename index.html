@@ -10,7 +10,7 @@
 
 <title>Reserva de Asientos</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
 <style>
 
@@ -250,6 +250,27 @@ header p {
 
 .mensaje-exito {
     text-align: center;
+}
+      .boleto {
+    background: #f7f7f7;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.boleto h3 {
+    margin-top: 0;
+}
+
+.qr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+    background: white;
+    padding: 15px;
+    width: fit-content;
+    border-radius: 10px;
 }
 
 .codigo {
@@ -1018,37 +1039,144 @@ datos.reserva_id ||
 }
 
 
+// ==========================================
+// GENERAR LOS BOLETOS QR
+// ==========================================
+
+const resultadoBoletos =
+    await db.rpc(
+        "generar_boletos",
+        {
+            p_reserva_id: datos.reserva_id
+        }
+    );
+
+
+if (resultadoBoletos.error) {
+
+    throw resultadoBoletos.error;
+
+}
+
+
+const boletos =
+    resultadoBoletos.data;
+
+
+// ==========================================
+// MOSTRAR LOS QR
+// ==========================================
+
+let htmlBoletos = "";
+
+
+boletos.forEach((boleto, index) => {
+
+    const mesa =
+        mesas.find(
+            m => {
+
+                const asiento =
+                    asientos.find(
+                        a => a.id === boleto.o_asiento_id
+                    );
+
+                return asiento &&
+                       m.id === asiento.mesa_id;
+
+            }
+        );
+
+
+    const asiento =
+        asientos.find(
+            a => a.id === boleto.o_asiento_id
+        );
+
+
+    htmlBoletos += `
+
+        <div class="boleto">
+
+            <h3>
+                Mesa ${mesa.numero}
+                —
+                Asiento ${asiento.numero}
+            </h3>
+
+            <div
+                id="qr-${index}"
+                class="qr">
+            </div>
+
+            <p>
+                Presenta este QR al ingresar.
+            </p>
+
+        </div>
+
+    `;
+
+});
+
+
 document.getElementById(
-"modalContenido"
+    "modalContenido"
 ).innerHTML = `
 
 <div class="mensaje-exito">
 
-<h2>✅ Reserva realizada</h2>
+    <h2>✅ Reserva confirmada</h2>
 
-<p>
-Tu reserva fue registrada correctamente.
-</p>
+    <p>
+        Tu reserva fue registrada correctamente.
+    </p>
 
-<div class="codigo">
-${codigo}
-</div>
+    <div class="codigo">
+        ${codigo}
+    </div>
 
-<p>
-Guarda este código.
-</p>
+    <h3>
+        Tus boletos
+    </h3>
 
-<button
-class="boton"
-onclick="location.reload()">
+    ${htmlBoletos}
 
-FINALIZAR
+    <br>
 
-</button>
+    <button
+        class="boton"
+        onclick="location.reload()">
+
+        FINALIZAR
+
+    </button>
 
 </div>
 
 `;
+
+
+// ==========================================
+// DIBUJAR CADA QR
+// ==========================================
+
+boletos.forEach(
+    (boleto, index) => {
+
+        new QRCode(
+            document.getElementById(
+                `qr-${index}`
+            ),
+            {
+                text: boleto.o_token,
+                width: 220,
+                height: 220
+            }
+        );
+
+    }
+);
 
 
 /*
