@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mi Evento</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mi Evento - Reserva de Asientos</title>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             background: #f5f5f5;
             color: #222;
         }
@@ -22,68 +30,89 @@
             background: #111;
             color: white;
             text-align: center;
-            padding: 50px 20px;
+            padding: 55px 20px;
         }
 
         header h1 {
-            margin: 0 0 10px;
+            margin: 0 0 12px;
             font-size: 42px;
         }
 
         header p {
-            margin: 5px 0;
+            margin: 7px 0;
             font-size: 18px;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 0 20px 120px;
         }
 
-        .section-title {
+        .titulo {
             text-align: center;
             margin-bottom: 30px;
         }
 
-        .section-title h2 {
+        .titulo h2 {
             margin-bottom: 10px;
+        }
+
+        .estado {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
         }
 
         .mesas {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns:
+                repeat(auto-fit, minmax(230px, 1fr));
+
             gap: 25px;
         }
 
         .mesa {
             background: white;
-            border-radius: 15px;
+            border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
         }
 
         .mesa h3 {
             text-align: center;
             margin-top: 0;
+            margin-bottom: 20px;
         }
 
         .asientos {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 12px;
         }
 
         .asiento {
+
+            width: 40px;
+            height: 40px;
+
+            margin: auto;
+
             border: none;
             border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            margin: auto;
-            cursor: pointer;
-            font-weight: bold;
+
             background: #2ecc71;
             color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.15s;
         }
 
         .asiento:hover {
@@ -91,74 +120,158 @@
         }
 
         .asiento.seleccionado {
+
             background: #f1c40f;
             color: #111;
+
+            transform: scale(1.08);
         }
 
         .asiento.reservado {
+
             background: #e74c3c;
+
+            color: white;
+
+            cursor: not-allowed;
+
+            opacity: 0.75;
+        }
+
+        .asiento.vendido {
+
+            background: #8e44ad;
+
+            cursor: not-allowed;
+        }
+
+        .asiento.utilizado {
+
+            background: #555;
+
             cursor: not-allowed;
         }
 
         .leyenda {
+
             display: flex;
+
             justify-content: center;
+
+            align-items: center;
+
             gap: 25px;
+
             flex-wrap: wrap;
+
             margin: 30px 0;
         }
 
         .leyenda-item {
+
             display: flex;
+
             align-items: center;
+
             gap: 8px;
         }
 
-        .color {
+        .circulo {
+
             width: 18px;
             height: 18px;
+
             border-radius: 50%;
         }
 
-        .verde {
+        .disponible {
             background: #2ecc71;
         }
 
-        .amarillo {
+        .seleccionado-color {
             background: #f1c40f;
         }
 
-        .rojo {
+        .reservado-color {
             background: #e74c3c;
         }
 
         .resumen {
-            position: sticky;
+
+            position: fixed;
+
+            left: 0;
+            right: 0;
             bottom: 0;
+
             background: white;
-            padding: 20px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+
+            padding: 18px 20px;
+
+            box-shadow:
+                0 -5px 20px rgba(0,0,0,0.15);
+
             text-align: center;
+
+            z-index: 100;
         }
 
-        .resumen button {
+        .resumen strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #seleccion {
+            margin-bottom: 12px;
+        }
+
+        .boton-continuar {
+
             background: #111;
+
             color: white;
+
             border: none;
-            padding: 15px 30px;
+
+            padding: 14px 30px;
+
             border-radius: 8px;
+
             cursor: pointer;
+
             font-size: 16px;
-            margin-top: 10px;
+        }
+
+        .boton-continuar:hover {
+            background: #333;
+        }
+
+        .error {
+
+            background: #ffe5e5;
+
+            color: #b00000;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            margin: 20px 0;
         }
 
         footer {
+
             text-align: center;
+
             padding: 40px;
+
             color: #777;
         }
 
         @media (max-width: 600px) {
+
             header h1 {
                 font-size: 30px;
             }
@@ -166,192 +279,717 @@
             .mesas {
                 grid-template-columns: 1fr;
             }
+
+            .asiento {
+                width: 42px;
+                height: 42px;
+            }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <header>
+
     <h1>MI EVENTO</h1>
-    <p>Selecciona tus asientos</p>
+
+    <p>Reserva tus asientos</p>
+
     <p>📅 Fecha del evento</p>
+
     <p>📍 Lugar del evento</p>
+
 </header>
+
 
 <div class="container">
 
-    <div class="section-title">
+
+    <div class="titulo">
+
         <h2>Selecciona tus asientos</h2>
-        <p>Los asientos verdes están disponibles.</p>
+
+        <p>
+            Los asientos verdes están disponibles.
+        </p>
+
     </div>
+
 
     <div class="leyenda">
 
         <div class="leyenda-item">
-            <div class="color verde"></div>
+
+            <div class="circulo disponible"></div>
+
             Disponible
+
         </div>
 
+
         <div class="leyenda-item">
-            <div class="color amarillo"></div>
+
+            <div class="circulo seleccionado-color"></div>
+
             Seleccionado
+
         </div>
 
+
         <div class="leyenda-item">
-            <div class="color rojo"></div>
+
+            <div class="circulo reservado-color"></div>
+
             Reservado
+
         </div>
 
     </div>
 
-    <div id="mesas" class="mesas"></div>
+
+    <div id="estado"
+         class="estado">
+
+        Cargando mesas...
+
+    </div>
+
+
+    <div id="error"></div>
+
+
+    <div id="mesas"
+         class="mesas">
+
+    </div>
+
 
 </div>
 
+
 <div class="resumen">
 
-    <strong>Asientos seleccionados:</strong>
+    <strong>
+        Asientos seleccionados
+    </strong>
 
     <div id="seleccion">
         Ninguno
     </div>
 
-    <button onclick="continuar()">
+    <button
+        class="boton-continuar"
+        onclick="continuar()">
+
         CONTINUAR
+
     </button>
 
 </div>
 
+
 <footer>
+
     Sistema de reservas
+
 </footer>
+
 
 
 <script>
 
-    const totalMesas = 42;
-    const asientosPorMesa = 10;
 
-    const mesasContainer = document.getElementById("mesas");
-
-    let seleccionados = [];
+/* =====================================================
+   CONFIGURACIÓN SUPABASE
+   ===================================================== */
 
 
-    // Crear las 42 mesas
+const SUPABASE_URL =
+    "https://ysismlkbfhzouxacaxv.supabase.co";
 
-    for (let mesa = 1; mesa <= totalMesas; mesa++) {
 
-        const mesaDiv = document.createElement("div");
+/*
+   IMPORTANTE:
 
-        mesaDiv.className = "mesa";
+   Aquí debes pegar TU Publishable key.
 
-        const titulo = document.createElement("h3");
+   NO pongas la service_role.
 
-        titulo.textContent = "MESA " + mesa;
+   Debe comenzar aproximadamente con:
+
+   sb_publishable_...
+
+   o utiliza la Publishable key que aparece
+   actualmente en Supabase.
+*/
+
+
+const SUPABASE_KEY =
+    "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
+
+
+const { createClient } =
+    supabase;
+
+
+const db =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =====================================================
+   VARIABLES
+   ===================================================== */
+
+
+let seleccionados = [];
+
+let asientos = [];
+
+let mesas = [];
+
+
+
+/* =====================================================
+   CARGAR DATOS
+   ===================================================== */
+
+
+async function cargarDatos() {
+
+
+    const estado =
+        document.getElementById("estado");
+
+
+    try {
+
+
+        estado.textContent =
+            "Conectando con el sistema...";
+
+
+        /*
+           Obtener mesas
+        */
+
+
+        const resultadoMesas =
+            await db
+                .from("mesas")
+                .select("*")
+                .order("numero");
+
+
+        if (resultadoMesas.error) {
+
+            throw resultadoMesas.error;
+
+        }
+
+
+        mesas =
+            resultadoMesas.data;
+
+
+        /*
+           Obtener asientos
+        */
+
+
+        const resultadoAsientos =
+            await db
+                .from("asientos")
+                .select("*")
+                .order("numero");
+
+
+        if (resultadoAsientos.error) {
+
+            throw resultadoAsientos.error;
+
+        }
+
+
+        asientos =
+            resultadoAsientos.data;
+
+
+        /*
+           Crear pantalla
+        */
+
+
+        mostrarMesas();
+
+
+        estado.textContent =
+            "Selecciona tus asientos";
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(error);
+
+
+        estado.textContent =
+            "No se pudo conectar con el sistema.";
+
+
+        document.getElementById("error")
+            .innerHTML = `
+
+                <div class="error">
+
+                    Ocurrió un error
+                    al cargar los asientos.
+
+                    <br><br>
+
+                    Revisa la configuración
+                    de Supabase.
+
+                </div>
+
+            `;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   MOSTRAR MESAS
+   ===================================================== */
+
+
+function mostrarMesas() {
+
+
+    const contenedor =
+        document.getElementById("mesas");
+
+
+    contenedor.innerHTML = "";
+
+
+    mesas.forEach(mesa => {
+
+
+        const mesaDiv =
+            document.createElement("div");
+
+
+        mesaDiv.className =
+            "mesa";
+
+
+        const titulo =
+            document.createElement("h3");
+
+
+        titulo.textContent =
+            "MESA " + mesa.numero;
+
 
         mesaDiv.appendChild(titulo);
 
 
-        const asientosDiv = document.createElement("div");
-
-        asientosDiv.className = "asientos";
-
-
-        // Crear los 10 asientos
-
-        for (let asiento = 1; asiento <= asientosPorMesa; asiento++) {
-
-            const boton = document.createElement("button");
-
-            boton.className = "asiento";
-
-            boton.textContent = asiento;
-
-            boton.dataset.mesa = mesa;
-
-            boton.dataset.asiento = asiento;
+        const asientosDiv =
+            document.createElement("div");
 
 
-            boton.onclick = function() {
+        asientosDiv.className =
+            "asientos";
 
-                const id = mesa + "-" + asiento;
+
+        /*
+           Buscar los 10 asientos
+           pertenecientes a esta mesa.
+        */
 
 
-                if (seleccionados.includes(id)) {
+        const asientosMesa =
+            asientos.filter(
+                asiento =>
+                    asiento.mesa_id === mesa.id
+            );
 
-                    seleccionados = seleccionados.filter(
-                        item => item !== id
+
+        asientosMesa.forEach(asiento => {
+
+
+            const boton =
+                document.createElement("button");
+
+
+            boton.className =
+                "asiento";
+
+
+            boton.textContent =
+                asiento.numero;
+
+
+            boton.dataset.id =
+                asiento.id;
+
+
+            boton.dataset.mesa =
+                mesa.numero;
+
+
+            boton.dataset.asiento =
+                asiento.numero;
+
+
+            /*
+               Mostrar estado real
+            */
+
+
+            actualizarColor(
+                boton,
+                asiento
+            );
+
+
+            /*
+               Evento click
+            */
+
+
+            boton.onclick =
+                function() {
+
+                    seleccionarAsiento(
+                        asiento,
+                        boton
                     );
 
-                    boton.classList.remove("seleccionado");
-
-                } else {
-
-                    seleccionados.push(id);
-
-                    boton.classList.add("seleccionado");
-
-                }
+                };
 
 
-                actualizarSeleccion();
-
-            };
-
-
-            asientosDiv.appendChild(boton);
-
-        }
+            asientosDiv.appendChild(
+                boton
+            );
 
 
-        mesaDiv.appendChild(asientosDiv);
-
-        mesasContainer.appendChild(mesaDiv);
-
-    }
+        });
 
 
-    function actualizarSeleccion() {
-
-        const elemento = document.getElementById("seleccion");
-
-        if (seleccionados.length === 0) {
-
-            elemento.textContent = "Ninguno";
-
-        } else {
-
-            elemento.textContent =
-                seleccionados
-                .map(item => "Mesa " + item.split("-")[0] +
-                    " - Asiento " + item.split("-")[1])
-                .join(", ");
-
-        }
-
-    }
-
-
-    function continuar() {
-
-        if (seleccionados.length === 0) {
-
-            alert("Selecciona al menos un asiento.");
-
-            return;
-
-        }
-
-
-        alert(
-            "Has seleccionado: " +
-            seleccionados.join(", ")
+        mesaDiv.appendChild(
+            asientosDiv
         );
 
+
+        contenedor.appendChild(
+            mesaDiv
+        );
+
+
+    });
+
+}
+
+
+
+/* =====================================================
+   COLOR DEL ASIENTO
+   ===================================================== */
+
+
+function actualizarColor(
+    boton,
+    asiento
+) {
+
+
+    boton.classList.remove(
+        "reservado",
+        "vendido",
+        "utilizado",
+        "seleccionado"
+    );
+
+
+    if (
+        asiento.estado ===
+        "reservado"
+    ) {
+
+        boton.classList.add(
+            "reservado"
+        );
+
+        boton.disabled = true;
+
     }
+
+
+    else if (
+        asiento.estado ===
+        "vendido"
+    ) {
+
+        boton.classList.add(
+            "vendido"
+        );
+
+        boton.disabled = true;
+
+    }
+
+
+    else if (
+        asiento.estado ===
+        "utilizado"
+    ) {
+
+        boton.classList.add(
+            "utilizado"
+        );
+
+        boton.disabled = true;
+
+    }
+
+
+    else {
+
+        boton.disabled = false;
+
+    }
+
+
+}
+
+
+
+/* =====================================================
+   SELECCIONAR ASIENTO
+   ===================================================== */
+
+
+function seleccionarAsiento(
+    asiento,
+    boton
+) {
+
+
+    /*
+       No permitir seleccionar
+       asientos que ya no estén disponibles.
+    */
+
+
+    if (
+        asiento.estado !==
+        "disponible"
+    ) {
+
+        return;
+
+    }
+
+
+    const existe =
+        seleccionados.find(
+            item =>
+                item.id === asiento.id
+        );
+
+
+    if (existe) {
+
+
+        /*
+           Quitar selección
+        */
+
+
+        seleccionados =
+            seleccionados.filter(
+                item =>
+                    item.id !== asiento.id
+            );
+
+
+        boton.classList.remove(
+            "seleccionado"
+        );
+
+
+    }
+
+    else {
+
+
+        /*
+           Agregar selección
+        */
+
+
+        seleccionados.push({
+
+            id: asiento.id,
+
+            mesa:
+                obtenerNumeroMesa(
+                    asiento.mesa_id
+                ),
+
+            asiento:
+                asiento.numero
+
+        });
+
+
+        boton.classList.add(
+            "seleccionado"
+        );
+
+
+    }
+
+
+    actualizarSeleccion();
+
+}
+
+
+
+/* =====================================================
+   OBTENER NÚMERO DE MESA
+   ===================================================== */
+
+
+function obtenerNumeroMesa(
+    mesaId
+) {
+
+
+    const mesa =
+        mesas.find(
+            m =>
+                m.id === mesaId
+        );
+
+
+    return mesa
+        ? mesa.numero
+        : "?";
+
+}
+
+
+
+/* =====================================================
+   ACTUALIZAR RESUMEN
+   ===================================================== */
+
+
+function actualizarSeleccion() {
+
+
+    const elemento =
+        document.getElementById(
+            "seleccion"
+        );
+
+
+    if (
+        seleccionados.length === 0
+    ) {
+
+        elemento.textContent =
+            "Ninguno";
+
+        return;
+
+    }
+
+
+    elemento.textContent =
+        seleccionados
+            .map(
+                item =>
+                    "Mesa " +
+                    item.mesa +
+                    " - Asiento " +
+                    item.asiento
+            )
+            .join(" | ");
+
+}
+
+
+
+/* =====================================================
+   CONTINUAR
+   ===================================================== */
+
+
+function continuar() {
+
+
+    if (
+        seleccionados.length === 0
+    ) {
+
+        alert(
+            "Selecciona al menos un asiento."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+
+        "Asientos seleccionados:\n\n" +
+
+        seleccionados
+            .map(
+                item =>
+                    "Mesa " +
+                    item.mesa +
+                    " - Asiento " +
+                    item.asiento
+            )
+            .join("\n")
+
+    );
+
+
+}
+
+
+
+/* =====================================================
+   INICIAR
+   ===================================================== */
+
+
+cargarDatos();
+
 
 </script>
 
+
 </body>
+
 </html>
