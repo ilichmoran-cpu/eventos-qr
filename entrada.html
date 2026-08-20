@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Control de Acceso</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    min-height: 100vh;
+}
+
+.contenedor {
+    max-width: 500px;
+    margin: auto;
+    padding: 25px 20px 50px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    color: #bbb;
+    margin-bottom: 25px;
+}
+
+#reader {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.resultado {
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 15px;
+    display: none;
+}
+
+.valido {
+    background: #16803c;
+}
+
+.invalido {
+    background: #b42318;
+}
+
+.resultado h2 {
+    margin-top: 0;
+    font-size: 28px;
+}
+
+.dato {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.boton {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.estado {
+    margin: 20px 0;
+    color: #ccc;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<h1>CONTROL DE ACCESO</h1>
+
+<div class="subtitulo">
+CONCIERTO LOS INQUIETOS DE OLANCHO
+</div>
+
+<div class="estado" id="estado">
+Preparando cámara...
+</div>
+
+<div id="reader"></div>
+
+<div id="resultado"
+     class="resultado">
+
+<div id="resultadoContenido"></div>
+
+<button
+class="boton"
+onclick="reiniciarEscaner()">
+
+ESCANEAR OTRO BOLETO
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   SUPABASE
+========================================== */
+
+const SUPABASE_URL =
+"https://ysismkibffhzouxacaxv.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
+
+const db =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* ==========================================
+   VARIABLES
+========================================== */
+
+let scanner = null;
+
+let procesando = false;
+
+
+/* ==========================================
+   INICIAR ESCÁNER
+========================================== */
+
+function iniciarEscaner() {
+
+scanner =
+new Html5Qrcode("reader");
+
+
+scanner.start(
+
+    {
+        facingMode: "environment"
+    },
+
+    {
+        fps: 10,
+        qrbox: {
+            width: 250,
+            height: 250
+        }
+    },
+
+    codigo => {
+
+        if (procesando)
+            return;
+
+        procesando = true;
+
+        validarCodigo(codigo);
+
+    },
+
+    error => {
+
+        // Ignoramos errores normales
+        // durante el escaneo
+
+    }
+
+)
+.then(() => {
+
+    document.getElementById(
+        "estado"
+    ).textContent =
+    "Apunta la cámara al código QR";
+
+})
+.catch(error => {
+
+    console.error(error);
+
+    document.getElementById(
+        "estado"
+    ).textContent =
+    "No se pudo acceder a la cámara.";
+
+});
+
+}
+
+
+/* ==========================================
+   VALIDAR BOLETO
+========================================== */
+
+async function validarCodigo(codigo) {
+
+try {
+
+    await scanner.stop();
+
+
+    document.getElementById(
+        "estado"
+    ).textContent =
+    "Validando boleto...";
+
+
+    /*
+       El QR contiene directamente
+       el UUID del boleto.
+    */
+
+    const token =
+        codigo.trim();
+
+
+    const resultado =
+        await db.rpc(
+            "validar_boleto",
+            {
+                p_token: token
+            }
+        );
+
+
+    if (resultado.error)
+        throw resultado.error;
+
+
+    mostrarResultado(
+        resultado.data
+    );
+
+
+}
+catch(error) {
+
+    console.error(error);
+
+    mostrarResultado({
+
+        valido: false,
+
+        mensaje:
+        "ERROR AL VALIDAR EL BOLETO"
+
+    });
+
+}
+
+}
+
+
+/* ==========================================
+   MOSTRAR RESULTADO
+========================================== */
+
+function mostrarResultado(
+    datos
+) {
+
+const resultado =
+document.getElementById(
+    "resultado"
+);
+
+const contenido =
+document.getElementById(
+    "resultadoContenido"
+);
+
+
+resultado.style.display =
+"block";
+
+
+if (datos.valido) {
+
+    resultado.className =
+    "resultado valido";
+
+
+    contenido.innerHTML = `
+
+        <h2>
+            ✅ ENTRADA AUTORIZADA
+        </h2>
+
+        <div class="dato">
+            <strong>Cliente:</strong><br>
+            ${datos.cliente}
+        </div>
+
+        <div class="dato">
+            <strong>Mesa:</strong>
+            ${datos.mesa}
+        </div>
+
+        <div class="dato">
+            <strong>Asiento:</strong>
+            ${datos.asiento}
+        </div>
+
+        <div class="dato">
+            <strong>Reserva:</strong>
+            ${datos.codigo_reserva}
+        </div>
+
+    `;
+
+}
+else {
+
+    resultado.className =
+    "resultado invalido";
+
+
+    contenido.innerHTML = `
+
+        <h2>
+            ❌ ACCESO DENEGADO
+        </h2>
+
+        <div class="dato">
+            ${datos.mensaje}
+        </div>
+
+        ${
+            datos.mesa
+            ?
+            `
+            <div class="dato">
+                Mesa: ${datos.mesa}
+                <br>
+                Asiento: ${datos.asiento}
+            </div>
+            `
+            :
+            ""
+        }
+
+    `;
+
+}
+
+}
+
+
+/* ==========================================
+   NUEVO ESCANEO
+========================================== */
+
+async function reiniciarEscaner() {
+
+const resultado =
+document.getElementById(
+    "resultado"
+);
+
+resultado.style.display =
+"none";
+
+
+procesando = false;
+
+
+document.getElementById(
+    "estado"
+).textContent =
+"Preparando cámara...";
+
+
+iniciarEscaner();
+
+}
+
+
+/* ==========================================
+   INICIO
+========================================== */
+
+iniciarEscaner();
+
+</script>
+
+</body>
+
+</html>
