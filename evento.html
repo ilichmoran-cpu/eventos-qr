@@ -7,20 +7,25 @@
 
 <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    content="width=device-width, initial-scale=1.0">
 
 <meta name="referrer" content="no-referrer">
 
-<title>Live Tickets | Selección de Asientos</title>
+<title>Evento | Live Tickets</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
 
 <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
+
 
 <style>
 
@@ -35,32 +40,22 @@
 :root {
 
     --bg: #f4f7fb;
-
     --dark: #08101f;
-
-    --dark2: #101a31;
+    --dark2: #111827;
 
     --text: #111827;
-
     --muted: #6b7280;
-
     --line: #e5e7eb;
 
-    --primary: #2563eb;
+    --blue: #2563eb;
+    --blue-dark: #1d4ed8;
 
-    --primary-dark: #1d4ed8;
-
-
-    /* COLORES DE ASIENTOS */
-
-    --available: #16a34a;
-
-    --selected: #facc15;
-
-    --blocked: #7c3aed;
-
+    --green: #22c55e;
+    --yellow: #facc15;
+    --purple: #7c3aed;
     --sold: #374151;
 
+    --red: #dc2626;
 }
 
 html {
@@ -71,11 +66,31 @@ body {
 
     margin: 0;
 
-    font-family: "Inter", sans-serif;
+    min-height: 100vh;
 
-    background: var(--bg);
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
 
-    color: var(--text);
+    background:
+        var(--bg);
+
+    color:
+        var(--text);
+
+    -webkit-font-smoothing:
+        antialiased;
+}
+
+button,
+input {
+
+    font-family: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -85,30 +100,35 @@ body {
 
 .topbar {
 
-    background: #08101f;
-
     position: sticky;
 
     top: 0;
 
     z-index: 1000;
 
+    background:
+        rgba(8,16,31,.98);
+
     border-bottom:
-        1px solid rgba(255,255,255,.10);
+        1px solid rgba(255,255,255,.07);
 
     box-shadow:
-        0 5px 25px rgba(0,0,0,.18);
+        0 5px 25px rgba(0,0,0,.15);
 }
+
 
 .nav {
 
-    max-width: 1500px;
+    width: 100%;
+
+    max-width: 1450px;
 
     min-height: 76px;
 
     margin: auto;
 
-    padding: 0 22px;
+    padding:
+        0 24px;
 
     display: flex;
 
@@ -120,8 +140,6 @@ body {
 }
 
 
-/* LOGO */
-
 .brand {
 
     display: flex;
@@ -131,13 +149,12 @@ body {
     text-decoration: none;
 }
 
+
 .brand-logo {
 
-    display: block;
+    height: 48px;
 
     width: auto;
-
-    height: 48px;
 
     max-width: 240px;
 
@@ -145,40 +162,36 @@ body {
 }
 
 
-/* BOTÓN REGRESAR */
-
 .back-link {
 
-    color: white;
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 38px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid rgba(255,255,255,.14);
+
+    border-radius:
+        999px;
+
+    color:
+        rgba(255,255,255,.78);
 
     text-decoration: none;
 
-    border:
-        1px solid rgba(255,255,255,.20);
+    font-size: 9px;
 
-    border-radius: 999px;
-
-    padding: 10px 16px;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    transition: .2s;
-}
-
-.back-link:hover {
-
-    background:
-        rgba(255,255,255,.09);
-
-    border-color:
-        rgba(255,255,255,.35);
+    font-weight: 800;
 }
 
 
 /* ==========================================================
-   HERO EVENTO
+   EVENT HERO
 ========================================================== */
 
 .event-hero {
@@ -187,38 +200,39 @@ body {
 
     overflow: hidden;
 
-    min-height: 355px;
+    min-height: 310px;
 
-    color: white;
+    background:
+        #08101f;
 
-    background: #091224;
+    color:
+        white;
 }
 
-
-/* FONDO DESENFOCADO */
 
 .event-hero-bg {
 
     position: absolute;
 
-    inset: -40px;
+    inset: -70px;
 
     background-image:
-        url("FLYER%201080X1350.png");
-
-    background-position: center;
+        url("/FLYER%201080X1350.png");
 
     background-size: cover;
 
-    filter: blur(30px);
+    background-position: center;
 
-    transform: scale(1.15);
+    filter:
+        blur(45px);
 
-    opacity: .52;
+    transform:
+        scale(1.18);
+
+    opacity:
+        .34;
 }
 
-
-/* CAPA OSCURA */
 
 .event-hero-overlay {
 
@@ -227,17 +241,14 @@ body {
     inset: 0;
 
     background:
-
         linear-gradient(
             90deg,
-            rgba(4,9,18,.98) 0%,
-            rgba(4,9,18,.89) 45%,
-            rgba(4,9,18,.58) 100%
+            rgba(5,10,20,.98) 0%,
+            rgba(5,10,20,.88) 55%,
+            rgba(5,10,20,.72) 100%
         );
 }
 
-
-/* CONTENIDO HERO */
 
 .event-hero-content {
 
@@ -245,150 +256,163 @@ body {
 
     z-index: 2;
 
-    max-width: 1500px;
+    width: 100%;
+
+    max-width: 1320px;
+
+    min-height: 310px;
 
     margin: auto;
 
-    padding: 38px 22px;
+    padding:
+        35px 24px;
 
-    display: grid;
-
-    grid-template-columns:
-        205px minmax(0,1fr);
-
-    gap: 32px;
+    display: flex;
 
     align-items: center;
+
+    gap: 34px;
 }
 
-
-/* FLYER */
 
 .event-poster {
 
     width: 205px;
 
-    aspect-ratio: 4 / 5;
+    aspect-ratio:
+        4 / 5;
 
-    border-radius: 17px;
+    flex-shrink: 0;
 
-    overflow: hidden;
+    object-fit: cover;
 
-    background-image:
-        url("FLYER%201080X1350.png");
-
-    background-size: cover;
-
-    background-position: center;
-
-    box-shadow:
-        0 24px 55px rgba(0,0,0,.45);
+    border-radius: 16px;
 
     border:
-        1px solid rgba(255,255,255,.15);
+        1px solid rgba(255,255,255,.13);
+
+    box-shadow:
+        0 22px 55px rgba(0,0,0,.35);
 }
 
 
-/* INFORMACIÓN */
+.event-info {
 
-.event-copy {
-
-    max-width: 900px;
+    max-width: 750px;
 }
 
-.event-type {
+
+.event-label {
 
     display: inline-flex;
 
-    align-items: center;
+    margin-bottom: 11px;
 
-    gap: 7px;
-
-    margin-bottom: 14px;
-
-    padding: 8px 13px;
-
-    background:
-        rgba(37,99,235,.20);
+    padding:
+        7px 11px;
 
     border:
-        1px solid rgba(96,165,250,.35);
+        1px solid rgba(96,165,250,.22);
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: .7px;
-}
-
-.event-copy h1 {
-
-    margin: 0 0 16px;
+    background:
+        rgba(37,99,235,.18);
 
     font-size:
-        clamp(34px,4vw,56px);
+        8px;
 
-    line-height: 1.02;
+    font-weight:
+        800;
 
-    letter-spacing: -1.5px;
+    letter-spacing:
+        .9px;
 }
 
-.event-info-line {
 
-    display: flex;
+.event-info h1 {
 
-    flex-wrap: wrap;
+    margin:
+        0 0 13px;
 
-    gap: 12px 25px;
+    font-size:
+        clamp(32px,5vw,52px);
 
-    margin-bottom: 20px;
+    line-height:
+        1.04;
+
+    letter-spacing:
+        -1.5px;
+}
+
+
+.event-meta {
+
+    display: grid;
+
+    gap: 8px;
 
     color:
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.70);
 
-    font-size: 14px;
+    font-size: 12px;
 }
 
-.event-price-big {
 
-    font-size: 27px;
+.event-price {
 
-    font-weight: 800;
-}
+    display: inline-flex;
 
-.event-price-big small {
+    margin-top: 17px;
 
-    font-size: 13px;
+    padding:
+        10px 14px;
 
-    font-weight: 500;
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.10);
+
+    border-radius:
+        11px;
 
     color:
-        rgba(255,255,255,.62);
+        white;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
 }
 
 
 /* ==========================================================
-   MAIN
+   PAGE
 ========================================================== */
 
 .page {
+
+    width: 100%;
 
     max-width: 1500px;
 
     margin: auto;
 
     padding:
-        28px 22px 100px;
+        30px 20px 120px;
 }
 
-.booking-layout {
+
+.layout {
 
     display: grid;
 
     grid-template-columns:
-        minmax(0,1fr) 340px;
+        minmax(0,1fr)
+        350px;
 
     gap: 22px;
 
@@ -397,30 +421,31 @@ body {
 
 
 /* ==========================================================
-   MAPA
+   MAP CARD
 ========================================================== */
 
 .map-card {
 
-    background: white;
-
-    border-radius: 22px;
-
-    border:
-        1px solid #e7ebf0;
-
     overflow: hidden;
 
+    background:
+        white;
+
+    border:
+        1px solid #e5e9ef;
+
+    border-radius:
+        22px;
+
     box-shadow:
-        0 12px 35px rgba(15,23,42,.07);
+        0 12px 35px rgba(15,23,42,.06);
 }
+
 
 .map-header {
 
-    padding: 20px 22px;
-
-    border-bottom:
-        1px solid var(--line);
+    padding:
+        20px 22px;
 
     display: flex;
 
@@ -428,95 +453,52 @@ body {
 
     justify-content: space-between;
 
-    gap: 16px;
+    gap: 15px;
 
     flex-wrap: wrap;
+
+    border-bottom:
+        1px solid var(--line);
 }
+
 
 .map-title h2 {
 
-    margin: 0 0 5px;
+    margin:
+        0 0 5px;
 
-    font-size: 22px;
+    font-size:
+        20px;
 }
+
 
 .map-title p {
 
     margin: 0;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 13px;
+    font-size:
+        10px;
 }
 
 
 /* ==========================================================
-   ZOOM
+   LEGEND
 ========================================================== */
 
-.zoom-controls {
+.legend {
 
     display: flex;
 
     align-items: center;
 
-    gap: 7px;
-}
-
-.zoom-btn {
-
-    border:
-        1px solid #dce2e9;
-
-    background: white;
-
-    min-width: 40px;
-
-    height: 40px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    font-size: 16px;
-
-    font-weight: 800;
-}
-
-.zoom-btn:hover {
-
-    background: #f5f7fa;
-}
-
-.zoom-fit {
-
-    width: auto;
-
-    padding: 0 13px;
-
-    font-size: 11px;
-}
-
-
-/* ==========================================================
-   LEYENDA
-========================================================== */
-
-.legend {
-
-    padding: 14px 22px;
-
-    display: flex;
+    gap: 12px;
 
     flex-wrap: wrap;
-
-    gap: 10px 20px;
-
-    border-bottom:
-        1px solid var(--line);
-
-    background: #fafbfd;
 }
+
 
 .legend-item {
 
@@ -524,138 +506,145 @@ body {
 
     align-items: center;
 
-    gap: 8px;
+    gap: 6px;
 
-    font-size: 12px;
+    color:
+        #667085;
 
-    font-weight: 500;
+    font-size:
+        8px;
 
-    color: #4b5563;
+    font-weight:
+        700;
 }
+
 
 .legend-dot {
 
-    width: 13px;
+    width: 11px;
 
-    height: 13px;
+    height: 11px;
 
     border-radius: 50%;
 }
 
-.legend-dot.available {
 
-    background: #16a34a;
+.legend-available {
+    background: var(--green);
 }
 
-.legend-dot.selected {
-
-    background: #facc15;
+.legend-selected {
+    background: var(--yellow);
 }
 
-.legend-dot.blocked {
-
-    background: #7c3aed;
+.legend-blocked {
+    background: var(--purple);
 }
 
-.legend-dot.sold {
-
-    background: #374151;
+.legend-sold {
+    background: var(--sold);
 }
 
 
 /* ==========================================================
-   MAP VIEWPORT
+   MAP AREA
 ========================================================== */
 
-.map-viewport {
-
-    width: 100%;
-
-    overflow: auto;
-
-    min-height: 700px;
+.map-scroll {
 
     position: relative;
 
-    touch-action: pan-x pan-y;
+    width: 100%;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    padding:
+        20px;
 
     background:
+        #f8fafc;
 
-        radial-gradient(
-            circle at center,
-            #ffffff 0%,
-            #f1f5f9 100%
-        );
+    -webkit-overflow-scrolling:
+        touch;
 }
 
-.map-transform {
+
+.map {
 
     width: 1380px;
 
-    transform-origin: top left;
-
-    transition:
-        transform .15s ease;
+    margin: auto;
 
     padding:
-        35px 30px 70px;
+        24px 20px 45px;
 }
 
 
 /* ==========================================================
-   ESCENARIO
+   STAGE
 ========================================================== */
-
-.stage-wrap {
-
-    width: 100%;
-
-    display: flex;
-
-    justify-content: center;
-
-    margin-bottom: 40px;
-}
 
 .stage {
 
-    width: 680px;
+    width:
+        min(620px,80%);
 
-    padding: 18px 20px;
+    margin:
+        0 auto 38px;
+
+    padding:
+        16px;
 
     text-align: center;
 
-    color: white;
-
-    border-radius:
-        10px 10px 35px 35px;
+    color:
+        white;
 
     background:
-
         linear-gradient(
             135deg,
-            #0f172a,
+            #111827,
             #273449
         );
 
+    border-radius:
+        12px 12px 30px 30px;
+
     box-shadow:
+        0 12px 25px rgba(15,23,42,.15);
 
-        0 15px 35px
-        rgba(15,23,42,.22),
+    font-size:
+        12px;
 
-        inset 0 -3px 0
-        rgba(255,255,255,.08);
+    font-weight:
+        800;
 
-    font-size: 17px;
+    letter-spacing:
+        2px;
+}
 
-    font-weight: 800;
 
-    letter-spacing: 7px;
+.stage-sub {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        rgba(255,255,255,.45);
+
+    font-size:
+        7px;
+
+    letter-spacing:
+        .7px;
 }
 
 
 /* ==========================================================
-   MESAS
+   TABLE GRID
 ========================================================== */
 
 .tables-grid {
@@ -663,56 +652,53 @@ body {
     display: grid;
 
     grid-template-columns:
-        repeat(5, 250px);
+        repeat(5,250px);
 
-    gap: 30px 25px;
+    gap:
+        22px 24px;
 
-    justify-content: center;
+    justify-content:
+        center;
 }
+
+
+/* ==========================================================
+   TABLE CARD
+========================================================== */
 
 .table-card {
 
-    position: relative;
+    min-height: 190px;
 
-    padding: 14px 12px;
-
-    background: white;
-
-    border:
-        1px solid #dce3eb;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 8px 22px rgba(15,23,42,.08);
-}
-
-.table-number {
-
-    margin-bottom: 9px;
-
-    text-align: center;
-
-    color: #667085;
-
-    font-size: 12px;
-
-    font-weight: 800;
-
-    letter-spacing: .8px;
-}
-
-.table-layout {
+    padding:
+        12px;
 
     display: grid;
 
     grid-template-columns:
-        52px 1fr 52px;
+        42px
+        1fr
+        42px;
 
-    gap: 8px;
+    gap:
+        8px;
 
-    align-items: center;
+    align-items:
+        center;
+
+    background:
+        white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        16px;
+
+    box-shadow:
+        0 6px 18px rgba(15,23,42,.055);
 }
+
 
 .seat-column {
 
@@ -721,64 +707,81 @@ body {
     gap: 8px;
 }
 
-.table-shape {
 
-    height: 190px;
+.table-center {
 
-    border-radius: 11px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #d4a373,
-            #b27b48
-        );
-
-    box-shadow:
-
-        inset 0 0 0 3px
-        rgba(255,255,255,.22),
-
-        0 8px 15px
-        rgba(92,61,30,.15);
+    min-height: 115px;
 
     display: flex;
 
-    justify-content: center;
-
     align-items: center;
 
-    writing-mode: vertical-rl;
+    justify-content: center;
 
-    transform: rotate(180deg);
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eef2f7,
+            #e2e8f0
+        );
+
+    border:
+        1px solid #d6dde6;
+
+    border-radius:
+        12px;
 
     color:
-        rgba(68,41,20,.68);
+        #334155;
 
-    font-size: 12px;
+    font-weight:
+        800;
+}
 
-    font-weight: 800;
 
-    letter-spacing: 2px;
+.table-center span {
+
+    display: block;
+}
+
+
+.table-center small {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        #94a3b8;
+
+    font-size:
+        7px;
+
+    letter-spacing:
+        .8px;
+}
+
+
+.table-number {
+
+    font-size:
+        21px;
 }
 
 
 /* ==========================================================
-   ASIENTOS
+   SEATS
 ========================================================== */
 
 .seat {
 
-    width: 43px;
+    width: 40px;
 
-    height: 34px;
+    height: 40px;
 
-    border: none;
-
-    border-radius: 8px;
-
-    cursor: pointer;
+    padding: 0;
 
     display: flex;
 
@@ -786,131 +789,90 @@ body {
 
     justify-content: center;
 
-    font-size: 11px;
+    border: none;
 
-    font-weight: 800;
+    border-radius:
+        50%;
+
+    cursor: pointer;
+
+    color:
+        white;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    box-shadow:
+        0 4px 9px rgba(15,23,42,.12);
 
     transition:
-        transform .13s ease,
-        box-shadow .13s ease,
-        background .13s ease;
+        transform .15s,
+        box-shadow .15s,
+        opacity .15s;
 }
+
 
 .seat:hover:not(:disabled) {
 
     transform:
-        scale(1.08);
+        scale(1.09);
+
+    box-shadow:
+        0 6px 13px rgba(15,23,42,.18);
 }
 
-
-/* DISPONIBLE */
 
 .seat.disponible {
 
-    background: #22c55e;
-
-    color: white;
-
-    border:
-        1px solid #16a34a;
-
-    box-shadow:
-        0 3px 8px rgba(22,163,74,.15);
+    background:
+        var(--green);
 }
 
-.seat.disponible:hover {
-
-    background: #16a34a;
-
-    box-shadow:
-        0 5px 14px rgba(22,163,74,.28);
-}
-
-
-/* SELECCIONADO */
 
 .seat.seleccionado {
 
-    background: #facc15;
+    background:
+        var(--yellow);
 
-    color: #713f12;
-
-    border:
-        2px solid #eab308;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(250,204,21,.22);
+    color:
+        #713f12;
 }
 
-
-/* EN PROCESO */
 
 .seat.bloqueado {
 
-    background: #7c3aed;
+    background:
+        var(--purple);
 
-    color: white;
-
-    border:
-        1px solid #6d28d9;
-
-    cursor: not-allowed;
-
-    box-shadow:
-        0 3px 8px rgba(124,58,237,.20);
+    cursor:
+        not-allowed;
 }
 
 
-/* RESERVADO */
-
-.seat.reservado {
-
-    background: #374151;
-
-    color: white;
-
-    border:
-        1px solid #1f2937;
-
-    cursor: not-allowed;
-}
-
-
-/* VENDIDO */
-
-.seat.vendido {
-
-    background: #374151;
-
-    color: white;
-
-    border:
-        1px solid #1f2937;
-
-    cursor: not-allowed;
-}
-
-
-/* UTILIZADO */
-
+.seat.reservado,
+.seat.vendido,
 .seat.utilizado {
 
-    background: #374151;
+    background:
+        var(--sold);
 
-    color: white;
+    cursor:
+        not-allowed;
+}
 
-    border:
-        1px solid #1f2937;
 
-    cursor: not-allowed;
+.seat:disabled {
 
-    opacity: .78;
+    opacity:
+        .96;
 }
 
 
 /* ==========================================================
-   RESUMEN COMPRA
+   SUMMARY
 ========================================================== */
 
 .summary-card {
@@ -919,621 +881,395 @@ body {
 
     top: 98px;
 
-    background: white;
-
-    border:
-        1px solid #e6eaf0;
-
-    border-radius: 22px;
-
     overflow: hidden;
 
+    background:
+        white;
+
+    border:
+        1px solid #e5e9ef;
+
+    border-radius:
+        21px;
+
     box-shadow:
-        0 15px 40px rgba(15,23,42,.09);
+        0 14px 40px rgba(15,23,42,.08);
 }
+
 
 .summary-head {
 
     padding:
-        21px 21px 17px;
+        19px 20px;
 
     border-bottom:
         1px solid var(--line);
 }
 
+
 .summary-head h3 {
 
-    margin: 0 0 5px;
+    margin:
+        0 0 5px;
 
-    font-size: 19px;
+    font-size:
+        18px;
 }
+
 
 .summary-head p {
 
     margin: 0;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 12px;
+    font-size:
+        9px;
+
+    line-height:
+        1.5;
 }
+
 
 .summary-content {
 
-    padding: 20px;
+    padding:
+        20px;
 }
 
 
-/* DISPONIBILIDAD */
+/* ==========================================================
+   AVAILABILITY
+========================================================== */
 
 .availability {
 
-    margin-bottom: 18px;
+    margin-bottom:
+        18px;
 
-    padding: 12px 14px;
+    padding:
+        12px 13px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    justify-content:
+        space-between;
 
-    justify-content: space-between;
+    gap:
+        12px;
 
-    background: #ecfdf5;
+    background:
+        #f8fafc;
 
     border:
-        1px solid #bbf7d0;
+        1px solid #e7ebf0;
 
-    border-radius: 13px;
+    border-radius:
+        11px;
+
+    font-size:
+        9px;
 }
+
 
 .availability span {
 
-    color: #166534;
-
-    font-size: 12px;
+    color:
+        #667085;
 }
+
 
 .availability strong {
 
-    color: #166534;
-
-    font-size: 15px;
+    color:
+        #111827;
 }
 
 
-/* SIN SELECCIÓN */
+/* ==========================================================
+   SELECTED LIST
+========================================================== */
 
-.selection-empty {
+.selected-title {
 
-    margin-bottom: 18px;
+    margin-bottom:
+        9px;
 
-    padding: 18px 15px;
+    color:
+        #344054;
 
-    background: #f7f9fc;
+    font-size:
+        9px;
 
-    color: var(--muted);
+    font-weight:
+        800;
 
-    border-radius: 13px;
-
-    text-align: center;
-
-    font-size: 13px;
+    letter-spacing:
+        .5px;
 }
 
-
-/* LISTA SELECCIONADOS */
 
 .selected-list {
 
-    display: grid;
+    max-height:
+        210px;
 
-    gap: 8px;
+    overflow-y:
+        auto;
 
-    max-height: 230px;
+    display:
+        grid;
 
-    overflow-y: auto;
+    gap:
+        7px;
 
-    margin-bottom: 18px;
+    margin-bottom:
+        18px;
 }
 
-.selected-ticket {
 
-    padding: 11px 12px;
+.empty-selection {
 
-    display: flex;
+    padding:
+        18px 10px;
 
-    justify-content: space-between;
+    color:
+        #98a2b3;
 
-    align-items: center;
+    text-align:
+        center;
 
-    gap: 10px;
+    background:
+        #fafbfd;
 
     border:
-        1px solid #e5e7eb;
+        1px dashed #dce2e9;
 
-    border-radius: 12px;
+    border-radius:
+        10px;
 
-    font-size: 12px;
+    font-size:
+        9px;
 }
 
-.selected-ticket strong {
 
-    display: block;
+.selected-item {
 
-    margin-bottom: 3px;
+    padding:
+        10px 11px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    background:
+        #fffbeb;
+
+    border:
+        1px solid #fde68a;
+
+    border-radius:
+        10px;
+
+    font-size:
+        9px;
 }
 
-.selected-ticket span {
 
-    color: var(--muted);
+.selected-item strong {
+
+    color:
+        #713f12;
 }
+
 
 .remove-seat {
 
-    width: 27px;
+    width:
+        24px;
 
-    height: 27px;
+    height:
+        24px;
 
-    border: none;
+    padding: 0;
 
-    border-radius: 50%;
+    border:
+        none;
 
-    background: #f3f4f6;
+    border-radius:
+        50%;
 
-    cursor: pointer;
+    background:
+        #fef3c7;
 
-    font-size: 13px;
+    color:
+        #92400e;
+
+    cursor:
+        pointer;
+
+    font-size:
+        13px;
 }
 
-.remove-seat:hover {
 
-    background: #e5e7eb;
-}
-
-
-/* RESUMEN */
+/* ==========================================================
+   TOTALS
+========================================================== */
 
 .summary-row {
 
-    margin: 12px 0;
-
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: center;
+    align-items:
+        center;
 
-    font-size: 13px;
+    gap:
+        15px;
+
+    margin-bottom:
+        11px;
+
+    font-size:
+        10px;
 }
+
 
 .summary-row span {
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
-.summary-total {
 
-    margin-top: 16px;
+.total-row {
 
-    padding-top: 17px;
+    margin-top:
+        17px;
+
+    padding-top:
+        17px;
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: end;
+    align-items:
+        flex-end;
+
+    gap:
+        15px;
 
     border-top:
         1px solid var(--line);
 }
 
-.summary-total span {
 
-    color: var(--muted);
+.total-row span {
 
-    font-size: 13px;
+    color:
+        var(--muted);
+
+    font-size:
+        11px;
 }
 
-.summary-total strong {
 
-    font-size: 27px;
-}
+.total-row strong {
 
-
-/* BOTÓN */
-
-.checkout-btn {
-
-    width: 100%;
-
-    margin-top: 20px;
-
-    padding: 16px;
-
-    border: none;
-
-    border-radius: 13px;
-
-    background: var(--primary);
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 14px;
-
-    font-weight: 800;
-
-    transition: .2s;
-}
-
-.checkout-btn:hover:not(:disabled) {
-
-    background: var(--primary-dark);
-
-    transform: translateY(-1px);
-}
-
-.checkout-btn:disabled {
-
-    background: #cbd5e1;
-
-    cursor: not-allowed;
-}
-
-.security-note {
-
-    margin-top: 12px;
-
-    text-align: center;
-
-    color: var(--muted);
-
-    font-size: 11px;
-
-    line-height: 1.5;
+    font-size:
+        27px;
 }
 
 
 /* ==========================================================
-   MODAL
+   CONTINUE
 ========================================================== */
 
-.modal {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 5000;
-
-    display: none;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 18px;
-
-    background:
-        rgba(4,10,20,.73);
-
-    backdrop-filter: blur(6px);
-}
-
-.modal.show {
-
-    display: flex;
-}
-
-.modal-box {
+.continue-button {
 
     width:
-        min(520px,100%);
+        100%;
 
-    background: white;
+    min-height:
+        52px;
 
-    border-radius: 22px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.28);
-}
-
-.modal-head {
-
-    padding: 22px 23px;
-
-    display: flex;
-
-    align-items: start;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    border-bottom:
-        1px solid var(--line);
-}
-
-.modal-head h3 {
-
-    margin: 0 0 5px;
-
-    font-size: 20px;
-}
-
-.modal-head p {
-
-    margin: 0;
-
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-.modal-close {
-
-    width: 34px;
-
-    height: 34px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #f3f4f6;
-
-    cursor: pointer;
-
-    font-size: 17px;
-}
-
-.modal-content {
-
-    padding: 23px;
-}
-
-.form-group {
-
-    margin-bottom: 16px;
-}
-
-.form-group label {
-
-    display: block;
-
-    margin-bottom: 7px;
-
-    color: #374151;
-
-    font-size: 12px;
-
-    font-weight: 700;
-}
-
-.form-group input {
-
-    width: 100%;
-
-    padding: 13px 14px;
+    margin-top:
+        19px;
 
     border:
-        1px solid #d7dde5;
+        none;
 
-    border-radius: 11px;
+    border-radius:
+        12px;
 
-    outline: none;
+    background:
+        var(--blue);
 
-    font-family: inherit;
+    color:
+        white;
 
-    font-size: 14px;
-}
+    cursor:
+        pointer;
 
-.form-group input:focus {
+    font-size:
+        11px;
 
-    border-color: var(--primary);
+    font-weight:
+        800;
 
-    box-shadow:
-        0 0 0 3px rgba(37,99,235,.10);
-}
-
-
-/* AVISO MORADO */
-
-.hold-notice {
-
-    margin: 18px 0;
-
-    padding: 13px 14px;
-
-    background: #f5f3ff;
-
-    color: #5b21b6;
-
-    border:
-        1px solid #ddd6fe;
-
-    border-radius: 12px;
-
-    font-size: 12px;
-
-    line-height: 1.55;
-}
-
-.modal-total {
-
-    margin-bottom: 17px;
-
-    padding: 15px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    background: #f7f9fc;
-
-    border-radius: 12px;
-}
-
-.modal-total span {
-
-    color: var(--muted);
-
-    font-size: 13px;
-}
-
-.modal-total strong {
-
-    font-size: 22px;
-}
-
-.modal-submit {
-
-    width: 100%;
-
-    padding: 15px;
-
-    border: none;
-
-    border-radius: 12px;
-
-    background: var(--primary);
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 14px;
-
-    font-weight: 800;
-}
-
-.modal-submit:hover:not(:disabled) {
-
-    background: var(--primary-dark);
-}
-
-.modal-submit:disabled {
-
-    background: #9ca3af;
+    transition:
+        .2s;
 }
 
 
-/* ==========================================================
-   LOADER
-========================================================== */
+.continue-button:hover:not(:disabled) {
 
-.loading-screen {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 9999;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #f4f7fb;
-}
-
-.loader-box {
-
-    text-align: center;
-}
-
-.spinner {
-
-    width: 42px;
-
-    height: 42px;
-
-    margin:
-        0 auto 15px;
-
-    border:
-        4px solid #dbe4ef;
-
-    border-top-color: #2563eb;
-
-    border-radius: 50%;
-
-    animation:
-        spin .8s linear infinite;
-}
-
-@keyframes spin {
-
-    to {
-        transform:
-            rotate(360deg);
-    }
-}
-
-.loader-box strong {
-
-    display: block;
-
-    margin-bottom: 5px;
-
-    font-size: 16px;
-}
-
-.loader-box span {
-
-    color: var(--muted);
-
-    font-size: 12px;
+    background:
+        var(--blue-dark);
 }
 
 
-/* ==========================================================
-   TOAST
-========================================================== */
+.continue-button:disabled {
 
-.toast {
+    background:
+        #9ca3af;
 
-    position: fixed;
-
-    right: 22px;
-
-    bottom: 22px;
-
-    z-index: 6000;
-
-    padding: 13px 17px;
-
-    background: #111827;
-
-    color: white;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.25);
-
-    font-size: 12px;
-
-    transform:
-        translateY(130px);
-
-    opacity: 0;
-
-    transition: .25s;
+    cursor:
+        not-allowed;
 }
 
-.toast.show {
 
-    transform:
-        translateY(0);
+.summary-note {
 
-    opacity: 1;
+    margin-top:
+        11px;
+
+    color:
+        #98a2b3;
+
+    text-align:
+        center;
+
+    font-size:
+        8px;
+
+    line-height:
+        1.55;
 }
 
 
@@ -1543,7 +1279,784 @@ body {
 
 .mobile-cart {
 
-    display: none;
+    position:
+        fixed;
+
+    left:
+        10px;
+
+    right:
+        10px;
+
+    bottom:
+        10px;
+
+    z-index:
+        1500;
+
+    display:
+        none;
+
+    padding:
+        12px;
+
+    background:
+        rgba(8,16,31,.97);
+
+    border:
+        1px solid rgba(255,255,255,.10);
+
+    border-radius:
+        15px;
+
+    box-shadow:
+        0 14px 40px rgba(0,0,0,.30);
+
+    color:
+        white;
+}
+
+
+.mobile-cart-info {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        12px;
+}
+
+
+.mobile-cart-info span {
+
+    color:
+        rgba(255,255,255,.60);
+
+    font-size:
+        8px;
+}
+
+
+.mobile-cart-info strong {
+
+    display:
+        block;
+
+    margin-top:
+        2px;
+
+    font-size:
+        15px;
+}
+
+
+.mobile-cart button {
+
+    min-height:
+        40px;
+
+    padding:
+        0 14px;
+
+    border:
+        none;
+
+    border-radius:
+        10px;
+
+    background:
+        var(--blue);
+
+    color:
+        white;
+
+    cursor:
+        pointer;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+}
+
+
+.mobile-cart button:disabled {
+
+    background:
+        #64748b;
+}
+
+
+/* ==========================================================
+   MODAL
+========================================================== */
+
+.modal {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        5000;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        18px;
+
+    background:
+        rgba(5,10,20,.76);
+
+    backdrop-filter:
+        blur(7px);
+}
+
+
+.modal.show {
+
+    display:
+        flex;
+}
+
+
+.modal-box {
+
+    width:
+        min(500px,100%);
+
+    overflow:
+        hidden;
+
+    background:
+        white;
+
+    border-radius:
+        22px;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.35);
+}
+
+
+.modal-header {
+
+    padding:
+        20px 21px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+
+.modal-header h2 {
+
+    margin:
+        0 0 4px;
+
+    font-size:
+        20px;
+}
+
+
+.modal-header p {
+
+    margin: 0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        9px;
+}
+
+
+.modal-close {
+
+    width:
+        36px;
+
+    height:
+        36px;
+
+    flex-shrink:
+        0;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    background:
+        #f3f4f6;
+
+    cursor:
+        pointer;
+
+    font-size:
+        17px;
+}
+
+
+.modal-content {
+
+    padding:
+        21px;
+}
+
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.form-group {
+
+    margin-bottom:
+        14px;
+}
+
+
+.form-group label {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+    margin-bottom:
+        7px;
+
+    color:
+        #344054;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .3px;
+}
+
+
+.required {
+
+    color:
+        var(--red);
+}
+
+
+.form-input {
+
+    width:
+        100%;
+
+    min-height:
+        47px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid #d8dee7;
+
+    border-radius:
+        11px;
+
+    outline:
+        none;
+
+    background:
+        white;
+
+    color:
+        #111827;
+
+    font-size:
+        12px;
+
+    transition:
+        .2s;
+}
+
+
+.form-input:focus {
+
+    border-color:
+        var(--blue);
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,.08);
+}
+
+
+.form-input.invalid {
+
+    border-color:
+        #ef4444;
+
+    box-shadow:
+        0 0 0 3px rgba(239,68,68,.07);
+}
+
+
+.field-help {
+
+    margin-top:
+        5px;
+
+    color:
+        #98a2b3;
+
+    font-size:
+        8px;
+
+    line-height:
+        1.5;
+}
+
+
+.field-error {
+
+    display:
+        none;
+
+    margin-top:
+        5px;
+
+    color:
+        #dc2626;
+
+    font-size:
+        8px;
+
+    font-weight:
+        600;
+}
+
+
+.field-error.show {
+
+    display:
+        block;
+}
+
+
+/* ==========================================================
+   EMAIL NOTICE
+========================================================== */
+
+.email-notice {
+
+    margin:
+        5px 0 18px;
+
+    padding:
+        12px 13px;
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        10px;
+
+    background:
+        #eff6ff;
+
+    border:
+        1px solid #bfdbfe;
+
+    border-radius:
+        11px;
+}
+
+
+.email-notice-icon {
+
+    width:
+        28px;
+
+    height:
+        28px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        #2563eb;
+
+    color:
+        white;
+
+    border-radius:
+        50%;
+
+    font-size:
+        12px;
+}
+
+
+.email-notice strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    color:
+        #1e40af;
+
+    font-size:
+        9px;
+}
+
+
+.email-notice span {
+
+    color:
+        #475569;
+
+    font-size:
+        8px;
+
+    line-height:
+        1.5;
+}
+
+
+/* ==========================================================
+   ORDER PREVIEW MODAL
+========================================================== */
+
+.modal-order {
+
+    margin-bottom:
+        18px;
+
+    padding:
+        14px;
+
+    background:
+        #f8fafc;
+
+    border:
+        1px solid #e7ebf0;
+
+    border-radius:
+        12px;
+}
+
+
+.modal-order-row {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        9px;
+}
+
+
+.modal-order-row:last-child {
+
+    margin-bottom:
+        0;
+
+    padding-top:
+        9px;
+
+    border-top:
+        1px solid #e5e7eb;
+
+    font-weight:
+        800;
+}
+
+
+.modal-order-row span {
+
+    color:
+        #667085;
+}
+
+
+/* ==========================================================
+   MODAL BUTTON
+========================================================== */
+
+.modal-continue {
+
+    width:
+        100%;
+
+    min-height:
+        50px;
+
+    border:
+        none;
+
+    border-radius:
+        11px;
+
+    background:
+        var(--blue);
+
+    color:
+        white;
+
+    cursor:
+        pointer;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+}
+
+
+.modal-continue:disabled {
+
+    background:
+        #9ca3af;
+
+    cursor:
+        not-allowed;
+}
+
+
+.process-notice {
+
+    margin-top:
+        11px;
+
+    padding:
+        10px 11px;
+
+    background:
+        #f5f3ff;
+
+    border:
+        1px solid #ddd6fe;
+
+    border-radius:
+        10px;
+
+    color:
+        #6d28d9;
+
+    text-align:
+        center;
+
+    font-size:
+        8px;
+
+    line-height:
+        1.55;
+}
+
+
+/* ==========================================================
+   LOADING
+========================================================== */
+
+.loading-screen {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        9999;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        #f4f7fb;
+}
+
+
+.loader {
+
+    text-align:
+        center;
+}
+
+
+.spinner {
+
+    width:
+        43px;
+
+    height:
+        43px;
+
+    margin:
+        0 auto 13px;
+
+    border:
+        4px solid #dce3ec;
+
+    border-top-color:
+        var(--blue);
+
+    border-radius:
+        50%;
+
+    animation:
+        spin .8s linear infinite;
+}
+
+
+@keyframes spin {
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+
+}
+
+
+.loader strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        4px;
+
+    font-size:
+        13px;
+}
+
+
+.loader span {
+
+    color:
+        var(--muted);
+
+    font-size:
+        9px;
+}
+
+
+/* ==========================================================
+   EMPTY / ERROR
+========================================================== */
+
+.message-card {
+
+    max-width:
+        700px;
+
+    margin:
+        40px auto;
+
+    padding:
+        35px 24px;
+
+    background:
+        white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        20px;
+
+    text-align:
+        center;
+}
+
+
+.message-card h2 {
+
+    margin:
+        0 0 7px;
+
+    font-size:
+        21px;
+}
+
+
+.message-card p {
+
+    margin: 0;
+
+    color:
+        #6b7280;
+
+    font-size:
+        10px;
+
+    line-height:
+        1.6;
 }
 
 
@@ -1551,281 +2064,200 @@ body {
    RESPONSIVE
 ========================================================== */
 
-@media (max-width: 1100px) {
+@media(max-width:1100px) {
 
-    .booking-layout {
+    .layout {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
+
 
     .summary-card {
 
-        position: relative;
+        position:
+            relative;
 
-        top: auto;
+        top:
+            auto;
     }
 
 }
 
 
-@media (max-width: 760px) {
-
-    body {
-
-        padding-bottom: 80px;
-    }
+@media(max-width:700px) {
 
     .nav {
 
-        min-height: 65px;
+        min-height:
+            64px;
 
         padding:
-            0 14px;
+            0 13px;
     }
 
 
-    /* LOGO MÓVIL */
-
     .brand-logo {
 
-        height: 36px;
-
-        max-width: 190px;
+        height:
+            35px;
     }
 
 
     .back-link {
 
-        padding:
-            9px 11px;
+        min-height:
+            34px;
 
-        font-size: 10px;
+        padding:
+            0 10px;
+
+        font-size:
+            7px;
     }
 
 
     .event-hero {
 
-        min-height: auto;
+        min-height:
+            235px;
     }
 
 
     .event-hero-content {
 
-        grid-template-columns:
-            105px minmax(0,1fr);
-
-        gap: 17px;
+        min-height:
+            235px;
 
         padding:
             25px 14px;
+
+        gap:
+            18px;
     }
 
 
     .event-poster {
 
-        width: 105px;
+        width:
+            110px;
 
-        border-radius: 12px;
+        border-radius:
+            12px;
     }
 
 
-    .event-copy h1 {
+    .event-info h1 {
 
-        font-size: 25px;
+        font-size:
+            25px;
 
-        letter-spacing: -.6px;
+        letter-spacing:
+            -.6px;
     }
 
 
-    .event-info-line {
+    .event-meta {
 
-        display: grid;
-
-        gap: 6px;
-
-        margin-bottom: 13px;
-
-        font-size: 11px;
+        font-size:
+            9px;
     }
 
 
-    .event-price-big {
+    .event-price {
 
-        font-size: 19px;
-    }
-
-
-    .event-type {
+        margin-top:
+            11px;
 
         padding:
-            6px 9px;
+            8px 10px;
 
-        margin-bottom: 9px;
-
-        font-size: 9px;
+        font-size:
+            9px;
     }
 
 
     .page {
 
         padding:
-            15px 10px 30px;
-    }
-
-
-    .map-card {
-
-        border-radius: 15px;
+            17px 10px 110px;
     }
 
 
     .map-header {
 
         padding:
-            15px 14px;
+            17px 15px;
     }
 
 
-    .map-title h2 {
-
-        font-size: 18px;
-    }
-
-
-    .legend {
+    .map-scroll {
 
         padding:
-            12px 14px;
-
-        gap:
-            10px 15px;
-    }
-
-
-    .map-viewport {
-
-        min-height: 590px;
-    }
-
-
-    .map-transform {
-
-        padding-top: 25px;
+            12px;
     }
 
 
     .summary-card {
 
-        margin-bottom: 15px;
+        display:
+            none;
     }
 
-
-    /* BARRA DE COMPRA MÓVIL */
 
     .mobile-cart {
 
-        position: fixed;
-
-        left: 0;
-
-        right: 0;
-
-        bottom: 0;
-
-        z-index: 3000;
-
-        display: none;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        gap: 12px;
-
-        padding:
-            10px 12px
-            calc(
-                10px +
-                env(safe-area-inset-bottom)
-            );
-
-        background: white;
-
-        border-top:
-            1px solid #e5e7eb;
-
-        box-shadow:
-            0 -10px 35px
-            rgba(15,23,42,.14);
+        display:
+            block;
     }
 
 
-    .mobile-cart.show {
+    .modal-box {
 
-        display: flex;
-    }
-
-
-    .mobile-cart-info small {
-
-        display: block;
-
-        margin-bottom: 2px;
-
-        color: var(--muted);
-
-        font-size: 10px;
-    }
-
-
-    .mobile-cart-info strong {
-
-        font-size: 17px;
-    }
-
-
-    .mobile-cart button {
-
-        padding:
-            12px 16px;
-
-        border: none;
-
-        border-radius: 10px;
-
-        background: var(--primary);
-
-        color: white;
-
-        cursor: pointer;
-
-        font-weight: 800;
+        border-radius:
+            18px;
     }
 
 }
 
 
-@media (max-width: 480px) {
-
-    .event-hero-content {
-
-        grid-template-columns:
-            87px minmax(0,1fr);
-    }
+@media(max-width:470px) {
 
     .event-poster {
 
-        width: 87px;
+        width:
+            88px;
     }
 
-    .event-copy h1 {
 
-        font-size: 21px;
+    .event-info h1 {
+
+        font-size:
+            21px;
     }
 
-    .event-price-big {
 
-        font-size: 17px;
+    .event-label {
+
+        font-size:
+            7px;
+    }
+
+
+    .event-meta {
+
+        gap:
+            5px;
+
+        font-size:
+            8px;
+    }
+
+
+    .event-price {
+
+        font-size:
+            8px;
     }
 
 }
@@ -1834,27 +2266,29 @@ body {
 
 </head>
 
+
 <body>
 
 
 <!-- ======================================================
-     CARGANDO
+     LOADING
 ====================================================== -->
 
 <div
     class="loading-screen"
     id="loadingScreen">
 
-    <div class="loader-box">
+    <div class="loader">
 
-        <div class="spinner"></div>
+        <div class="spinner">
+        </div>
 
         <strong>
-            Cargando mapa del evento
+            Preparando el evento
         </strong>
 
         <span>
-            Preparando los asientos disponibles...
+            Cargando mesas y asientos...
         </span>
 
     </div>
@@ -1875,9 +2309,9 @@ body {
             class="brand">
 
             <img
-                src="LIVE_TICKETS_BLANCO.png"
-                alt="Live Tickets"
-                class="brand-logo">
+                src="/LIVE_TICKETS_BLANCO.png"
+                class="brand-logo"
+                alt="Live Tickets">
 
         </a>
 
@@ -1896,7 +2330,7 @@ body {
 
 
 <!-- ======================================================
-     HERO DEL EVENTO
+     EVENT HERO
 ====================================================== -->
 
 <section class="event-hero">
@@ -1906,76 +2340,68 @@ body {
         id="eventHeroBg">
     </div>
 
-    <div
-        class="event-hero-overlay">
+    <div class="event-hero-overlay">
     </div>
 
 
-    <div
-        class="event-hero-content">
+    <div class="event-hero-content">
 
 
-        <!-- FLYER -->
-
-        <div
+        <img
+            src="/FLYER%201080X1350.png"
             class="event-poster"
-            id="eventPoster">
-        </div>
+            id="eventPoster"
+            alt="Evento">
 
 
-        <!-- INFORMACIÓN -->
+        <div class="event-info">
 
-        <div class="event-copy">
 
-            <div class="event-type">
+            <div class="event-label">
 
-                ● CONCIERTO
+                EVENTO EN VENTA
 
             </div>
 
 
             <h1 id="eventName">
 
-                Evento
+                Live Tickets
 
             </h1>
 
 
-            <div class="event-info-line">
-
-                <span id="eventDate">
-
-                    Fecha
-
-                </span>
+            <div class="event-meta">
 
 
-                <span id="eventPlace">
+                <div id="eventDate">
 
-                    Lugar
+                    📅 —
 
-                </span>
+                </div>
+
+
+                <div id="eventPlace">
+
+                    📍 —
+
+                </div>
+
+
+            </div>
+
+
+            <div
+                class="event-price"
+                id="eventPrice">
+
+                L 0.00 por asiento
 
             </div>
 
-
-            <div class="event-price-big">
-
-                <span id="eventPrice">
-
-                    L 0.00
-
-                </span>
-
-                <small>
-
-                    / por asiento
-
-                </small>
-
-            </div>
 
         </div>
+
 
     </div>
 
@@ -1983,22 +2409,26 @@ body {
 
 
 <!-- ======================================================
-     CONTENIDO
+     PAGE
 ====================================================== -->
 
-<main class="page">
+<main
+    class="page"
+    id="pageContent">
 
-<div class="booking-layout">
+
+<div class="layout">
 
 
 <!-- ======================================================
-     MAPA
+     MAP
 ====================================================== -->
 
 <section class="map-card">
 
 
     <div class="map-header">
+
 
         <div class="map-title">
 
@@ -2007,113 +2437,78 @@ body {
             </h2>
 
             <p>
-                Haz clic sobre los asientos verdes disponibles.
+                Toca los asientos verdes que deseas reservar.
             </p>
 
         </div>
 
 
-        <div class="zoom-controls">
-
-            <button
-                class="zoom-btn"
-                onclick="zoomOut()">
-
-                −
-
-            </button>
+        <div class="legend">
 
 
-            <button
-                class="zoom-btn zoom-fit"
-                onclick="fitMap()">
+            <div class="legend-item">
 
-                AJUSTAR
+                <span class="legend-dot legend-available">
+                </span>
 
-            </button>
+                Disponible
+
+            </div>
 
 
-            <button
-                class="zoom-btn"
-                onclick="zoomIn()">
+            <div class="legend-item">
 
-                +
+                <span class="legend-dot legend-selected">
+                </span>
 
-            </button>
+                Seleccionado
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <span class="legend-dot legend-blocked">
+                </span>
+
+                En proceso
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <span class="legend-dot legend-sold">
+                </span>
+
+                Vendido
+
+            </div>
+
 
         </div>
+
 
     </div>
 
 
-    <!-- LEYENDA -->
+    <div class="map-scroll">
 
-    <div class="legend">
-
-        <div class="legend-item">
-
-            <div
-                class="legend-dot available">
-            </div>
-
-            Disponible
-
-        </div>
-
-
-        <div class="legend-item">
-
-            <div
-                class="legend-dot selected">
-            </div>
-
-            Seleccionado
-
-        </div>
-
-
-        <div class="legend-item">
-
-            <div
-                class="legend-dot blocked">
-            </div>
-
-            En proceso
-
-        </div>
-
-
-        <div class="legend-item">
-
-            <div
-                class="legend-dot sold">
-            </div>
-
-            Vendido
-
-        </div>
-
-    </div>
-
-
-    <!-- MAPA -->
-
-    <div
-        class="map-viewport"
-        id="mapViewport">
 
         <div
-            class="map-transform"
-            id="mapTransform">
+            class="map"
+            id="map">
 
 
-            <div class="stage-wrap">
+            <div class="stage">
 
-                <div class="stage">
+                ESCENARIO
 
-                    ESCENARIO
+                <span class="stage-sub">
 
-                </div>
+                    FRONT STAGE
+
+                </span>
 
             </div>
 
@@ -2121,21 +2516,25 @@ body {
             <div
                 class="tables-grid"
                 id="tablesGrid">
+
             </div>
 
 
         </div>
 
+
     </div>
+
 
 </section>
 
 
 <!-- ======================================================
-     RESUMEN
+     SUMMARY
 ====================================================== -->
 
 <aside class="summary-card">
+
 
     <div class="summary-head">
 
@@ -2156,23 +2555,19 @@ body {
         <div class="availability">
 
             <span>
-                Asientos disponibles
+                Disponibles
             </span>
 
-            <strong id="availableCount">
-
+            <strong id="availableSeats">
                 0
-
             </strong>
 
         </div>
 
 
-        <div
-            class="selection-empty"
-            id="selectionEmpty">
+        <div class="selected-title">
 
-            Aún no has seleccionado ningún asiento.
+            ASIENTOS SELECCIONADOS
 
         </div>
 
@@ -2180,6 +2575,13 @@ body {
         <div
             class="selected-list"
             id="selectedList">
+
+            <div class="empty-selection">
+
+                Aún no has seleccionado asientos.
+
+            </div>
+
         </div>
 
 
@@ -2189,10 +2591,8 @@ body {
                 Cantidad
             </span>
 
-            <strong id="summaryQuantity">
-
+            <strong id="selectedQuantity">
                 0
-
             </strong>
 
         </div>
@@ -2201,116 +2601,125 @@ body {
         <div class="summary-row">
 
             <span>
-                Precio por asiento
+                Precio unitario
             </span>
 
-            <strong id="summaryPrice">
-
+            <strong id="summaryUnitPrice">
                 L 0.00
-
             </strong>
 
         </div>
 
 
-        <div class="summary-total">
+        <div class="total-row">
 
             <span>
                 Total
             </span>
 
             <strong id="summaryTotal">
-
                 L 0.00
-
             </strong>
 
         </div>
 
 
         <button
-            class="checkout-btn"
-            id="checkoutButton"
-            disabled
-            onclick="openBuyerModal()">
+            class="continue-button"
+            id="continueButton"
+            onclick="openBuyerModal()"
+            disabled>
 
             CONTINUAR
 
         </button>
 
 
-        <div class="security-note">
+        <div class="summary-note">
 
-            Los asientos serán bloqueados temporalmente
-            durante el proceso de compra.
+            Tus asientos se bloquearán temporalmente
+            cuando continúes al checkout.
 
         </div>
 
+
     </div>
+
 
 </aside>
 
+
 </div>
+
 
 </main>
 
 
 <!-- ======================================================
-     BARRA MÓVIL
+     MOBILE CART
 ====================================================== -->
 
 <div
     class="mobile-cart"
     id="mobileCart">
 
+
     <div class="mobile-cart-info">
 
-        <small id="mobileQuantity">
 
-            0 asientos
+        <div>
 
-        </small>
+            <span id="mobileQuantity">
+                0 ASIENTOS
+            </span>
 
-        <strong id="mobileTotal">
+            <strong id="mobileTotal">
+                L 0.00
+            </strong>
 
-            L 0.00
+        </div>
 
-        </strong>
+
+        <button
+            id="mobileContinueButton"
+            onclick="openBuyerModal()"
+            disabled>
+
+            CONTINUAR
+
+        </button>
+
 
     </div>
 
-
-    <button
-        onclick="openBuyerModal()">
-
-        CONTINUAR
-
-    </button>
 
 </div>
 
 
 <!-- ======================================================
-     MODAL COMPRADOR
+     BUYER MODAL
 ====================================================== -->
 
 <div
     class="modal"
-    id="buyerModal">
+    id="buyerModal"
+    onclick="modalBackgroundClick(event)">
+
 
     <div class="modal-box">
 
 
-        <div class="modal-head">
+        <div class="modal-header">
+
 
             <div>
 
-                <h3>
+                <h2>
                     Datos del comprador
-                </h3>
+                </h2>
 
                 <p>
-                    Completa tus datos para continuar.
+                    Esta información será utilizada para tu reserva.
                 </p>
 
             </div>
@@ -2324,129 +2733,232 @@ body {
 
             </button>
 
+
         </div>
 
 
         <div class="modal-content">
 
 
+            <!-- NAME -->
+
             <div class="form-group">
 
                 <label>
-                    Nombre completo *
+
+                    NOMBRE COMPLETO
+
+                    <span class="required">
+                        *
+                    </span>
+
                 </label>
 
                 <input
                     type="text"
                     id="buyerName"
+                    class="form-input"
+                    placeholder="Ej. Kevin Moran"
                     autocomplete="name"
-                    placeholder="Nombre y apellido">
+                    maxlength="120">
+
+                <div
+                    class="field-error"
+                    id="nameError">
+
+                    Ingresa el nombre del comprador.
+
+                </div>
 
             </div>
 
 
+            <!-- PHONE -->
+
             <div class="form-group">
 
                 <label>
-                    Teléfono *
+
+                    TELÉFONO
+
+                    <span class="required">
+                        *
+                    </span>
+
                 </label>
 
                 <input
                     type="tel"
                     id="buyerPhone"
+                    class="form-input"
+                    placeholder="Ej. 9999-9999"
                     autocomplete="tel"
-                    placeholder="+504 9999-9999">
+                    maxlength="30">
+
+                <div class="field-help">
+
+                    Incluye un número donde podamos contactarte si es necesario.
+
+                </div>
+
+                <div
+                    class="field-error"
+                    id="phoneError">
+
+                    Ingresa un número de teléfono válido.
+
+                </div>
 
             </div>
 
 
+            <!-- EMAIL -->
+
             <div class="form-group">
 
                 <label>
-                    Correo electrónico
+
+                    CORREO ELECTRÓNICO
+
+                    <span class="required">
+                        *
+                    </span>
+
                 </label>
 
                 <input
                     type="email"
                     id="buyerEmail"
+                    class="form-input"
+                    placeholder="Ej. cliente@gmail.com"
                     autocomplete="email"
-                    placeholder="correo@ejemplo.com">
+                    inputmode="email"
+                    maxlength="180">
+
+                <div
+                    class="field-error"
+                    id="emailError">
+
+                    Ingresa un correo electrónico válido.
+
+                </div>
 
             </div>
 
 
-            <div class="hold-notice">
+            <!-- EMAIL NOTICE -->
 
-                Al continuar, tus asientos quedarán
-                en estado <strong>En proceso</strong>
-                durante aproximadamente
-                <strong>10 minutos</strong> mientras
-                completas la compra.
+            <div class="email-notice">
+
+
+                <div class="email-notice-icon">
+
+                    ✉
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+
+                        AQUÍ RECIBIRÁS TUS ENTRADAS
+
+                    </strong>
+
+                    <span>
+
+                        Después de aprobarse el pago, Live Tickets
+                        enviará todos tus códigos QR a este correo.
+                        Verifica que esté escrito correctamente.
+
+                    </span>
+
+                </div>
+
 
             </div>
 
 
-            <div class="modal-total">
+            <!-- ORDER -->
 
-                <span>
-                    Total de la reserva
-                </span>
+            <div class="modal-order">
 
-                <strong id="modalTotal">
 
-                    L 0.00
+                <div class="modal-order-row">
 
-                </strong>
+                    <span>
+                        Asientos
+                    </span>
+
+                    <strong id="modalQuantity">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="modal-order-row">
+
+                    <span>
+                        Precio unitario
+                    </span>
+
+                    <strong id="modalPrice">
+                        L 0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="modal-order-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="modalTotal">
+                        L 0.00
+                    </strong>
+
+                </div>
+
 
             </div>
 
 
             <button
-                class="modal-submit"
-                id="modalSubmit"
+                class="modal-continue"
+                id="modalContinueButton"
                 onclick="createPreReservation()">
 
                 CONTINUAR AL CHECKOUT
 
             </button>
 
+
+            <div class="process-notice">
+
+                Al continuar, tus asientos pasarán a
+                <strong>En proceso</strong> durante aproximadamente
+                10 minutos mientras completas la compra.
+
+            </div>
+
+
         </div>
+
 
     </div>
 
-</div>
 
-
-<!-- ======================================================
-     TOAST
-====================================================== -->
-
-<div
-    class="toast"
-    id="toast">
 </div>
 
 
 <script>
 
 /* ==========================================================
-   ARCHIVOS VISUALES
-========================================================== */
-
-/*
-Si tus imágenes están directamente
-en la raíz del repositorio, déjalo así.
-*/
-
-const LOGO_FILE =
-    "LIVE_TICKETS_BLANCO.png";
-
-const DEFAULT_FLYER =
-    "FLYER%201080X1350.png";
-
-
-/* ==========================================================
-   SUPABASE
+   CONFIGURACIÓN
 ========================================================== */
 
 const SUPABASE_URL =
@@ -2457,6 +2969,10 @@ const SUPABASE_KEY =
     "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
 
 
+const DEFAULT_FLYER =
+    "/FLYER%201080X1350.png";
+
+
 const db =
     supabase.createClient(
         SUPABASE_URL,
@@ -2465,7 +2981,7 @@ const db =
 
 
 /* ==========================================================
-   EVENTO
+   EVENT ID
 ========================================================== */
 
 const params =
@@ -2476,44 +2992,46 @@ const params =
 
 const EVENT_ID =
     Number(
-        params.get("id") || 1
+        params.get("id") ||
+        1
     );
 
 
 /* ==========================================================
-   VARIABLES
+   DATA
 ========================================================== */
 
-let currentEvent = null;
+let currentEvent =
+    null;
 
-let mesas = [];
 
-let asientos = [];
+let tables =
+    [];
 
-let selectedSeats =
-    new Map();
 
-let currentZoom = 1;
+let seats =
+    [];
 
-const MAP_WIDTH =
-    1380;
 
-const MIN_ZOOM =
-    0.40;
+let selectedSeatIds =
+    new Set();
 
-const MAX_ZOOM =
-    1.40;
+
+let refreshing =
+    false;
 
 
 /* ==========================================================
-   DINERO
+   MONEY
 ========================================================== */
 
 function money(value) {
 
     return "L " +
 
-        Number(value || 0)
+        Number(
+            value || 0
+        )
         .toLocaleString(
             "es-HN",
             {
@@ -2526,26 +3044,115 @@ function money(value) {
 
 
 /* ==========================================================
-   FECHA
+   ESCAPE
 ========================================================== */
 
-function formatDate(date) {
+function escapeHTML(value) {
 
-    if (!date) {
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value ?? "";
+
+
+    return div.innerHTML;
+
+}
+
+
+/* ==========================================================
+   VALID EMAIL
+========================================================== */
+
+function validEmail(value) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(
+            String(
+                value || ""
+            )
+            .trim()
+        );
+
+}
+
+
+/* ==========================================================
+   VALID PHONE
+========================================================== */
+
+function validPhone(value) {
+
+    const cleaned =
+        String(
+            value || ""
+        )
+        .replace(
+            /\D/g,
+            ""
+        );
+
+
+    return cleaned.length >= 8;
+
+}
+
+
+/* ==========================================================
+   DATE
+========================================================== */
+
+function formatEventDate(value) {
+
+    if (!value) {
 
         return "Fecha por confirmar";
 
     }
 
 
-    return new Date(date)
-        .toLocaleDateString(
+    const date =
+        new Date(
+            value
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "Fecha por confirmar";
+
+    }
+
+
+    return date
+        .toLocaleString(
             "es-HN",
             {
-                weekday: "long",
-                day: "2-digit",
-                month: "long",
-                year: "numeric"
+                weekday:
+                    "long",
+
+                day:
+                    "2-digit",
+
+                month:
+                    "long",
+
+                year:
+                    "numeric",
+
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit"
             }
         );
 
@@ -2553,107 +3160,60 @@ function formatDate(date) {
 
 
 /* ==========================================================
-   IMAGEN EVENTO
+   EVENT IMAGE
 ========================================================== */
 
-function getEventImage(evento) {
+function getEventImage(
+    event
+) {
 
-    /*
-    Si después agregamos flyer_url
-    en Supabase para otros eventos,
-    lo usará automáticamente.
+    const image =
+        event?.flyer_url
+        ||
+        DEFAULT_FLYER;
 
-    Para este primer evento utiliza
-    FLYER 1080X1350.png.
-    */
 
-    return (
-
-        evento.flyer_url ||
-
-        evento.flyer ||
-
-        evento.imagen_url ||
-
-        evento.imagen ||
-
-        evento.portada_url ||
-
-        evento.banner_url ||
-
-        DEFAULT_FLYER
-
-    );
+    return image;
 
 }
 
 
 /* ==========================================================
-   INICIALIZAR
+   CLEANUP
 ========================================================== */
 
-async function initialize() {
+async function cleanupExpired() {
 
     try {
 
 
+        const {
+            error
+        } =
         await db.rpc(
             "liberar_bloqueos_expirados"
         );
 
 
-        await loadEvent();
+        if (error) {
 
+            console.warn(
+                "Liberar bloqueos:",
+                error
+            );
 
-        await loadTablesAndSeats();
+        }
 
-
-        renderEvent();
-
-
-        renderMap();
-
-
-        updateSummary();
-
-
-        setTimeout(
-            fitMap,
-            150
-        );
-
-
-        /*
-        Actualiza disponibilidad
-        cada 12 segundos.
-        */
-
-        setInterval(
-            refreshSeatStates,
-            12000
-        );
 
     }
 
     catch(error) {
 
-        console.error(error);
 
-
-        alert(
-            "No fue posible cargar el evento."
+        console.warn(
+            "Cleanup:",
+            error
         );
-
-    }
-
-    finally {
-
-        document
-            .getElementById(
-                "loadingScreen"
-            )
-            .style.display =
-            "none";
 
     }
 
@@ -2661,7 +3221,7 @@ async function initialize() {
 
 
 /* ==========================================================
-   CARGAR EVENTO
+   LOAD EVENT
 ========================================================== */
 
 async function loadEvent() {
@@ -2670,29 +3230,44 @@ async function loadEvent() {
         data,
         error
     } =
-
     await db
-
-        .from("eventos")
-
-        .select("*")
-
+        .from(
+            "eventos"
+        )
+        .select(`
+            id,
+            nombre,
+            fecha,
+            lugar,
+            capacidad,
+            activo,
+            precio_asiento,
+            flyer_url,
+            descripcion
+        `)
         .eq(
             "id",
             EVENT_ID
         )
-
-        .eq(
-            "activo",
-            true
-        )
-
-        .single();
+        .maybeSingle();
 
 
-    if (error) {
+    if (
+        error
+    ) {
 
         throw error;
+
+    }
+
+
+    if (
+        !data
+    ) {
+
+        throw new Error(
+            "Evento no encontrado."
+        );
 
     }
 
@@ -2700,116 +3275,25 @@ async function loadEvent() {
     currentEvent =
         data;
 
-}
 
-
-/* ==========================================================
-   MESAS Y ASIENTOS
-========================================================== */
-
-async function loadTablesAndSeats() {
-
-    const {
-        data: tableData,
-        error: tableError
-    } =
-
-    await db
-
-        .from("mesas")
-
-        .select(
-            "id, numero"
-        )
-
-        .eq(
-            "evento_id",
-            EVENT_ID
-        )
-
-        .order(
-            "numero",
-            {
-                ascending: true
-            }
-        );
-
-
-    if (tableError) {
-
-        throw tableError;
-
-    }
-
-
-    mesas =
-        tableData || [];
-
-
-    if (!mesas.length) {
-
-        asientos = [];
-
-        return;
-
-    }
-
-
-    const tableIds =
-
-        mesas.map(
-            mesa =>
-                mesa.id
-        );
-
-
-    const {
-        data: seatData,
-        error: seatError
-    } =
-
-    await db
-
-        .from("asientos")
-
-        .select(
-            "id, mesa_id, numero, estado"
-        )
-
-        .in(
-            "mesa_id",
-            tableIds
-        )
-
-        .order(
-            "numero",
-            {
-                ascending: true
-            }
-        );
-
-
-    if (seatError) {
-
-        throw seatError;
-
-    }
-
-
-    asientos =
-        seatData || [];
+    renderEvent();
 
 }
 
 
 /* ==========================================================
-   MOSTRAR EVENTO
+   RENDER EVENT
 ========================================================== */
 
 function renderEvent() {
 
-    document.title =
+    const image =
+        getEventImage(
+            currentEvent
+        );
 
+
+    document.title =
         `${currentEvent.nombre} | Live Tickets`;
 
 
@@ -2818,7 +3302,6 @@ function renderEvent() {
             "eventName"
         )
         .textContent =
-
         currentEvent.nombre;
 
 
@@ -2829,7 +3312,7 @@ function renderEvent() {
         .textContent =
 
         "📅 " +
-        formatDate(
+        formatEventDate(
             currentEvent.fecha
         );
 
@@ -2841,9 +3324,9 @@ function renderEvent() {
         .textContent =
 
         "📍 " +
-
         (
-            currentEvent.lugar ||
+            currentEvent.lugar
+            ||
             "Lugar por confirmar"
         );
 
@@ -2854,40 +3337,17 @@ function renderEvent() {
         )
         .textContent =
 
-        money(
+        `${money(
             currentEvent.precio_asiento
-        );
-
-
-    document
-        .getElementById(
-            "summaryPrice"
-        )
-        .textContent =
-
-        money(
-            currentEvent.precio_asiento
-        );
-
-
-    /*
-    IMAGEN
-    */
-
-    const image =
-
-        getEventImage(
-            currentEvent
-        );
+        )} por asiento`;
 
 
     document
         .getElementById(
             "eventPoster"
         )
-        .style.backgroundImage =
-
-        `url("${image}")`;
+        .src =
+        image;
 
 
     document
@@ -2898,18 +3358,169 @@ function renderEvent() {
 
         `url("${image}")`;
 
+
+    document
+        .getElementById(
+            "summaryUnitPrice"
+        )
+        .textContent =
+
+        money(
+            currentEvent.precio_asiento
+        );
+
 }
 
 
 /* ==========================================================
-   RENDER MAPA
+   LOAD TABLES + SEATS
 ========================================================== */
 
-function renderMap() {
+async function loadTablesAndSeats() {
+
+    const {
+        data: tableData,
+        error: tableError
+    } =
+    await db
+        .from(
+            "mesas"
+        )
+        .select(
+            "id,evento_id,numero"
+        )
+        .eq(
+            "evento_id",
+            EVENT_ID
+        )
+        .order(
+            "numero",
+            {
+                ascending:
+                    true
+            }
+        );
+
+
+    if (
+        tableError
+    ) {
+
+        throw tableError;
+
+    }
+
+
+    tables =
+        tableData || [];
+
+
+    const tableIds =
+        tables.map(
+            table =>
+                table.id
+        );
+
+
+    seats =
+        [];
+
+
+    if (
+        tableIds.length
+    ) {
+
+
+        const {
+            data: seatData,
+            error: seatError
+        } =
+        await db
+            .from(
+                "asientos"
+            )
+            .select(
+                "id,mesa_id,numero,estado"
+            )
+            .in(
+                "mesa_id",
+                tableIds
+            )
+            .order(
+                "numero",
+                {
+                    ascending:
+                        true
+                }
+            );
+
+
+        if (
+            seatError
+        ) {
+
+            throw seatError;
+
+        }
+
+
+        seats =
+            seatData || [];
+
+    }
+
+
+    /*
+    Si un asiento seleccionado por el usuario
+    dejó de estar disponible mientras navegaba,
+    lo quitamos de la selección.
+    */
+
+    for (
+        const seatId
+        of [...selectedSeatIds]
+    ) {
+
+
+        const seat =
+            seats.find(
+                item =>
+                    Number(item.id) ===
+                    Number(seatId)
+            );
+
+
+        if (
+            !seat ||
+            seat.estado !==
+            "disponible"
+        ) {
+
+            selectedSeatIds.delete(
+                seatId
+            );
+
+        }
+
+    }
+
+
+    renderTables();
+
+    renderSummary();
+
+}
+
+
+/* ==========================================================
+   RENDER TABLES
+========================================================== */
+
+function renderTables() {
 
     const grid =
-
-        document.getElementById(
+        document
+        .getElementById(
             "tablesGrid"
         );
 
@@ -2918,30 +3529,35 @@ function renderMap() {
         "";
 
 
-    mesas.forEach(
-        mesa => {
+    tables.forEach(
+        table => {
 
 
             const tableSeats =
-
-                asientos
+                seats
 
                 .filter(
                     seat =>
-                        seat.mesa_id ===
-                        mesa.id
+                        Number(
+                            seat.mesa_id
+                        ) ===
+                        Number(
+                            table.id
+                        )
                 )
 
                 .sort(
-                    (a,b) =>
-
-                        Number(a.numero) -
+                    (
+                        a,
+                        b
+                    ) =>
+                        Number(a.numero)
+                        -
                         Number(b.numero)
                 );
 
 
             const leftSeats =
-
                 tableSeats.slice(
                     0,
                     5
@@ -2949,7 +3565,6 @@ function renderMap() {
 
 
             const rightSeats =
-
                 tableSeats.slice(
                     5,
                     10
@@ -2957,8 +3572,8 @@ function renderMap() {
 
 
             const card =
-
-                document.createElement(
+                document
+                .createElement(
                     "div"
                 );
 
@@ -2968,69 +3583,98 @@ function renderMap() {
 
 
             const leftColumn =
+                document
+                .createElement(
+                    "div"
+                );
 
-                leftSeats
 
-                .map(
-                    seat =>
-                        seatHTML(
-                            seat
-                        )
-                )
-
-                .join("");
+            leftColumn.className =
+                "seat-column";
 
 
             const rightColumn =
+                document
+                .createElement(
+                    "div"
+                );
 
-                rightSeats
 
-                .map(
-                    seat =>
-                        seatHTML(
+            rightColumn.className =
+                "seat-column";
+
+
+            leftSeats.forEach(
+                seat => {
+
+                    leftColumn.appendChild(
+                        createSeatButton(
                             seat
                         )
-                )
+                    );
 
-                .join("");
-
-
-            card.innerHTML = `
-
-                <div class="table-number">
-
-                    MESA ${mesa.numero}
-
-                </div>
+                }
+            );
 
 
-                <div class="table-layout">
+            rightSeats.forEach(
+                seat => {
+
+                    rightColumn.appendChild(
+                        createSeatButton(
+                            seat
+                        )
+                    );
+
+                }
+            );
 
 
-                    <div class="seat-column">
-
-                        ${leftColumn}
-
-                    </div>
-
-
-                    <div class="table-shape">
-
-                        MESA ${mesa.numero}
-
-                    </div>
+            const center =
+                document
+                .createElement(
+                    "div"
+                );
 
 
-                    <div class="seat-column">
+            center.className =
+                "table-center";
 
-                        ${rightColumn}
 
-                    </div>
+            center.innerHTML = `
 
+                <div>
+
+                    <small>
+                        MESA
+                    </small>
+
+                    <span class="table-number">
+
+                        ${escapeHTML(
+                            table.numero
+                        )}
+
+                    </span>
 
                 </div>
 
             `;
+
+
+            card.appendChild(
+                leftColumn
+            );
+
+
+            card.appendChild(
+                center
+            );
+
+
+            card.appendChild(
+                rightColumn
+            );
 
 
             grid.appendChild(
@@ -3040,157 +3684,150 @@ function renderMap() {
         }
     );
 
-
-    bindSeatClicks();
-
-
-    updateAvailability();
-
 }
 
 
 /* ==========================================================
-   ASIENTO
+   CREATE SEAT
 ========================================================== */
 
-function seatHTML(seat) {
+function createSeatButton(
+    seat
+) {
 
-    let status =
+    const button =
+        document
+        .createElement(
+            "button"
+        );
 
-        seat.estado ||
-        "disponible";
+
+    button.type =
+        "button";
 
 
-    /*
-    Si fue seleccionado por
-    este comprador, mostrar amarillo.
-    */
+    button.className =
+        "seat";
+
+
+    button.textContent =
+        seat.numero;
+
+
+    const selected =
+        selectedSeatIds.has(
+            seat.id
+        );
+
 
     if (
-        selectedSeats.has(
-            seat.id
-        )
+        selected
     ) {
 
-        status =
-            "seleccionado";
-
-    }
-
-
-    const disabled =
-
-        status !== "disponible"
-
-        &&
-
-        status !== "seleccionado";
+        button.classList.add(
+            "seleccionado"
+        );
 
 
-    return `
-
-        <button
-
-            class="seat ${status}"
-
-            data-seat-id="${seat.id}"
-
-            ${disabled ? "disabled" : ""}
-
-            title="Asiento ${seat.numero}">
-
-            ${seat.numero}
-
-        </button>
-
-    `;
-
-}
+        button.disabled =
+            false;
 
 
-/* ==========================================================
-   CLIC ASIENTO
-========================================================== */
-
-function bindSeatClicks() {
-
-    document
-
-        .querySelectorAll(
-            ".seat"
-        )
-
-        .forEach(
-            button => {
+        button.title =
+            "Quitar de selección";
 
 
-                button.addEventListener(
-                    "click",
-                    () => {
-
-
-                        const seatId =
-
-                            Number(
-                                button
-                                    .dataset
-                                    .seatId
-                            );
-
-
-                        toggleSeat(
-                            seatId
-                        );
-
-                    }
+        button.onclick =
+            () =>
+                toggleSeat(
+                    seat.id
                 );
 
-            }
-        );
 
-}
-
-
-/* ==========================================================
-   SELECCIONAR / QUITAR
-========================================================== */
-
-function toggleSeat(seatId) {
-
-    const seat =
-
-        asientos.find(
-            item =>
-                item.id ===
-                seatId
-        );
-
-
-    if (!seat) {
-
-        return;
+        return button;
 
     }
+
+
+    const state =
+        String(
+            seat.estado ||
+            "disponible"
+        )
+        .toLowerCase();
+
+
+    button.classList.add(
+        state
+    );
 
 
     if (
-        seat.estado !==
+        state ===
         "disponible"
     ) {
 
+        button.disabled =
+            false;
+
+
+        button.title =
+            "Seleccionar asiento";
+
+
+        button.onclick =
+            () =>
+                toggleSeat(
+                    seat.id
+                );
+
+    }
+
+    else {
+
+        button.disabled =
+            true;
+
+    }
+
+
+    return button;
+
+}
+
+
+/* ==========================================================
+   TOGGLE SEAT
+========================================================== */
+
+function toggleSeat(
+    seatId
+) {
+
+    const seat =
+        seats.find(
+            item =>
+                Number(item.id) ===
+                Number(seatId)
+        );
+
+
+    if (
+        !seat
+    ) {
+
         return;
 
     }
 
 
     if (
-        selectedSeats.has(
+        selectedSeatIds.has(
             seatId
         )
     ) {
 
-
-        selectedSeats.delete(
+        selectedSeatIds.delete(
             seatId
         );
 
@@ -3198,86 +3835,171 @@ function toggleSeat(seatId) {
 
     else {
 
+        if (
+            seat.estado !==
+            "disponible"
+        ) {
 
-        const mesa =
+            return;
 
-            mesas.find(
+        }
+
+
+        selectedSeatIds.add(
+            seatId
+        );
+
+    }
+
+
+    renderTables();
+
+    renderSummary();
+
+}
+
+
+/* ==========================================================
+   SEAT DETAILS
+========================================================== */
+
+function getSelectedDetails() {
+
+    const result =
+        [];
+
+
+    for (
+        const seatId
+        of selectedSeatIds
+    ) {
+
+
+        const seat =
+            seats.find(
                 item =>
-                    item.id ===
-                    seat.mesa_id
+                    Number(item.id) ===
+                    Number(seatId)
             );
 
 
-        selectedSeats.set(
-            seatId,
+        if (!seat) {
+
+            continue;
+
+        }
+
+
+        const table =
+            tables.find(
+                item =>
+                    Number(item.id) ===
+                    Number(seat.mesa_id)
+            );
+
+
+        result.push(
             {
+                id:
+                    seat.id,
 
-                ...seat,
+                asiento:
+                    seat.numero,
 
-                mesaNumero:
-                    mesa
-                    ? mesa.numero
-                    : "-"
-
+                mesa:
+                    table?.numero
+                    ?? "—"
             }
         );
 
     }
 
 
-    renderMap();
+    result.sort(
+        (
+            a,
+            b
+        ) => {
 
 
-    updateSummary();
+            const tableDifference =
+                Number(a.mesa)
+                -
+                Number(b.mesa);
 
-}
+
+            if (
+                tableDifference !==
+                0
+            ) {
+
+                return tableDifference;
+
+            }
 
 
-/* ==========================================================
-   QUITAR DESDE RESUMEN
-========================================================== */
+            return (
+                Number(a.asiento)
+                -
+                Number(b.asiento)
+            );
 
-function removeSelectedSeat(seatId) {
-
-    selectedSeats.delete(
-        Number(seatId)
+        }
     );
 
 
-    renderMap();
-
-
-    updateSummary();
+    return result;
 
 }
 
 
 /* ==========================================================
-   RESUMEN
+   SUMMARY
 ========================================================== */
 
-function updateSummary() {
+function renderSummary() {
+
+    const selected =
+        getSelectedDetails();
+
 
     const quantity =
-        selectedSeats.size;
+        selected.length;
 
 
     const price =
-
         Number(
-            currentEvent
-                ?.precio_asiento ||
+            currentEvent?.precio_asiento
+            ||
             0
         );
 
 
     const total =
-        quantity * price;
+        quantity *
+        price;
+
+
+    const available =
+        seats.filter(
+            seat =>
+                seat.estado ===
+                "disponible"
+        )
+        .length;
 
 
     document
         .getElementById(
-            "summaryQuantity"
+            "availableSeats"
+        )
+        .textContent =
+        available;
+
+
+    document
+        .getElementById(
+            "selectedQuantity"
         )
         .textContent =
         quantity;
@@ -3285,18 +4007,22 @@ function updateSummary() {
 
     document
         .getElementById(
-            "summaryTotal"
+            "summaryUnitPrice"
         )
         .textContent =
-        money(total);
+        money(
+            price
+        );
 
 
     document
         .getElementById(
-            "modalTotal"
+            "summaryTotal"
         )
         .textContent =
-        money(total);
+        money(
+            total
+        );
 
 
     document
@@ -3307,9 +4033,13 @@ function updateSummary() {
 
         quantity === 1
 
-        ? "1 asiento"
+        ?
 
-        : `${quantity} asientos`;
+        "1 ASIENTO"
+
+        :
+
+        `${quantity} ASIENTOS`;
 
 
     document
@@ -3317,59 +4047,79 @@ function updateSummary() {
             "mobileTotal"
         )
         .textContent =
-        money(total);
-
-
-    const button =
-
-        document.getElementById(
-            "checkoutButton"
+        money(
+            total
         );
 
 
-    button.disabled =
+    document
+        .getElementById(
+            "modalQuantity"
+        )
+        .textContent =
+        quantity;
+
+
+    document
+        .getElementById(
+            "modalPrice"
+        )
+        .textContent =
+        money(
+            price
+        );
+
+
+    document
+        .getElementById(
+            "modalTotal"
+        )
+        .textContent =
+        money(
+            total
+        );
+
+
+    const disabled =
         quantity === 0;
 
 
-    const empty =
+    document
+        .getElementById(
+            "continueButton"
+        )
+        .disabled =
+        disabled;
 
-        document.getElementById(
-            "selectionEmpty"
-        );
+
+    document
+        .getElementById(
+            "mobileContinueButton"
+        )
+        .disabled =
+        disabled;
 
 
     const list =
-
-        document.getElementById(
+        document
+        .getElementById(
             "selectedList"
         );
 
 
-    const mobile =
-
-        document.getElementById(
-            "mobileCart"
-        );
-
-
     if (
-        quantity === 0
+        !quantity
     ) {
 
+        list.innerHTML = `
 
-        empty.style.display =
-            "block";
+            <div class="empty-selection">
 
+                Aún no has seleccionado asientos.
 
-        list.innerHTML =
-            "";
+            </div>
 
-
-        mobile
-            .classList
-            .remove(
-                "show"
-            );
+        `;
 
 
         return;
@@ -3377,93 +4127,26 @@ function updateSummary() {
     }
 
 
-    empty.style.display =
-        "none";
-
-
-    mobile
-        .classList
-        .add(
-            "show"
-        );
-
-
-    const selected =
-
-        Array.from(
-            selectedSeats.values()
-        );
-
-
-    selected.sort(
-        (a,b) => {
-
-
-            if (
-                a.mesaNumero !==
-                b.mesaNumero
-            ) {
-
-                return (
-
-                    Number(
-                        a.mesaNumero
-                    )
-
-                    -
-
-                    Number(
-                        b.mesaNumero
-                    )
-
-                );
-
-            }
-
-
-            return (
-
-                Number(a.numero)
-                -
-                Number(b.numero)
-
-            );
-
-        }
-    );
-
-
     list.innerHTML =
-
         selected
-
         .map(
-            seat => `
+            item => `
 
-                <div class="selected-ticket">
+                <div class="selected-item">
 
-                    <div>
+                    <strong>
 
-                        <strong>
+                        Mesa ${escapeHTML(item.mesa)}
+                        ·
+                        Asiento ${escapeHTML(item.asiento)}
 
-                            Mesa ${seat.mesaNumero}
-
-                        </strong>
-
-                        <span>
-
-                            Asiento ${seat.numero}
-
-                        </span>
-
-                    </div>
+                    </strong>
 
 
                     <button
-
                         class="remove-seat"
-
-                        onclick="removeSelectedSeat(${seat.id})">
+                        onclick="toggleSeat(${Number(item.id)})"
+                        title="Quitar">
 
                         ×
 
@@ -3473,259 +4156,7 @@ function updateSummary() {
 
             `
         )
-
         .join("");
-
-}
-
-
-/* ==========================================================
-   DISPONIBILIDAD
-========================================================== */
-
-function updateAvailability() {
-
-    const available =
-
-        asientos.filter(
-            seat =>
-                seat.estado ===
-                "disponible"
-        ).length;
-
-
-    document
-        .getElementById(
-            "availableCount"
-        )
-        .textContent =
-        available;
-
-}
-
-
-/* ==========================================================
-   REFRESCAR DISPONIBILIDAD
-========================================================== */
-
-async function refreshSeatStates() {
-
-    try {
-
-
-        await db.rpc(
-            "liberar_bloqueos_expirados"
-        );
-
-
-        const tableIds =
-
-            mesas.map(
-                mesa =>
-                    mesa.id
-            );
-
-
-        if (!tableIds.length) {
-
-            return;
-
-        }
-
-
-        const {
-            data,
-            error
-        } =
-
-        await db
-
-            .from("asientos")
-
-            .select(
-                "id, mesa_id, numero, estado"
-            )
-
-            .in(
-                "mesa_id",
-                tableIds
-            );
-
-
-        if (error) {
-
-            console.error(error);
-
-            return;
-
-        }
-
-
-        asientos =
-            data || [];
-
-
-        /*
-        Si otro usuario tomó
-        un asiento mientras este
-        comprador lo tenía seleccionado.
-        */
-
-        for (
-            const seatId
-            of selectedSeats.keys()
-        ) {
-
-
-            const current =
-
-                asientos.find(
-                    seat =>
-                        seat.id ===
-                        seatId
-                );
-
-
-            if (
-
-                !current
-
-                ||
-
-                current.estado !==
-                "disponible"
-
-            ) {
-
-
-                selectedSeats.delete(
-                    seatId
-                );
-
-
-                showToast(
-
-                    "Uno de los asientos seleccionados ya no está disponible."
-
-                );
-
-            }
-
-        }
-
-
-        renderMap();
-
-
-        updateSummary();
-
-    }
-
-    catch(error) {
-
-        console.error(
-            "Error actualizando asientos:",
-            error
-        );
-
-    }
-
-}
-
-
-/* ==========================================================
-   ZOOM
-========================================================== */
-
-function applyZoom() {
-
-    const map =
-
-        document.getElementById(
-            "mapTransform"
-        );
-
-
-    map.style.transform =
-
-        `scale(${currentZoom})`;
-
-
-    map.style.marginBottom =
-
-        `${-(1-currentZoom) * 900}px`;
-
-}
-
-
-function zoomIn() {
-
-    currentZoom =
-
-        Math.min(
-            MAX_ZOOM,
-            currentZoom + 0.10
-        );
-
-
-    applyZoom();
-
-}
-
-
-function zoomOut() {
-
-    currentZoom =
-
-        Math.max(
-            MIN_ZOOM,
-            currentZoom - 0.10
-        );
-
-
-    applyZoom();
-
-}
-
-
-function fitMap() {
-
-    const viewport =
-
-        document.getElementById(
-            "mapViewport"
-        );
-
-
-    const available =
-
-        viewport.clientWidth -
-        20;
-
-
-    currentZoom =
-
-        Math.min(
-
-            1,
-
-            Math.max(
-
-                MIN_ZOOM,
-
-                available /
-                MAP_WIDTH
-
-            )
-
-        );
-
-
-    applyZoom();
-
-
-    viewport.scrollLeft =
-        0;
 
 }
 
@@ -3737,16 +4168,19 @@ function fitMap() {
 function openBuyerModal() {
 
     if (
-        selectedSeats.size === 0
+        selectedSeatIds.size ===
+        0
     ) {
-
-        showToast(
-            "Selecciona al menos un asiento."
-        );
 
         return;
 
     }
+
+
+    clearFormErrors();
+
+
+    renderSummary();
 
 
     document
@@ -3757,6 +4191,20 @@ function openBuyerModal() {
         .add(
             "show"
         );
+
+
+    setTimeout(
+        () => {
+
+            document
+                .getElementById(
+                    "buyerName"
+                )
+                .focus();
+
+        },
+        100
+    );
 
 }
 
@@ -3775,14 +4223,85 @@ function closeBuyerModal() {
 }
 
 
+function modalBackgroundClick(
+    event
+) {
+
+    if (
+        event.target.id ===
+        "buyerModal"
+    ) {
+
+        closeBuyerModal();
+
+    }
+
+}
+
+
 /* ==========================================================
-   CREAR PRE-RESERVA
+   CLEAR ERRORS
 ========================================================== */
 
-async function createPreReservation() {
+function clearFormErrors() {
 
-    const nombre =
+    const inputs =
+        [
+            "buyerName",
+            "buyerPhone",
+            "buyerEmail"
+        ];
 
+
+    inputs.forEach(
+        id => {
+
+            document
+                .getElementById(
+                    id
+                )
+                .classList
+                .remove(
+                    "invalid"
+                );
+
+        }
+    );
+
+
+    [
+        "nameError",
+        "phoneError",
+        "emailError"
+    ]
+    .forEach(
+        id => {
+
+            document
+                .getElementById(
+                    id
+                )
+                .classList
+                .remove(
+                    "show"
+                );
+
+        }
+    );
+
+}
+
+
+/* ==========================================================
+   VALIDATE BUYER
+========================================================== */
+
+function validateBuyer() {
+
+    clearFormErrors();
+
+
+    const name =
         document
         .getElementById(
             "buyerName"
@@ -3791,8 +4310,7 @@ async function createPreReservation() {
         .trim();
 
 
-    const telefono =
-
+    const phone =
         document
         .getElementById(
             "buyerPhone"
@@ -3802,31 +4320,140 @@ async function createPreReservation() {
 
 
     const email =
-
         document
         .getElementById(
             "buyerEmail"
         )
         .value
-        .trim();
+        .trim()
+        .toLowerCase();
 
 
-    if (!nombre) {
+    let valid =
+        true;
 
-        showToast(
-            "Ingresa el nombre del comprador."
-        );
 
-        return;
+    if (
+        name.length < 3
+    ) {
+
+        document
+            .getElementById(
+                "buyerName"
+            )
+            .classList
+            .add(
+                "invalid"
+            );
+
+
+        document
+            .getElementById(
+                "nameError"
+            )
+            .classList
+            .add(
+                "show"
+            );
+
+
+        valid =
+            false;
 
     }
 
 
-    if (!telefono) {
+    if (
+        !validPhone(
+            phone
+        )
+    ) {
 
-        showToast(
-            "Ingresa un número de teléfono."
-        );
+        document
+            .getElementById(
+                "buyerPhone"
+            )
+            .classList
+            .add(
+                "invalid"
+            );
+
+
+        document
+            .getElementById(
+                "phoneError"
+            )
+            .classList
+            .add(
+                "show"
+            );
+
+
+        valid =
+            false;
+
+    }
+
+
+    if (
+        !validEmail(
+            email
+        )
+    ) {
+
+        document
+            .getElementById(
+                "buyerEmail"
+            )
+            .classList
+            .add(
+                "invalid"
+            );
+
+
+        document
+            .getElementById(
+                "emailError"
+            )
+            .classList
+            .add(
+                "show"
+            );
+
+
+        valid =
+            false;
+
+    }
+
+
+    if (!valid) {
+
+        return null;
+
+    }
+
+
+    return {
+        name,
+        phone,
+        email
+    };
+
+}
+
+
+/* ==========================================================
+   CREATE PRE RESERVATION
+========================================================== */
+
+async function createPreReservation() {
+
+    const buyer =
+        validateBuyer();
+
+
+    if (!buyer) {
 
         return;
 
@@ -3834,11 +4461,12 @@ async function createPreReservation() {
 
 
     if (
-        selectedSeats.size === 0
+        selectedSeatIds.size ===
+        0
     ) {
 
-        showToast(
-            "No hay asientos seleccionados."
+        alert(
+            "Selecciona al menos un asiento."
         );
 
         closeBuyerModal();
@@ -3849,15 +4477,10 @@ async function createPreReservation() {
 
 
     const button =
-
-        document.getElementById(
-            "modalSubmit"
+        document
+        .getElementById(
+            "modalContinueButton"
         );
-
-
-    const originalText =
-
-        button.textContent;
 
 
     button.disabled =
@@ -3865,49 +4488,70 @@ async function createPreReservation() {
 
 
     button.textContent =
-
-        "PROCESANDO...";
+        "CREANDO RESERVA...";
 
 
     try {
 
 
-        const seatIds =
+        /*
+        Actualizamos estados antes de intentar reservar,
+        para reducir el riesgo de que el comprador esté
+        intentando tomar un asiento que otro usuario bloqueó.
+        */
 
-            Array.from(
-                selectedSeats.keys()
+        await cleanupExpired();
+
+
+        await refreshSeatsOnly();
+
+
+        const selectedIds =
+            [...selectedSeatIds]
+            .map(
+                id =>
+                    Number(id)
             );
+
+
+        if (
+            !selectedIds.length
+        ) {
+
+            throw new Error(
+                "Los asientos seleccionados ya no están disponibles."
+            );
+
+        }
 
 
         const {
             data,
             error
         } =
-
         await db.rpc(
-
             "crear_pre_reserva",
-
             {
 
                 p_nombre_cliente:
-                    nombre,
+                    buyer.name,
 
                 p_telefono:
-                    telefono,
+                    buyer.phone,
 
                 p_email:
-                    email || null,
+                    buyer.email,
 
                 p_asientos:
-                    seatIds
+                    selectedIds
 
             }
-
         );
 
 
-        if (error) {
+        if (
+            error
+        ) {
 
             throw error;
 
@@ -3915,18 +4559,17 @@ async function createPreReservation() {
 
 
         const result =
-
             Array.isArray(data)
-
-            ? data[0]
-
-            : data;
+            ?
+            data[0]
+            :
+            data;
 
 
         if (!result) {
 
             throw new Error(
-                "No se recibió respuesta de la reserva."
+                "No se recibió respuesta al crear la reserva."
             );
 
         }
@@ -3954,41 +4597,77 @@ async function createPreReservation() {
 
 
         const token =
-            result.public_token;
+            result.public_token
+            ||
+            result.token
+            ||
+            result.reserva_token;
 
 
         if (!token) {
 
-
-            console.error(
-                "Respuesta RPC:",
-                result
-            );
-
-
             throw new Error(
-                "La reserva se creó pero no recibimos el token de checkout."
+                "La reserva fue creada, pero no se recibió el token público."
             );
 
         }
 
 
+        /*
+        Redirigir al checkout.
+        */
+
         window.location.href =
 
-            "checkout.html?token="
-
-            +
-
-            encodeURIComponent(
+            `checkout.html?token=${encodeURIComponent(
                 token
-            );
+            )}`;
+
 
     }
 
     catch(error) {
 
 
-        console.error(error);
+        console.error(
+            "Crear pre-reserva:",
+            error
+        );
+
+
+        alert(
+
+            error.message
+
+            ||
+
+            "No fue posible crear la reserva. Actualiza la página e intenta nuevamente."
+
+        );
+
+
+        /*
+        Refrescamos mapa si hubo conflicto.
+        */
+
+        try {
+
+            await loadTablesAndSeats();
+
+        }
+
+        catch(refreshError) {
+
+            console.error(
+                refreshError
+            );
+
+        }
+
+
+    }
+
+    finally {
 
 
         button.disabled =
@@ -3996,24 +4675,7 @@ async function createPreReservation() {
 
 
         button.textContent =
-            originalText;
-
-
-        closeBuyerModal();
-
-
-        showToast(
-
-            error.message
-
-            ||
-
-            "No fue posible crear la reserva."
-
-        );
-
-
-        await refreshSeatStates();
+            "CONTINUAR AL CHECKOUT";
 
     }
 
@@ -4021,91 +4683,181 @@ async function createPreReservation() {
 
 
 /* ==========================================================
-   TOAST
+   REFRESH SEATS ONLY
 ========================================================== */
 
-let toastTimer =
-    null;
+async function refreshSeatsOnly() {
+
+    if (
+        refreshing ||
+        !tables.length
+    ) {
+
+        return;
+
+    }
 
 
-function showToast(message) {
-
-    const toast =
-
-        document.getElementById(
-            "toast"
-        );
+    refreshing =
+        true;
 
 
-    toast.textContent =
-        message;
+    try {
 
 
-    toast
-        .classList
-        .add(
-            "show"
-        );
+        const tableIds =
+            tables.map(
+                table =>
+                    table.id
+            );
 
 
-    clearTimeout(
-        toastTimer
-    );
+        const {
+            data,
+            error
+        } =
+        await db
+            .from(
+                "asientos"
+            )
+            .select(
+                "id,mesa_id,numero,estado"
+            )
+            .in(
+                "mesa_id",
+                tableIds
+            )
+            .order(
+                "numero",
+                {
+                    ascending:
+                        true
+                }
+            );
 
 
-    toastTimer =
+        if (
+            error
+        ) {
 
-        setTimeout(
-            () => {
+            throw error;
 
-
-                toast
-                    .classList
-                    .remove(
-                        "show"
-                    );
+        }
 
 
-            },
-            3500
-        );
+        seats =
+            data || [];
+
+
+        for (
+            const seatId
+            of [...selectedSeatIds]
+        ) {
+
+
+            const seat =
+                seats.find(
+                    item =>
+                        Number(item.id) ===
+                        Number(seatId)
+                );
+
+
+            if (
+                !seat ||
+                seat.estado !==
+                "disponible"
+            ) {
+
+                selectedSeatIds.delete(
+                    seatId
+                );
+
+            }
+
+        }
+
+
+        renderTables();
+
+        renderSummary();
+
+
+    }
+
+    finally {
+
+        refreshing =
+            false;
+
+    }
 
 }
 
 
 /* ==========================================================
-   CERRAR MODAL AL TOCAR FONDO
+   LIVE REFRESH
 ========================================================== */
 
-document
-    .getElementById(
-        "buyerModal"
-    )
-    .addEventListener(
-        "click",
-        function(event) {
+function startLiveRefresh() {
 
+    setInterval(
+        async () => {
+
+
+            /*
+            No refrescamos mientras el modal del comprador
+            esté abierto para no interrumpir la experiencia.
+            */
 
             if (
-                event.target ===
-                this
+                document
+                .getElementById(
+                    "buyerModal"
+                )
+                .classList
+                .contains(
+                    "show"
+                )
             ) {
 
-                closeBuyerModal();
+                return;
 
             }
 
-        }
+
+            try {
+
+                await cleanupExpired();
+
+                await refreshSeatsOnly();
+
+            }
+
+            catch(error) {
+
+                console.warn(
+                    "Live refresh:",
+                    error
+                );
+
+            }
+
+
+        },
+        12000
     );
+
+}
 
 
 /* ==========================================================
-   ESCAPE
+   KEYBOARD
 ========================================================== */
 
 document.addEventListener(
     "keydown",
-    function(event) {
+    event => {
 
 
         if (
@@ -4122,84 +4874,181 @@ document.addEventListener(
 
 
 /* ==========================================================
-   RESIZE
-========================================================== */
-
-let resizeTimer;
-
-
-window.addEventListener(
-    "resize",
-    function() {
-
-
-        clearTimeout(
-            resizeTimer
-        );
-
-
-        resizeTimer =
-
-            setTimeout(
-                fitMap,
-                180
-            );
-
-    }
-);
-
-
-/* ==========================================================
-   CTRL + RUEDA PARA ZOOM
+   INPUT ERROR CLEAR
 ========================================================== */
 
 document
     .getElementById(
-        "mapViewport"
+        "buyerName"
     )
     .addEventListener(
-        "wheel",
-        function(event) {
+        "input",
+        function() {
+
+            this.classList.remove(
+                "invalid"
+            );
+
+            document
+                .getElementById(
+                    "nameError"
+                )
+                .classList
+                .remove(
+                    "show"
+                );
+
+        }
+    );
 
 
-            if (!event.ctrlKey) {
+document
+    .getElementById(
+        "buyerPhone"
+    )
+    .addEventListener(
+        "input",
+        function() {
 
-                return;
+            this.classList.remove(
+                "invalid"
+            );
 
-            }
+            document
+                .getElementById(
+                    "phoneError"
+                )
+                .classList
+                .remove(
+                    "show"
+                );
+
+        }
+    );
 
 
-            event.preventDefault();
+document
+    .getElementById(
+        "buyerEmail"
+    )
+    .addEventListener(
+        "input",
+        function() {
 
+            this.classList.remove(
+                "invalid"
+            );
 
-            if (
-                event.deltaY < 0
-            ) {
+            document
+                .getElementById(
+                    "emailError"
+                )
+                .classList
+                .remove(
+                    "show"
+                );
 
-                zoomIn();
-
-            }
-
-            else {
-
-                zoomOut();
-
-            }
-
-        },
-        {
-            passive: false
         }
     );
 
 
 /* ==========================================================
-   INICIAR
+   ERROR PAGE
 ========================================================== */
+
+function showPageError(
+    message
+) {
+
+    document
+        .getElementById(
+            "pageContent"
+        )
+        .innerHTML = `
+
+            <div class="message-card">
+
+                <h2>
+                    No pudimos cargar el evento
+                </h2>
+
+                <p>
+                    ${escapeHTML(
+                        message
+                    )}
+                </p>
+
+            </div>
+
+        `;
+
+}
+
+
+/* ==========================================================
+   INITIALIZE
+========================================================== */
+
+async function initialize() {
+
+    try {
+
+
+        await cleanupExpired();
+
+
+        await loadEvent();
+
+
+        await loadTablesAndSeats();
+
+
+        startLiveRefresh();
+
+
+    }
+
+    catch(error) {
+
+
+        console.error(
+            "Inicialización:",
+            error
+        );
+
+
+        showPageError(
+
+            error.message
+
+            ||
+
+            "Ocurrió un problema al cargar el evento."
+
+        );
+
+
+    }
+
+    finally {
+
+
+        document
+            .getElementById(
+                "loadingScreen"
+            )
+            .style.display =
+            "none";
+
+    }
+
+}
+
 
 initialize();
 
 </script>
+
 
 </body>
 
