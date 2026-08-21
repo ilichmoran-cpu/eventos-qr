@@ -14,6 +14,7 @@
 <title>Admin | Live Tickets</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,8 +44,6 @@
     --bg: #f4f7fb;
 
     --dark: #08101f;
-
-    --dark-soft: #111b31;
 
     --text: #111827;
 
@@ -176,20 +175,14 @@ select {
 
 .login-logo {
 
-    display:
-        block;
+    height:
+        52px;
 
     width:
         auto;
 
-    height:
-        52px;
-
     max-width:
         230px;
-
-    margin:
-        auto;
 
     object-fit:
         contain;
@@ -225,13 +218,10 @@ select {
 
     font-size:
         26px;
-
-    letter-spacing:
-        -.6px;
 }
 
 
-.login-card > p {
+.login-card p {
 
     margin:
         0 0 24px;
@@ -270,9 +260,6 @@ select {
 
     font-weight:
         800;
-
-    letter-spacing:
-        .5px;
 }
 
 
@@ -296,17 +283,8 @@ select {
     outline:
         none;
 
-    background:
-        white;
-
-    color:
-        #111827;
-
     font-size:
         13px;
-
-    transition:
-        .2s;
 }
 
 
@@ -351,23 +329,13 @@ select {
 
     font-weight:
         800;
-
-    transition:
-        .2s;
-}
-
-
-.login-button:hover {
-
-    background:
-        var(--blue-dark);
 }
 
 
 .login-button:disabled {
 
     opacity:
-        .65;
+        .6;
 
     cursor:
         not-allowed;
@@ -383,7 +351,7 @@ select {
         14px;
 
     padding:
-        11px 12px;
+        11px;
 
     background:
         #fef2f2;
@@ -402,14 +370,11 @@ select {
 
     font-size:
         9px;
-
-    line-height:
-        1.5;
 }
 
 
 /* ==========================================================
-   ADMIN APP
+   APP
 ========================================================== */
 
 .admin-app {
@@ -435,10 +400,7 @@ select {
         1000;
 
     background:
-        rgba(8,16,31,.98);
-
-    border-bottom:
-        1px solid rgba(255,255,255,.07);
+        #08101f;
 
     box-shadow:
         0 5px 25px rgba(0,0,0,.16);
@@ -446,9 +408,6 @@ select {
 
 
 .nav {
-
-    width:
-        100%;
 
     max-width:
         1500px;
@@ -478,14 +437,11 @@ select {
 
 .brand-logo {
 
-    display:
-        block;
+    height:
+        47px;
 
     width:
         auto;
-
-    height:
-        47px;
 
     max-width:
         230px;
@@ -528,9 +484,6 @@ select {
 
     font-size:
         8px;
-
-    font-weight:
-        700;
 }
 
 
@@ -572,16 +525,6 @@ select {
 
     font-weight:
         800;
-
-    transition:
-        .2s;
-}
-
-
-.logout-button:hover {
-
-    background:
-        rgba(255,255,255,.08);
 }
 
 
@@ -590,9 +533,6 @@ select {
 ========================================================== */
 
 .page {
-
-    width:
-        100%;
 
     max-width:
         1500px;
@@ -604,10 +544,6 @@ select {
         29px 24px 80px;
 }
 
-
-/* ==========================================================
-   DASHBOARD HEADER
-========================================================== */
 
 .dashboard-head {
 
@@ -638,9 +574,6 @@ select {
 
     font-size:
         30px;
-
-    letter-spacing:
-        -.8px;
 }
 
 
@@ -693,9 +626,6 @@ select {
     background:
         white;
 
-    color:
-        #111827;
-
     outline:
         none;
 
@@ -739,7 +669,7 @@ select {
 
 
 /* ==========================================================
-   EVENT HERO
+   EVENT OVERVIEW
 ========================================================== */
 
 .event-overview {
@@ -806,9 +736,6 @@ select {
 
     opacity:
         .13;
-
-    transform:
-        scale(1.15);
 }
 
 
@@ -839,9 +766,6 @@ select {
 
     font-weight:
         800;
-
-    letter-spacing:
-        .9px;
 }
 
 
@@ -888,9 +812,6 @@ select {
 
     font-size:
         8px;
-
-    font-weight:
-        700;
 }
 
 
@@ -901,9 +822,6 @@ select {
 
     font-size:
         34px;
-
-    letter-spacing:
-        -1px;
 }
 
 
@@ -951,14 +869,8 @@ select {
     display:
         flex;
 
-    align-items:
-        center;
-
     justify-content:
         space-between;
-
-    gap:
-        10px;
 
     margin-bottom:
         14px;
@@ -975,9 +887,6 @@ select {
 
     font-weight:
         800;
-
-    letter-spacing:
-        .6px;
 
     text-transform:
         uppercase;
@@ -998,23 +907,23 @@ select {
 
 
 .dot-blue {
-    background: #2563eb;
+    background:#2563eb;
 }
 
 .dot-green {
-    background: #16a34a;
+    background:#16a34a;
 }
 
 .dot-purple {
-    background: #7c3aed;
+    background:#7c3aed;
 }
 
 .dot-dark {
-    background: #374151;
+    background:#374151;
 }
 
 .dot-orange {
-    background: #f97316;
+    background:#f97316;
 }
 
 
@@ -1025,9 +934,6 @@ select {
 
     font-weight:
         800;
-
-    letter-spacing:
-        -.6px;
 }
 
 
@@ -1078,12 +984,6 @@ select {
     justify-content:
         space-between;
 
-    align-items:
-        center;
-
-    gap:
-        20px;
-
     color:
         #667085;
 
@@ -1132,9 +1032,6 @@ select {
 
     border-radius:
         inherit;
-
-    transition:
-        width .4s ease;
 }
 
 
@@ -1275,7 +1172,7 @@ table {
         100%;
 
     min-width:
-        1050px;
+        1280px;
 
     border-collapse:
         collapse;
@@ -1285,7 +1182,7 @@ table {
 th {
 
     padding:
-        12px 15px;
+        12px 14px;
 
     background:
         #fafbfd;
@@ -1302,9 +1199,6 @@ th {
     font-weight:
         800;
 
-    letter-spacing:
-        .6px;
-
     text-transform:
         uppercase;
 }
@@ -1313,7 +1207,7 @@ th {
 td {
 
     padding:
-        13px 15px;
+        13px 14px;
 
     border-top:
         1px solid #eef1f4;
@@ -1336,9 +1230,6 @@ td {
 
     font-weight:
         800;
-
-    white-space:
-        nowrap;
 }
 
 
@@ -1373,9 +1264,6 @@ td {
 
 .money {
 
-    color:
-        #111827;
-
     font-weight:
         800;
 
@@ -1393,9 +1281,6 @@ td {
     display:
         inline-flex;
 
-    align-items:
-        center;
-
     padding:
         6px 9px;
 
@@ -1407,9 +1292,6 @@ td {
 
     font-weight:
         800;
-
-    text-transform:
-        uppercase;
 }
 
 
@@ -1454,16 +1336,81 @@ td {
 
 
 /* ==========================================================
-   VIEW BUTTON
+   EMAIL
 ========================================================== */
 
-.view-button {
+.email-state {
+
+    display:
+        grid;
+
+    gap:
+        5px;
+}
+
+
+.email-sent {
+
+    color:
+        #166534;
+
+    font-weight:
+        800;
+}
+
+
+.email-date {
+
+    color:
+        #9ca3af;
+
+    font-size:
+        7px;
+}
+
+
+.email-pending {
+
+    color:
+        #b45309;
+
+    font-weight:
+        700;
+}
+
+
+.email-missing {
+
+    color:
+        #9ca3af;
+}
+
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.action-buttons {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+}
+
+
+.view-button,
+.email-button {
 
     min-height:
         32px;
 
     padding:
-        0 11px;
+        0 10px;
 
     border:
         none;
@@ -1471,20 +1418,54 @@ td {
     border-radius:
         8px;
 
+    cursor:
+        pointer;
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+    white-space:
+        nowrap;
+}
+
+
+.view-button {
+
     background:
         #111827;
 
     color:
         white;
+}
+
+
+.email-button {
+
+    background:
+        #2563eb;
+
+    color:
+        white;
+}
+
+
+.email-button:hover {
+
+    background:
+        #1d4ed8;
+}
+
+
+.email-button:disabled {
+
+    background:
+        #9ca3af;
 
     cursor:
-        pointer;
-
-    font-size:
-        8px;
-
-    font-weight:
-        800;
+        not-allowed;
 }
 
 
@@ -1493,11 +1474,11 @@ td {
     padding:
         45px;
 
-    color:
-        var(--muted);
-
     text-align:
         center;
+
+    color:
+        #6b7280;
 
     font-size:
         11px;
@@ -1591,9 +1572,6 @@ td {
     justify-content:
         space-between;
 
-    gap:
-        15px;
-
     background:
         white;
 
@@ -1628,9 +1606,6 @@ td {
 
     background:
         #f3f4f6;
-
-    color:
-        #111827;
 
     cursor:
         pointer;
@@ -1722,9 +1697,6 @@ td {
     padding:
         16px;
 
-    background:
-        white;
-
     border:
         1px solid #e5e7eb;
 
@@ -1739,10 +1711,7 @@ td {
 .admin-ticket-number {
 
     margin-bottom:
-        4px;
-
-    color:
-        #111827;
+        5px;
 
     font-size:
         13px;
@@ -1775,15 +1744,6 @@ td {
 
     margin:
         auto;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
 }
 
 
@@ -1797,119 +1757,68 @@ td {
 }
 
 
-.no-ticket {
-
-    padding:
-        20px;
-
-    color:
-        #9ca3af;
-
-    font-size:
-        9px;
-}
-
-
 /* ==========================================================
-   LOADING OVERLAY
+   TOAST
 ========================================================== */
 
-.loading-overlay {
+.toast {
 
     position:
         fixed;
 
-    inset:
-        0;
+    right:
+        20px;
+
+    bottom:
+        20px;
 
     z-index:
-        9999;
+        10000;
+
+    width:
+        min(390px,calc(100% - 40px));
+
+    padding:
+        15px 17px;
 
     display:
         none;
 
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    background:
-        rgba(244,247,251,.88);
-
-    backdrop-filter:
-        blur(3px);
-}
-
-
-.loading-overlay.show {
-
-    display:
-        flex;
-}
-
-
-.loading-content {
-
-    text-align:
-        center;
-}
-
-
-.spinner {
-
-    width:
-        42px;
-
-    height:
-        42px;
-
-    margin:
-        0 auto 12px;
-
-    border:
-        4px solid #dce3ec;
-
-    border-top-color:
-        var(--blue);
-
     border-radius:
-        50%;
+        13px;
 
-    animation:
-        spin .8s linear infinite;
+    color:
+        white;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.25);
+
+    font-size:
+        10px;
+
+    line-height:
+        1.55;
 }
 
 
-@keyframes spin {
-
-    to {
-        transform:
-            rotate(360deg);
-    }
-}
-
-
-.loading-content strong {
+.toast.show {
 
     display:
         block;
-
-    margin-bottom:
-        4px;
-
-    font-size:
-        12px;
 }
 
 
-.loading-content span {
+.toast.success {
 
-    color:
-        var(--muted);
+    background:
+        #166534;
+}
 
-    font-size:
-        9px;
+
+.toast.error {
+
+    background:
+        #991b1b;
 }
 
 
@@ -1925,15 +1834,7 @@ td {
             repeat(3,1fr);
     }
 
-
     .admin-ticket-grid {
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-
-    .reservation-summary {
 
         grid-template-columns:
             repeat(2,1fr);
@@ -1953,13 +1854,11 @@ td {
             0 13px;
     }
 
-
     .brand-logo {
 
         height:
             35px;
     }
-
 
     .user-info {
 
@@ -1967,27 +1866,17 @@ td {
             none;
     }
 
-
     .page {
 
         padding:
             18px 11px 60px;
     }
 
-
-    .dashboard-title h1 {
-
-        font-size:
-            24px;
-    }
-
-
     .dashboard-controls {
 
         width:
             100%;
     }
-
 
     .event-select {
 
@@ -1998,16 +1887,11 @@ td {
             0;
     }
 
-
     .event-overview {
 
         display:
             grid;
-
-        align-items:
-            start;
     }
-
 
     .event-sales {
 
@@ -2015,20 +1899,11 @@ td {
             left;
     }
 
-
     .stats-grid {
 
         grid-template-columns:
             repeat(2,1fr);
     }
-
-
-    .filters {
-
-        width:
-            100%;
-    }
-
 
     .filter-input,
     .filter-select {
@@ -2037,18 +1912,16 @@ td {
             100%;
     }
 
-
     .admin-ticket-grid {
 
         grid-template-columns:
             1fr;
     }
 
-
     .reservation-summary {
 
         grid-template-columns:
-            1fr 1fr;
+            repeat(2,1fr);
     }
 
 }
@@ -2062,13 +1935,6 @@ td {
             1fr;
     }
 
-
-    .login-card {
-
-        padding:
-            26px 20px;
-    }
-
 }
 
 </style>
@@ -2080,27 +1946,12 @@ td {
 
 
 <!-- ======================================================
-     LOADING
+     TOAST
 ====================================================== -->
 
 <div
-    class="loading-overlay"
-    id="loadingOverlay">
-
-    <div class="loading-content">
-
-        <div class="spinner"></div>
-
-        <strong>
-            Actualizando dashboard
-        </strong>
-
-        <span>
-            Cargando información...
-        </span>
-
-    </div>
-
+    class="toast"
+    id="toast">
 </div>
 
 
@@ -2111,6 +1962,7 @@ td {
 <div
     class="login-screen"
     id="loginScreen">
+
 
     <div class="login-card">
 
@@ -2126,25 +1978,33 @@ td {
 
 
         <span class="login-eyebrow">
+
             LIVE TICKETS ADMIN
+
         </span>
 
 
         <h1>
+
             Panel administrador
+
         </h1>
 
 
         <p>
+
             Ingresa con tu usuario y contraseña para administrar
-            ventas, reservaciones y control de aforo.
+            ventas, reservaciones y boletos.
+
         </p>
 
 
         <div class="form-group">
 
             <label>
+
                 USUARIO
+
             </label>
 
             <input
@@ -2160,14 +2020,16 @@ td {
         <div class="form-group">
 
             <label>
+
                 CONTRASEÑA
+
             </label>
 
             <input
                 type="password"
                 id="loginPassword"
                 class="form-input"
-                placeholder="••••••••••••"
+                placeholder="••••••••••"
                 autocomplete="current-password">
 
         </div>
@@ -2188,6 +2050,7 @@ td {
             id="loginError">
         </div>
 
+
     </div>
 
 </div>
@@ -2201,8 +2064,6 @@ td {
     class="admin-app"
     id="adminApp">
 
-
-<!-- HEADER -->
 
 <header class="topbar">
 
@@ -2242,19 +2103,18 @@ td {
 
         </div>
 
+
     </div>
 
 </header>
 
 
-<!-- ======================================================
-     PAGE
-====================================================== -->
-
 <main class="page">
 
 
-<!-- DASHBOARD HEADER -->
+<!-- ======================================================
+     HEADER DASHBOARD
+====================================================== -->
 
 <div class="dashboard-head">
 
@@ -2266,13 +2126,14 @@ td {
         </h1>
 
         <p>
-            Ventas, reservaciones y aforo en tiempo real.
+            Ventas, reservaciones, boletos y aforo en tiempo real.
         </p>
 
     </div>
 
 
     <div class="dashboard-controls">
+
 
         <select
             id="eventSelect"
@@ -2283,13 +2144,15 @@ td {
 
         <button
             class="refresh-button"
-            onclick="loadDashboard(true)">
+            onclick="loadDashboard()">
 
             ACTUALIZAR
 
         </button>
 
+
     </div>
+
 
 </div>
 
@@ -2347,8 +2210,6 @@ td {
 <div class="stats-grid">
 
 
-    <!-- VENTAS -->
-
     <div class="stat-card">
 
         <div class="stat-head">
@@ -2376,8 +2237,6 @@ td {
 
     </div>
 
-
-    <!-- VENDIDOS -->
 
     <div class="stat-card">
 
@@ -2407,8 +2266,6 @@ td {
     </div>
 
 
-    <!-- DISPONIBLES -->
-
     <div class="stat-card">
 
         <div class="stat-head">
@@ -2436,8 +2293,6 @@ td {
 
     </div>
 
-
-    <!-- BLOQUEADOS -->
 
     <div class="stat-card">
 
@@ -2467,8 +2322,6 @@ td {
     </div>
 
 
-    <!-- INGRESADOS -->
-
     <div class="stat-card">
 
         <div class="stat-head">
@@ -2491,7 +2344,7 @@ td {
         </div>
 
         <div class="stat-subtitle">
-            QR ya utilizados
+            QR utilizados
         </div>
 
     </div>
@@ -2534,7 +2387,7 @@ td {
 
 
 <!-- ======================================================
-     RESERVATIONS PANEL
+     RESERVATIONS
 ====================================================== -->
 
 <section class="panel">
@@ -2550,7 +2403,7 @@ td {
             </h2>
 
             <p>
-                Registro completo de operaciones del evento.
+                Consulta compradores y reenvía sus entradas cuando sea necesario.
             </p>
 
         </div>
@@ -2563,7 +2416,7 @@ td {
                 type="text"
                 id="searchReservation"
                 class="filter-input"
-                placeholder="Buscar cliente, teléfono o ID..."
+                placeholder="Buscar cliente, correo o reserva..."
                 oninput="renderReservations()">
 
 
@@ -2572,31 +2425,25 @@ td {
                 class="filter-select"
                 onchange="renderReservations()">
 
-
                 <option value="">
-                    Todos los estados
+                    Todos
                 </option>
-
 
                 <option value="pagada">
                     Pagadas
                 </option>
 
-
                 <option value="pendiente_pago">
                     En proceso
                 </option>
-
 
                 <option value="expirada">
                     Expiradas
                 </option>
 
-
                 <option value="cancelada">
                     Canceladas
                 </option>
-
 
             </select>
 
@@ -2642,10 +2489,11 @@ td {
                     </th>
 
                     <th>
-                        Expiración
+                        Correo boletos
                     </th>
 
                     <th>
+                        Acciones
                     </th>
 
                 </tr>
@@ -2653,20 +2501,8 @@ td {
             </thead>
 
 
-            <tbody id="reservationsBody">
-
-                <tr>
-
-                    <td
-                        colspan="8"
-                        class="no-data">
-
-                        Cargando reservaciones...
-
-                    </td>
-
-                </tr>
-
+            <tbody
+                id="reservationsBody">
             </tbody>
 
 
@@ -2686,7 +2522,7 @@ td {
 
 
 <!-- ======================================================
-     MODAL RESERVA
+     MODAL
 ====================================================== -->
 
 <div
@@ -2733,7 +2569,7 @@ td {
 <script>
 
 /* ==========================================================
-   CONFIGURACIÓN SUPABASE
+   CONFIG
 ========================================================== */
 
 const SUPABASE_URL =
@@ -2743,16 +2579,6 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
 
-
-/*
-Cuando escribes:
-
-admin1
-
-internamente se transforma en:
-
-admin1@admin.liveticketshn.com
-*/
 
 const ADMIN_DOMAIN =
     "admin.liveticketshn.com";
@@ -2766,22 +2592,31 @@ const db =
 
 
 /* ==========================================================
-   DATOS
+   DATA
 ========================================================== */
 
-let events = [];
+let events =
+    [];
 
-let currentEvent = null;
 
-let reservations = [];
+let currentEvent =
+    null;
 
-let seats = [];
 
-let autoRefreshInterval = null;
+let reservations =
+    [];
+
+
+let seats =
+    [];
+
+
+let autoRefreshInterval =
+    null;
 
 
 /* ==========================================================
-   UTILIDADES
+   UTILS
 ========================================================== */
 
 function money(value) {
@@ -2819,6 +2654,19 @@ function escapeHTML(value) {
 }
 
 
+function validEmail(value) {
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(
+            String(
+                value || ""
+            )
+            .trim()
+        );
+
+}
+
+
 function formatDate(value) {
 
     if (!value) {
@@ -2829,7 +2677,9 @@ function formatDate(value) {
 
 
     const date =
-        new Date(value);
+        new Date(
+            value
+        );
 
 
     if (
@@ -2875,18 +2725,44 @@ function reservationCode(
 }
 
 
-function showLoading(
-    show
+/* ==========================================================
+   TOAST
+========================================================== */
+
+function showToast(
+    message,
+    type = "success"
 ) {
 
-    document
+    const toast =
+        document
         .getElementById(
-            "loadingOverlay"
-        )
-        .classList
-        .toggle(
-            "show",
-            show
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.className =
+        `toast show ${type}`;
+
+
+    clearTimeout(
+        toast._timer
+    );
+
+
+    toast._timer =
+        setTimeout(
+            () => {
+
+                toast.className =
+                    "toast";
+
+            },
+            5000
         );
 
 }
@@ -2899,7 +2775,6 @@ function showLoading(
 async function login() {
 
     const username =
-
         document
         .getElementById(
             "loginUser"
@@ -2910,7 +2785,6 @@ async function login() {
 
 
     const password =
-
         document
         .getElementById(
             "loginPassword"
@@ -2919,23 +2793,10 @@ async function login() {
 
 
     const button =
-
         document
         .getElementById(
             "loginButton"
         );
-
-
-    const errorBox =
-
-        document
-        .getElementById(
-            "loginError"
-        );
-
-
-    errorBox.style.display =
-        "none";
 
 
     if (
@@ -2951,14 +2812,6 @@ async function login() {
 
     }
 
-
-    /*
-    Si escribe un email completo,
-    lo utilizamos directamente.
-
-    Si escribe admin1,
-    agregamos nuestro dominio interno.
-    */
 
     let internalEmail;
 
@@ -2982,7 +2835,7 @@ async function login() {
         ) {
 
             showLoginError(
-                "El nombre de usuario no es válido."
+                "Usuario no válido."
             );
 
             return;
@@ -3010,7 +2863,6 @@ async function login() {
         const {
             error
         } =
-
         await db.auth
             .signInWithPassword(
                 {
@@ -3067,7 +2919,7 @@ async function login() {
 
 
 /* ==========================================================
-   VERIFICAR ADMINISTRADOR
+   VERIFY ADMIN
 ========================================================== */
 
 async function verifyAdmin() {
@@ -3106,7 +2958,6 @@ async function verifyAdmin() {
         data !== true
     ) {
 
-
         await db.auth
             .signOut();
 
@@ -3128,14 +2979,6 @@ async function verifyAdmin() {
         session.user.email ||
         "";
 
-
-    /*
-    Si es uno de los emails internos,
-    mostramos únicamente admin1 / admin2.
-
-    Si es tu correo normal,
-    mostramos el correo.
-    */
 
     let displayUser =
         email;
@@ -3186,7 +3029,7 @@ async function verifyAdmin() {
 
 
 /* ==========================================================
-   LOGIN STATES
+   LOGIN UI
 ========================================================== */
 
 function showLogin() {
@@ -3245,7 +3088,8 @@ async function logout() {
     }
 
 
-    await db.auth.signOut();
+    await db.auth
+        .signOut();
 
 
     location.reload();
@@ -3254,131 +3098,100 @@ async function logout() {
 
 
 /* ==========================================================
-   EVENTOS
+   LOAD EVENTS
 ========================================================== */
 
 async function loadEvents() {
 
-    showLoading(true);
-
-
-    try {
-
-
-        const {
-            data,
-            error
-        } =
-
-        await db
-            .from(
-                "eventos"
-            )
-            .select(
-                "id,nombre,fecha,lugar,capacidad,precio_asiento,flyer_url,activo"
-            )
-            .order(
-                "fecha",
-                {
-                    ascending: true
-                }
-            );
-
-
-        if (error) {
-
-            throw error;
-
-        }
-
-
-        events =
-            data || [];
-
-
-        const select =
-
-            document
-            .getElementById(
-                "eventSelect"
-            );
-
-
-        select.innerHTML =
-            "";
-
-
-        events.forEach(
-            event => {
-
-
-                const option =
-
-                    document
-                    .createElement(
-                        "option"
-                    );
-
-
-                option.value =
-                    event.id;
-
-
-                option.textContent =
-
-                    event.nombre
-
-                    +
-
-                    (
-                        event.activo === false
-                        ? " · Inactivo"
-                        : ""
-                    );
-
-
-                select.appendChild(
-                    option
-                );
-
+    const {
+        data,
+        error
+    } =
+    await db
+        .from(
+            "eventos"
+        )
+        .select(
+            "id,nombre,fecha,lugar,capacidad,precio_asiento,flyer_url,activo"
+        )
+        .order(
+            "fecha",
+            {
+                ascending: true
             }
         );
 
 
-        if (
-            !events.length
-        ) {
+    if (error) {
 
-            currentEvent =
-                null;
-
-
-            document
-                .getElementById(
-                    "overviewName"
-                )
-                .textContent =
-                "No hay eventos";
+        console.error(
+            error
+        );
 
 
-            return;
+        showToast(
+            "No fue posible cargar los eventos.",
+            "error"
+        );
+
+
+        return;
+
+    }
+
+
+    events =
+        data || [];
+
+
+    const select =
+        document
+        .getElementById(
+            "eventSelect"
+        );
+
+
+    select.innerHTML =
+        "";
+
+
+    events.forEach(
+        event => {
+
+
+            const option =
+                document
+                .createElement(
+                    "option"
+                );
+
+
+            option.value =
+                event.id;
+
+
+            option.textContent =
+                event.nombre;
+
+
+            select.appendChild(
+                option
+            );
 
         }
+    );
 
 
-        /*
-        Preferimos el primer evento activo.
-        */
+    if (
+        events.length
+    ) {
 
         currentEvent =
-
             events.find(
                 event =>
                     event.activo === true
             )
-
             ||
-
             events[0];
 
 
@@ -3386,33 +3199,7 @@ async function loadEvents() {
             currentEvent.id;
 
 
-        await loadDashboard(
-            false
-        );
-
-
-    }
-
-    catch(error) {
-
-
-        console.error(
-            "Eventos:",
-            error
-        );
-
-
-        alert(
-            "No fue posible cargar los eventos."
-        );
-
-
-    }
-
-    finally {
-
-
-        showLoading(false);
+        await loadDashboard();
 
     }
 
@@ -3420,13 +3207,12 @@ async function loadEvents() {
 
 
 /* ==========================================================
-   CAMBIAR EVENTO
+   CHANGE EVENT
 ========================================================== */
 
 async function changeEvent() {
 
-    const selectedId =
-
+    const id =
         Number(
             document
             .getElementById(
@@ -3437,17 +3223,16 @@ async function changeEvent() {
 
 
     currentEvent =
-
         events.find(
             event =>
-                Number(event.id) ===
-                selectedId
+                Number(
+                    event.id
+                ) ===
+                id
         );
 
 
-    await loadDashboard(
-        true
-    );
+    await loadDashboard();
 
 }
 
@@ -3456,24 +3241,11 @@ async function changeEvent() {
    DASHBOARD
 ========================================================== */
 
-async function loadDashboard(
-    showLoader = false
-) {
+async function loadDashboard() {
 
-    if (
-        !currentEvent
-    ) {
+    if (!currentEvent) {
 
         return;
-
-    }
-
-
-    if (
-        showLoader
-    ) {
-
-        showLoading(true);
 
     }
 
@@ -3481,37 +3253,19 @@ async function loadDashboard(
     try {
 
 
-        /*
-        Liberamos reservas vencidas.
-        */
-
-        const cleanup =
-            await db.rpc(
-                "liberar_bloqueos_expirados"
-            );
-
-
-        if (
-            cleanup.error
-        ) {
-
-            console.warn(
-                "Liberar expirados:",
-                cleanup.error
-            );
-
-        }
+        await db.rpc(
+            "liberar_bloqueos_expirados"
+        );
 
 
         /* ====================================================
-           MESAS DEL EVENTO
+           MESAS
         ==================================================== */
 
         const {
             data: tables,
             error: tablesError
         } =
-
         await db
             .from(
                 "mesas"
@@ -3535,7 +3289,6 @@ async function loadDashboard(
 
 
         const tableIds =
-
             (tables || [])
             .map(
                 table =>
@@ -3555,12 +3308,10 @@ async function loadDashboard(
             tableIds.length
         ) {
 
-
             const {
                 data: seatData,
                 error: seatError
             } =
-
             await db
                 .from(
                     "asientos"
@@ -3590,14 +3341,13 @@ async function loadDashboard(
 
 
         /* ====================================================
-           RESERVAS
+           RESERVACIONES
         ==================================================== */
 
         const {
             data: reservationData,
             error: reservationError
         } =
-
         await db
             .from(
                 "reservas"
@@ -3614,6 +3364,8 @@ async function loadDashboard(
                 paid_at,
                 expires_at,
                 public_token,
+                email_enviado_at,
+                email_resend_id,
                 evento_id
             `)
             .eq(
@@ -3623,8 +3375,7 @@ async function loadDashboard(
             .order(
                 "id",
                 {
-                    ascending:
-                        false
+                    ascending: false
                 }
             );
 
@@ -3660,23 +3411,10 @@ async function loadDashboard(
         );
 
 
-        alert(
-            "No fue posible actualizar el dashboard."
+        showToast(
+            "No fue posible actualizar el dashboard.",
+            "error"
         );
-
-
-    }
-
-    finally {
-
-
-        if (
-            showLoader
-        ) {
-
-            showLoading(false);
-
-        }
 
     }
 
@@ -3689,18 +3427,16 @@ async function loadDashboard(
 
 function renderOverview() {
 
-    const paidReservations =
+    const sales =
+        reservations
 
-        reservations.filter(
+        .filter(
             reservation =>
                 reservation.estado ===
                 "pagada"
-        );
+        )
 
-
-    const sales =
-
-        paidReservations.reduce(
+        .reduce(
             (
                 total,
                 reservation
@@ -3731,7 +3467,7 @@ function renderOverview() {
         )
         .textContent =
 
-        `${formatDate(currentEvent.fecha)} · ${currentEvent.lugar || "Lugar por confirmar"}`;
+        `${formatDate(currentEvent.fecha)} · ${currentEvent.lugar || ""}`;
 
 
     document
@@ -3744,17 +3480,9 @@ function renderOverview() {
         );
 
 
-    /*
-    Flyer individual por evento,
-    si flyer_url existe.
-    */
-
     const flyer =
-
         currentEvent.flyer_url
-
         ||
-
         "FLYER%201080X1350.png";
 
 
@@ -3763,21 +3491,18 @@ function renderOverview() {
             "eventBackground"
         )
         .style.backgroundImage =
-
         `url("${flyer}")`;
 
 }
 
 
 /* ==========================================================
-   ESTADÍSTICAS
+   STATS
 ========================================================== */
 
 function renderStats() {
 
-
     const available =
-
         seats.filter(
             seat =>
                 seat.estado ===
@@ -3787,7 +3512,6 @@ function renderStats() {
 
 
     const blocked =
-
         seats.filter(
             seat =>
                 seat.estado ===
@@ -3797,7 +3521,6 @@ function renderStats() {
 
 
     const sold =
-
         seats.filter(
             seat =>
 
@@ -3819,7 +3542,6 @@ function renderStats() {
 
 
     const used =
-
         seats.filter(
             seat =>
                 seat.estado ===
@@ -3829,7 +3551,6 @@ function renderStats() {
 
 
     const sales =
-
         reservations
 
         .filter(
@@ -3898,7 +3619,6 @@ function renderStats() {
 
 
     const capacity =
-
         Number(
             currentEvent.capacidad
             ||
@@ -3909,18 +3629,14 @@ function renderStats() {
 
 
     const percentage =
-
         capacity > 0
 
         ?
 
         Math.min(
             100,
-            (
-                sold /
-                capacity
-            )
-            *
+            sold /
+            capacity *
             100
         )
 
@@ -3950,13 +3666,12 @@ function renderStats() {
 
 
 /* ==========================================================
-   TABLA RESERVACIONES
+   RENDER RESERVATIONS
 ========================================================== */
 
 function renderReservations() {
 
     const body =
-
         document
         .getElementById(
             "reservationsBody"
@@ -3964,7 +3679,6 @@ function renderReservations() {
 
 
     const search =
-
         document
         .getElementById(
             "searchReservation"
@@ -3975,7 +3689,6 @@ function renderReservations() {
 
 
     const statusFilter =
-
         document
         .getElementById(
             "statusFilter"
@@ -3984,21 +3697,12 @@ function renderReservations() {
 
 
     const filtered =
-
         reservations.filter(
             reservation => {
 
 
-                const code =
-                    reservationCode(
-                        reservation
-                    );
-
-
-                const searchableText =
-
-                    `${code}
-                     ${reservation.id}
+                const text =
+                    `${reservationCode(reservation)}
                      ${reservation.nombre_cliente || ""}
                      ${reservation.telefono || ""}
                      ${reservation.email || ""}`
@@ -4006,34 +3710,24 @@ function renderReservations() {
                     .toLowerCase();
 
 
-                const matchesSearch =
-
-                    !search
-
-                    ||
-
-                    searchableText.includes(
-                        search
-                    );
-
-
-                const matchesStatus =
-
-                    !statusFilter
-
-                    ||
-
-                    reservation.estado ===
-                    statusFilter;
-
-
                 return (
 
-                    matchesSearch
+                    (
+                        !search
+                        ||
+                        text.includes(
+                            search
+                        )
+                    )
 
                     &&
 
-                    matchesStatus
+                    (
+                        !statusFilter
+                        ||
+                        reservation.estado ===
+                        statusFilter
+                    )
 
                 );
 
@@ -4068,7 +3762,6 @@ function renderReservations() {
 
 
     body.innerHTML =
-
         filtered
 
         .map(
@@ -4140,17 +3833,109 @@ function renderReservations() {
                 }
 
 
-                const contact =
+                let emailHTML =
+                    `<span class="email-missing">—</span>`;
 
-                    reservation.email
 
-                    ||
+                if (
+                    !validEmail(
+                        reservation.email
+                    )
+                ) {
 
-                    reservation.telefono
+                    emailHTML = `
 
-                    ||
+                        <span class="email-missing">
+                            Sin correo válido
+                        </span>
 
+                    `;
+
+                }
+
+                else if (
+                    reservation.email_enviado_at
+                ) {
+
+                    emailHTML = `
+
+                        <div class="email-state">
+
+                            <span class="email-sent">
+                                ✓ Enviado
+                            </span>
+
+                            <span class="email-date">
+
+                                ${formatDate(
+                                    reservation.email_enviado_at
+                                )}
+
+                            </span>
+
+                        </div>
+
+                    `;
+
+                }
+
+                else if (
+                    reservation.estado ===
+                    "pagada"
+                ) {
+
+                    emailHTML = `
+
+                        <span class="email-pending">
+                            Pendiente de envío
+                        </span>
+
+                    `;
+
+                }
+
+
+                let emailButton =
                     "";
+
+
+                if (
+                    reservation.estado ===
+                    "pagada"
+
+                    &&
+
+                    validEmail(
+                        reservation.email
+                    )
+                ) {
+
+
+                    const buttonText =
+                        reservation.email_enviado_at
+
+                        ?
+
+                        "REENVIAR"
+
+                        :
+
+                        "ENVIAR";
+
+
+                    emailButton = `
+
+                        <button
+                            class="email-button"
+                            onclick="sendOrResendTickets(${reservation.id}, this)">
+
+                            ${buttonText}
+
+                        </button>
+
+                    `;
+
+                }
 
 
                 return `
@@ -4182,10 +3967,15 @@ function renderReservations() {
 
                             </span>
 
+
                             <span class="customer-contact">
 
                                 ${escapeHTML(
-                                    contact
+                                    reservation.email
+                                    ||
+                                    reservation.telefono
+                                    ||
+                                    ""
                                 )}
 
                             </span>
@@ -4228,11 +4018,15 @@ function renderReservations() {
 
                             ${
                                 reservation.paid_at
+
                                 ?
+
                                 formatDate(
                                     reservation.paid_at
                                 )
+
                                 :
+
                                 "—"
                             }
 
@@ -4241,28 +4035,29 @@ function renderReservations() {
 
                         <td>
 
-                            ${
-                                reservation.expires_at
-                                ?
-                                formatDate(
-                                    reservation.expires_at
-                                )
-                                :
-                                "—"
-                            }
+                            ${emailHTML}
 
                         </td>
 
 
                         <td>
 
-                            <button
-                                class="view-button"
-                                onclick="viewReservation(${reservation.id})">
+                            <div class="action-buttons">
 
-                                VER
 
-                            </button>
+                                <button
+                                    class="view-button"
+                                    onclick="viewReservation(${reservation.id})">
+
+                                    VER
+
+                                </button>
+
+
+                                ${emailButton}
+
+
+                            </div>
 
                         </td>
 
@@ -4279,7 +4074,299 @@ function renderReservations() {
 
 
 /* ==========================================================
-   VER RESERVA
+   ENVIAR / REENVIAR BOLETOS
+========================================================== */
+
+async function sendOrResendTickets(
+    reservationId,
+    button
+) {
+
+    const reservation =
+        reservations.find(
+            item =>
+                Number(item.id) ===
+                Number(reservationId)
+        );
+
+
+    if (!reservation) {
+
+        showToast(
+            "No se encontró la reserva.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        reservation.estado !==
+        "pagada"
+    ) {
+
+        showToast(
+            "Solo pueden enviarse boletos de reservas pagadas.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !validEmail(
+            reservation.email
+        )
+    ) {
+
+        showToast(
+            "La reserva no tiene un correo válido.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const isResend =
+        Boolean(
+            reservation.email_enviado_at
+        );
+
+
+    const question =
+        isResend
+
+        ?
+
+        `¿Reenviar nuevamente los boletos de ${reservationCode(reservation)} a ${reservation.email}?`
+
+        :
+
+        `¿Enviar los boletos de ${reservationCode(reservation)} a ${reservation.email}?`;
+
+
+    if (
+        !confirm(
+            question
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const originalText =
+        button.textContent;
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        isResend
+        ? "REENVIANDO..."
+        : "ENVIANDO...";
+
+
+    try {
+
+
+        const {
+            data: sessionData
+        } =
+        await db.auth
+            .getSession();
+
+
+        const session =
+            sessionData?.session;
+
+
+        if (!session) {
+
+            throw new Error(
+                "La sesión de administrador expiró."
+            );
+
+        }
+
+
+        let requestId;
+
+
+        if (
+            window.crypto &&
+            typeof window.crypto.randomUUID ===
+            "function"
+        ) {
+
+            requestId =
+                window.crypto.randomUUID();
+
+        }
+
+        else {
+
+            requestId =
+                `${Date.now()}-${Math.random()
+                    .toString(36)
+                    .slice(2)}`;
+
+        }
+
+
+        const response =
+            await fetch(
+                "/api/enviar-boletos",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            `Bearer ${session.access_token}`
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            {
+
+                                token:
+                                    reservation.public_token,
+
+                                reenviar:
+                                    isResend,
+
+                                request_id:
+                                    requestId
+
+                            }
+                        )
+
+                }
+            );
+
+
+        let result;
+
+
+        try {
+
+            result =
+                await response.json();
+
+        }
+
+        catch {
+
+            throw new Error(
+                "El servidor devolvió una respuesta no válida."
+            );
+
+        }
+
+
+        if (
+            !response.ok ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+
+                result.message
+
+                ||
+
+                "No fue posible enviar los boletos."
+
+            );
+
+        }
+
+
+        if (
+            result.reenviado
+        ) {
+
+            showToast(
+                `✓ Boletos reenviados correctamente a ${result.email}`
+            );
+
+        }
+
+        else if (
+            result.already_sent
+        ) {
+
+            showToast(
+                `Los boletos ya habían sido enviados a ${result.email}`
+            );
+
+        }
+
+        else {
+
+            showToast(
+                `✓ Boletos enviados correctamente a ${result.email}`
+            );
+
+        }
+
+
+        await loadDashboard();
+
+
+    }
+
+    catch(error) {
+
+
+        console.error(
+            "Enviar boletos:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "No fue posible enviar los boletos.",
+            "error"
+        );
+
+
+    }
+
+    finally {
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            originalText;
+
+    }
+
+}
+
+
+/* ==========================================================
+   VIEW RESERVATION
 ========================================================== */
 
 async function viewReservation(
@@ -4287,7 +4374,6 @@ async function viewReservation(
 ) {
 
     const reservation =
-
         reservations.find(
             item =>
                 Number(item.id) ===
@@ -4302,37 +4388,30 @@ async function viewReservation(
     }
 
 
-    const modal =
-
-        document
-        .getElementById(
-            "reservationModal"
-        );
-
-
-    const content =
-
-        document
-        .getElementById(
-            "modalContent"
-        );
-
-
     document
         .getElementById(
             "modalTitle"
         )
         .textContent =
-
         reservationCode(
             reservation
         );
 
 
-    modal
+    document
+        .getElementById(
+            "reservationModal"
+        )
         .classList
         .add(
             "show"
+        );
+
+
+    const content =
+        document
+        .getElementById(
+            "modalContent"
         );
 
 
@@ -4340,7 +4419,7 @@ async function viewReservation(
 
         <div class="no-data">
 
-            Cargando asientos y boletos...
+            Cargando boletos...
 
         </div>
 
@@ -4350,15 +4429,10 @@ async function viewReservation(
     try {
 
 
-        /* ====================================================
-           RELACIONES RESERVA - ASIENTO
-        ==================================================== */
-
         const {
             data: relations,
             error: relationsError
         } =
-
         await db
             .from(
                 "reserva_asientos"
@@ -4382,7 +4456,6 @@ async function viewReservation(
 
 
         const seatIds =
-
             (relations || [])
             .map(
                 relation =>
@@ -4390,63 +4463,48 @@ async function viewReservation(
             );
 
 
-        if (
-            !seatIds.length
-        ) {
-
-            renderModalSummary(
-                reservation,
-                [],
-                new Map(),
-                new Map()
-            );
-
-            return;
-
-        }
-
-
-        /* ====================================================
-           ASIENTOS
-        ==================================================== */
-
-        const {
-            data: seatData,
-            error: seatError
-        } =
-
-        await db
-            .from(
-                "asientos"
-            )
-            .select(
-                "id,numero,mesa_id,estado"
-            )
-            .in(
-                "id",
-                seatIds
-            );
+        let seatData =
+            [];
 
 
         if (
-            seatError
+            seatIds.length
         ) {
 
-            throw seatError;
+            const {
+                data,
+                error
+            } =
+            await db
+                .from(
+                    "asientos"
+                )
+                .select(
+                    "id,numero,mesa_id,estado"
+                )
+                .in(
+                    "id",
+                    seatIds
+                );
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            seatData =
+                data || [];
 
         }
 
-
-        /* ====================================================
-           MESAS
-        ==================================================== */
 
         const tableIds =
-
             [
                 ...new Set(
-                    (seatData || [])
-                    .map(
+                    seatData.map(
                         seat =>
                             seat.mesa_id
                     )
@@ -4462,12 +4520,10 @@ async function viewReservation(
             tableIds.length
         ) {
 
-
             const {
                 data,
                 error
             } =
-
             await db
                 .from(
                     "mesas"
@@ -4481,9 +4537,7 @@ async function viewReservation(
                 );
 
 
-            if (
-                error
-            ) {
+            if (error) {
 
                 throw error;
 
@@ -4496,15 +4550,10 @@ async function viewReservation(
         }
 
 
-        /* ====================================================
-           BOLETOS
-        ==================================================== */
-
         const {
             data: ticketData,
             error: ticketError
         } =
-
         await db
             .from(
                 "boletos"
@@ -4527,11 +4576,9 @@ async function viewReservation(
         }
 
 
-        const tablesMap =
-
+        const tableMap =
             new Map(
-                tableData
-                .map(
+                tableData.map(
                     table => [
                         table.id,
                         table.numero
@@ -4540,8 +4587,7 @@ async function viewReservation(
             );
 
 
-        const ticketsMap =
-
+        const ticketMap =
             new Map(
                 (ticketData || [])
                 .map(
@@ -4553,11 +4599,11 @@ async function viewReservation(
             );
 
 
-        renderModalSummary(
+        renderModal(
             reservation,
-            seatData || [],
-            tablesMap,
-            ticketsMap
+            seatData,
+            tableMap,
+            ticketMap
         );
 
 
@@ -4567,7 +4613,6 @@ async function viewReservation(
 
 
         console.error(
-            "Reserva:",
             error
         );
 
@@ -4576,7 +4621,7 @@ async function viewReservation(
 
             <div class="no-data">
 
-                No fue posible cargar los detalles de esta reserva.
+                No fue posible cargar los detalles.
 
             </div>
 
@@ -4591,15 +4636,14 @@ async function viewReservation(
    RENDER MODAL
 ========================================================== */
 
-function renderModalSummary(
+function renderModal(
     reservation,
     seatData,
-    tablesMap,
-    ticketsMap
+    tableMap,
+    ticketMap
 ) {
 
     const content =
-
         document
         .getElementById(
             "modalContent"
@@ -4607,7 +4651,6 @@ function renderModalSummary(
 
 
     const sortedSeats =
-
         [...seatData]
         .sort(
             (
@@ -4617,9 +4660,8 @@ function renderModalSummary(
 
 
                 const tableA =
-
                     Number(
-                        tablesMap.get(
+                        tableMap.get(
                             a.mesa_id
                         ) ||
                         0
@@ -4627,9 +4669,8 @@ function renderModalSummary(
 
 
                 const tableB =
-
                     Number(
-                        tablesMap.get(
+                        tableMap.get(
                             b.mesa_id
                         ) ||
                         0
@@ -4650,13 +4691,9 @@ function renderModalSummary(
 
 
                 return (
-
                     Number(a.numero)
-
                     -
-
                     Number(b.numero)
-
                 );
 
             }
@@ -4687,12 +4724,12 @@ function renderModalSummary(
             <div class="summary-item">
 
                 <small>
-                    ESTADO
+                    CORREO
                 </small>
 
                 <strong>
                     ${escapeHTML(
-                        reservation.estado ||
+                        reservation.email ||
                         "—"
                     )}
                 </strong>
@@ -4737,14 +4774,12 @@ function renderModalSummary(
         <div
             class="admin-ticket-grid"
             id="adminTicketGrid">
-
         </div>
 
     `;
 
 
     const grid =
-
         document
         .getElementById(
             "adminTicketGrid"
@@ -4759,7 +4794,7 @@ function renderModalSummary(
 
             <div class="no-data">
 
-                No hay asientos asociados a esta reserva.
+                No hay asientos asociados.
 
             </div>
 
@@ -4779,25 +4814,20 @@ function renderModalSummary(
 
 
             const tableNumber =
-
-                tablesMap.get(
+                tableMap.get(
                     seat.mesa_id
                 )
-
                 ??
-
                 "—";
 
 
             const ticket =
-
-                ticketsMap.get(
+                ticketMap.get(
                     seat.id
                 );
 
 
             const card =
-
                 document
                 .createElement(
                     "div"
@@ -4823,9 +4853,16 @@ function renderModalSummary(
 
                     ${
                         ticket
+
                         ?
-                        `Boleto: ${escapeHTML(ticket.estado || "generado")}`
+
+                        `Boleto: ${escapeHTML(
+                            ticket.estado ||
+                            "generado"
+                        )}`
+
                         :
+
                         "Sin boleto generado"
                     }
 
@@ -4848,21 +4885,7 @@ function renderModalSummary(
 
                     :
 
-                    `
-
-                        <div class="no-ticket">
-
-                            ${
-                                reservation.estado === "pagada"
-                                ?
-                                "El boleto aún no está disponible."
-                                :
-                                "El QR aparecerá después del pago."
-                            }
-
-                        </div>
-
-                    `
+                    ""
                 }
 
             `;
@@ -4961,7 +4984,6 @@ function startAutoRefresh() {
 
 
     autoRefreshInterval =
-
         setInterval(
             () => {
 
@@ -4990,9 +5012,7 @@ function startAutoRefresh() {
                     )
                 ) {
 
-                    loadDashboard(
-                        false
-                    );
+                    loadDashboard();
 
                 }
 
@@ -5004,7 +5024,7 @@ function startAutoRefresh() {
 
 
 /* ==========================================================
-   LOGIN CON ENTER
+   KEYBOARD
 ========================================================== */
 
 document.addEventListener(
@@ -5045,7 +5065,7 @@ document.addEventListener(
 
 
 /* ==========================================================
-   INICIAR
+   START
 ========================================================== */
 
 verifyAdmin();
