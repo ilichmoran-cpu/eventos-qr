@@ -9,7 +9,7 @@ import { createClient } from "@supabase/supabase-js";
 
 
 /* ============================================================
-   VARIABLES
+   VARIABLES DE ENTORNO
 ============================================================ */
 
 const SUPABASE_URL =
@@ -19,6 +19,10 @@ const SUPABASE_URL =
 const SUPABASE_SERVICE_ROLE_KEY =
     process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+
+/* ============================================================
+   CONFIGURACIÓN LIVE PASS
+============================================================ */
 
 const COOKIE_NAME =
     "lt_livepass";
@@ -56,7 +60,7 @@ const supabase =
 
 
 /* ============================================================
-   RESPONSE
+   RESPUESTA JSON
 ============================================================ */
 
 function sendJSON(
@@ -79,7 +83,7 @@ function sendJSON(
 
 
 /* ============================================================
-   BODY
+   OBTENER BODY
 ============================================================ */
 
 function getBody(request) {
@@ -149,6 +153,13 @@ function validEmail(value) {
 
 /* ============================================================
    VERIFICAR HASH DEL CÓDIGO
+
+   solicitar-codigo.js guarda:
+
+   salt:hash
+
+   Aquí reconstruimos el hash con el código
+   que escribió el comprador.
 ============================================================ */
 
 function verifyCodeHash(
@@ -219,6 +230,7 @@ function verifyCodeHash(
 
     catch(error) {
 
+
         console.error(
             "verifyCodeHash:",
             error
@@ -233,7 +245,11 @@ function verifyCodeHash(
 
 
 /* ============================================================
-   GENERAR TOKEN SESIÓN
+   GENERAR TOKEN DE SESIÓN
+
+   Este token queda solamente en la cookie del navegador.
+
+   Supabase guarda únicamente su SHA-256.
 ============================================================ */
 
 function generateSessionToken() {
@@ -248,7 +264,7 @@ function generateSessionToken() {
 
 
 /* ============================================================
-   HASH SESIÓN
+   HASH DEL TOKEN DE SESIÓN
 ============================================================ */
 
 function hashSessionToken(token) {
@@ -268,7 +284,7 @@ function hashSessionToken(token) {
 
 
 /* ============================================================
-   COOKIE
+   CREAR COOKIE HTTPONLY
 ============================================================ */
 
 function createSessionCookie(token) {
@@ -294,7 +310,7 @@ function createSessionCookie(token) {
 
 
 /* ============================================================
-   HANDLER
+   HANDLER PRINCIPAL
 ============================================================ */
 
 export default async function handler(
@@ -303,7 +319,7 @@ export default async function handler(
 ) {
 
     /* ========================================================
-       MÉTODO
+       SOLO POST
     ======================================================== */
 
     if (
@@ -316,7 +332,8 @@ export default async function handler(
             405,
             {
                 success: false,
-                message: "Método no permitido."
+                message:
+                    "Método no permitido."
             }
         );
 
@@ -327,7 +344,7 @@ export default async function handler(
 
 
         /* ====================================================
-           CONFIG
+           VERIFICAR CONFIGURACIÓN
         ==================================================== */
 
         if (
@@ -344,7 +361,7 @@ export default async function handler(
 
 
         /* ====================================================
-           BODY
+           DATOS RECIBIDOS
         ==================================================== */
 
         const body =
@@ -374,7 +391,7 @@ export default async function handler(
 
 
         /* ====================================================
-           VALIDACIONES
+           VALIDAR EMAIL
         ==================================================== */
 
         if (
@@ -395,6 +412,10 @@ export default async function handler(
 
         }
 
+
+        /* ====================================================
+           VALIDAR CÓDIGO
+        ==================================================== */
 
         if (
             !/^\d{6}$/
@@ -465,7 +486,7 @@ export default async function handler(
 
 
         /* ====================================================
-           NO EXISTE
+           NO HAY CÓDIGO ACTIVO
         ==================================================== */
 
         if (!accessCode) {
@@ -484,15 +505,18 @@ export default async function handler(
 
 
         /* ====================================================
-           EXPIRADO
+           CÓDIGO VENCIDO
         ==================================================== */
 
-        if (
+        const expiresAt =
             new Date(
                 accessCode.expires_at
             )
-            .getTime()
-            <=
+            .getTime();
+
+
+        if (
+            expiresAt <=
             Date.now()
         ) {
 
@@ -531,13 +555,16 @@ export default async function handler(
            DEMASIADOS INTENTOS
         ==================================================== */
 
-        if (
+        const currentAttempts =
             Number(
                 accessCode.intentos
                 ||
                 0
-            )
-            >=
+            );
+
+
+        if (
+            currentAttempts >=
             5
         ) {
 
@@ -573,7 +600,7 @@ export default async function handler(
 
 
         /* ====================================================
-           VERIFICAR CÓDIGO
+           COMPARAR EL CÓDIGO
         ==================================================== */
 
         const valid =
@@ -583,15 +610,15 @@ export default async function handler(
             );
 
 
+        /* ====================================================
+           CÓDIGO INCORRECTO
+        ==================================================== */
+
         if (!valid) {
 
 
             const newAttempts =
-                Number(
-                    accessCode.intentos
-                    ||
-                    0
-                )
+                currentAttempts
                 +
                 1;
 
@@ -602,6 +629,11 @@ export default async function handler(
                         newAttempts
                 };
 
+
+            /*
+            Al quinto intento,
+            invalidamos el código.
+            */
 
             if (
                 newAttempts >=
@@ -615,6 +647,9 @@ export default async function handler(
             }
 
 
+            const {
+                error: attemptError
+            } =
             await supabase
                 .from(
                     "cliente_codigos_acceso"
@@ -628,18 +663,33 @@ export default async function handler(
                 );
 
 
+            if (attemptError) {
+
+                console.error(
+                    "Actualizar intentos:",
+                    attemptError
+                );
+
+            }
+
+
             return sendJSON(
                 response,
                 401,
                 {
 
-                    success: false,
+                    success:
+                        false,
 
                     message:
                         newAttempts >= 5
+
                         ?
+
                         "Código bloqueado. Solicita uno nuevo."
+
                         :
+
                         "Código incorrecto.",
 
                     intentos_restantes:
@@ -656,7 +706,15 @@ export default async function handler(
 
         /* ====================================================
            CONSUMIR CÓDIGO
+
+           Solo se permite consumirlo si todavía
+           usado_at sigue siendo NULL.
         ==================================================== */
+
+        const now =
+            new Date()
+            .toISOString();
+
 
         const {
             data: consumed,
@@ -669,8 +727,7 @@ export default async function handler(
             .update(
                 {
                     usado_at:
-                        new Date()
-                        .toISOString()
+                        now
                 }
             )
             .eq(
@@ -694,6 +751,11 @@ export default async function handler(
         }
 
 
+        /*
+        Si otra petición consumió el código
+        antes que esta, no creamos otra sesión.
+        */
+
         if (!consumed) {
 
             return sendJSON(
@@ -710,7 +772,7 @@ export default async function handler(
 
 
         /* ====================================================
-           CREAR SESIÓN
+           CREAR TOKEN DE SESIÓN
         ==================================================== */
 
         const sessionToken =
@@ -723,7 +785,7 @@ export default async function handler(
             );
 
 
-        const expiresAt =
+        const sessionExpiresAt =
             new Date(
                 Date.now()
                 +
@@ -733,6 +795,10 @@ export default async function handler(
             )
             .toISOString();
 
+
+        /* ====================================================
+           GUARDAR SESIÓN EN SUPABASE
+        ==================================================== */
 
         const {
             error: sessionError
@@ -751,11 +817,10 @@ export default async function handler(
                         tokenHash,
 
                     expires_at:
-                        expiresAt,
+                        sessionExpiresAt,
 
                     ultimo_uso_at:
-                        new Date()
-                        .toISOString()
+                        now
 
                 }
             );
@@ -769,7 +834,7 @@ export default async function handler(
 
 
         /* ====================================================
-           COOKIE HTTPONLY
+           COOKIE SEGURA
         ==================================================== */
 
         response.setHeader(
@@ -781,7 +846,7 @@ export default async function handler(
 
 
         /* ====================================================
-           OK
+           RESPUESTA EXITOSA
         ==================================================== */
 
         return sendJSON(
@@ -789,7 +854,8 @@ export default async function handler(
             200,
             {
 
-                success: true,
+                success:
+                    true,
 
                 message:
                     "Acceso confirmado.",
@@ -817,7 +883,8 @@ export default async function handler(
             500,
             {
 
-                success: false,
+                success:
+                    false,
 
                 message:
                     "No fue posible verificar el código."
