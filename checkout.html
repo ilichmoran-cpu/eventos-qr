@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Checkout | Live Tickets</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+}
+
+header {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+header p {
+    margin: 7px 0 0;
+    color: #ccc;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 15px 50px;
+}
+
+.tarjeta {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.centrado {
+    text-align: center;
+}
+
+.estado {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+}
+
+.evento {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.codigo {
+    background: #f1f1f1;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.contador-contenedor {
+    background: #fff4d6;
+    border: 1px solid #f0d889;
+    border-radius: 12px;
+    text-align: center;
+    padding: 18px;
+    margin: 20px 0;
+}
+
+.contador-titulo {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.contador {
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.detalle {
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.fila {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 12px 0;
+}
+
+.total {
+    font-size: 27px;
+    font-weight: bold;
+    border-top: 2px solid #111;
+    padding-top: 16px;
+    margin-top: 18px;
+}
+
+.boton {
+    width: 100%;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    background: #111;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.boton:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.boton-secundario {
+    background: #eee;
+    color: #111;
+}
+
+.pago-pendiente {
+    background: #fff7dd;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.pagado {
+    background: #e3f6e9;
+    color: #12662e;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.expirado {
+    background: #ffe5e5;
+    color: #9f1717;
+    border-radius: 12px;
+    padding: 22px;
+    text-align: center;
+}
+
+.boleto {
+    background: #f7f7f7;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 18px 0;
+    text-align: center;
+}
+
+.qr {
+    background: white;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    margin: 15px auto;
+    border-radius: 10px;
+}
+
+.oculto {
+    display: none;
+}
+
+@media(max-width:600px) {
+
+    header {
+        padding: 25px 15px;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .contenedor {
+        margin-top: 18px;
+        padding: 0 10px 40px;
+    }
+
+    .tarjeta {
+        padding: 20px 16px;
+    }
+
+    .contador {
+        font-size: 34px;
+    }
+
+    .total {
+        font-size: 24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+<h1>LIVE TICKETS</h1>
+
+<p>Checkout seguro</p>
+
+</header>
+
+
+<div class="contenedor">
+
+
+<div
+id="cargando"
+class="tarjeta estado">
+
+Cargando tu reserva...
+
+</div>
+
+
+<div
+id="checkout"
+class="tarjeta oculto">
+
+
+<div
+id="nombreEvento"
+class="evento">
+</div>
+
+
+<div class="codigo">
+
+Reserva:
+<span id="codigoReserva"></span>
+
+</div>
+
+
+<div
+id="contenedorContador"
+class="contador-contenedor">
+
+<div class="contador-titulo">
+
+Tus asientos están reservados durante:
+
+</div>
+
+<div
+id="contador"
+class="contador">
+
+10:00
+
+</div>
+
+</div>
+
+
+<div class="detalle">
+
+
+<div class="fila">
+
+<span>
+Cantidad de boletos
+</span>
+
+<strong id="cantidad">
+0
+</strong>
+
+</div>
+
+
+<div class="fila">
+
+<span>
+Precio por asiento
+</span>
+
+<strong id="precio">
+L 0.00
+</strong>
+
+</div>
+
+
+<div class="fila total">
+
+<span>
+TOTAL
+</span>
+
+<span id="total">
+L 0.00
+</span>
+
+</div>
+
+
+</div>
+
+
+<div
+id="mensajePago"
+class="pago-pendiente">
+
+Tu reserva está pendiente de pago.
+
+</div>
+
+
+<button
+id="botonPagar"
+class="boton"
+disabled>
+
+PAGAR
+
+</button>
+
+
+<div
+style="
+text-align:center;
+font-size:12px;
+color:#777;
+margin-top:12px;
+">
+
+La pasarela de pago será habilitada
+cuando conectemos el proveedor bancario.
+
+</div>
+
+
+<button
+class="boton boton-secundario"
+onclick="volverEvento()">
+
+VOLVER AL EVENTO
+
+</button>
+
+
+</div>
+
+
+
+<!-- RESERVA PAGADA -->
+
+<div
+id="panelPagado"
+class="oculto">
+
+
+<div class="pagado">
+
+<h2>
+✅ PAGO APROBADO
+</h2>
+
+<p>
+Tu compra fue confirmada correctamente.
+</p>
+
+<div>
+
+Reserva:
+
+<strong id="codigoPagado"></strong>
+
+</div>
+
+</div>
+
+
+<div
+id="boletos">
+</div>
+
+
+</div>
+
+
+
+<!-- RESERVA EXPIRADA -->
+
+<div
+id="panelExpirado"
+class="tarjeta expirado oculto">
+
+<h2>
+RESERVA EXPIRADA
+</h2>
+
+<p>
+
+El tiempo para completar la compra terminó.
+
+</p>
+
+<p>
+
+Los asientos fueron liberados para
+que puedan ser seleccionados nuevamente.
+
+</p>
+
+
+<button
+class="boton"
+onclick="volverEvento()">
+
+VOLVER AL EVENTO
+
+</button>
+
+</div>
+
+
+
+<!-- ERROR -->
+
+<div
+id="panelError"
+class="tarjeta expirado oculto">
+
+<h2>
+No se pudo cargar la reserva
+</h2>
+
+<p id="mensajeError"></p>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+
+const SUPABASE_URL =
+"https://ysismkibffhzouxacaxv.supabase.co";
+
+
+const SUPABASE_KEY =
+"sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
+
+
+const db =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+
+let reservaActual =
+null;
+
+
+let intervaloContador =
+null;
+
+
+let intervaloConsulta =
+null;
+
+
+/* =====================================================
+   TOKEN
+===================================================== */
+
+
+const parametros =
+new URLSearchParams(
+    window.location.search
+);
+
+
+const PUBLIC_TOKEN =
+parametros.get(
+    "token"
+);
+
+
+/* =====================================================
+   FORMATO
+===================================================== */
+
+
+function formatoLempiras(
+    valor
+) {
+
+    return (
+        "L " +
+        Number(valor || 0)
+        .toLocaleString(
+            "es-HN",
+            {
+                minimumFractionDigits:
+                2,
+
+                maximumFractionDigits:
+                2
+            }
+        )
+    );
+
+}
+
+
+/* =====================================================
+   CONSULTAR RESERVA
+===================================================== */
+
+
+async function consultarReserva() {
+
+
+    if (!PUBLIC_TOKEN) {
+
+        mostrarError(
+            "El enlace de checkout no contiene una reserva válida."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+
+        const resultado =
+        await db.rpc(
+            "consultar_reserva",
+            {
+                p_token:
+                PUBLIC_TOKEN
+            }
+        );
+
+
+        if (
+            resultado.error
+        ) {
+
+            throw resultado.error;
+
+        }
+
+
+        const datos =
+        resultado.data;
+
+
+        if (
+            !datos ||
+            datos.success !== true
+        ) {
+
+            mostrarError(
+                datos?.mensaje ||
+                "Reserva no encontrada."
+            );
+
+            return;
+
+        }
+
+
+        reservaActual =
+        datos;
+
+
+        evaluarEstado(
+            datos
+        );
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            error
+        );
+
+
+        mostrarError(
+            "No fue posible consultar la reserva."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   EVALUAR ESTADO
+===================================================== */
+
+
+function evaluarEstado(
+    datos
+) {
+
+
+    document
+    .getElementById(
+        "cargando"
+    )
+    .style.display =
+    "none";
+
+
+    if (
+        datos.estado ===
+        "pagada"
+    ) {
+
+
+        mostrarPagada(
+            datos
+        );
+
+
+        return;
+
+    }
+
+
+    if (
+        datos.estado ===
+        "expirada" ||
+        datos.estado ===
+        "cancelada"
+    ) {
+
+
+        mostrarExpirada();
+
+
+        return;
+
+    }
+
+
+    if (
+        datos.estado ===
+        "pendiente_pago"
+    ) {
+
+
+        mostrarPendiente(
+            datos
+        );
+
+
+        return;
+
+    }
+
+
+    mostrarError(
+        "Esta reserva se encuentra en estado: " +
+        datos.estado
+    );
+
+}
+
+
+/* =====================================================
+   PENDIENTE
+===================================================== */
+
+
+function mostrarPendiente(
+    datos
+) {
+
+
+    document
+    .getElementById(
+        "checkout"
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "panelPagado"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelExpirado"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "nombreEvento"
+    )
+    .textContent =
+    datos.evento;
+
+
+    document
+    .getElementById(
+        "codigoReserva"
+    )
+    .textContent =
+    datos.codigo_reserva;
+
+
+    document
+    .getElementById(
+        "cantidad"
+    )
+    .textContent =
+    datos.cantidad_asientos;
+
+
+    document
+    .getElementById(
+        "precio"
+    )
+    .textContent =
+    formatoLempiras(
+        datos.precio_unitario
+    );
+
+
+    document
+    .getElementById(
+        "total"
+    )
+    .textContent =
+    formatoLempiras(
+        datos.total_reserva
+    );
+
+
+    document
+    .getElementById(
+        "botonPagar"
+    )
+    .textContent =
+    "PAGAR " +
+    formatoLempiras(
+        datos.total_reserva
+    );
+
+
+    iniciarContador(
+        datos.expires_at
+    );
+
+
+    /*
+    Cada 5 segundos comprobamos
+    si el backend cambió la reserva
+    a PAGADA.
+
+    Esto será útil cuando PixelPay
+    confirme el pago mediante webhook.
+    */
+
+
+    if (!intervaloConsulta) {
+
+
+        intervaloConsulta =
+        setInterval(
+            consultarReserva,
+            5000
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CONTADOR
+===================================================== */
+
+
+function iniciarContador(
+    fechaExpiracion
+) {
+
+
+    if (
+        intervaloContador
+    ) {
+
+        clearInterval(
+            intervaloContador
+        );
+
+    }
+
+
+    function actualizar() {
+
+
+        const ahora =
+        new Date()
+        .getTime();
+
+
+        const expira =
+        new Date(
+            fechaExpiracion
+        )
+        .getTime();
+
+
+        let diferencia =
+        expira -
+        ahora;
+
+
+        if (
+            diferencia <=
+            0
+        ) {
+
+
+            diferencia =
+            0;
+
+
+            document
+            .getElementById(
+                "contador"
+            )
+            .textContent =
+            "00:00";
+
+
+            clearInterval(
+                intervaloContador
+            );
+
+
+            /*
+            Al llegar a cero
+            volvemos a consultar
+            Supabase.
+
+            consultar_reserva()
+            ejecutará la liberación
+            de bloqueos vencidos.
+            */
+
+
+            consultarReserva();
+
+
+            return;
+
+        }
+
+
+        const minutos =
+        Math.floor(
+            diferencia /
+            60000
+        );
+
+
+        const segundos =
+        Math.floor(
+            (
+                diferencia %
+                60000
+            ) /
+            1000
+        );
+
+
+        document
+        .getElementById(
+            "contador"
+        )
+        .textContent =
+        String(
+            minutos
+        )
+        .padStart(
+            2,
+            "0"
+        )
+        +
+        ":" +
+        String(
+            segundos
+        )
+        .padStart(
+            2,
+            "0"
+        );
+
+    }
+
+
+    actualizar();
+
+
+    intervaloContador =
+    setInterval(
+        actualizar,
+        1000
+    );
+
+}
+
+
+/* =====================================================
+   PAGADA
+===================================================== */
+
+
+function mostrarPagada(
+    datos
+) {
+
+
+    limpiarIntervalos();
+
+
+    document
+    .getElementById(
+        "checkout"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelExpirado"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelError"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelPagado"
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "codigoPagado"
+    )
+    .textContent =
+    datos.codigo_reserva;
+
+
+    const contenedor =
+    document
+    .getElementById(
+        "boletos"
+    );
+
+
+    contenedor.innerHTML =
+    "";
+
+
+    const boletos =
+    datos.boletos ||
+    [];
+
+
+    if (
+        boletos.length ===
+        0
+    ) {
+
+
+        contenedor.innerHTML = `
+
+            <div class="tarjeta centrado">
+
+                Pago confirmado.
+
+                <br><br>
+
+                Los boletos están
+                siendo preparados.
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    boletos.forEach(
+        (boleto,index) => {
+
+
+            const div =
+            document.createElement(
+                "div"
+            );
+
+
+            div.className =
+            "tarjeta boleto";
+
+
+            div.innerHTML = `
+
+                <h3>
+                    Boleto ${index + 1}
+                </h3>
+
+                <div>
+                    Asiento ID:
+                    ${boleto.asiento_id}
+                </div>
+
+                <div
+                id="qr-${index}"
+                class="qr">
+                </div>
+
+                <p>
+
+                    Presenta este código QR
+                    al ingresar al evento.
+
+                </p>
+
+            `;
+
+
+            contenedor.appendChild(
+                div
+            );
+
+
+            new QRCode(
+                document
+                .getElementById(
+                    `qr-${index}`
+                ),
+                {
+
+                    text:
+                    boleto.token,
+
+                    width:
+                    220,
+
+                    height:
+                    220
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =====================================================
+   EXPIRADA
+===================================================== */
+
+
+function mostrarExpirada() {
+
+
+    limpiarIntervalos();
+
+
+    document
+    .getElementById(
+        "checkout"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelPagado"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelError"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelExpirado"
+    )
+    .style.display =
+    "block";
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+
+function mostrarError(
+    mensaje
+) {
+
+
+    limpiarIntervalos();
+
+
+    document
+    .getElementById(
+        "cargando"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "checkout"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelPagado"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelExpirado"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "panelError"
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "mensajeError"
+    )
+    .textContent =
+    mensaje;
+
+}
+
+
+/* =====================================================
+   VOLVER EVENTO
+===================================================== */
+
+
+function volverEvento() {
+
+
+    if (
+        reservaActual &&
+        reservaActual.evento_id
+    ) {
+
+
+        window.location.href =
+        "evento.html?id=" +
+        reservaActual.evento_id;
+
+
+        return;
+
+    }
+
+
+    window.location.href =
+    "index.html";
+
+}
+
+
+/* =====================================================
+   LIMPIAR INTERVALOS
+===================================================== */
+
+
+function limpiarIntervalos() {
+
+
+    if (
+        intervaloContador
+    ) {
+
+
+        clearInterval(
+            intervaloContador
+        );
+
+
+        intervaloContador =
+        null;
+
+    }
+
+
+    if (
+        intervaloConsulta
+    ) {
+
+
+        clearInterval(
+            intervaloConsulta
+        );
+
+
+        intervaloConsulta =
+        null;
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIO
+===================================================== */
+
+
+consultarReserva();
+
+
+</script>
+
+</body>
+
+</html>
