@@ -81,26 +81,11 @@ function escapeHTML(value) {
     return String(
         value ?? ""
     )
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
 }
 
@@ -123,7 +108,7 @@ function validEmail(value) {
 
 
 /* ============================================================
-   FORMATEAR FECHA
+   FORMATEAR FECHA EVENTO
 ============================================================ */
 
 function formatEventDate(value) {
@@ -136,7 +121,9 @@ function formatEventDate(value) {
 
 
     const date =
-        new Date(value);
+        new Date(
+            value
+        );
 
 
     if (
@@ -153,20 +140,11 @@ function formatEventDate(value) {
     return new Intl.DateTimeFormat(
         "es-HN",
         {
-            weekday:
-                "long",
-
-            day:
-                "2-digit",
-
-            month:
-                "long",
-
-            year:
-                "numeric",
-
-            timeZone:
-                "America/Tegucigalpa"
+            weekday: "long",
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            timeZone: "America/Tegucigalpa"
         }
     )
     .format(
@@ -177,14 +155,12 @@ function formatEventDate(value) {
 
 
 /* ============================================================
-   CUERPO DE REQUEST
+   BODY
 ============================================================ */
 
 function getBody(request) {
 
-    if (
-        !request.body
-    ) {
+    if (!request.body) {
 
         return {};
 
@@ -219,7 +195,7 @@ function getBody(request) {
 
 
 /* ============================================================
-   HANDLER PRINCIPAL
+   HANDLER
 ============================================================ */
 
 export default async function handler(
@@ -241,11 +217,8 @@ export default async function handler(
             response,
             405,
             {
-                success:
-                    false,
-
-                message:
-                    "Método no permitido."
+                success: false,
+                message: "Método no permitido."
             }
         );
 
@@ -256,7 +229,7 @@ export default async function handler(
 
 
         /* ====================================================
-           COMPROBAR VARIABLES
+           VARIABLES DE SERVIDOR
         ==================================================== */
 
         if (
@@ -273,7 +246,7 @@ export default async function handler(
 
 
         /* ====================================================
-           OBTENER JWT DEL ADMIN
+           AUTORIZACIÓN ADMIN
         ==================================================== */
 
         const authorization =
@@ -291,11 +264,8 @@ export default async function handler(
                 response,
                 401,
                 {
-                    success:
-                        false,
-
-                    message:
-                        "Debes iniciar sesión como administrador."
+                    success: false,
+                    message: "Debes iniciar sesión como administrador."
                 }
             );
 
@@ -309,7 +279,7 @@ export default async function handler(
 
 
         /* ====================================================
-           VALIDAR JWT
+           VALIDAR USUARIO
         ==================================================== */
 
         const {
@@ -331,11 +301,8 @@ export default async function handler(
                 response,
                 401,
                 {
-                    success:
-                        false,
-
-                    message:
-                        "La sesión del administrador no es válida."
+                    success: false,
+                    message: "La sesión del administrador no es válida."
                 }
             );
 
@@ -347,7 +314,7 @@ export default async function handler(
 
 
         /* ====================================================
-           VERIFICAR ROL ADMIN
+           COMPROBAR ROL ADMIN
         ==================================================== */
 
         const {
@@ -385,11 +352,8 @@ export default async function handler(
                 response,
                 403,
                 {
-                    success:
-                        false,
-
-                    message:
-                        "No tienes permisos de administrador."
+                    success: false,
+                    message: "No tienes permisos de administrador."
                 }
             );
 
@@ -397,7 +361,7 @@ export default async function handler(
 
 
         /* ====================================================
-           TOKEN DE RESERVA
+           BODY
         ==================================================== */
 
         const body =
@@ -414,27 +378,61 @@ export default async function handler(
             .trim();
 
 
-        if (
-            !publicToken
-        ) {
+        const forceResend =
+            body.reenviar === true;
+
+
+        let requestId =
+            String(
+                body.request_id ||
+                ""
+            )
+            .trim();
+
+
+        if (!publicToken) {
 
             return sendJSON(
                 response,
                 400,
                 {
-                    success:
-                        false,
-
-                    message:
-                        "Falta el token de la reserva."
+                    success: false,
+                    message: "Falta el token de la reserva."
                 }
             );
 
         }
 
 
+        /*
+        El request_id solamente se utiliza
+        para reenvíos manuales.
+
+        Evita que el mismo clic genere
+        duplicados por un reintento de red.
+        */
+
+        if (forceResend) {
+
+
+            if (
+                !requestId ||
+                !/^[a-zA-Z0-9._:-]{1,120}$/
+                    .test(
+                        requestId
+                    )
+            ) {
+
+                requestId =
+                    crypto.randomUUID();
+
+            }
+
+        }
+
+
         /* ====================================================
-           BUSCAR RESERVA
+           RESERVA
         ==================================================== */
 
         const {
@@ -467,28 +465,21 @@ export default async function handler(
             .maybeSingle();
 
 
-        if (
-            reservaError
-        ) {
+        if (reservaError) {
 
             throw reservaError;
 
         }
 
 
-        if (
-            !reserva
-        ) {
+        if (!reserva) {
 
             return sendJSON(
                 response,
                 404,
                 {
-                    success:
-                        false,
-
-                    message:
-                        "Reserva no encontrada."
+                    success: false,
+                    message: "Reserva no encontrada."
                 }
             );
 
@@ -496,7 +487,7 @@ export default async function handler(
 
 
         /* ====================================================
-           SOLO RESERVAS PAGADAS
+           SOLO PAGADAS
         ==================================================== */
 
         if (
@@ -508,11 +499,8 @@ export default async function handler(
                 response,
                 400,
                 {
-                    success:
-                        false,
-
-                    message:
-                        "La reserva todavía no está pagada."
+                    success: false,
+                    message: "La reserva todavía no está pagada."
                 }
             );
 
@@ -520,7 +508,7 @@ export default async function handler(
 
 
         /* ====================================================
-           VALIDAR CORREO COMPRADOR
+           EMAIL
         ==================================================== */
 
         const buyerEmail =
@@ -542,14 +530,9 @@ export default async function handler(
                 response,
                 400,
                 {
-                    success:
-                        false,
-
-                    code:
-                        "MISSING_EMAIL",
-
-                    message:
-                        "La reserva no tiene un correo electrónico válido."
+                    success: false,
+                    code: "MISSING_EMAIL",
+                    message: "La reserva no tiene un correo electrónico válido."
                 }
             );
 
@@ -557,28 +540,23 @@ export default async function handler(
 
 
         /* ====================================================
-           EVITAR DUPLICADOS
+           EVITAR ENVÍO AUTOMÁTICO DUPLICADO
         ==================================================== */
 
         if (
-            reserva.email_enviado_at
+            reserva.email_enviado_at &&
+            !forceResend
         ) {
 
             return sendJSON(
                 response,
                 200,
                 {
-                    success:
-                        true,
-
-                    already_sent:
-                        true,
-
-                    email:
-                        buyerEmail,
-
-                    message:
-                        "Los boletos ya habían sido enviados."
+                    success: true,
+                    already_sent: true,
+                    reenviado: false,
+                    email: buyerEmail,
+                    message: "Los boletos ya habían sido enviados."
                 }
             );
 
@@ -586,7 +564,7 @@ export default async function handler(
 
 
         /* ====================================================
-           CARGAR EVENTO
+           EVENTO
         ==================================================== */
 
         const {
@@ -610,9 +588,7 @@ export default async function handler(
             .single();
 
 
-        if (
-            eventoError
-        ) {
+        if (eventoError) {
 
             throw eventoError;
 
@@ -620,7 +596,7 @@ export default async function handler(
 
 
         /* ====================================================
-           CARGAR BOLETOS
+           BOLETOS
         ==================================================== */
 
         const {
@@ -645,15 +621,12 @@ export default async function handler(
             .order(
                 "id",
                 {
-                    ascending:
-                        true
+                    ascending: true
                 }
             );
 
 
-        if (
-            boletosError
-        ) {
+        if (boletosError) {
 
             throw boletosError;
 
@@ -669,11 +642,8 @@ export default async function handler(
                 response,
                 409,
                 {
-                    success:
-                        false,
-
-                    message:
-                        "La reserva está pagada pero todavía no tiene boletos."
+                    success: false,
+                    message: "La reserva está pagada pero todavía no tiene boletos."
                 }
             );
 
@@ -681,7 +651,7 @@ export default async function handler(
 
 
         /* ====================================================
-           OBTENER ASIENTOS
+           ASIENTOS
         ==================================================== */
 
         const asientoIds =
@@ -714,9 +684,7 @@ export default async function handler(
             );
 
 
-        if (
-            asientosError
-        ) {
+        if (asientosError) {
 
             throw asientosError;
 
@@ -724,7 +692,7 @@ export default async function handler(
 
 
         /* ====================================================
-           OBTENER MESAS
+           MESAS
         ==================================================== */
 
         const mesaIds =
@@ -766,9 +734,7 @@ export default async function handler(
                 );
 
 
-            if (
-                error
-            ) {
+            if (error) {
 
                 throw error;
 
@@ -799,7 +765,8 @@ export default async function handler(
 
         const mesaMap =
             new Map(
-                mesas.map(
+                mesas
+                .map(
                     mesa => [
                         mesa.id,
                         mesa
@@ -809,7 +776,7 @@ export default async function handler(
 
 
         /* ====================================================
-           CONSTRUIR TICKETS + QR
+           GENERAR QR
         ==================================================== */
 
         const tickets =
@@ -847,34 +814,22 @@ export default async function handler(
                 null;
 
 
-            /*
-            Generamos el QR directamente
-            en memoria.
-            */
-
             const qrBuffer =
                 await QRCode.toBuffer(
                     String(
                         boleto.token
                     ),
                     {
-                        type:
-                            "png",
-
-                        width:
-                            500,
-
-                        margin:
-                            2,
-
-                        errorCorrectionLevel:
-                            "H"
+                        type: "png",
+                        width: 500,
+                        margin: 2,
+                        errorCorrectionLevel: "H"
                     }
                 );
 
 
             const contentId =
-                `ticket-qr-${index + 1}`;
+                `live-ticket-${reserva.id}-${index + 1}`;
 
 
             attachments.push(
@@ -918,7 +873,7 @@ export default async function handler(
 
 
         /* ====================================================
-           CÓDIGO VISUAL DE RESERVA
+           CÓDIGO RESERVA
         ==================================================== */
 
         const reservationCode =
@@ -934,7 +889,7 @@ export default async function handler(
 
 
         /* ====================================================
-           HTML DE CADA ENTRADA
+           HTML TICKETS
         ==================================================== */
 
         const ticketsHTML =
@@ -983,7 +938,6 @@ export default async function handler(
                         padding:20px;
                     ">
 
-
                         <table
                             width="100%"
                             cellpadding="0"
@@ -995,7 +949,6 @@ export default async function handler(
                         >
 
                             <tr>
-
 
                                 <td
                                     width="48%"
@@ -1064,7 +1017,6 @@ export default async function handler(
 
                                 </td>
 
-
                             </tr>
 
                         </table>
@@ -1110,37 +1062,46 @@ export default async function handler(
                             ● VÁLIDO PARA 1 INGRESO
                         </div>
 
-
                     </div>
 
                 </div>
 
-            `
-            )
+            `)
             .join("");
 
 
         /* ====================================================
-           LINK PARA VER BOLETOS
+           URL ENTRADAS
         ==================================================== */
 
         const checkoutURL =
-
             `${SITE_URL}/checkout.html?token=${encodeURIComponent(
                 reserva.public_token
             )}`;
 
-
-        /* ====================================================
-           LOGO
-        ==================================================== */
 
         const logoURL =
             `${SITE_URL}/LIVE_TICKETS_BLANCO.png`;
 
 
         /* ====================================================
-           HTML COMPLETO EMAIL
+           TÍTULO EMAIL
+        ==================================================== */
+
+        const emailTitle =
+            forceResend
+            ? "Tus entradas han sido reenviadas"
+            : "¡Tus entradas están listas!";
+
+
+        const emailSubtitle =
+            forceResend
+            ? "REENVÍO DE ENTRADAS"
+            : "COMPRA CONFIRMADA";
+
+
+        /* ====================================================
+           HTML EMAIL
         ==================================================== */
 
         const emailHTML = `
@@ -1155,7 +1116,6 @@ export default async function handler(
     background:#f3f5f8;
     font-family:Arial,Helvetica,sans-serif;
 ">
-
 
 <table
     width="100%"
@@ -1172,7 +1132,6 @@ export default async function handler(
 
 <td align="center">
 
-
 <table
     width="100%"
     cellpadding="0"
@@ -1188,8 +1147,6 @@ export default async function handler(
 >
 
 
-<!-- HEADER -->
-
 <tr>
 
 <td style="
@@ -1197,7 +1154,6 @@ export default async function handler(
     background:#08101f;
     color:#ffffff;
 ">
-
 
 <img
     src="${logoURL}"
@@ -1220,7 +1176,7 @@ export default async function handler(
     font-weight:700;
     letter-spacing:1px;
 ">
-    COMPRA CONFIRMADA
+    ${emailSubtitle}
 </div>
 
 
@@ -1229,23 +1185,19 @@ export default async function handler(
     line-height:1.2;
     font-weight:800;
 ">
-    ¡Tus entradas están listas!
+    ${emailTitle}
 </div>
-
 
 </td>
 
 </tr>
 
 
-<!-- BODY -->
-
 <tr>
 
 <td style="
     padding:26px 24px;
 ">
-
 
 <p style="
     margin:0 0 8px;
@@ -1269,13 +1221,23 @@ export default async function handler(
     line-height:1.6;
 ">
 
-    Tu compra fue confirmada correctamente.
-    A continuación encontrarás tus entradas digitales.
+    ${
+        forceResend
+
+        ?
+
+        `Te enviamos nuevamente tus entradas digitales.
+         Los códigos QR siguen siendo los mismos y mantienen
+         su validez original.`
+
+        :
+
+        `Tu compra fue confirmada correctamente.
+         A continuación encontrarás tus entradas digitales.`
+    }
 
 </p>
 
-
-<!-- EVENT INFO -->
 
 <div style="
     margin-bottom:24px;
@@ -1283,7 +1245,6 @@ export default async function handler(
     background:#f7f9fc;
     border-radius:14px;
 ">
-
 
 <div style="
     margin-bottom:11px;
@@ -1334,16 +1295,11 @@ export default async function handler(
 
 </div>
 
-
 </div>
 
 
-<!-- TICKETS -->
-
 ${ticketsHTML}
 
-
-<!-- BUTTON -->
 
 <div style="
     margin-top:28px;
@@ -1390,8 +1346,6 @@ ${ticketsHTML}
 </tr>
 
 
-<!-- FOOTER -->
-
 <tr>
 
 <td style="
@@ -1411,13 +1365,11 @@ ${ticketsHTML}
 
 </table>
 
-
 </td>
 
 </tr>
 
 </table>
-
 
 </body>
 
@@ -1427,7 +1379,23 @@ ${ticketsHTML}
 
 
         /* ====================================================
-           ENVIAR CON RESEND
+           IDEMPOTENCY
+        ==================================================== */
+
+        const idempotencyKey =
+            forceResend
+
+            ?
+
+            `live-tickets-resend-${reserva.id}-${requestId}`
+
+            :
+
+            `live-tickets-reserva-${reserva.id}`;
+
+
+        /* ====================================================
+           ENVIAR
         ==================================================== */
 
         const {
@@ -1446,6 +1414,14 @@ ${ticketsHTML}
                     ],
 
                 subject:
+                    forceResend
+
+                    ?
+
+                    `Reenvío de tus entradas - ${evento.nombre}`
+
+                    :
+
                     `Tus entradas - ${evento.nombre}`,
 
                 html:
@@ -1457,19 +1433,13 @@ ${ticketsHTML}
             },
 
             {
-                /*
-                Evita que un reintento accidental
-                envíe el mismo email varias veces.
-                */
                 idempotencyKey:
-                    `live-tickets-reserva-${reserva.id}`
+                    idempotencyKey
             }
         );
 
 
-        if (
-            resendError
-        ) {
+        if (resendError) {
 
             console.error(
                 "Resend:",
@@ -1481,12 +1451,8 @@ ${ticketsHTML}
                 response,
                 502,
                 {
-                    success:
-                        false,
-
-                    message:
-                        "Los boletos están listos, pero el correo no pudo enviarse.",
-
+                    success: false,
+                    message: "Los boletos están listos, pero el correo no pudo enviarse.",
                     error:
                         resendError.message
                         || "Error de Resend"
@@ -1497,7 +1463,7 @@ ${ticketsHTML}
 
 
         /* ====================================================
-           MARCAR COMO ENVIADO
+           MARCAR ENVÍO
         ==================================================== */
 
         const {
@@ -1526,12 +1492,10 @@ ${ticketsHTML}
             );
 
 
-        if (
-            updateError
-        ) {
+        if (updateError) {
 
             console.error(
-                "No se pudo marcar correo enviado:",
+                "No se pudo actualizar email_enviado_at:",
                 updateError
             );
 
@@ -1539,7 +1503,7 @@ ${ticketsHTML}
 
 
         /* ====================================================
-           RESPUESTA EXITOSA
+           RESPUESTA
         ==================================================== */
 
         return sendJSON(
@@ -1547,8 +1511,10 @@ ${ticketsHTML}
             200,
             {
 
-                success:
-                    true,
+                success: true,
+
+                reenviado:
+                    forceResend,
 
                 email:
                     buyerEmail,
@@ -1561,7 +1527,9 @@ ${ticketsHTML}
                     || null,
 
                 message:
-                    "Boletos enviados correctamente."
+                    forceResend
+                    ? "Boletos reenviados correctamente."
+                    : "Boletos enviados correctamente."
 
             }
         );
@@ -1582,14 +1550,10 @@ ${ticketsHTML}
             response,
             500,
             {
-
-                success:
-                    false,
-
+                success: false,
                 message:
                     error.message
                     || "Error interno del servidor."
-
             }
         );
 
