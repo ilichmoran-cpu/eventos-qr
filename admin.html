@@ -14,7 +14,6 @@
 <title>Admin | Live Tickets</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +29,10 @@
 
 
 <style>
+
+/* ==========================================================
+   GENERAL
+========================================================== */
 
 * {
     box-sizing: border-box;
@@ -49,7 +52,9 @@
 
     --line: #e5e7eb;
 
-    --primary: #2563eb;
+    --blue: #2563eb;
+
+    --blue-dark: #1d4ed8;
 
     --green: #16a34a;
 
@@ -60,18 +65,29 @@
     --red: #dc2626;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
 
     margin: 0;
+
+    min-height: 100vh;
 
     font-family:
         "Inter",
         Arial,
         sans-serif;
 
-    background: var(--bg);
+    background:
+        var(--bg);
 
-    color: var(--text);
+    color:
+        var(--text);
+
+    -webkit-font-smoothing:
+        antialiased;
 }
 
 button,
@@ -90,153 +106,316 @@ select {
 
     min-height: 100vh;
 
+    padding: 20px;
+
     display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    padding: 20px;
-
     background:
 
         radial-gradient(
-            circle at top left,
-            rgba(37,99,235,.25),
-            transparent 30%
+            circle at 15% 10%,
+            rgba(37,99,235,.30),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(124,58,237,.20),
+            transparent 35%
         ),
 
         linear-gradient(
             135deg,
-            #06101f,
-            #101a31
+            #050b16,
+            #101b33
         );
 }
 
+
 .login-card {
 
-    width: min(
-        420px,
-        100%
-    );
+    width:
+        min(430px,100%);
 
-    padding: 34px;
+    padding:
+        35px;
 
-    background: white;
+    background:
+        white;
 
-    border-radius: 24px;
+    border-radius:
+        26px;
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.3);
+        0 35px 90px rgba(0,0,0,.35);
 }
 
-.login-logo-wrap {
 
-    margin-bottom: 25px;
+.login-logo-box {
 
-    padding: 17px;
+    margin-bottom:
+        28px;
 
-    background: #08101f;
+    padding:
+        18px;
 
-    border-radius: 15px;
+    background:
+        #08101f;
 
-    text-align: center;
+    border-radius:
+        16px;
+
+    text-align:
+        center;
 }
+
 
 .login-logo {
 
-    height: 50px;
+    display:
+        block;
 
-    max-width: 220px;
+    width:
+        auto;
 
-    object-fit: contain;
+    height:
+        52px;
+
+    max-width:
+        230px;
+
+    margin:
+        auto;
+
+    object-fit:
+        contain;
 }
+
+
+.login-eyebrow {
+
+    display:
+        inline-block;
+
+    margin-bottom:
+        8px;
+
+    color:
+        var(--blue);
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+}
+
 
 .login-card h1 {
 
     margin:
-        0 0 6px;
+        0 0 7px;
 
-    font-size: 25px;
+    font-size:
+        26px;
+
+    letter-spacing:
+        -.6px;
 }
 
-.login-card p {
+
+.login-card > p {
 
     margin:
-        0 0 22px;
+        0 0 24px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 11px;
+    font-size:
+        11px;
+
+    line-height:
+        1.6;
 }
 
-.login-input {
 
-    width: 100%;
+.form-group {
 
-    min-height: 46px;
+    margin-bottom:
+        13px;
+}
 
-    margin-bottom: 11px;
+
+.form-group label {
+
+    display:
+        block;
+
+    margin-bottom:
+        7px;
+
+    color:
+        #475467;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .5px;
+}
+
+
+.form-input {
+
+    width:
+        100%;
+
+    min-height:
+        50px;
 
     padding:
-        0 13px;
+        0 14px;
 
     border:
-        1px solid #d8dee7;
+        1px solid #d7dde6;
 
-    border-radius: 11px;
+    border-radius:
+        12px;
 
-    outline: none;
+    outline:
+        none;
+
+    background:
+        white;
+
+    color:
+        #111827;
+
+    font-size:
+        13px;
+
+    transition:
+        .2s;
 }
 
-.login-input:focus {
 
-    border-color: #2563eb;
+.form-input:focus {
+
+    border-color:
+        var(--blue);
 
     box-shadow:
         0 0 0 3px rgba(37,99,235,.09);
 }
 
+
 .login-button {
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 47px;
+    min-height:
+        50px;
 
-    border: none;
+    margin-top:
+        7px;
 
-    border-radius: 11px;
+    border:
+        none;
 
-    background: #2563eb;
+    border-radius:
+        12px;
 
-    color: white;
+    background:
+        var(--blue);
 
-    cursor: pointer;
+    color:
+        white;
 
-    font-weight: 800;
+    cursor:
+        pointer;
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    transition:
+        .2s;
 }
+
+
+.login-button:hover {
+
+    background:
+        var(--blue-dark);
+}
+
+
+.login-button:disabled {
+
+    opacity:
+        .65;
+
+    cursor:
+        not-allowed;
+}
+
 
 .login-error {
 
-    display: none;
+    display:
+        none;
 
-    margin-top: 12px;
+    margin-top:
+        14px;
 
-    color: #b91c1c;
+    padding:
+        11px 12px;
 
-    text-align: center;
+    background:
+        #fef2f2;
 
-    font-size: 10px;
+    border:
+        1px solid #fecaca;
+
+    border-radius:
+        10px;
+
+    color:
+        #991b1b;
+
+    text-align:
+        center;
+
+    font-size:
+        9px;
+
+    line-height:
+        1.5;
 }
 
 
 /* ==========================================================
-   APP
+   ADMIN APP
 ========================================================== */
 
 .admin-app {
 
-    display: none;
+    display:
+        none;
 }
 
 
@@ -246,85 +425,163 @@ select {
 
 .topbar {
 
-    position: sticky;
+    position:
+        sticky;
 
-    top: 0;
+    top:
+        0;
 
-    z-index: 1000;
+    z-index:
+        1000;
 
-    background: #08101f;
+    background:
+        rgba(8,16,31,.98);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
 
     box-shadow:
         0 5px 25px rgba(0,0,0,.16);
 }
 
+
 .nav {
 
-    max-width: 1500px;
+    width:
+        100%;
 
-    min-height: 76px;
+    max-width:
+        1500px;
 
-    margin: auto;
+    min-height:
+        76px;
+
+    margin:
+        auto;
 
     padding:
         0 24px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    gap: 20px;
+    gap:
+        20px;
 }
+
 
 .brand-logo {
 
-    height: 47px;
+    display:
+        block;
 
-    width: auto;
+    width:
+        auto;
 
-    max-width: 230px;
+    height:
+        47px;
 
-    object-fit: contain;
+    max-width:
+        230px;
+
+    object-fit:
+        contain;
 }
 
-.admin-actions {
 
-    display: flex;
+.admin-user {
 
-    align-items: center;
+    display:
+        flex;
 
-    gap: 12px;
+    align-items:
+        center;
+
+    gap:
+        14px;
 }
 
-.admin-email {
+
+.user-info {
+
+    text-align:
+        right;
+}
+
+
+.user-info small {
+
+    display:
+        block;
+
+    margin-bottom:
+        3px;
 
     color:
-        rgba(255,255,255,.65);
+        rgba(255,255,255,.45);
 
-    font-size: 10px;
+    font-size:
+        8px;
+
+    font-weight:
+        700;
 }
+
+
+.user-info strong {
+
+    color:
+        white;
+
+    font-size:
+        10px;
+}
+
 
 .logout-button {
 
+    min-height:
+        37px;
+
     padding:
-        9px 13px;
+        0 14px;
 
     border:
-        1px solid rgba(255,255,255,.17);
+        1px solid rgba(255,255,255,.16);
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
-    background: transparent;
+    background:
+        transparent;
 
-    color: white;
+    color:
+        white;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    font-size: 9px;
+    font-size:
+        8px;
 
-    font-weight: 700;
+    font-weight:
+        800;
+
+    transition:
+        .2s;
+}
+
+
+.logout-button:hover {
+
+    background:
+        rgba(255,255,255,.08);
 }
 
 
@@ -334,69 +591,95 @@ select {
 
 .page {
 
-    max-width: 1500px;
+    width:
+        100%;
 
-    margin: auto;
+    max-width:
+        1500px;
+
+    margin:
+        auto;
 
     padding:
-        28px 24px 80px;
+        29px 24px 80px;
 }
 
 
 /* ==========================================================
-   TITLE
+   DASHBOARD HEADER
 ========================================================== */
 
 .dashboard-head {
 
-    display: flex;
+    margin-bottom:
+        24px;
 
-    justify-content: space-between;
+    display:
+        flex;
 
-    align-items: flex-end;
+    align-items:
+        flex-end;
 
-    gap: 20px;
+    justify-content:
+        space-between;
 
-    margin-bottom: 25px;
+    gap:
+        20px;
 
-    flex-wrap: wrap;
+    flex-wrap:
+        wrap;
 }
+
 
 .dashboard-title h1 {
 
     margin:
         0 0 6px;
 
-    font-size: 29px;
+    font-size:
+        30px;
 
-    letter-spacing: -.7px;
+    letter-spacing:
+        -.8px;
 }
+
 
 .dashboard-title p {
 
-    margin: 0;
+    margin:
+        0;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 11px;
+    font-size:
+        10px;
 }
 
-.event-controls {
 
-    display: flex;
+.dashboard-controls {
 
-    align-items: center;
+    display:
+        flex;
 
-    gap: 9px;
+    align-items:
+        center;
 
-    flex-wrap: wrap;
+    gap:
+        9px;
+
+    flex-wrap:
+        wrap;
 }
+
 
 .event-select {
 
-    min-height: 43px;
+    min-width:
+        280px;
 
-    min-width: 280px;
+    min-height:
+        43px;
 
     padding:
         0 12px;
@@ -404,160 +687,223 @@ select {
     border:
         1px solid #d7dde5;
 
-    border-radius: 11px;
+    border-radius:
+        11px;
 
-    background: white;
+    background:
+        white;
 
-    outline: none;
+    color:
+        #111827;
 
-    font-size: 11px;
+    outline:
+        none;
 
-    font-weight: 600;
+    font-size:
+        10px;
+
+    font-weight:
+        700;
 }
+
 
 .refresh-button {
 
-    min-height: 43px;
+    min-height:
+        43px;
 
     padding:
         0 15px;
 
-    border: none;
+    border:
+        none;
 
-    border-radius: 11px;
+    border-radius:
+        11px;
 
-    background: #111827;
+    background:
+        #111827;
 
-    color: white;
+    color:
+        white;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    font-size: 10px;
+    font-size:
+        9px;
 
-    font-weight: 800;
+    font-weight:
+        800;
 }
 
 
 /* ==========================================================
-   EVENT CARD
+   EVENT HERO
 ========================================================== */
 
 .event-overview {
 
-    position: relative;
+    position:
+        relative;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    margin-bottom: 22px;
+    min-height:
+        165px;
 
-    padding: 25px;
+    margin-bottom:
+        21px;
 
-    display: flex;
+    padding:
+        26px;
 
-    align-items: center;
+    display:
+        flex;
 
-    justify-content: space-between;
+    align-items:
+        center;
 
-    gap: 25px;
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
 
     background:
         linear-gradient(
             135deg,
             #08101f,
-            #16233f
+            #172643
         );
 
-    color: white;
+    color:
+        white;
 
-    border-radius: 22px;
+    border-radius:
+        23px;
 
     box-shadow:
-        0 15px 40px rgba(15,23,42,.15);
+        0 16px 42px rgba(15,23,42,.15);
 }
 
-.event-overview::after {
 
-    content: "";
+.event-background {
 
-    position: absolute;
+    position:
+        absolute;
 
-    right: -40px;
-
-    top: -100px;
-
-    width: 320px;
-
-    height: 320px;
+    inset:
+        -60px;
 
     background:
         url("FLYER%201080X1350.png")
         center/cover;
 
-    filter: blur(25px);
+    filter:
+        blur(38px);
 
-    opacity: .14;
+    opacity:
+        .13;
 
-    border-radius: 50%;
+    transform:
+        scale(1.15);
 }
 
-.event-overview-content {
 
-    position: relative;
+.event-overview-info,
+.event-sales {
 
-    z-index: 2;
+    position:
+        relative;
+
+    z-index:
+        2;
 }
 
-.event-overview small {
 
-    display: block;
+.event-overview-info small {
 
-    margin-bottom: 7px;
+    display:
+        block;
+
+    margin-bottom:
+        8px;
 
     color:
-        rgba(255,255,255,.55);
+        rgba(255,255,255,.50);
 
-    font-size: 9px;
+    font-size:
+        8px;
 
-    font-weight: 700;
+    font-weight:
+        800;
+
+    letter-spacing:
+        .9px;
 }
 
-.event-overview h2 {
+
+.event-overview-info h2 {
 
     margin:
         0 0 8px;
 
-    font-size: 25px;
+    font-size:
+        26px;
 }
 
-.event-overview p {
 
-    margin: 0;
+.event-overview-info p {
+
+    margin:
+        0;
 
     color:
-        rgba(255,255,255,.65);
+        rgba(255,255,255,.62);
 
-    font-size: 10px;
+    font-size:
+        10px;
 }
 
-.event-total {
 
-    position: relative;
+.event-sales {
 
-    z-index: 2;
-
-    text-align: right;
+    text-align:
+        right;
 }
 
-.event-total small {
 
-    margin-bottom: 3px;
+.event-sales small {
+
+    display:
+        block;
+
+    margin-bottom:
+        6px;
+
+    color:
+        rgba(255,255,255,.50);
+
+    font-size:
+        8px;
+
+    font-weight:
+        700;
 }
 
-.event-total strong {
 
-    display: block;
+.event-sales strong {
 
-    font-size: 32px;
+    display:
+        block;
+
+    font-size:
+        34px;
+
+    letter-spacing:
+        -1px;
 }
 
 
@@ -567,105 +913,134 @@ select {
 
 .stats-grid {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         repeat(5,minmax(0,1fr));
 
-    gap: 14px;
+    gap:
+        14px;
 
-    margin-bottom: 22px;
+    margin-bottom:
+        21px;
 }
 
-.stat {
 
-    padding: 19px;
+.stat-card {
 
-    background: white;
+    padding:
+        20px;
+
+    background:
+        white;
 
     border:
-        1px solid #e6eaf0;
+        1px solid #e5e9ef;
 
-    border-radius: 17px;
+    border-radius:
+        18px;
 
     box-shadow:
-        0 8px 25px rgba(15,23,42,.05);
+        0 8px 26px rgba(15,23,42,.045);
 }
 
-.stat-top {
 
-    display: flex;
+.stat-head {
 
-    align-items: center;
+    display:
+        flex;
 
-    justify-content: space-between;
+    align-items:
+        center;
 
-    margin-bottom: 13px;
+    justify-content:
+        space-between;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        14px;
 }
+
 
 .stat-title {
 
-    color: var(--muted);
+    color:
+        #667085;
 
-    font-size: 9px;
+    font-size:
+        8px;
 
-    font-weight: 700;
+    font-weight:
+        800;
 
-    text-transform: uppercase;
+    letter-spacing:
+        .6px;
 
-    letter-spacing: .5px;
+    text-transform:
+        uppercase;
 }
+
 
 .stat-dot {
 
-    width: 10px;
+    width:
+        10px;
 
-    height: 10px;
+    height:
+        10px;
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 }
 
-.dot-blue {
 
+.dot-blue {
     background: #2563eb;
 }
 
 .dot-green {
-
     background: #16a34a;
 }
 
 .dot-purple {
-
     background: #7c3aed;
 }
 
 .dot-dark {
-
     background: #374151;
 }
 
 .dot-orange {
-
     background: #f97316;
 }
 
+
 .stat-value {
 
-    font-size: 25px;
+    font-size:
+        26px;
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    letter-spacing: -.5px;
+    letter-spacing:
+        -.6px;
 }
 
-.stat-sub {
 
-    margin-top: 5px;
+.stat-subtitle {
 
-    color: #9ca3af;
+    margin-top:
+        6px;
 
-    font-size: 8px;
+    color:
+        #9ca3af;
+
+    font-size:
+        8px;
 }
 
 
@@ -675,52 +1050,78 @@ select {
 
 .progress-card {
 
-    margin-bottom: 22px;
+    margin-bottom:
+        21px;
 
-    padding: 20px;
+    padding:
+        20px;
 
-    background: white;
+    background:
+        white;
 
     border:
-        1px solid #e6eaf0;
+        1px solid #e5e9ef;
 
-    border-radius: 18px;
+    border-radius:
+        18px;
 }
+
 
 .progress-head {
 
-    display: flex;
+    margin-bottom:
+        13px;
 
-    justify-content: space-between;
+    display:
+        flex;
 
-    gap: 20px;
+    justify-content:
+        space-between;
 
-    margin-bottom: 13px;
+    align-items:
+        center;
 
-    font-size: 11px;
+    gap:
+        20px;
+
+    color:
+        #667085;
+
+    font-size:
+        10px;
 }
 
-.progress-head span {
 
-    color: var(--muted);
+.progress-head strong {
+
+    color:
+        #111827;
 }
+
 
 .progress-track {
 
-    height: 10px;
+    height:
+        10px;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    background: #edf0f4;
+    background:
+        #edf0f4;
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 }
+
 
 .progress-bar {
 
-    width: 0%;
+    width:
+        0%;
 
-    height: 100%;
+    height:
+        100%;
 
     background:
         linear-gradient(
@@ -729,97 +1130,128 @@ select {
             #16a34a
         );
 
-    border-radius: inherit;
+    border-radius:
+        inherit;
 
-    transition: width .4s;
+    transition:
+        width .4s ease;
 }
 
 
 /* ==========================================================
-   TABLE PANEL
+   PANEL
 ========================================================== */
 
 .panel {
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
-    background: white;
+    background:
+        white;
 
     border:
-        1px solid #e6eaf0;
+        1px solid #e5e9ef;
 
-    border-radius: 20px;
+    border-radius:
+        21px;
 
     box-shadow:
-        0 10px 30px rgba(15,23,42,.05);
+        0 10px 30px rgba(15,23,42,.045);
 }
 
-.panel-head {
+
+.panel-header {
 
     padding:
-        18px 20px;
+        19px 20px;
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 15px;
+    gap:
+        16px;
+
+    flex-wrap:
+        wrap;
 
     border-bottom:
         1px solid var(--line);
-
-    flex-wrap: wrap;
 }
 
-.panel-head h2 {
+
+.panel-header h2 {
 
     margin:
         0 0 4px;
 
-    font-size: 18px;
+    font-size:
+        19px;
 }
 
-.panel-head p {
 
-    margin: 0;
+.panel-header p {
 
-    color: var(--muted);
+    margin:
+        0;
 
-    font-size: 9px;
+    color:
+        var(--muted);
+
+    font-size:
+        9px;
 }
+
 
 .filters {
 
-    display: flex;
+    display:
+        flex;
 
-    gap: 8px;
+    gap:
+        8px;
 
-    flex-wrap: wrap;
+    flex-wrap:
+        wrap;
 }
+
 
 .filter-input,
 .filter-select {
 
-    min-height: 39px;
+    min-height:
+        40px;
 
     padding:
         0 11px;
 
     border:
-        1px solid #d8dee7;
+        1px solid #d7dde5;
 
-    border-radius: 9px;
+    border-radius:
+        10px;
 
-    outline: none;
+    background:
+        white;
 
-    font-size: 10px;
+    outline:
+        none;
+
+    font-size:
+        9px;
 }
+
 
 .filter-input {
 
-    min-width: 210px;
+    min-width:
+        225px;
 }
 
 
@@ -827,41 +1259,56 @@ select {
    TABLE
 ========================================================== */
 
-.table-wrap {
+.table-wrapper {
 
-    width: 100%;
+    width:
+        100%;
 
-    overflow-x: auto;
+    overflow-x:
+        auto;
 }
+
 
 table {
 
-    width: 100%;
+    width:
+        100%;
 
-    border-collapse: collapse;
+    min-width:
+        1050px;
 
-    min-width: 950px;
+    border-collapse:
+        collapse;
 }
+
 
 th {
 
     padding:
         12px 15px;
 
-    background: #fafbfd;
+    background:
+        #fafbfd;
 
-    color: #667085;
+    color:
+        #667085;
 
-    text-align: left;
+    text-align:
+        left;
 
-    font-size: 8px;
+    font-size:
+        7px;
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    text-transform: uppercase;
+    letter-spacing:
+        .6px;
 
-    letter-spacing: .5px;
+    text-transform:
+        uppercase;
 }
+
 
 td {
 
@@ -871,107 +1318,189 @@ td {
     border-top:
         1px solid #eef1f4;
 
-    font-size: 9px;
+    color:
+        #344054;
 
-    vertical-align: middle;
+    font-size:
+        9px;
+
+    vertical-align:
+        middle;
 }
+
+
+.reservation-code {
+
+    color:
+        #111827;
+
+    font-weight:
+        800;
+
+    white-space:
+        nowrap;
+}
+
 
 .customer-name {
 
-    font-weight: 700;
+    display:
+        block;
+
+    color:
+        #111827;
+
+    font-weight:
+        700;
 }
 
-.customer-email {
 
-    display: block;
+.customer-contact {
 
-    margin-top: 3px;
+    display:
+        block;
 
-    color: var(--muted);
+    margin-top:
+        3px;
 
-    font-size: 8px;
+    color:
+        #6b7280;
+
+    font-size:
+        8px;
 }
+
 
 .money {
 
-    font-weight: 800;
+    color:
+        #111827;
 
-    white-space: nowrap;
+    font-weight:
+        800;
+
+    white-space:
+        nowrap;
 }
+
+
+/* ==========================================================
+   STATUS
+========================================================== */
 
 .status {
 
-    display: inline-flex;
+    display:
+        inline-flex;
+
+    align-items:
+        center;
 
     padding:
         6px 9px;
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
-    font-size: 7px;
+    font-size:
+        7px;
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 }
+
 
 .status-paid {
 
-    background: #dcfce7;
+    background:
+        #dcfce7;
 
-    color: #166534;
+    color:
+        #166534;
 }
+
 
 .status-pending {
 
-    background: #f3e8ff;
+    background:
+        #f3e8ff;
 
-    color: #6b21a8;
+    color:
+        #6b21a8;
 }
+
 
 .status-expired {
 
-    background: #f3f4f6;
+    background:
+        #f3f4f6;
 
-    color: #4b5563;
+    color:
+        #4b5563;
 }
+
 
 .status-cancelled {
 
-    background: #fee2e2;
+    background:
+        #fee2e2;
 
-    color: #991b1b;
+    color:
+        #991b1b;
 }
+
+
+/* ==========================================================
+   VIEW BUTTON
+========================================================== */
 
 .view-button {
 
+    min-height:
+        32px;
+
     padding:
-        7px 10px;
+        0 11px;
 
-    border: none;
+    border:
+        none;
 
-    border-radius: 8px;
+    border-radius:
+        8px;
 
-    background: #111827;
+    background:
+        #111827;
 
-    color: white;
+    color:
+        white;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    font-size: 8px;
+    font-size:
+        8px;
 
-    font-weight: 700;
+    font-weight:
+        800;
 }
+
 
 .no-data {
 
-    padding: 40px;
+    padding:
+        45px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    text-align: center;
+    text-align:
+        center;
 
-    font-size: 11px;
+    font-size:
+        11px;
 }
 
 
@@ -981,152 +1510,406 @@ td {
 
 .modal {
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 5000;
+    z-index:
+        5000;
 
-    display: none;
+    display:
+        none;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    padding: 20px;
+    padding:
+        20px;
 
     background:
         rgba(5,10,20,.75);
 
-    backdrop-filter: blur(6px);
+    backdrop-filter:
+        blur(6px);
 }
+
 
 .modal.show {
 
-    display: flex;
+    display:
+        flex;
 }
+
 
 .modal-box {
 
     width:
-        min(850px,100%);
+        min(900px,100%);
 
-    max-height: 90vh;
+    max-height:
+        90vh;
 
-    overflow-y: auto;
+    overflow-y:
+        auto;
 
-    background: white;
+    background:
+        white;
 
-    border-radius: 20px;
+    border-radius:
+        22px;
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.3);
+        0 30px 90px rgba(0,0,0,.35);
 }
 
-.modal-head {
 
-    position: sticky;
+.modal-header {
 
-    top: 0;
+    position:
+        sticky;
 
-    z-index: 2;
+    top:
+        0;
+
+    z-index:
+        3;
 
     padding:
-        18px 20px;
+        19px 20px;
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: space-between;
+    align-items:
+        center;
 
-    align-items: center;
+    justify-content:
+        space-between;
 
-    background: white;
+    gap:
+        15px;
+
+    background:
+        white;
 
     border-bottom:
         1px solid var(--line);
 }
 
-.modal-head h3 {
 
-    margin: 0;
+.modal-header h3 {
 
-    font-size: 17px;
+    margin:
+        0;
+
+    font-size:
+        18px;
 }
+
 
 .modal-close {
 
-    width: 34px;
+    width:
+        35px;
 
-    height: 34px;
+    height:
+        35px;
 
-    border: none;
+    border:
+        none;
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    background: #f3f4f6;
+    background:
+        #f3f4f6;
 
-    cursor: pointer;
+    color:
+        #111827;
+
+    cursor:
+        pointer;
+
+    font-size:
+        17px;
 }
+
 
 .modal-content {
 
-    padding: 20px;
+    padding:
+        21px;
 }
 
-.ticket-admin-grid {
 
-    display: grid;
+.reservation-summary {
+
+    margin-bottom:
+        20px;
+
+    padding:
+        16px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:
+        12px;
+
+    background:
+        #f7f9fc;
+
+    border:
+        1px solid #e8ecf1;
+
+    border-radius:
+        14px;
+}
+
+
+.summary-item small {
+
+    display:
+        block;
+
+    margin-bottom:
+        4px;
+
+    color:
+        #6b7280;
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+}
+
+
+.summary-item strong {
+
+    color:
+        #111827;
+
+    font-size:
+        11px;
+}
+
+
+.admin-ticket-grid {
+
+    display:
+        grid;
 
     grid-template-columns:
         repeat(3,minmax(0,1fr));
 
-    gap: 14px;
+    gap:
+        14px;
 }
+
 
 .admin-ticket {
 
-    padding: 15px;
+    padding:
+        16px;
+
+    background:
+        white;
 
     border:
         1px solid #e5e7eb;
 
-    border-radius: 14px;
+    border-radius:
+        15px;
 
-    text-align: center;
+    text-align:
+        center;
 }
 
-.admin-ticket strong {
 
-    display: block;
+.admin-ticket-number {
 
-    margin-bottom: 5px;
+    margin-bottom:
+        4px;
+
+    color:
+        #111827;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
 }
 
-.admin-ticket span {
 
-    display: block;
+.admin-ticket-status {
 
-    margin-bottom: 10px;
+    margin-bottom:
+        12px;
 
-    color: var(--muted);
+    color:
+        #6b7280;
 
-    font-size: 9px;
+    font-size:
+        8px;
 }
+
 
 .admin-qr {
 
-    width: 130px;
+    width:
+        130px;
 
-    min-height: 130px;
+    min-height:
+        130px;
 
-    margin: auto;
+    margin:
+        auto;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
 }
+
 
 .admin-qr img {
 
-    max-width: 100%;
+    max-width:
+        100%;
 
-    height: auto !important;
+    height:
+        auto !important;
+}
+
+
+.no-ticket {
+
+    padding:
+        20px;
+
+    color:
+        #9ca3af;
+
+    font-size:
+        9px;
+}
+
+
+/* ==========================================================
+   LOADING OVERLAY
+========================================================== */
+
+.loading-overlay {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        9999;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        rgba(244,247,251,.88);
+
+    backdrop-filter:
+        blur(3px);
+}
+
+
+.loading-overlay.show {
+
+    display:
+        flex;
+}
+
+
+.loading-content {
+
+    text-align:
+        center;
+}
+
+
+.spinner {
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    margin:
+        0 auto 12px;
+
+    border:
+        4px solid #dce3ec;
+
+    border-top-color:
+        var(--blue);
+
+    border-radius:
+        50%;
+
+    animation:
+        spin .8s linear infinite;
+}
+
+
+@keyframes spin {
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+}
+
+
+.loading-content strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        4px;
+
+    font-size:
+        12px;
+}
+
+
+.loading-content span {
+
+    color:
+        var(--muted);
+
+    font-size:
+        9px;
 }
 
 
@@ -1142,11 +1925,20 @@ td {
             repeat(3,1fr);
     }
 
-    .ticket-admin-grid {
+
+    .admin-ticket-grid {
 
         grid-template-columns:
             repeat(2,1fr);
     }
+
+
+    .reservation-summary {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
 }
 
 
@@ -1154,21 +1946,27 @@ td {
 
     .nav {
 
-        min-height: 64px;
+        min-height:
+            64px;
 
         padding:
             0 13px;
     }
 
+
     .brand-logo {
 
-        height: 34px;
+        height:
+            35px;
     }
 
-    .admin-email {
 
-        display: none;
+    .user-info {
+
+        display:
+            none;
     }
+
 
     .page {
 
@@ -1176,22 +1974,47 @@ td {
             18px 11px 60px;
     }
 
+
     .dashboard-title h1 {
 
-        font-size: 24px;
+        font-size:
+            24px;
     }
 
-    .event-controls {
 
-        width: 100%;
+    .dashboard-controls {
+
+        width:
+            100%;
     }
+
 
     .event-select {
 
-        width: 100%;
+        width:
+            100%;
 
-        min-width: 0;
+        min-width:
+            0;
     }
+
+
+    .event-overview {
+
+        display:
+            grid;
+
+        align-items:
+            start;
+    }
+
+
+    .event-sales {
+
+        text-align:
+            left;
+    }
+
 
     .stats-grid {
 
@@ -1199,22 +2022,35 @@ td {
             repeat(2,1fr);
     }
 
-    .event-overview {
 
-        align-items: flex-start;
+    .filters {
 
-        display: grid;
+        width:
+            100%;
     }
 
-    .event-total {
 
-        text-align: left;
+    .filter-input,
+    .filter-select {
+
+        width:
+            100%;
     }
 
-    .ticket-admin-grid {
 
-        grid-template-columns: 1fr;
+    .admin-ticket-grid {
+
+        grid-template-columns:
+            1fr;
     }
+
+
+    .reservation-summary {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
 }
 
 
@@ -1222,8 +2058,17 @@ td {
 
     .stats-grid {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
+
+
+    .login-card {
+
+        padding:
+            26px 20px;
+    }
+
 }
 
 </style>
@@ -1232,6 +2077,31 @@ td {
 
 
 <body>
+
+
+<!-- ======================================================
+     LOADING
+====================================================== -->
+
+<div
+    class="loading-overlay"
+    id="loadingOverlay">
+
+    <div class="loading-content">
+
+        <div class="spinner"></div>
+
+        <strong>
+            Actualizando dashboard
+        </strong>
+
+        <span>
+            Cargando información...
+        </span>
+
+    </div>
+
+</div>
 
 
 <!-- ======================================================
@@ -1245,7 +2115,7 @@ td {
     <div class="login-card">
 
 
-        <div class="login-logo-wrap">
+        <div class="login-logo-box">
 
             <img
                 src="LIVE_TICKETS_BLANCO.png"
@@ -1255,31 +2125,57 @@ td {
         </div>
 
 
+        <span class="login-eyebrow">
+            LIVE TICKETS ADMIN
+        </span>
+
+
         <h1>
             Panel administrador
         </h1>
 
+
         <p>
-            Ingresa con tu cuenta autorizada de Live Tickets.
+            Ingresa con tu usuario y contraseña para administrar
+            ventas, reservaciones y control de aforo.
         </p>
 
 
-        <input
-            type="email"
-            id="loginEmail"
-            class="login-input"
-            placeholder="Correo">
+        <div class="form-group">
+
+            <label>
+                USUARIO
+            </label>
+
+            <input
+                type="text"
+                id="loginUser"
+                class="form-input"
+                placeholder="Ej. admin1"
+                autocomplete="username">
+
+        </div>
 
 
-        <input
-            type="password"
-            id="loginPassword"
-            class="login-input"
-            placeholder="Contraseña">
+        <div class="form-group">
+
+            <label>
+                CONTRASEÑA
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                class="form-input"
+                placeholder="••••••••••••"
+                autocomplete="current-password">
+
+        </div>
 
 
         <button
             class="login-button"
+            id="loginButton"
             onclick="login()">
 
             INICIAR SESIÓN
@@ -1298,7 +2194,7 @@ td {
 
 
 <!-- ======================================================
-     APP
+     ADMIN APP
 ====================================================== -->
 
 <div
@@ -1306,9 +2202,12 @@ td {
     id="adminApp">
 
 
+<!-- HEADER -->
+
 <header class="topbar">
 
     <div class="nav">
+
 
         <img
             src="LIVE_TICKETS_BLANCO.png"
@@ -1316,12 +2215,20 @@ td {
             alt="Live Tickets">
 
 
-        <div class="admin-actions">
+        <div class="admin-user">
 
-            <span
-                class="admin-email"
-                id="adminEmail">
-            </span>
+
+            <div class="user-info">
+
+                <small>
+                    ADMINISTRADOR
+                </small>
+
+                <strong id="adminUsername">
+                    —
+                </strong>
+
+            </div>
 
 
             <button
@@ -1332,6 +2239,7 @@ td {
 
             </button>
 
+
         </div>
 
     </div>
@@ -1339,14 +2247,17 @@ td {
 </header>
 
 
+<!-- ======================================================
+     PAGE
+====================================================== -->
+
 <main class="page">
 
 
-<!-- ======================================================
-     HEAD
-====================================================== -->
+<!-- DASHBOARD HEADER -->
 
 <div class="dashboard-head">
+
 
     <div class="dashboard-title">
 
@@ -1355,24 +2266,24 @@ td {
         </h1>
 
         <p>
-            Ventas, reservaciones y control de aforo en tiempo real.
+            Ventas, reservaciones y aforo en tiempo real.
         </p>
 
     </div>
 
 
-    <div class="event-controls">
+    <div class="dashboard-controls">
 
         <select
-            class="event-select"
             id="eventSelect"
+            class="event-select"
             onchange="changeEvent()">
         </select>
 
 
         <button
             class="refresh-button"
-            onclick="loadDashboard()">
+            onclick="loadDashboard(true)">
 
             ACTUALIZAR
 
@@ -1389,7 +2300,14 @@ td {
 
 <section class="event-overview">
 
-    <div class="event-overview-content">
+
+    <div
+        class="event-background"
+        id="eventBackground">
+    </div>
+
+
+    <div class="event-overview-info">
 
         <small>
             EVENTO SELECCIONADO
@@ -1406,7 +2324,7 @@ td {
     </div>
 
 
-    <div class="event-total">
+    <div class="event-sales">
 
         <small>
             VENTA PAGADA
@@ -1418,6 +2336,7 @@ td {
 
     </div>
 
+
 </section>
 
 
@@ -1428,9 +2347,11 @@ td {
 <div class="stats-grid">
 
 
-    <div class="stat">
+    <!-- VENTAS -->
 
-        <div class="stat-top">
+    <div class="stat-card">
+
+        <div class="stat-head">
 
             <span class="stat-title">
                 Ventas pagadas
@@ -1445,20 +2366,22 @@ td {
             class="stat-value"
             id="salesTotal">
 
-            L 0
+            L 0.00
 
         </div>
 
-        <div class="stat-sub">
+        <div class="stat-subtitle">
             Ingreso bruto confirmado
         </div>
 
     </div>
 
 
-    <div class="stat">
+    <!-- VENDIDOS -->
 
-        <div class="stat-top">
+    <div class="stat-card">
+
+        <div class="stat-head">
 
             <span class="stat-title">
                 Vendidos
@@ -1477,16 +2400,18 @@ td {
 
         </div>
 
-        <div class="stat-sub">
-            Asientos pagados
+        <div class="stat-subtitle">
+            Asientos vendidos
         </div>
 
     </div>
 
 
-    <div class="stat">
+    <!-- DISPONIBLES -->
 
-        <div class="stat-top">
+    <div class="stat-card">
+
+        <div class="stat-head">
 
             <span class="stat-title">
                 Disponibles
@@ -1505,16 +2430,18 @@ td {
 
         </div>
 
-        <div class="stat-sub">
+        <div class="stat-subtitle">
             Asientos libres
         </div>
 
     </div>
 
 
-    <div class="stat">
+    <!-- BLOQUEADOS -->
 
-        <div class="stat-top">
+    <div class="stat-card">
+
+        <div class="stat-head">
 
             <span class="stat-title">
                 En proceso
@@ -1533,16 +2460,18 @@ td {
 
         </div>
 
-        <div class="stat-sub">
+        <div class="stat-subtitle">
             Bloqueados temporalmente
         </div>
 
     </div>
 
 
-    <div class="stat">
+    <!-- INGRESADOS -->
 
-        <div class="stat-top">
+    <div class="stat-card">
+
+        <div class="stat-head">
 
             <span class="stat-title">
                 Ingresados
@@ -1561,8 +2490,8 @@ td {
 
         </div>
 
-        <div class="stat-sub">
-            QR ya escaneados
+        <div class="stat-subtitle">
+            QR ya utilizados
         </div>
 
     </div>
@@ -1577,10 +2506,11 @@ td {
 
 <div class="progress-card">
 
+
     <div class="progress-head">
 
         <span>
-            Ocupación / venta del evento
+            Venta / ocupación del evento
         </span>
 
         <strong id="progressText">
@@ -1588,6 +2518,7 @@ td {
         </strong>
 
     </div>
+
 
     <div class="progress-track">
 
@@ -1598,16 +2529,19 @@ td {
 
     </div>
 
+
 </div>
 
 
 <!-- ======================================================
-     RESERVATIONS
+     RESERVATIONS PANEL
 ====================================================== -->
 
 <section class="panel">
 
-    <div class="panel-head">
+
+    <div class="panel-header">
+
 
         <div>
 
@@ -1616,7 +2550,7 @@ td {
             </h2>
 
             <p>
-                Registro de operaciones del evento.
+                Registro completo de operaciones del evento.
             </p>
 
         </div>
@@ -1624,11 +2558,12 @@ td {
 
         <div class="filters">
 
+
             <input
                 type="text"
                 id="searchReservation"
                 class="filter-input"
-                placeholder="Buscar cliente o reserva..."
+                placeholder="Buscar cliente, teléfono o ID..."
                 oninput="renderReservations()">
 
 
@@ -1637,90 +2572,136 @@ td {
                 class="filter-select"
                 onchange="renderReservations()">
 
+
                 <option value="">
-                    Todos
+                    Todos los estados
                 </option>
+
 
                 <option value="pagada">
                     Pagadas
                 </option>
 
+
                 <option value="pendiente_pago">
                     En proceso
                 </option>
+
 
                 <option value="expirada">
                     Expiradas
                 </option>
 
+
                 <option value="cancelada">
                     Canceladas
                 </option>
 
+
             </select>
 
+
         </div>
+
 
     </div>
 
 
-    <div class="table-wrap">
+    <div class="table-wrapper">
+
 
         <table>
+
 
             <thead>
 
                 <tr>
 
-                    <th>Reserva</th>
+                    <th>
+                        Reserva
+                    </th>
 
-                    <th>Cliente</th>
+                    <th>
+                        Cliente
+                    </th>
 
-                    <th>Estado</th>
+                    <th>
+                        Estado
+                    </th>
 
-                    <th>Entradas</th>
+                    <th>
+                        Entradas
+                    </th>
 
-                    <th>Total</th>
+                    <th>
+                        Total
+                    </th>
 
-                    <th>Pago</th>
+                    <th>
+                        Pago
+                    </th>
 
-                    <th></th>
+                    <th>
+                        Expiración
+                    </th>
+
+                    <th>
+                    </th>
 
                 </tr>
 
             </thead>
 
 
-            <tbody
-                id="reservationsBody">
+            <tbody id="reservationsBody">
+
+                <tr>
+
+                    <td
+                        colspan="8"
+                        class="no-data">
+
+                        Cargando reservaciones...
+
+                    </td>
+
+                </tr>
+
             </tbody>
+
 
         </table>
 
+
     </div>
+
 
 </section>
 
 
 </main>
 
+
 </div>
 
 
 <!-- ======================================================
-     MODAL TICKETS
+     MODAL RESERVA
 ====================================================== -->
 
 <div
     class="modal"
-    id="ticketsModal">
+    id="reservationModal"
+    onclick="modalBackgroundClick(event)">
+
 
     <div class="modal-box">
 
-        <div class="modal-head">
+
+        <div class="modal-header">
 
             <h3 id="modalTitle">
-                Entradas
+                Reserva
             </h3>
 
             <button
@@ -1738,9 +2719,13 @@ td {
             class="modal-content"
             id="modalContent">
 
+            Cargando...
+
         </div>
 
+
     </div>
+
 
 </div>
 
@@ -1748,7 +2733,7 @@ td {
 <script>
 
 /* ==========================================================
-   SUPABASE
+   CONFIGURACIÓN SUPABASE
 ========================================================== */
 
 const SUPABASE_URL =
@@ -1759,6 +2744,20 @@ const SUPABASE_KEY =
     "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
 
 
+/*
+Cuando escribes:
+
+admin1
+
+internamente se transforma en:
+
+admin1@admin.liveticketshn.com
+*/
+
+const ADMIN_DOMAIN =
+    "admin.liveticketshn.com";
+
+
 const db =
     supabase.createClient(
         SUPABASE_URL,
@@ -1767,28 +2766,31 @@ const db =
 
 
 /* ==========================================================
-   DATA
+   DATOS
 ========================================================== */
 
 let events = [];
 
-let currentEvent =
-    null;
+let currentEvent = null;
 
 let reservations = [];
 
 let seats = [];
 
+let autoRefreshInterval = null;
+
 
 /* ==========================================================
-   UTILS
+   UTILIDADES
 ========================================================== */
 
 function money(value) {
 
     return "L " +
 
-        Number(value || 0)
+        Number(
+            value || 0
+        )
         .toLocaleString(
             "es-HN",
             {
@@ -1807,8 +2809,10 @@ function escapeHTML(value) {
             "div"
         );
 
+
     div.textContent =
         value ?? "";
+
 
     return div.innerHTML;
 
@@ -1854,22 +2858,59 @@ function formatDate(value) {
 }
 
 
+function reservationCode(
+    reservation
+) {
+
+    return "LT-" +
+
+        String(
+            reservation.id
+        )
+        .padStart(
+            6,
+            "0"
+        );
+
+}
+
+
+function showLoading(
+    show
+) {
+
+    document
+        .getElementById(
+            "loadingOverlay"
+        )
+        .classList
+        .toggle(
+            "show",
+            show
+        );
+
+}
+
+
 /* ==========================================================
    LOGIN
 ========================================================== */
 
 async function login() {
 
-    const email =
+    const username =
+
         document
         .getElementById(
-            "loginEmail"
+            "loginUser"
         )
         .value
-        .trim();
+        .trim()
+        .toLowerCase();
 
 
     const password =
+
         document
         .getElementById(
             "loginPassword"
@@ -1877,22 +2918,33 @@ async function login() {
         .value;
 
 
-    const {
-        error
-    } =
-    await db.auth
-        .signInWithPassword(
-            {
-                email,
-                password
-            }
+    const button =
+
+        document
+        .getElementById(
+            "loginButton"
         );
 
 
-    if (error) {
+    const errorBox =
+
+        document
+        .getElementById(
+            "loginError"
+        );
+
+
+    errorBox.style.display =
+        "none";
+
+
+    if (
+        !username ||
+        !password
+    ) {
 
         showLoginError(
-            "Correo o contraseña incorrectos."
+            "Ingresa usuario y contraseña."
         );
 
         return;
@@ -1900,10 +2952,123 @@ async function login() {
     }
 
 
-    await verifyAdmin();
+    /*
+    Si escribe un email completo,
+    lo utilizamos directamente.
+
+    Si escribe admin1,
+    agregamos nuestro dominio interno.
+    */
+
+    let internalEmail;
+
+
+    if (
+        username.includes("@")
+    ) {
+
+        internalEmail =
+            username;
+
+    }
+
+    else {
+
+        if (
+            !/^[a-z0-9._-]{2,30}$/
+            .test(
+                username
+            )
+        ) {
+
+            showLoginError(
+                "El nombre de usuario no es válido."
+            );
+
+            return;
+
+        }
+
+
+        internalEmail =
+            `${username}@${ADMIN_DOMAIN}`;
+
+    }
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        "VERIFICANDO...";
+
+
+    try {
+
+
+        const {
+            error
+        } =
+
+        await db.auth
+            .signInWithPassword(
+                {
+                    email:
+                        internalEmail,
+
+                    password:
+                        password
+                }
+            );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        await verifyAdmin();
+
+
+    }
+
+    catch(error) {
+
+
+        console.error(
+            "Login:",
+            error
+        );
+
+
+        showLoginError(
+            "Usuario o contraseña incorrectos."
+        );
+
+
+    }
+
+    finally {
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "INICIAR SESIÓN";
+
+    }
 
 }
 
+
+/* ==========================================================
+   VERIFICAR ADMINISTRADOR
+========================================================== */
 
 async function verifyAdmin() {
 
@@ -1941,23 +3106,59 @@ async function verifyAdmin() {
         data !== true
     ) {
 
-        await db.auth.signOut();
+
+        await db.auth
+            .signOut();
+
+
+        showLogin();
+
 
         showLoginError(
             "Este usuario no tiene permisos de administrador."
         );
+
 
         return;
 
     }
 
 
+    const email =
+        session.user.email ||
+        "";
+
+
+    /*
+    Si es uno de los emails internos,
+    mostramos únicamente admin1 / admin2.
+
+    Si es tu correo normal,
+    mostramos el correo.
+    */
+
+    let displayUser =
+        email;
+
+
+    if (
+        email.endsWith(
+            `@${ADMIN_DOMAIN}`
+        )
+    ) {
+
+        displayUser =
+            email.split("@")[0];
+
+    }
+
+
     document
         .getElementById(
-            "adminEmail"
+            "adminUsername"
         )
         .textContent =
-        session.user.email;
+        displayUser;
 
 
     document
@@ -1978,8 +3179,15 @@ async function verifyAdmin() {
 
     await loadEvents();
 
+
+    startAutoRefresh();
+
 }
 
+
+/* ==========================================================
+   LOGIN STATES
+========================================================== */
 
 function showLogin() {
 
@@ -2020,9 +3228,25 @@ function showLoginError(message) {
 }
 
 
+/* ==========================================================
+   LOGOUT
+========================================================== */
+
 async function logout() {
 
+    if (
+        autoRefreshInterval
+    ) {
+
+        clearInterval(
+            autoRefreshInterval
+        );
+
+    }
+
+
     await db.auth.signOut();
+
 
     location.reload();
 
@@ -2030,83 +3254,131 @@ async function logout() {
 
 
 /* ==========================================================
-   EVENTS
+   EVENTOS
 ========================================================== */
 
 async function loadEvents() {
 
-    const {
-        data,
-        error
-    } =
-    await db
-        .from("eventos")
-        .select(
-            "id,nombre,fecha,lugar,capacidad,precio_asiento,activo"
-        )
-        .order(
-            "fecha",
-            {
-                ascending: true
+    showLoading(true);
+
+
+    try {
+
+
+        const {
+            data,
+            error
+        } =
+
+        await db
+            .from(
+                "eventos"
+            )
+            .select(
+                "id,nombre,fecha,lugar,capacidad,precio_asiento,flyer_url,activo"
+            )
+            .order(
+                "fecha",
+                {
+                    ascending: true
+                }
+            );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        events =
+            data || [];
+
+
+        const select =
+
+            document
+            .getElementById(
+                "eventSelect"
+            );
+
+
+        select.innerHTML =
+            "";
+
+
+        events.forEach(
+            event => {
+
+
+                const option =
+
+                    document
+                    .createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    event.id;
+
+
+                option.textContent =
+
+                    event.nombre
+
+                    +
+
+                    (
+                        event.activo === false
+                        ? " · Inactivo"
+                        : ""
+                    );
+
+
+                select.appendChild(
+                    option
+                );
+
             }
         );
 
 
-    if (error) {
+        if (
+            !events.length
+        ) {
 
-        console.error(error);
-
-        return;
-
-    }
-
-
-    events =
-        data || [];
+            currentEvent =
+                null;
 
 
-    const select =
-        document
-        .getElementById(
-            "eventSelect"
-        );
+            document
+                .getElementById(
+                    "overviewName"
+                )
+                .textContent =
+                "No hay eventos";
 
 
-    select.innerHTML =
-        "";
-
-
-    events.forEach(
-        event => {
-
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                event.id;
-
-
-            option.textContent =
-                event.nombre;
-
-
-            select.appendChild(
-                option
-            );
+            return;
 
         }
-    );
 
 
-    if (
-        events.length
-    ) {
+        /*
+        Preferimos el primer evento activo.
+        */
 
         currentEvent =
+
+            events.find(
+                event =>
+                    event.activo === true
+            )
+
+            ||
+
             events[0];
 
 
@@ -2114,7 +3386,33 @@ async function loadEvents() {
             currentEvent.id;
 
 
-        await loadDashboard();
+        await loadDashboard(
+            false
+        );
+
+
+    }
+
+    catch(error) {
+
+
+        console.error(
+            "Eventos:",
+            error
+        );
+
+
+        alert(
+            "No fue posible cargar los eventos."
+        );
+
+
+    }
+
+    finally {
+
+
+        showLoading(false);
 
     }
 
@@ -2122,12 +3420,13 @@ async function loadEvents() {
 
 
 /* ==========================================================
-   CHANGE EVENT
+   CAMBIAR EVENTO
 ========================================================== */
 
 async function changeEvent() {
 
-    const id =
+    const selectedId =
+
         Number(
             document
             .getElementById(
@@ -2138,147 +3437,248 @@ async function changeEvent() {
 
 
     currentEvent =
+
         events.find(
             event =>
-                event.id === id
+                Number(event.id) ===
+                selectedId
         );
 
 
-    await loadDashboard();
+    await loadDashboard(
+        true
+    );
 
 }
 
 
 /* ==========================================================
-   LOAD DASHBOARD
+   DASHBOARD
 ========================================================== */
 
-async function loadDashboard() {
+async function loadDashboard(
+    showLoader = false
+) {
 
-    if (!currentEvent) {
+    if (
+        !currentEvent
+    ) {
 
         return;
 
     }
-
-
-    /*
-    Limpiar bloqueos expirados.
-    */
-
-    await db.rpc(
-        "liberar_bloqueos_expirados"
-    );
-
-
-    /*
-    MESAS
-    */
-
-    const {
-        data: tables
-    } =
-    await db
-        .from("mesas")
-        .select(
-            "id"
-        )
-        .eq(
-            "evento_id",
-            currentEvent.id
-        );
-
-
-    const tableIds =
-        (tables || [])
-        .map(
-            table =>
-                table.id
-        );
-
-
-    /*
-    ASIENTOS
-    */
-
-    seats = [];
 
 
     if (
-        tableIds.length
+        showLoader
     ) {
 
-        const {
-            data: seatData
-        } =
-        await db
-            .from("asientos")
-            .select(
-                "id,mesa_id,numero,estado"
-            )
-            .in(
-                "mesa_id",
-                tableIds
+        showLoading(true);
+
+    }
+
+
+    try {
+
+
+        /*
+        Liberamos reservas vencidas.
+        */
+
+        const cleanup =
+            await db.rpc(
+                "liberar_bloqueos_expirados"
             );
 
 
+        if (
+            cleanup.error
+        ) {
+
+            console.warn(
+                "Liberar expirados:",
+                cleanup.error
+            );
+
+        }
+
+
+        /* ====================================================
+           MESAS DEL EVENTO
+        ==================================================== */
+
+        const {
+            data: tables,
+            error: tablesError
+        } =
+
+        await db
+            .from(
+                "mesas"
+            )
+            .select(
+                "id"
+            )
+            .eq(
+                "evento_id",
+                currentEvent.id
+            );
+
+
+        if (
+            tablesError
+        ) {
+
+            throw tablesError;
+
+        }
+
+
+        const tableIds =
+
+            (tables || [])
+            .map(
+                table =>
+                    table.id
+            );
+
+
+        /* ====================================================
+           ASIENTOS
+        ==================================================== */
+
         seats =
-            seatData || [];
+            [];
+
+
+        if (
+            tableIds.length
+        ) {
+
+
+            const {
+                data: seatData,
+                error: seatError
+            } =
+
+            await db
+                .from(
+                    "asientos"
+                )
+                .select(
+                    "id,mesa_id,numero,estado"
+                )
+                .in(
+                    "mesa_id",
+                    tableIds
+                );
+
+
+            if (
+                seatError
+            ) {
+
+                throw seatError;
+
+            }
+
+
+            seats =
+                seatData || [];
+
+        }
+
+
+        /* ====================================================
+           RESERVAS
+        ==================================================== */
+
+        const {
+            data: reservationData,
+            error: reservationError
+        } =
+
+        await db
+            .from(
+                "reservas"
+            )
+            .select(`
+                id,
+                nombre_cliente,
+                telefono,
+                email,
+                estado,
+                cantidad_asientos,
+                precio_unitario,
+                total_reserva,
+                paid_at,
+                expires_at,
+                public_token,
+                evento_id
+            `)
+            .eq(
+                "evento_id",
+                currentEvent.id
+            )
+            .order(
+                "id",
+                {
+                    ascending:
+                        false
+                }
+            );
+
+
+        if (
+            reservationError
+        ) {
+
+            throw reservationError;
+
+        }
+
+
+        reservations =
+            reservationData || [];
+
+
+        renderOverview();
+
+        renderStats();
+
+        renderReservations();
+
 
     }
 
+    catch(error) {
 
-    /*
-    RESERVACIONES
-    */
-
-    const {
-        data: reservationData,
-        error: reservationError
-    } =
-    await db
-        .from("reservas")
-        .select(
-            "id,codigo_reserva,nombre_cliente,telefono,email,estado,cantidad_asientos,total_reserva,paid_at,expires_at,evento_id"
-        )
-        .eq(
-            "evento_id",
-            currentEvent.id
-        )
-        .order(
-            "id",
-            {
-                ascending: false
-            }
-        );
-
-
-    if (reservationError) {
 
         console.error(
-            reservationError
+            "Dashboard:",
+            error
         );
+
 
         alert(
-            "No fue posible cargar las reservaciones."
+            "No fue posible actualizar el dashboard."
         );
 
-        return;
 
     }
 
-
-    reservations =
-        reservationData || [];
+    finally {
 
 
-    renderOverview();
+        if (
+            showLoader
+        ) {
 
+            showLoading(false);
 
-    renderStats();
+        }
 
-
-    renderReservations();
+    }
 
 }
 
@@ -2289,7 +3689,8 @@ async function loadDashboard() {
 
 function renderOverview() {
 
-    const paid =
+    const paidReservations =
+
         reservations.filter(
             reservation =>
                 reservation.estado ===
@@ -2297,8 +3698,9 @@ function renderOverview() {
         );
 
 
-    const totalSales =
-        paid.reduce(
+    const sales =
+
+        paidReservations.reduce(
             (
                 total,
                 reservation
@@ -2329,7 +3731,7 @@ function renderOverview() {
         )
         .textContent =
 
-        `${formatDate(currentEvent.fecha)} · ${currentEvent.lugar || ""}`;
+        `${formatDate(currentEvent.fecha)} · ${currentEvent.lugar || "Lugar por confirmar"}`;
 
 
     document
@@ -2337,55 +3739,97 @@ function renderOverview() {
             "overviewSales"
         )
         .textContent =
-        money(totalSales);
+        money(
+            sales
+        );
+
+
+    /*
+    Flyer individual por evento,
+    si flyer_url existe.
+    */
+
+    const flyer =
+
+        currentEvent.flyer_url
+
+        ||
+
+        "FLYER%201080X1350.png";
+
+
+    document
+        .getElementById(
+            "eventBackground"
+        )
+        .style.backgroundImage =
+
+        `url("${flyer}")`;
 
 }
 
 
 /* ==========================================================
-   STATS
+   ESTADÍSTICAS
 ========================================================== */
 
 function renderStats() {
 
+
     const available =
+
         seats.filter(
             seat =>
                 seat.estado ===
                 "disponible"
-        ).length;
+        )
+        .length;
 
 
     const blocked =
+
         seats.filter(
             seat =>
                 seat.estado ===
                 "bloqueado"
-        ).length;
+        )
+        .length;
 
 
     const sold =
+
         seats.filter(
             seat =>
+
                 seat.estado ===
-                "vendido"
+                    "vendido"
 
                 ||
 
                 seat.estado ===
-                "utilizado"
-        ).length;
+                    "reservado"
+
+                ||
+
+                seat.estado ===
+                    "utilizado"
+
+        )
+        .length;
 
 
     const used =
+
         seats.filter(
             seat =>
                 seat.estado ===
                 "utilizado"
-        ).length;
+        )
+        .length;
 
 
-    const totalSales =
+    const sales =
+
         reservations
 
         .filter(
@@ -2416,7 +3860,9 @@ function renderStats() {
             "salesTotal"
         )
         .textContent =
-        money(totalSales);
+        money(
+            sales
+        );
 
 
     document
@@ -2452,9 +3898,12 @@ function renderStats() {
 
 
     const capacity =
+
         Number(
-            currentEvent.capacidad ||
-            seats.length ||
+            currentEvent.capacidad
+            ||
+            seats.length
+            ||
             0
         );
 
@@ -2463,16 +3912,21 @@ function renderStats() {
 
         capacity > 0
 
-        ? Math.min(
+        ?
+
+        Math.min(
             100,
             (
                 sold /
                 capacity
             )
-            * 100
+            *
+            100
         )
 
-        : 0;
+        :
+
+        0;
 
 
     document
@@ -2496,12 +3950,13 @@ function renderStats() {
 
 
 /* ==========================================================
-   RESERVATION TABLE
+   TABLA RESERVACIONES
 ========================================================== */
 
 function renderReservations() {
 
     const body =
+
         document
         .getElementById(
             "reservationsBody"
@@ -2509,6 +3964,7 @@ function renderReservations() {
 
 
     const search =
+
         document
         .getElementById(
             "searchReservation"
@@ -2519,6 +3975,7 @@ function renderReservations() {
 
 
     const statusFilter =
+
         document
         .getElementById(
             "statusFilter"
@@ -2527,13 +3984,21 @@ function renderReservations() {
 
 
     const filtered =
+
         reservations.filter(
             reservation => {
 
 
-                const text =
+                const code =
+                    reservationCode(
+                        reservation
+                    );
 
-                    `${reservation.codigo_reserva || ""}
+
+                const searchableText =
+
+                    `${code}
+                     ${reservation.id}
                      ${reservation.nombre_cliente || ""}
                      ${reservation.telefono || ""}
                      ${reservation.email || ""}`
@@ -2541,18 +4006,18 @@ function renderReservations() {
                     .toLowerCase();
 
 
-                const matchSearch =
+                const matchesSearch =
 
                     !search
 
                     ||
 
-                    text.includes(
+                    searchableText.includes(
                         search
                     );
 
 
-                const matchStatus =
+                const matchesStatus =
 
                     !statusFilter
 
@@ -2564,11 +4029,11 @@ function renderReservations() {
 
                 return (
 
-                    matchSearch
+                    matchesSearch
 
                     &&
 
-                    matchStatus
+                    matchesStatus
 
                 );
 
@@ -2585,7 +4050,7 @@ function renderReservations() {
             <tr>
 
                 <td
-                    colspan="7"
+                    colspan="8"
                     class="no-data">
 
                     No hay reservaciones para mostrar.
@@ -2595,6 +4060,7 @@ function renderReservations() {
             </tr>
 
         `;
+
 
         return;
 
@@ -2614,7 +4080,8 @@ function renderReservations() {
 
 
                 let statusText =
-                    reservation.estado;
+                    reservation.estado ||
+                    "—";
 
 
                 if (
@@ -2664,10 +4131,26 @@ function renderReservations() {
                     "expirada"
                 ) {
 
+                    statusClass =
+                        "status-expired";
+
                     statusText =
                         "Expirada";
 
                 }
+
+
+                const contact =
+
+                    reservation.email
+
+                    ||
+
+                    reservation.telefono
+
+                    ||
+
+                    "";
 
 
                 return `
@@ -2677,14 +4160,13 @@ function renderReservations() {
 
                         <td>
 
-                            <strong>
+                            <span class="reservation-code">
 
-                                ${escapeHTML(
-                                    reservation.codigo_reserva ||
-                                    "—"
+                                ${reservationCode(
+                                    reservation
                                 )}
 
-                            </strong>
+                            </span>
 
                         </td>
 
@@ -2700,12 +4182,10 @@ function renderReservations() {
 
                             </span>
 
-                            <span class="customer-email">
+                            <span class="customer-contact">
 
                                 ${escapeHTML(
-                                    reservation.email ||
-                                    reservation.telefono ||
-                                    ""
+                                    contact
                                 )}
 
                             </span>
@@ -2748,10 +4228,27 @@ function renderReservations() {
 
                             ${
                                 reservation.paid_at
-                                ? formatDate(
+                                ?
+                                formatDate(
                                     reservation.paid_at
-                                  )
-                                : "—"
+                                )
+                                :
+                                "—"
+                            }
+
+                        </td>
+
+
+                        <td>
+
+                            ${
+                                reservation.expires_at
+                                ?
+                                formatDate(
+                                    reservation.expires_at
+                                )
+                                :
+                                "—"
                             }
 
                         </td>
@@ -2782,7 +4279,7 @@ function renderReservations() {
 
 
 /* ==========================================================
-   VIEW RESERVATION
+   VER RESERVA
 ========================================================== */
 
 async function viewReservation(
@@ -2790,10 +4287,11 @@ async function viewReservation(
 ) {
 
     const reservation =
+
         reservations.find(
             item =>
-                item.id ===
-                reservationId
+                Number(item.id) ===
+                Number(reservationId)
         );
 
 
@@ -2804,173 +4302,334 @@ async function viewReservation(
     }
 
 
-    document
+    const modal =
+
+        document
         .getElementById(
-            "modalTitle"
-        )
-        .textContent =
-
-        reservation.codigo_reserva ||
-        "Reserva";
-
-
-    document
-        .getElementById(
-            "ticketsModal"
-        )
-        .classList
-        .add("show");
+            "reservationModal"
+        );
 
 
     const content =
+
         document
         .getElementById(
             "modalContent"
         );
 
 
-    content.innerHTML =
-        "Cargando...";
-
-
-    /*
-    RELACIONES
-    */
-
-    const {
-        data: relations
-    } =
-    await db
-        .from(
-            "reserva_asientos"
+    document
+        .getElementById(
+            "modalTitle"
         )
-        .select(
-            "asiento_id"
-        )
-        .eq(
-            "reserva_id",
-            reservationId
+        .textContent =
+
+        reservationCode(
+            reservation
         );
 
 
-    const seatIds =
-        (relations || [])
-        .map(
-            row =>
-                row.asiento_id
+    modal
+        .classList
+        .add(
+            "show"
         );
 
 
-    if (!seatIds.length) {
+    content.innerHTML = `
 
-        content.innerHTML =
-            "No hay asientos asociados.";
+        <div class="no-data">
 
-        return;
+            Cargando asientos y boletos...
 
-    }
+        </div>
 
-
-    const {
-        data: seatData
-    } =
-    await db
-        .from("asientos")
-        .select(
-            "id,numero,mesa_id,estado"
-        )
-        .in(
-            "id",
-            seatIds
-        );
+    `;
 
 
-    const mesaIds =
-        [
-            ...new Set(
-                (seatData || [])
-                .map(
-                    seat =>
-                        seat.mesa_id
+    try {
+
+
+        /* ====================================================
+           RELACIONES RESERVA - ASIENTO
+        ==================================================== */
+
+        const {
+            data: relations,
+            error: relationsError
+        } =
+
+        await db
+            .from(
+                "reserva_asientos"
+            )
+            .select(
+                "asiento_id"
+            )
+            .eq(
+                "reserva_id",
+                reservation.id
+            );
+
+
+        if (
+            relationsError
+        ) {
+
+            throw relationsError;
+
+        }
+
+
+        const seatIds =
+
+            (relations || [])
+            .map(
+                relation =>
+                    relation.asiento_id
+            );
+
+
+        if (
+            !seatIds.length
+        ) {
+
+            renderModalSummary(
+                reservation,
+                [],
+                new Map(),
+                new Map()
+            );
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           ASIENTOS
+        ==================================================== */
+
+        const {
+            data: seatData,
+            error: seatError
+        } =
+
+        await db
+            .from(
+                "asientos"
+            )
+            .select(
+                "id,numero,mesa_id,estado"
+            )
+            .in(
+                "id",
+                seatIds
+            );
+
+
+        if (
+            seatError
+        ) {
+
+            throw seatError;
+
+        }
+
+
+        /* ====================================================
+           MESAS
+        ==================================================== */
+
+        const tableIds =
+
+            [
+                ...new Set(
+                    (seatData || [])
+                    .map(
+                        seat =>
+                            seat.mesa_id
+                    )
                 )
+            ];
+
+
+        let tableData =
+            [];
+
+
+        if (
+            tableIds.length
+        ) {
+
+
+            const {
+                data,
+                error
+            } =
+
+            await db
+                .from(
+                    "mesas"
+                )
+                .select(
+                    "id,numero"
+                )
+                .in(
+                    "id",
+                    tableIds
+                );
+
+
+            if (
+                error
+            ) {
+
+                throw error;
+
+            }
+
+
+            tableData =
+                data || [];
+
+        }
+
+
+        /* ====================================================
+           BOLETOS
+        ==================================================== */
+
+        const {
+            data: ticketData,
+            error: ticketError
+        } =
+
+        await db
+            .from(
+                "boletos"
             )
-        ];
+            .select(
+                "id,asiento_id,token,estado,fecha_ingreso"
+            )
+            .eq(
+                "reserva_id",
+                reservation.id
+            );
 
 
-    const {
-        data: mesaData
-    } =
-    await db
-        .from("mesas")
-        .select(
-            "id,numero"
-        )
-        .in(
-            "id",
-            mesaIds
-        );
+        if (
+            ticketError
+        ) {
+
+            throw ticketError;
+
+        }
 
 
-    const {
-        data: ticketData
-    } =
-    await db
-        .from("boletos")
-        .select(
-            "id,asiento_id,token,estado,fecha_ingreso"
-        )
-        .eq(
-            "reserva_id",
-            reservationId
-        );
+        const tablesMap =
 
-
-    const mesasMap =
-        new Map(
-            (mesaData || [])
-            .map(
-                mesa =>
-                    [
-                        mesa.id,
-                        mesa.numero
+            new Map(
+                tableData
+                .map(
+                    table => [
+                        table.id,
+                        table.numero
                     ]
-            )
-        );
+                )
+            );
 
 
-    const ticketsMap =
-        new Map(
-            (ticketData || [])
-            .map(
-                ticket =>
-                    [
+        const ticketsMap =
+
+            new Map(
+                (ticketData || [])
+                .map(
+                    ticket => [
                         ticket.asiento_id,
                         ticket
                     ]
-            )
+                )
+            );
+
+
+        renderModalSummary(
+            reservation,
+            seatData || [],
+            tablesMap,
+            ticketsMap
         );
 
 
-    const cards =
-        (seatData || [])
+    }
+
+    catch(error) {
+
+
+        console.error(
+            "Reserva:",
+            error
+        );
+
+
+        content.innerHTML = `
+
+            <div class="no-data">
+
+                No fue posible cargar los detalles de esta reserva.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ==========================================================
+   RENDER MODAL
+========================================================== */
+
+function renderModalSummary(
+    reservation,
+    seatData,
+    tablesMap,
+    ticketsMap
+) {
+
+    const content =
+
+        document
+        .getElementById(
+            "modalContent"
+        );
+
+
+    const sortedSeats =
+
+        [...seatData]
         .sort(
             (
                 a,
                 b
             ) => {
 
-                const mesaA =
+
+                const tableA =
+
                     Number(
-                        mesasMap.get(
+                        tablesMap.get(
                             a.mesa_id
                         ) ||
                         0
                     );
 
 
-                const mesaB =
+                const tableB =
+
                     Number(
-                        mesasMap.get(
+                        tablesMap.get(
                             b.mesa_id
                         ) ||
                         0
@@ -2978,22 +4637,26 @@ async function viewReservation(
 
 
                 if (
-                    mesaA !==
-                    mesaB
+                    tableA !==
+                    tableB
                 ) {
 
                     return (
-                        mesaA -
-                        mesaB
+                        tableA -
+                        tableB
                     );
 
                 }
 
 
                 return (
+
                     Number(a.numero)
+
                     -
+
                     Number(b.numero)
+
                 );
 
             }
@@ -3002,67 +4665,141 @@ async function viewReservation(
 
     content.innerHTML = `
 
-        <div style="
-            margin-bottom:20px;
-            display:grid;
-            gap:7px;
-            font-size:11px;
-        ">
+        <div class="reservation-summary">
 
-            <div>
-                <strong>Cliente:</strong>
-                ${escapeHTML(reservation.nombre_cliente)}
+
+            <div class="summary-item">
+
+                <small>
+                    CLIENTE
+                </small>
+
+                <strong>
+                    ${escapeHTML(
+                        reservation.nombre_cliente ||
+                        "—"
+                    )}
+                </strong>
+
             </div>
 
-            <div>
-                <strong>Estado:</strong>
-                ${escapeHTML(reservation.estado)}
+
+            <div class="summary-item">
+
+                <small>
+                    ESTADO
+                </small>
+
+                <strong>
+                    ${escapeHTML(
+                        reservation.estado ||
+                        "—"
+                    )}
+                </strong>
+
             </div>
 
-            <div>
-                <strong>Total:</strong>
-                ${money(reservation.total_reserva)}
+
+            <div class="summary-item">
+
+                <small>
+                    ENTRADAS
+                </small>
+
+                <strong>
+                    ${Number(
+                        reservation.cantidad_asientos ||
+                        0
+                    )}
+                </strong>
+
             </div>
+
+
+            <div class="summary-item">
+
+                <small>
+                    TOTAL
+                </small>
+
+                <strong>
+                    ${money(
+                        reservation.total_reserva
+                    )}
+                </strong>
+
+            </div>
+
 
         </div>
 
 
         <div
-            class="ticket-admin-grid"
+            class="admin-ticket-grid"
             id="adminTicketGrid">
+
         </div>
 
     `;
 
 
     const grid =
+
         document
         .getElementById(
             "adminTicketGrid"
         );
 
 
-    cards.forEach(
+    if (
+        !sortedSeats.length
+    ) {
+
+        grid.innerHTML = `
+
+            <div class="no-data">
+
+                No hay asientos asociados a esta reserva.
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    sortedSeats.forEach(
         (
             seat,
             index
         ) => {
 
 
-            const mesa =
-                mesasMap.get(
+            const tableNumber =
+
+                tablesMap.get(
                     seat.mesa_id
-                );
+                )
+
+                ??
+
+                "—";
 
 
             const ticket =
+
                 ticketsMap.get(
                     seat.id
                 );
 
 
             const card =
-                document.createElement(
+
+                document
+                .createElement(
                     "div"
                 );
 
@@ -3073,43 +4810,59 @@ async function viewReservation(
 
             card.innerHTML = `
 
-                <strong>
+                <div class="admin-ticket-number">
 
-                    Mesa ${escapeHTML(mesa)}
-
+                    Mesa ${escapeHTML(tableNumber)}
                     ·
-
                     Asiento ${escapeHTML(seat.numero)}
 
-                </strong>
+                </div>
 
 
-                <span>
+                <div class="admin-ticket-status">
 
                     ${
                         ticket
-                        ? escapeHTML(
-                            ticket.estado
-                          )
-                        : "Sin boleto"
+                        ?
+                        `Boleto: ${escapeHTML(ticket.estado || "generado")}`
+                        :
+                        "Sin boleto generado"
                     }
 
-                </span>
+                </div>
 
 
                 ${
                     ticket?.token
 
-                    ? `
+                    ?
+
+                    `
 
                         <div
                             class="admin-qr"
-                            id="adminqr-${index}">
+                            id="adminQr-${index}">
                         </div>
 
-                      `
+                    `
 
-                    : ""
+                    :
+
+                    `
+
+                        <div class="no-ticket">
+
+                            ${
+                                reservation.estado === "pagada"
+                                ?
+                                "El boleto aún no está disponible."
+                                :
+                                "El QR aparecerá después del pago."
+                            }
+
+                        </div>
+
+                    `
                 }
 
             `;
@@ -3127,9 +4880,10 @@ async function viewReservation(
                 new QRCode(
                     document
                     .getElementById(
-                        `adminqr-${index}`
+                        `adminQr-${index}`
                     ),
                     {
+
                         text:
                             String(
                                 ticket.token
@@ -3143,6 +4897,7 @@ async function viewReservation(
 
                         correctLevel:
                             QRCode.CorrectLevel.H
+
                     }
                 );
 
@@ -3162,10 +4917,28 @@ function closeModal() {
 
     document
         .getElementById(
-            "ticketsModal"
+            "reservationModal"
         )
         .classList
-        .remove("show");
+        .remove(
+            "show"
+        );
+
+}
+
+
+function modalBackgroundClick(
+    event
+) {
+
+    if (
+        event.target.id ===
+        "reservationModal"
+    ) {
+
+        closeModal();
+
+    }
 
 }
 
@@ -3174,30 +4947,105 @@ function closeModal() {
    AUTO REFRESH
 ========================================================== */
 
-setInterval(
-    () => {
+function startAutoRefresh() {
+
+    if (
+        autoRefreshInterval
+    ) {
+
+        clearInterval(
+            autoRefreshInterval
+        );
+
+    }
+
+
+    autoRefreshInterval =
+
+        setInterval(
+            () => {
+
+
+                if (
+                    currentEvent
+
+                    &&
+
+                    document
+                    .getElementById(
+                        "adminApp"
+                    )
+                    .style.display ===
+                    "block"
+
+                    &&
+
+                    !document
+                    .getElementById(
+                        "reservationModal"
+                    )
+                    .classList
+                    .contains(
+                        "show"
+                    )
+                ) {
+
+                    loadDashboard(
+                        false
+                    );
+
+                }
+
+            },
+            10000
+        );
+
+}
+
+
+/* ==========================================================
+   LOGIN CON ENTER
+========================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
 
         if (
-            currentEvent &&
+            event.key ===
+            "Enter"
+
+            &&
+
             document
             .getElementById(
-                "adminApp"
+                "loginScreen"
             )
-            .style.display ===
-            "block"
+            .style.display !==
+            "none"
         ) {
 
-            loadDashboard();
+            login();
 
         }
 
-    },
-    10000
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeModal();
+
+        }
+
+    }
 );
 
 
 /* ==========================================================
-   START
+   INICIAR
 ========================================================== */
 
 verifyAdmin();
