@@ -6,13 +6,14 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
-<title>Control de Acceso</title>
+<title>Control de Acceso | Live Tickets</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+
 
 <style>
 
@@ -28,96 +29,569 @@ body {
     min-height: 100vh;
 }
 
+
+/* ==========================================
+   CONTENEDOR
+========================================== */
+
 .contenedor {
+
     max-width: 500px;
+
     margin: auto;
-    padding: 25px 20px 50px;
+
+    padding:
+        25px
+        20px
+        50px;
+
     text-align: center;
 }
+
 
 h1 {
     margin-bottom: 5px;
 }
 
+
 .subtitulo {
+
     color: #bbb;
-    margin-bottom: 25px;
+
+    margin-bottom: 20px;
 }
 
-#reader {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-}
 
-.resultado {
-    margin-top: 25px;
+/* ==========================================
+   LOGIN
+========================================== */
+
+.login {
+
+    background: #1d1d1d;
+
     padding: 25px;
+
     border-radius: 15px;
+
+    margin-top: 30px;
+
+    text-align: left;
+
+    border:
+        1px solid #333;
+}
+
+
+.login h2 {
+
+    text-align: center;
+
+    margin-top: 0;
+}
+
+
+.campo {
+
+    margin-bottom: 18px;
+}
+
+
+.campo label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+
+.campo input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 8px;
+
+    border:
+        1px solid #444;
+
+    background: #111;
+
+    color: white;
+
+    font-size: 16px;
+}
+
+
+.campo input:focus {
+
+    outline:
+        2px solid #777;
+}
+
+
+/* ==========================================
+   OPERADOR
+========================================== */
+
+.operador {
+
+    display: none;
+
+    background: #1c1c1c;
+
+    border:
+        1px solid #333;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    margin:
+        15px 0;
+
+    font-size: 14px;
+}
+
+
+.operador strong {
+
+    color: #fff;
+}
+
+
+/* ==========================================
+   SCANNER
+========================================== */
+
+#scannerPanel {
+
     display: none;
 }
 
+
+#reader {
+
+    width: 100%;
+
+    max-width: 400px;
+
+    margin: auto;
+
+    background: white;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   RESULTADOS
+========================================== */
+
+.resultado {
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    display: none;
+}
+
+
 .valido {
+
     background: #16803c;
 }
 
+
 .invalido {
+
     background: #b42318;
 }
 
+
 .resultado h2 {
+
     margin-top: 0;
-    font-size: 28px;
+
+    font-size: 27px;
 }
 
+
 .dato {
-    margin: 10px 0;
+
+    margin:
+        10px 0;
+
     font-size: 18px;
 }
 
-.boton {
-    margin-top: 20px;
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-}
+
+/* ==========================================
+   ESTADO
+========================================== */
 
 .estado {
-    margin: 20px 0;
+
+    margin:
+        20px 0;
+
     color: #ccc;
+
+    min-height: 20px;
+}
+
+
+/* ==========================================
+   ERROR LOGIN
+========================================== */
+
+.error-login {
+
+    display: none;
+
+    background: #b42318;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 15px;
+
+    text-align: center;
+}
+
+
+/* ==========================================
+   BOTONES
+========================================== */
+
+.boton {
+
+    margin-top: 15px;
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: white;
+
+    color: #111;
+}
+
+
+.boton:hover {
+
+    background: #ddd;
+}
+
+
+.boton-login {
+
+    background: white;
+
+    color: #111;
+}
+
+
+.boton-salir {
+
+    width: auto;
+
+    background: #333;
+
+    color: white;
+
+    padding:
+        8px
+        15px;
+
+    font-size: 13px;
+
+    margin-top: 10px;
+}
+
+
+/* ==========================================
+   EVENTO
+========================================== */
+
+.evento-badge {
+
+    display: inline-block;
+
+    background: #292929;
+
+    padding:
+        8px
+        14px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    margin-top: 8px;
+}
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+.loading {
+
+    color: #bbb;
+
+    margin-top: 30px;
+}
+
+
+/* ==========================================
+   MÓVIL
+========================================== */
+
+@media(max-width:600px) {
+
+    .contenedor {
+
+        padding:
+            18px
+            12px
+            40px;
+    }
+
+
+    h1 {
+
+        font-size: 27px;
+    }
+
+
+    .login {
+
+        padding:
+            22px
+            16px;
+    }
+
+
+    .resultado {
+
+        padding:
+            22px
+            15px;
+    }
+
+
+    .resultado h2 {
+
+        font-size: 24px;
+    }
+
+
+    .dato {
+
+        font-size: 17px;
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="contenedor">
 
-<h1>CONTROL DE ACCESO</h1>
+
+<h1>
+CONTROL DE ACCESO
+</h1>
+
 
 <div class="subtitulo">
-CONCIERTO LOS INQUIETOS DE OLANCHO
+LIVE TICKETS
 </div>
 
-<div class="estado" id="estado">
-Preparando cámara...
+
+<div
+id="eventoBadge"
+class="evento-badge">
+
+Cargando evento...
+
 </div>
+
+
+<div
+id="loadingInicial"
+class="loading">
+
+Verificando sesión...
+
+</div>
+
+
+
+<!-- ==========================================
+     LOGIN
+========================================== -->
+
+<div
+id="loginPanel"
+class="login"
+style="display:none;">
+
+
+<h2>
+Iniciar sesión
+</h2>
+
+
+<p style="text-align:center;color:#bbb;">
+
+Acceso exclusivo para
+personal autorizado.
+
+</p>
+
+
+<div
+id="errorLogin"
+class="error-login">
+
+</div>
+
+
+<div class="campo">
+
+<label for="email">
+Correo electrónico
+</label>
+
+<input
+type="email"
+id="email"
+autocomplete="username"
+placeholder="correo@liveticketshn.com">
+
+</div>
+
+
+<div class="campo">
+
+<label for="password">
+Contraseña
+</label>
+
+<input
+type="password"
+id="password"
+autocomplete="current-password"
+placeholder="Contraseña">
+
+</div>
+
+
+<button
+id="botonLogin"
+class="boton boton-login"
+onclick="iniciarSesion()">
+
+INICIAR SESIÓN
+
+</button>
+
+
+</div>
+
+
+
+<!-- ==========================================
+     OPERADOR
+========================================== -->
+
+<div
+id="operador"
+class="operador">
+
+
+<div>
+
+Sesión:
+
+<strong id="nombreOperador">
+Operador
+</strong>
+
+</div>
+
+
+<div id="rolOperador">
+</div>
+
+
+<button
+class="boton boton-salir"
+onclick="cerrarSesion()">
+
+CERRAR SESIÓN
+
+</button>
+
+
+</div>
+
+
+
+<!-- ==========================================
+     SCANNER
+========================================== -->
+
+<div id="scannerPanel">
+
+
+<div
+class="estado"
+id="estado">
+
+Preparando cámara...
+
+</div>
+
 
 <div id="reader"></div>
 
-<div id="resultado"
-     class="resultado">
 
-<div id="resultadoContenido"></div>
+
+<div
+id="resultado"
+class="resultado">
+
+
+<div id="resultadoContenido">
+</div>
+
 
 <button
 class="boton"
@@ -127,22 +601,35 @@ ESCANEAR OTRO BOLETO
 
 </button>
 
-</div>
 
 </div>
+
+
+</div>
+
+
+</div>
+
 
 
 <script>
 
-/* ==========================================
+
+/* =====================================================
    SUPABASE
-========================================== */
+===================================================== */
+
 
 const SUPABASE_URL =
 "https://ysismkibffhzouxacaxv.supabase.co";
 
+
+
+
+
 const SUPABASE_KEY =
 "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
+
 
 const db =
 supabase.createClient(
@@ -151,274 +638,1179 @@ supabase.createClient(
 );
 
 
-/* ==========================================
+
+/* =====================================================
+   EVENTO
+
+   Si no se especifica ?id=
+   usamos evento 1 por ahora.
+
+   Ejemplo:
+   entrada.html?id=1
+===================================================== */
+
+
+const parametros =
+new URLSearchParams(
+    window.location.search
+);
+
+
+const EVENTO_ID =
+Number(
+    parametros.get("id") || 1
+);
+
+
+
+/* =====================================================
    VARIABLES
-========================================== */
-
-let scanner = null;
-
-let procesando = false;
+===================================================== */
 
 
-/* ==========================================
-   INICIAR ESCÁNER
-========================================== */
-
-function iniciarEscaner() {
-
-scanner =
-new Html5Qrcode("reader");
+let scanner =
+null;
 
 
-scanner.start(
+let procesando =
+false;
 
-    {
-        facingMode: "environment"
-    },
 
-    {
-        fps: 10,
-        qrbox: {
-            width: 250,
-            height: 250
-        }
-    },
+let operadorActual =
+null;
 
-    codigo => {
 
-        if (procesando)
-            return;
 
-        procesando = true;
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
 
-        validarCodigo(codigo);
 
-    },
+function escaparHTML(
+    valor
+) {
 
-    error => {
+    if (
+        valor === null ||
+        valor === undefined
+    ) {
 
-        // Ignoramos errores normales
-        // durante el escaneo
+        return "";
 
     }
 
-)
-.then(() => {
 
-    document.getElementById(
-        "estado"
-    ).textContent =
-    "Apunta la cámara al código QR";
+    return String(valor)
 
-})
-.catch(error => {
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
 
-    console.error(error);
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
 
-    document.getElementById(
-        "estado"
-    ).textContent =
-    "No se pudo acceder a la cámara.";
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
 
-});
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
 }
 
 
-/* ==========================================
-   VALIDAR BOLETO
-========================================== */
 
-async function validarCodigo(codigo) {
-
-try {
-
-    await scanner.stop();
+/* =====================================================
+   CARGAR NOMBRE DEL EVENTO
+===================================================== */
 
 
-    document.getElementById(
+async function cargarEvento() {
+
+
+    try {
+
+
+        const resultado =
+        await db
+        .from("eventos")
+        .select(
+            "id,nombre,fecha,lugar"
+        )
+        .eq(
+            "id",
+            EVENTO_ID
+        )
+        .single();
+
+
+        if (
+            resultado.error
+        ) {
+
+            throw resultado.error;
+
+        }
+
+
+        document
+        .getElementById(
+            "eventoBadge"
+        )
+        .textContent =
+        resultado.data.nombre;
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            "Error cargando evento:",
+            error
+        );
+
+
+        document
+        .getElementById(
+            "eventoBadge"
+        )
+        .textContent =
+        "Evento " +
+        EVENTO_ID;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   MOSTRAR LOGIN
+===================================================== */
+
+
+function mostrarLogin() {
+
+
+    document
+    .getElementById(
+        "loadingInicial"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "loginPanel"
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "scannerPanel"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "operador"
+    )
+    .style.display =
+    "none";
+
+}
+
+
+
+/* =====================================================
+   MOSTRAR SCANNER
+===================================================== */
+
+
+function mostrarScanner(
+    usuario
+) {
+
+
+    operadorActual =
+    usuario;
+
+
+    document
+    .getElementById(
+        "loadingInicial"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "loginPanel"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "scannerPanel"
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "operador"
+    )
+    .style.display =
+    "block";
+
+
+    document
+    .getElementById(
+        "nombreOperador"
+    )
+    .textContent =
+    usuario.nombre ||
+    "Operador";
+
+
+    document
+    .getElementById(
+        "rolOperador"
+    )
+    .textContent =
+    "Rol: " +
+    (
+        usuario.rol ||
+        "acceso"
+    );
+
+
+    iniciarEscaner();
+
+}
+
+
+
+/* =====================================================
+   VERIFICAR PERMISO
+===================================================== */
+
+
+async function verificarAutorizacion() {
+
+
+    try {
+
+
+        const resultado =
+        await db.rpc(
+            "puede_validar_boletos"
+        );
+
+
+        if (
+            resultado.error
+        ) {
+
+            throw resultado.error;
+
+        }
+
+
+        if (
+            !resultado.data ||
+            resultado.data.autorizado !== true
+        ) {
+
+
+            await db.auth.signOut();
+
+
+            mostrarLogin();
+
+
+            mostrarErrorLogin(
+                "Tu usuario no está autorizado para validar boletos."
+            );
+
+
+            return false;
+
+        }
+
+
+        mostrarScanner(
+            resultado.data
+        );
+
+
+        return true;
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            error
+        );
+
+
+        mostrarLogin();
+
+
+        mostrarErrorLogin(
+            "No fue posible verificar los permisos."
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   INICIAR SESIÓN
+===================================================== */
+
+
+async function iniciarSesion() {
+
+
+    const email =
+    document
+    .getElementById(
+        "email"
+    )
+    .value
+    .trim();
+
+
+    const password =
+    document
+    .getElementById(
+        "password"
+    )
+    .value;
+
+
+    const boton =
+    document
+    .getElementById(
+        "botonLogin"
+    );
+
+
+    const error =
+    document
+    .getElementById(
+        "errorLogin"
+    );
+
+
+    error.style.display =
+    "none";
+
+
+    if (
+        !email ||
+        !password
+    ) {
+
+
+        mostrarErrorLogin(
+            "Ingresa correo y contraseña."
+        );
+
+
+        return;
+
+    }
+
+
+    boton.disabled =
+    true;
+
+
+    boton.textContent =
+    "INGRESANDO...";
+
+
+    try {
+
+
+        const resultado =
+        await db.auth
+        .signInWithPassword({
+
+            email:
+            email,
+
+            password:
+            password
+
+        });
+
+
+        if (
+            resultado.error
+        ) {
+
+            throw resultado.error;
+
+        }
+
+
+        const autorizado =
+        await verificarAutorizacion();
+
+
+        if (!autorizado) {
+
+            return;
+
+        }
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            error
+        );
+
+
+        mostrarErrorLogin(
+            "Correo, contraseña o permisos incorrectos."
+        );
+
+    }
+
+
+    finally {
+
+
+        boton.disabled =
+        false;
+
+
+        boton.textContent =
+        "INICIAR SESIÓN";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ENTER PARA LOGIN
+===================================================== */
+
+
+document
+.getElementById(
+    "password"
+)
+.addEventListener(
+    "keydown",
+    function(event) {
+
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            iniciarSesion();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   ERROR LOGIN
+===================================================== */
+
+
+function mostrarErrorLogin(
+    mensaje
+) {
+
+
+    const elemento =
+    document
+    .getElementById(
+        "errorLogin"
+    );
+
+
+    elemento.textContent =
+    mensaje;
+
+
+    elemento.style.display =
+    "block";
+
+}
+
+
+
+/* =====================================================
+   CERRAR SESIÓN
+===================================================== */
+
+
+async function cerrarSesion() {
+
+
+    await detenerEscaner();
+
+
+    await db.auth.signOut();
+
+
+    operadorActual =
+    null;
+
+
+    mostrarLogin();
+
+}
+
+
+
+/* =====================================================
+   INICIAR ESCÁNER
+===================================================== */
+
+
+async function iniciarEscaner() {
+
+
+    procesando =
+    false;
+
+
+    document
+    .getElementById(
+        "resultado"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
         "estado"
-    ).textContent =
-    "Validando boleto...";
+    )
+    .textContent =
+    "Preparando cámara...";
 
 
-    /*
-       El QR contiene directamente
-       el UUID del boleto.
-    */
+    if (scanner) {
 
-    const token =
-        codigo.trim();
+        await detenerEscaner();
+
+    }
 
 
-    const resultado =
+    scanner =
+    new Html5Qrcode(
+        "reader"
+    );
+
+
+    try {
+
+
+        await scanner.start(
+
+
+            {
+                facingMode:
+                "environment"
+            },
+
+
+            {
+                fps:
+                10,
+
+                qrbox: {
+                    width:
+                    250,
+
+                    height:
+                    250
+                }
+            },
+
+
+            codigo => {
+
+
+                if (
+                    procesando
+                ) {
+
+                    return;
+
+                }
+
+
+                procesando =
+                true;
+
+
+                validarCodigo(
+                    codigo
+                );
+
+            },
+
+
+            error => {
+
+                /*
+                Ignoramos los errores
+                normales mientras
+                busca un QR.
+                */
+
+            }
+
+
+        );
+
+
+        document
+        .getElementById(
+            "estado"
+        )
+        .textContent =
+        "Apunta la cámara al código QR";
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            error
+        );
+
+
+        document
+        .getElementById(
+            "estado"
+        )
+        .textContent =
+        "No se pudo acceder a la cámara. Revisa los permisos del navegador.";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   DETENER ESCÁNER
+===================================================== */
+
+
+async function detenerEscaner() {
+
+
+    if (!scanner) {
+
+        return;
+
+    }
+
+
+    try {
+
+
+        if (
+            scanner.isScanning
+        ) {
+
+            await scanner.stop();
+
+        }
+
+
+        scanner.clear();
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.warn(
+            "Scanner:",
+            error
+        );
+
+    }
+
+
+    scanner =
+    null;
+
+}
+
+
+
+/* =====================================================
+   VALIDAR QR
+===================================================== */
+
+
+async function validarCodigo(
+    codigo
+) {
+
+
+    try {
+
+
+        await detenerEscaner();
+
+
+        document
+        .getElementById(
+            "estado"
+        )
+        .textContent =
+        "Validando boleto...";
+
+
+        const token =
+        String(
+            codigo
+        )
+        .trim();
+
+
+        const resultado =
         await db.rpc(
             "validar_boleto",
             {
-                p_token: token
+
+                p_token:
+                token,
+
+                p_evento_id:
+                EVENTO_ID
+
             }
         );
 
 
-    if (resultado.error)
-        throw resultado.error;
+        if (
+            resultado.error
+        ) {
+
+            throw resultado.error;
+
+        }
 
 
-    mostrarResultado(
-        resultado.data
-    );
+        mostrarResultado(
+            resultado.data
+        );
 
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            error
+        );
+
+
+        /*
+        Comprobar si la sesión
+        sigue existiendo.
+        */
+
+
+        const sesion =
+        await db.auth
+        .getSession();
+
+
+        if (
+            !sesion.data.session
+        ) {
+
+
+            mostrarLogin();
+
+
+            mostrarErrorLogin(
+                "La sesión terminó. Inicia sesión nuevamente."
+            );
+
+
+            return;
+
+        }
+
+
+        mostrarResultado({
+
+            valido:
+            false,
+
+            mensaje:
+            "ERROR AL VALIDAR EL BOLETO"
+
+        });
+
+    }
 
 }
-catch(error) {
-
-    console.error(error);
-
-    mostrarResultado({
-
-        valido: false,
-
-        mensaje:
-        "ERROR AL VALIDAR EL BOLETO"
-
-    });
-
-}
-
-}
 
 
-/* ==========================================
+
+/* =====================================================
    MOSTRAR RESULTADO
-========================================== */
+===================================================== */
+
 
 function mostrarResultado(
     datos
 ) {
 
-const resultado =
-document.getElementById(
-    "resultado"
-);
 
-const contenido =
-document.getElementById(
-    "resultadoContenido"
-);
+    const resultado =
+    document
+    .getElementById(
+        "resultado"
+    );
 
 
-resultado.style.display =
-"block";
+    const contenido =
+    document
+    .getElementById(
+        "resultadoContenido"
+    );
 
 
-if (datos.valido) {
-
-    resultado.className =
-    "resultado valido";
+    resultado.style.display =
+    "block";
 
 
-    contenido.innerHTML = `
-
-        <h2>
-            ✅ ENTRADA AUTORIZADA
-        </h2>
-
-        <div class="dato">
-            <strong>Cliente:</strong><br>
-            ${datos.cliente}
-        </div>
-
-        <div class="dato">
-            <strong>Mesa:</strong>
-            ${datos.mesa}
-        </div>
-
-        <div class="dato">
-            <strong>Asiento:</strong>
-            ${datos.asiento}
-        </div>
-
-        <div class="dato">
-            <strong>Reserva:</strong>
-            ${datos.codigo_reserva}
-        </div>
-
-    `;
-
-}
-else {
-
-    resultado.className =
-    "resultado invalido";
+    if (
+        datos &&
+        datos.valido
+    ) {
 
 
-    contenido.innerHTML = `
+        resultado.className =
+        "resultado valido";
 
-        <h2>
-            ❌ ACCESO DENEGADO
-        </h2>
 
-        <div class="dato">
-            ${datos.mensaje}
-        </div>
+        contenido.innerHTML = `
 
-        ${
-            datos.mesa
-            ?
-            `
+
+            <h2>
+
+                ✅ ENTRADA AUTORIZADA
+
+            </h2>
+
+
             <div class="dato">
-                Mesa: ${datos.mesa}
+
+                <strong>
+                    Cliente:
+                </strong>
+
                 <br>
-                Asiento: ${datos.asiento}
+
+                ${escaparHTML(
+                    datos.cliente
+                )}
+
             </div>
-            `
-            :
-            ""
-        }
 
-    `;
+
+            <div class="dato">
+
+                <strong>
+                    Mesa:
+                </strong>
+
+                ${escaparHTML(
+                    datos.mesa
+                )}
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>
+                    Asiento:
+                </strong>
+
+                ${escaparHTML(
+                    datos.asiento
+                )}
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>
+                    Reserva:
+                </strong>
+
+                ${escaparHTML(
+                    datos.codigo_reserva
+                )}
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>
+                    Validado por:
+                </strong>
+
+                <br>
+
+                ${escaparHTML(
+                    datos.validado_por
+                )}
+
+            </div>
+
+
+        `;
+
+
+    }
+
+
+    else {
+
+
+        resultado.className =
+        "resultado invalido";
+
+
+        contenido.innerHTML = `
+
+
+            <h2>
+
+                ❌ ACCESO DENEGADO
+
+            </h2>
+
+
+            <div class="dato">
+
+                ${escaparHTML(
+                    datos?.mensaje ||
+                    "Boleto no válido."
+                )}
+
+            </div>
+
+
+            ${
+                datos?.mesa
+                ?
+                `
+
+                    <div class="dato">
+
+                        Mesa:
+                        ${escaparHTML(
+                            datos.mesa
+                        )}
+
+                        <br>
+
+                        Asiento:
+                        ${escaparHTML(
+                            datos.asiento
+                        )}
+
+                    </div>
+
+                `
+                :
+                ""
+            }
+
+
+        `;
+
+    }
+
+
+    document
+    .getElementById(
+        "estado"
+    )
+    .textContent =
+    "";
 
 }
 
-}
 
 
-/* ==========================================
+/* =====================================================
    NUEVO ESCANEO
-========================================== */
+===================================================== */
+
 
 async function reiniciarEscaner() {
 
-const resultado =
-document.getElementById(
-    "resultado"
-);
 
-resultado.style.display =
-"none";
-
-
-procesando = false;
+    document
+    .getElementById(
+        "resultado"
+    )
+    .style.display =
+    "none";
 
 
-document.getElementById(
-    "estado"
-).textContent =
-"Preparando cámara...";
+    procesando =
+    false;
 
 
-iniciarEscaner();
+    await iniciarEscaner();
 
 }
 
 
-/* ==========================================
-   INICIO
-========================================== */
 
-iniciarEscaner();
+/* =====================================================
+   COMPROBAR SESIÓN AL ABRIR
+===================================================== */
+
+
+async function iniciarSistema() {
+
+
+    await cargarEvento();
+
+
+    try {
+
+
+        const resultado =
+        await db.auth
+        .getSession();
+
+
+        if (
+            resultado.error
+        ) {
+
+            throw resultado.error;
+
+        }
+
+
+        if (
+            resultado.data.session
+        ) {
+
+
+            await verificarAutorizacion();
+
+        }
+
+
+        else {
+
+
+            mostrarLogin();
+
+        }
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            error
+        );
+
+
+        mostrarLogin();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   INICIO
+===================================================== */
+
+
+iniciarSistema();
+
 
 </script>
+
 
 </body>
 
