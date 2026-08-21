@@ -12,9 +12,6 @@ content="width=device-width, initial-scale=1.0">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
-
 <style>
 
 * {
@@ -51,7 +48,9 @@ header p {
 }
 
 
-/* LEYENDA */
+/* ==========================================
+   LEYENDA
+========================================== */
 
 .leyenda {
     display: flex;
@@ -81,6 +80,10 @@ header p {
     background: #f1c40f;
 }
 
+.naranja {
+    background: #e67e22;
+}
+
 .rojo {
     background: #e74c3c;
 }
@@ -99,7 +102,9 @@ header p {
 }
 
 
-/* ZOOM */
+/* ==========================================
+   ZOOM
+========================================== */
 
 .controles-mapa {
     display: flex;
@@ -148,7 +153,9 @@ header p {
 }
 
 
-/* MAPA */
+/* ==========================================
+   MAPA
+========================================== */
 
 .mapa-scroll {
     width: 100%;
@@ -184,6 +191,11 @@ header p {
     font-size: 20px;
 }
 
+
+/* ==========================================
+   MESAS
+========================================== */
+
 .mesas {
     display: grid;
     grid-template-columns: repeat(5, 250px);
@@ -191,9 +203,6 @@ header p {
     justify-content: center;
     align-items: start;
 }
-
-
-/* MESA */
 
 .mesa {
     background: white;
@@ -235,7 +244,9 @@ header p {
 }
 
 
-/* ASIENTOS */
+/* ==========================================
+   ASIENTOS
+========================================== */
 
 .asiento {
     width: 42px;
@@ -281,9 +292,19 @@ header p {
     grid-row: 5;
 }
 
+
+/* ==========================================
+   ESTADOS
+========================================== */
+
 .asiento.seleccionado {
     background: #f1c40f;
     color: #111;
+}
+
+.asiento.bloqueado {
+    background: #e67e22;
+    cursor: not-allowed;
 }
 
 .asiento.reservado {
@@ -302,7 +323,9 @@ header p {
 }
 
 
-/* RESUMEN */
+/* ==========================================
+   RESUMEN
+========================================== */
 
 .resumen {
     position: fixed;
@@ -338,6 +361,11 @@ header p {
     font-weight: bold;
 }
 
+
+/* ==========================================
+   BOTONES
+========================================== */
+
 .boton {
     border: none;
     background: #111;
@@ -348,8 +376,15 @@ header p {
     font-size: 16px;
 }
 
+.boton:disabled {
+    background: #888;
+    cursor: not-allowed;
+}
 
-/* MODAL */
+
+/* ==========================================
+   MODAL
+========================================== */
 
 .modal {
     display: none;
@@ -408,6 +443,11 @@ header p {
     background: #111;
     color: white;
     cursor: pointer;
+    font-weight: bold;
+}
+
+.boton-confirmar:disabled {
+    background: #888;
 }
 
 .resumen-compra {
@@ -418,26 +458,14 @@ header p {
     margin-bottom: 20px;
 }
 
-.boleto {
-    background: #f5f5f5;
-    padding: 20px;
-    border-radius: 12px;
-    margin: 18px 0;
-    text-align: center;
-}
-
-.qr {
-    display: flex;
-    justify-content: center;
-    margin: 15px auto;
-}
-
-.codigo {
-    background: #eee;
-    padding: 14px;
-    border-radius: 8px;
-    font-weight: bold;
-    margin: 15px 0;
+.aviso-pago {
+    background: #fff4d6;
+    border: 1px solid #efd27a;
+    border-radius: 10px;
+    padding: 13px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    line-height: 1.5;
 }
 
 .error {
@@ -449,7 +477,9 @@ header p {
 }
 
 
-/* MÓVIL */
+/* ==========================================
+   MÓVIL
+========================================== */
 
 @media(max-width:600px) {
 
@@ -578,14 +608,20 @@ Seleccionado
 </div>
 
 <div class="leyenda-item">
+<div class="circulo naranja"></div>
+En proceso
+</div>
+
+<div class="leyenda-item">
 <div class="circulo rojo"></div>
-Reservado
+No disponible
 </div>
 
 </div>
 
 
-<div id="estado"
+<div
+id="estado"
 class="estado">
 
 Cargando evento...
@@ -714,19 +750,30 @@ id="modal"
 class="modal">
 
 <div
-id="modalContenido"
 class="modal-contenido">
 
 <h2>
 Datos del comprador
 </h2>
 
+
 <div
 id="resumenModal"
 class="resumen-compra">
 </div>
 
+
+<div class="aviso-pago">
+
+Al continuar, tus asientos quedarán
+bloqueados durante <strong>10 minutos</strong>
+mientras completas el pago.
+
+</div>
+
+
 <div id="mensajeError"></div>
+
 
 <div class="campo">
 
@@ -741,6 +788,7 @@ placeholder="Nombre completo">
 
 </div>
 
+
 <div class="campo">
 
 <label>
@@ -753,6 +801,7 @@ type="tel"
 placeholder="9999-9999">
 
 </div>
+
 
 <div class="campo">
 
@@ -767,18 +816,24 @@ placeholder="correo@email.com">
 
 </div>
 
+
 <div class="botones-modal">
 
 <button
 class="boton-cancelar"
 onclick="cerrarFormulario()">
+
 Cancelar
+
 </button>
+
 
 <button
 class="boton-confirmar"
-onclick="confirmarReserva()">
-CONFIRMAR RESERVA
+onclick="procederPago()">
+
+PROCEDER AL PAGO
+
 </button>
 
 </div>
@@ -795,6 +850,7 @@ CONFIRMAR RESERVA
 /* =====================================================
    SUPABASE
 ===================================================== */
+
 
 const SUPABASE_URL =
 "https://ysismkibffhzouxacaxv.supabase.co";
@@ -815,31 +871,50 @@ supabase.createClient(
    VARIABLES
 ===================================================== */
 
-let evento = null;
 
-let mesas = [];
+let evento =
+null;
 
-let asientos = [];
 
-let seleccionados = [];
+let mesas =
+[];
+
+
+let asientos =
+[];
+
+
+let seleccionados =
+[];
 
 
 /* ZOOM */
 
-let zoomMapa = 1;
 
-const ZOOM_MINIMO = 0.25;
+let zoomMapa =
+1;
 
-const ZOOM_MAXIMO = 1.30;
 
-const PASO_ZOOM = 0.10;
+const ZOOM_MINIMO =
+0.25;
+
+
+const ZOOM_MAXIMO =
+1.30;
+
+
+const PASO_ZOOM =
+0.10;
 
 
 /* =====================================================
    FORMATO
 ===================================================== */
 
-function formatoLempiras(valor) {
+
+function formatoLempiras(
+    valor
+) {
 
     return (
         "L " +
@@ -847,8 +922,11 @@ function formatoLempiras(valor) {
         .toLocaleString(
             "es-HN",
             {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+                minimumFractionDigits:
+                2,
+
+                maximumFractionDigits:
+                2
             }
         )
     );
@@ -860,12 +938,14 @@ function formatoLempiras(valor) {
    EVENTO ID
 ===================================================== */
 
+
 function obtenerEventoId() {
 
     const parametros =
     new URLSearchParams(
         window.location.search
     );
+
 
     return Number(
         parametros.get("id")
@@ -878,9 +958,22 @@ function obtenerEventoId() {
    CARGAR EVENTO
 ===================================================== */
 
+
 async function cargarEvento() {
 
     try {
+
+
+        /*
+        Primero liberamos cualquier
+        bloqueo que ya haya vencido.
+        */
+
+
+        await db.rpc(
+            "liberar_bloqueos_expirados"
+        );
+
 
         const eventoId =
         obtenerEventoId();
@@ -906,8 +999,13 @@ async function cargarEvento() {
         .single();
 
 
-        if (resultadoEvento.error)
+        if (
+            resultadoEvento.error
+        ) {
+
             throw resultadoEvento.error;
+
+        }
 
 
         evento =
@@ -934,9 +1032,14 @@ async function cargarEvento() {
         .toLocaleDateString(
             "es-HN",
             {
-                day: "2-digit",
-                month: "long",
-                year: "numeric"
+                day:
+                "2-digit",
+
+                month:
+                "long",
+
+                year:
+                "numeric"
             }
         );
 
@@ -974,6 +1077,7 @@ async function cargarEvento() {
 
         /* MESAS */
 
+
         const resultadoMesas =
         await db
         .from("mesas")
@@ -982,11 +1086,18 @@ async function cargarEvento() {
             "evento_id",
             eventoId
         )
-        .order("numero");
+        .order(
+            "numero"
+        );
 
 
-        if (resultadoMesas.error)
+        if (
+            resultadoMesas.error
+        ) {
+
             throw resultadoMesas.error;
+
+        }
 
 
         mesas =
@@ -994,7 +1105,8 @@ async function cargarEvento() {
 
 
         if (
-            mesas.length === 0
+            mesas.length ===
+            0
         ) {
 
             throw new Error(
@@ -1006,11 +1118,13 @@ async function cargarEvento() {
 
         const idsMesas =
         mesas.map(
-            mesa => mesa.id
+            mesa =>
+            mesa.id
         );
 
 
         /* ASIENTOS */
+
 
         const resultadoAsientos =
         await db
@@ -1020,11 +1134,18 @@ async function cargarEvento() {
             "mesa_id",
             idsMesas
         )
-        .order("id");
+        .order(
+            "id"
+        );
 
 
-        if (resultadoAsientos.error)
+        if (
+            resultadoAsientos.error
+        ) {
+
             throw resultadoAsientos.error;
+
+        }
 
 
         asientos =
@@ -1032,6 +1153,9 @@ async function cargarEvento() {
 
 
         mostrarMesas();
+
+
+        actualizarResumen();
 
 
         document
@@ -1047,11 +1171,16 @@ async function cargarEvento() {
             120
         );
 
+
     }
 
     catch(error) {
 
-        console.error(error);
+
+        console.error(
+            error
+        );
+
 
         document
         .getElementById(
@@ -1069,10 +1198,13 @@ async function cargarEvento() {
    MOSTRAR MESAS
 ===================================================== */
 
+
 function mostrarMesas() {
 
+
     const contenedor =
-    document.getElementById(
+    document
+    .getElementById(
         "mesas"
     );
 
@@ -1085,162 +1217,174 @@ function mostrarMesas() {
         mesa => {
 
 
-        const mesaDiv =
-        document.createElement(
-            "div"
-        );
-
-
-        mesaDiv.className =
-        "mesa";
-
-
-        const titulo =
-        document.createElement(
-            "h3"
-        );
-
-
-        titulo.textContent =
-        "MESA " +
-        mesa.numero;
-
-
-        mesaDiv.appendChild(
-            titulo
-        );
-
-
-        const distribucion =
-        document.createElement(
-            "div"
-        );
-
-
-        distribucion.className =
-        "distribucion-mesa";
-
-
-        const rectangulo =
-        document.createElement(
-            "div"
-        );
-
-
-        rectangulo.className =
-        "rectangulo-mesa";
-
-
-        rectangulo.textContent =
-        "MESA " +
-        mesa.numero;
-
-
-        distribucion.appendChild(
-            rectangulo
-        );
-
-
-        const asientosMesa =
-        asientos
-        .filter(
-            asiento =>
-            Number(asiento.mesa_id) ===
-            Number(mesa.id)
-        )
-        .sort(
-            (a,b) =>
-            Number(a.numero) -
-            Number(b.numero)
-        );
-
-
-        asientosMesa.forEach(
-            asiento => {
-
-
-            const boton =
+            const mesaDiv =
             document.createElement(
-                "button"
+                "div"
             );
 
 
-            boton.className =
-            "asiento";
+            mesaDiv.className =
+            "mesa";
 
 
-            boton.textContent =
-            asiento.numero;
-
-
-            if (
-                Number(
-                    asiento.numero
-                ) <= 5
-            ) {
-
-                boton.classList.add(
-                    "asiento-izquierda"
-                );
-
-
-                boton.classList.add(
-                    `fila-${asiento.numero}`
-                );
-
-            }
-
-            else {
-
-                boton.classList.add(
-                    "asiento-derecha"
-                );
-
-
-                const fila =
-                    Number(
-                        asiento.numero
-                    ) - 5;
-
-
-                boton.classList.add(
-                    `fila-${fila}`
-                );
-
-            }
-
-
-            actualizarEstadoVisual(
-                boton,
-                asiento
+            const titulo =
+            document.createElement(
+                "h3"
             );
 
 
-            boton.onclick =
-            () =>
-            seleccionarAsiento(
-                asiento,
-                boton
+            titulo.textContent =
+            "MESA " +
+            mesa.numero;
+
+
+            mesaDiv.appendChild(
+                titulo
             );
+
+
+            const distribucion =
+            document.createElement(
+                "div"
+            );
+
+
+            distribucion.className =
+            "distribucion-mesa";
+
+
+            const rectangulo =
+            document.createElement(
+                "div"
+            );
+
+
+            rectangulo.className =
+            "rectangulo-mesa";
+
+
+            rectangulo.textContent =
+            "MESA " +
+            mesa.numero;
 
 
             distribucion.appendChild(
-                boton
+                rectangulo
             );
 
-        });
+
+            const asientosMesa =
+            asientos
+            .filter(
+                asiento =>
+                Number(
+                    asiento.mesa_id
+                ) ===
+                Number(
+                    mesa.id
+                )
+            )
+            .sort(
+                (a,b) =>
+                Number(a.numero) -
+                Number(b.numero)
+            );
 
 
-        mesaDiv.appendChild(
-            distribucion
-        );
+            asientosMesa.forEach(
+                asiento => {
 
 
-        contenedor.appendChild(
-            mesaDiv
-        );
+                    const boton =
+                    document.createElement(
+                        "button"
+                    );
 
-    });
+
+                    boton.className =
+                    "asiento";
+
+
+                    boton.textContent =
+                    asiento.numero;
+
+
+                    if (
+                        Number(
+                            asiento.numero
+                        ) <= 5
+                    ) {
+
+
+                        boton.classList.add(
+                            "asiento-izquierda"
+                        );
+
+
+                        boton.classList.add(
+                            `fila-${asiento.numero}`
+                        );
+
+
+                    }
+
+                    else {
+
+
+                        boton.classList.add(
+                            "asiento-derecha"
+                        );
+
+
+                        const fila =
+                        Number(
+                            asiento.numero
+                        ) - 5;
+
+
+                        boton.classList.add(
+                            `fila-${fila}`
+                        );
+
+
+                    }
+
+
+                    actualizarEstadoVisual(
+                        boton,
+                        asiento
+                    );
+
+
+                    boton.onclick =
+                    () =>
+                    seleccionarAsiento(
+                        asiento,
+                        boton
+                    );
+
+
+                    distribucion.appendChild(
+                        boton
+                    );
+
+
+                }
+            );
+
+
+            mesaDiv.appendChild(
+                distribucion
+            );
+
+
+            contenedor.appendChild(
+                mesaDiv
+            );
+
+
+        }
+    );
 
 }
 
@@ -1249,12 +1393,15 @@ function mostrarMesas() {
    ESTADO VISUAL
 ===================================================== */
 
+
 function actualizarEstadoVisual(
     boton,
     asiento
 ) {
 
+
     boton.classList.remove(
+        "bloqueado",
         "reservado",
         "vendido",
         "utilizado"
@@ -1263,15 +1410,35 @@ function actualizarEstadoVisual(
 
     if (
         asiento.estado ===
+        "bloqueado"
+    ) {
+
+
+        boton.classList.add(
+            "bloqueado"
+        );
+
+
+        boton.disabled =
+        true;
+
+
+    }
+
+    else if (
+        asiento.estado ===
         "reservado"
     ) {
+
 
         boton.classList.add(
             "reservado"
         );
 
+
         boton.disabled =
         true;
+
 
     }
 
@@ -1280,12 +1447,15 @@ function actualizarEstadoVisual(
         "vendido"
     ) {
 
+
         boton.classList.add(
             "vendido"
         );
 
+
         boton.disabled =
         true;
+
 
     }
 
@@ -1294,19 +1464,24 @@ function actualizarEstadoVisual(
         "utilizado"
     ) {
 
+
         boton.classList.add(
             "utilizado"
         );
 
+
         boton.disabled =
         true;
+
 
     }
 
     else {
 
+
         boton.disabled =
         false;
+
 
     }
 
@@ -1317,15 +1492,21 @@ function actualizarEstadoVisual(
    SELECCIONAR
 ===================================================== */
 
+
 function seleccionarAsiento(
     asiento,
     boton
 ) {
 
+
     if (
         asiento.estado !==
         "disponible"
-    ) return;
+    ) {
+
+        return;
+
+    }
 
 
     const existe =
@@ -1337,6 +1518,7 @@ function seleccionarAsiento(
 
 
     if (existe) {
+
 
         seleccionados =
         seleccionados.filter(
@@ -1350,9 +1532,11 @@ function seleccionarAsiento(
             "seleccionado"
         );
 
+
     }
 
     else {
+
 
         seleccionados.push(
             asiento
@@ -1362,6 +1546,7 @@ function seleccionarAsiento(
         boton.classList.add(
             "seleccionado"
         );
+
 
     }
 
@@ -1375,17 +1560,23 @@ function seleccionarAsiento(
    RESUMEN
 ===================================================== */
 
+
 function actualizarResumen() {
+
 
     const cantidad =
     seleccionados.length;
 
 
     const total =
+    evento
+    ?
     cantidad *
     Number(
         evento.precio_asiento
-    );
+    )
+    :
+    0;
 
 
     document
@@ -1407,8 +1598,10 @@ function actualizarResumen() {
 
 
     if (
-        cantidad === 0
+        cantidad ===
+        0
     ) {
+
 
         document
         .getElementById(
@@ -1419,6 +1612,7 @@ function actualizarResumen() {
 
 
         return;
+
 
     }
 
@@ -1450,9 +1644,12 @@ function actualizarResumen() {
                 asiento.numero
             );
 
+
         }
     )
-    .join(" | ");
+    .join(
+        " | "
+    );
 
 }
 
@@ -1461,18 +1658,23 @@ function actualizarResumen() {
    FORMULARIO
 ===================================================== */
 
+
 function abrirFormulario() {
+
 
     if (
         seleccionados.length ===
         0
     ) {
 
+
         alert(
             "Selecciona al menos un asiento."
         );
 
+
         return;
+
 
     }
 
@@ -1511,6 +1713,7 @@ function abrirFormulario() {
                 asiento.numero
             );
 
+
         }
     );
 
@@ -1522,7 +1725,7 @@ function abrirFormulario() {
     .innerHTML = `
 
         <strong>
-            Resumen de la reserva
+            Resumen de compra
         </strong>
 
         <br><br>
@@ -1532,6 +1735,7 @@ function abrirFormulario() {
         <br><br>
 
         Cantidad:
+
         <strong>
             ${cantidad}
         </strong>
@@ -1539,6 +1743,7 @@ function abrirFormulario() {
         <br>
 
         Precio por asiento:
+
         <strong>
             ${formatoLempiras(
                 evento.precio_asiento
@@ -1578,7 +1783,13 @@ function abrirFormulario() {
 }
 
 
+/* =====================================================
+   CERRAR
+===================================================== */
+
+
 function cerrarFormulario() {
+
 
     document
     .getElementById(
@@ -1591,17 +1802,20 @@ function cerrarFormulario() {
 
 
 /* =====================================================
-   CONFIRMAR RESERVA
+   PROCEDER AL PAGO
 ===================================================== */
 
-async function confirmarReserva() {
+
+async function procederPago() {
+
 
     const nombre =
     document
     .getElementById(
         "nombre"
     )
-    .value.trim();
+    .value
+    .trim();
 
 
     const telefono =
@@ -1609,7 +1823,8 @@ async function confirmarReserva() {
     .getElementById(
         "telefono"
     )
-    .value.trim();
+    .value
+    .trim();
 
 
     const correo =
@@ -1617,7 +1832,8 @@ async function confirmarReserva() {
     .getElementById(
         "correo"
     )
-    .value.trim();
+    .value
+    .trim();
 
 
     const mensaje =
@@ -1627,7 +1843,8 @@ async function confirmarReserva() {
     );
 
 
-    mensaje.innerHTML = "";
+    mensaje.innerHTML =
+    "";
 
 
     if (
@@ -1636,15 +1853,20 @@ async function confirmarReserva() {
         !correo
     ) {
 
+
         mensaje.innerHTML = `
 
             <div class="error">
+
                 Completa todos los campos.
+
             </div>
 
         `;
 
+
         return;
+
 
     }
 
@@ -1660,7 +1882,7 @@ async function confirmarReserva() {
 
 
     boton.textContent =
-    "Procesando...";
+    "BLOQUEANDO ASIENTOS...";
 
 
     try {
@@ -1674,21 +1896,16 @@ async function confirmarReserva() {
 
 
         /*
-        ESTA ES AHORA LA ÚNICA LLAMADA.
+        AQUÍ YA NO GENERAMOS QR.
 
-        Supabase:
-        - crea reserva
-        - guarda evento
-        - calcula precio
-        - bloquea asientos
-        - genera boletos
-        - devuelve solamente sus QR
+        ÚNICAMENTE CREAMOS
+        PRE-RESERVA DE 10 MINUTOS.
         */
 
 
         const resultado =
         await db.rpc(
-            "crear_reserva",
+            "crear_pre_reserva",
             {
 
                 p_nombre_cliente:
@@ -1711,7 +1928,9 @@ async function confirmarReserva() {
             resultado.error
         ) {
 
+
             throw resultado.error;
+
 
         }
 
@@ -1720,242 +1939,36 @@ async function confirmarReserva() {
         resultado.data;
 
 
-        const boletos =
-        datos.boletos ||
-        [];
-
-
         if (
-            boletos.length === 0
+            !datos ||
+            datos.success !==
+            true ||
+            !datos.public_token
         ) {
 
+
             throw new Error(
-                "No se generaron los boletos."
+                "No se pudo crear el checkout."
             );
+
 
         }
 
 
         /*
-        USAMOS LOS VALORES CALCULADOS
-        POR SUPABASE.
+        REDIRECCIÓN AL CHECKOUT
         */
 
 
-        const cantidad =
-        Number(
-            datos.cantidad_asientos
+        window.location.href =
+        "checkout.html?token=" +
+        encodeURIComponent(
+            datos.public_token
         );
-
-
-        const precio =
-        Number(
-            datos.precio_unitario
-        );
-
-
-        const total =
-        Number(
-            datos.total_reserva
-        );
-
-
-        let htmlBoletos =
-        "";
-
-
-        boletos.forEach(
-            (boleto,index) => {
-
-
-            const asiento =
-            asientos.find(
-                item =>
-                Number(item.id) ===
-                Number(
-                    boleto.o_asiento_id
-                )
-            );
-
-
-            if (!asiento)
-                return;
-
-
-            const mesa =
-            mesas.find(
-                item =>
-                Number(item.id) ===
-                Number(
-                    asiento.mesa_id
-                )
-            );
-
-
-            if (!mesa)
-                return;
-
-
-            htmlBoletos += `
-
-                <div class="boleto">
-
-                    <h3>
-
-                        Mesa
-                        ${mesa.numero}
-
-                        —
-
-                        Asiento
-                        ${asiento.numero}
-
-                    </h3>
-
-
-                    <div
-                    id="qr-${index}"
-                    class="qr">
-                    </div>
-
-
-                    <p>
-
-                        Valor:
-
-                        <strong>
-                            ${formatoLempiras(
-                                precio
-                            )}
-                        </strong>
-
-                    </p>
-
-
-                    <p>
-
-                        Presenta este QR
-                        al ingresar.
-
-                    </p>
-
-                </div>
-
-            `;
-
-        });
-
-
-        document
-        .getElementById(
-            "modalContenido"
-        )
-        .innerHTML = `
-
-            <div style="text-align:center">
-
-                <h2>
-                    ✅ Reserva confirmada
-                </h2>
-
-                <p>
-                    Tu reserva fue registrada correctamente.
-                </p>
-
-                <div class="codigo">
-
-                    ${datos.codigo_reserva}
-
-                </div>
-
-
-                <p>
-
-                    ${cantidad}
-
-                    ${
-                        cantidad === 1
-                        ? "boleto"
-                        : "boletos"
-                    }
-
-                </p>
-
-
-                <p>
-
-                    Precio por asiento:
-
-                    <strong>
-                        ${formatoLempiras(
-                            precio
-                        )}
-                    </strong>
-
-                </p>
-
-
-                <h3>
-
-                    TOTAL:
-
-                    ${formatoLempiras(
-                        total
-                    )}
-
-                </h3>
-
-
-                ${htmlBoletos}
-
-
-                <button
-                class="boton"
-                onclick="location.reload()">
-
-                    FINALIZAR
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        boletos.forEach(
-            (boleto,index) => {
-
-
-            const elemento =
-            document.getElementById(
-                `qr-${index}`
-            );
-
-
-            if (!elemento)
-                return;
-
-
-            new QRCode(
-                elemento,
-                {
-
-                    text:
-                    boleto.o_token,
-
-                    width:
-                    220,
-
-                    height:
-                    220
-
-                }
-            );
-
-        });
 
 
     }
+
 
     catch(error) {
 
@@ -1969,14 +1982,20 @@ async function confirmarReserva() {
 
             <div class="error">
 
-                No fue posible realizar
-                la reserva.
+                No fue posible iniciar
+                la compra.
 
                 <br><br>
 
                 Es posible que uno de
-                los asientos ya no esté
-                disponible.
+                los asientos haya sido
+                seleccionado por otra
+                persona.
+
+                <br><br>
+
+                Actualiza el mapa e
+                inténtalo nuevamente.
 
             </div>
 
@@ -1988,7 +2007,21 @@ async function confirmarReserva() {
 
 
         boton.textContent =
-        "CONFIRMAR RESERVA";
+        "PROCEDER AL PAGO";
+
+
+        /*
+        Actualizamos el mapa por si
+        otro comprador tomó el asiento.
+        */
+
+
+        seleccionados =
+        [];
+
+
+        await cargarEvento();
+
 
     }
 
@@ -1999,22 +2032,32 @@ async function confirmarReserva() {
    ZOOM
 ===================================================== */
 
+
 function aplicarZoom() {
 
+
     const mapa =
-    document.getElementById(
+    document
+    .getElementById(
         "mapa"
     );
 
 
     const escala =
-    document.getElementById(
+    document
+    .getElementById(
         "mapaEscala"
     );
 
 
-    if (!mapa || !escala)
+    if (
+        !mapa ||
+        !escala
+    ) {
+
         return;
+
+    }
 
 
     mapa.style.transform =
@@ -2043,14 +2086,19 @@ function aplicarZoom() {
     )
     .textContent =
     Math.round(
-        zoomMapa * 100
+        zoomMapa *
+        100
     ) +
     "%";
 
 }
 
 
+/* ACERCAR */
+
+
 function acercarMapa() {
+
 
     zoomMapa +=
     PASO_ZOOM;
@@ -2061,8 +2109,10 @@ function acercarMapa() {
         ZOOM_MAXIMO
     ) {
 
+
         zoomMapa =
         ZOOM_MAXIMO;
+
 
     }
 
@@ -2072,7 +2122,11 @@ function acercarMapa() {
 }
 
 
+/* ALEJAR */
+
+
 function alejarMapa() {
+
 
     zoomMapa -=
     PASO_ZOOM;
@@ -2083,8 +2137,10 @@ function alejarMapa() {
         ZOOM_MINIMO
     ) {
 
+
         zoomMapa =
         ZOOM_MINIMO;
+
 
     }
 
@@ -2094,22 +2150,34 @@ function alejarMapa() {
 }
 
 
+/* AJUSTAR */
+
+
 function ajustarMapa() {
 
+
     const mapa =
-    document.getElementById(
+    document
+    .getElementById(
         "mapa"
     );
 
 
     const contenedor =
-    document.getElementById(
+    document
+    .getElementById(
         "mapaScroll"
     );
 
 
-    if (!mapa || !contenedor)
+    if (
+        !mapa ||
+        !contenedor
+    ) {
+
         return;
+
+    }
 
 
     if (
@@ -2117,12 +2185,15 @@ function ajustarMapa() {
         700
     ) {
 
+
         zoomMapa =
         1;
+
 
     }
 
     else {
+
 
         const anchoDisponible =
         contenedor.clientWidth -
@@ -2143,8 +2214,10 @@ function ajustarMapa() {
             ZOOM_MINIMO
         ) {
 
+
             zoomMapa =
             ZOOM_MINIMO;
+
 
         }
 
@@ -2154,10 +2227,13 @@ function ajustarMapa() {
             0.55
         ) {
 
+
             zoomMapa =
             0.55;
 
+
         }
+
 
     }
 
@@ -2166,9 +2242,16 @@ function ajustarMapa() {
 
 
     contenedor.scrollTo({
-        left: 0,
-        top: 0,
-        behavior: "smooth"
+
+        left:
+        0,
+
+        top:
+        0,
+
+        behavior:
+        "smooth"
+
     });
 
 }
@@ -2177,6 +2260,7 @@ function ajustarMapa() {
 window.addEventListener(
     "resize",
     () => {
+
 
         clearTimeout(
             window.temporizadorResize
@@ -2189,6 +2273,7 @@ window.addEventListener(
             250
         );
 
+
     }
 );
 
@@ -2196,6 +2281,7 @@ window.addEventListener(
 /* =====================================================
    INICIO
 ===================================================== */
+
 
 cargarEvento();
 
