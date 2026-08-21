@@ -2,12 +2,11 @@
 <html lang="es">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0">
+    content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
 <meta name="referrer" content="no-referrer">
 
@@ -16,16 +15,11 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin>
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
-
 
 <style>
 
@@ -38,11 +32,8 @@
 }
 
 :root {
-
     --bg: #f4f7fb;
     --dark: #08101f;
-    --dark2: #111827;
-
     --text: #111827;
     --muted: #6b7280;
     --line: #e5e7eb;
@@ -63,9 +54,7 @@ html {
 }
 
 body {
-
     margin: 0;
-
     min-height: 100vh;
 
     font-family:
@@ -73,19 +62,14 @@ body {
         Arial,
         sans-serif;
 
-    background:
-        var(--bg);
+    background: var(--bg);
+    color: var(--text);
 
-    color:
-        var(--text);
-
-    -webkit-font-smoothing:
-        antialiased;
+    -webkit-font-smoothing: antialiased;
 }
 
 button,
 input {
-
     font-family: inherit;
 }
 
@@ -99,15 +83,11 @@ button {
 ========================================================== */
 
 .topbar {
-
     position: sticky;
-
     top: 0;
-
     z-index: 1000;
 
-    background:
-        rgba(8,16,31,.98);
+    background: rgba(8,16,31,.98);
 
     border-bottom:
         1px solid rgba(255,255,255,.07);
@@ -116,68 +96,48 @@ button {
         0 5px 25px rgba(0,0,0,.15);
 }
 
-
 .nav {
-
     width: 100%;
-
     max-width: 1450px;
-
     min-height: 76px;
 
     margin: auto;
-
-    padding:
-        0 24px;
+    padding: 0 24px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 20px;
 }
 
-
 .brand {
-
     display: flex;
-
     align-items: center;
 
     text-decoration: none;
 }
 
-
 .brand-logo {
-
     height: 48px;
-
     width: auto;
-
     max-width: 240px;
 
     object-fit: contain;
 }
 
-
 .back-link {
-
     display: inline-flex;
-
     align-items: center;
+    justify-content: center;
 
     min-height: 38px;
-
-    padding:
-        0 13px;
+    padding: 0 13px;
 
     border:
         1px solid rgba(255,255,255,.14);
 
-    border-radius:
-        999px;
+    border-radius: 999px;
 
     color:
         rgba(255,255,255,.78);
@@ -185,7 +145,6 @@ button {
     text-decoration: none;
 
     font-size: 9px;
-
     font-weight: 800;
 }
 
@@ -195,49 +154,34 @@ button {
 ========================================================== */
 
 .event-hero {
-
     position: relative;
-
     overflow: hidden;
 
     min-height: 310px;
 
-    background:
-        #08101f;
-
-    color:
-        white;
+    background: #08101f;
+    color: white;
 }
 
-
 .event-hero-bg {
-
     position: absolute;
-
     inset: -70px;
 
     background-image:
         url("/FLYER%201080X1350.png");
 
     background-size: cover;
-
     background-position: center;
 
-    filter:
-        blur(45px);
+    filter: blur(45px);
 
-    transform:
-        scale(1.18);
+    transform: scale(1.18);
 
-    opacity:
-        .34;
+    opacity: .34;
 }
 
-
 .event-hero-overlay {
-
     position: absolute;
-
     inset: 0;
 
     background:
@@ -249,38 +193,27 @@ button {
         );
 }
 
-
 .event-hero-content {
-
     position: relative;
-
     z-index: 2;
 
     width: 100%;
-
     max-width: 1320px;
-
     min-height: 310px;
 
     margin: auto;
-
-    padding:
-        35px 24px;
+    padding: 35px 24px;
 
     display: flex;
-
     align-items: center;
 
     gap: 34px;
 }
 
-
 .event-poster {
-
     width: 205px;
 
-    aspect-ratio:
-        4 / 5;
+    aspect-ratio: 4 / 5;
 
     flex-shrink: 0;
 
@@ -295,62 +228,42 @@ button {
         0 22px 55px rgba(0,0,0,.35);
 }
 
-
 .event-info {
-
     max-width: 750px;
 }
 
-
 .event-label {
-
     display: inline-flex;
 
     margin-bottom: 11px;
-
-    padding:
-        7px 11px;
+    padding: 7px 11px;
 
     border:
         1px solid rgba(96,165,250,.22);
 
-    border-radius:
-        999px;
+    border-radius: 999px;
 
     background:
         rgba(37,99,235,.18);
 
-    font-size:
-        8px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        .9px;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .9px;
 }
 
-
 .event-info h1 {
-
-    margin:
-        0 0 13px;
+    margin: 0 0 13px;
 
     font-size:
         clamp(32px,5vw,52px);
 
-    line-height:
-        1.04;
+    line-height: 1.04;
 
-    letter-spacing:
-        -1.5px;
+    letter-spacing: -1.5px;
 }
 
-
 .event-meta {
-
     display: grid;
-
     gap: 8px;
 
     color:
@@ -359,15 +272,12 @@ button {
     font-size: 12px;
 }
 
-
 .event-price {
-
     display: inline-flex;
 
     margin-top: 17px;
 
-    padding:
-        10px 14px;
+    padding: 10px 14px;
 
     background:
         rgba(255,255,255,.08);
@@ -375,17 +285,12 @@ button {
     border:
         1px solid rgba(255,255,255,.10);
 
-    border-radius:
-        11px;
+    border-radius: 11px;
 
-    color:
-        white;
+    color: white;
 
-    font-size:
-        12px;
-
-    font-weight:
-        800;
+    font-size: 12px;
+    font-weight: 800;
 }
 
 
@@ -394,20 +299,16 @@ button {
 ========================================================== */
 
 .page {
-
     width: 100%;
-
     max-width: 1500px;
 
     margin: auto;
 
     padding:
-        30px 20px 120px;
+        30px 20px 130px;
 }
 
-
 .layout {
-
     display: grid;
 
     grid-template-columns:
@@ -425,32 +326,24 @@ button {
 ========================================================== */
 
 .map-card {
-
     overflow: hidden;
 
-    background:
-        white;
+    background: white;
 
     border:
         1px solid #e5e9ef;
 
-    border-radius:
-        22px;
+    border-radius: 22px;
 
     box-shadow:
         0 12px 35px rgba(15,23,42,.06);
 }
 
-
 .map-header {
-
-    padding:
-        20px 22px;
+    padding: 20px 22px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 15px;
@@ -461,26 +354,17 @@ button {
         1px solid var(--line);
 }
 
-
 .map-title h2 {
-
-    margin:
-        0 0 5px;
-
-    font-size:
-        20px;
+    margin: 0 0 5px;
+    font-size: 20px;
 }
 
-
 .map-title p {
-
     margin: 0;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
-    font-size:
-        10px;
+    font-size: 10px;
 }
 
 
@@ -489,9 +373,7 @@ button {
 ========================================================== */
 
 .legend {
-
     display: flex;
-
     align-items: center;
 
     gap: 12px;
@@ -499,35 +381,24 @@ button {
     flex-wrap: wrap;
 }
 
-
 .legend-item {
-
     display: flex;
-
     align-items: center;
 
     gap: 6px;
 
-    color:
-        #667085;
+    color: #667085;
 
-    font-size:
-        8px;
-
-    font-weight:
-        700;
+    font-size: 8px;
+    font-weight: 700;
 }
 
-
 .legend-dot {
-
     width: 11px;
-
     height: 11px;
 
     border-radius: 50%;
 }
-
 
 .legend-available {
     background: var(--green);
@@ -547,38 +418,240 @@ button {
 
 
 /* ==========================================================
-   MAP AREA
+   MAP WRAPPER
 ========================================================== */
 
-.map-scroll {
-
+.map-wrapper {
     position: relative;
 
     width: 100%;
 
-    overflow-x: auto;
+    background: #f8fafc;
+}
 
-    overflow-y: hidden;
+.map-scroll {
+    position: relative;
 
-    padding:
-        20px;
+    width: 100%;
+
+    overflow: auto;
+
+    padding: 22px;
 
     background:
+        radial-gradient(
+            circle at center,
+            rgba(37,99,235,.025),
+            transparent 60%
+        ),
         #f8fafc;
 
-    -webkit-overflow-scrolling:
-        touch;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        #cbd5e1
+        #f1f5f9;
+
+    /*
+    Permite desplazamiento normal con un dedo.
+    El JS solamente interviene cuando detecta
+    DOS dedos para el zoom.
+    */
+    touch-action: pan-x pan-y;
+}
+
+.map-scroll::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+}
+
+.map-scroll::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.map-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+
+    border-radius: 999px;
+
+    border:
+        2px solid #f1f5f9;
 }
 
 
+/* ==========================================================
+   ZOOM SHELL
+========================================================== */
+
+.map-zoom-shell {
+    position: relative;
+
+    margin: 0 auto;
+
+    /*
+    JS actualiza width/height dependiendo
+    del nivel de zoom.
+    */
+}
+
+
+/* ==========================================================
+   MAP
+========================================================== */
+
 .map {
-
     width: 1380px;
-
-    margin: auto;
 
     padding:
         24px 20px 45px;
+
+    transform-origin:
+        top left;
+
+    will-change:
+        transform;
+}
+
+
+/* ==========================================================
+   ZOOM CONTROLS
+========================================================== */
+
+.zoom-controls {
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    z-index: 200;
+
+    display: grid;
+
+    overflow: hidden;
+
+    background:
+        rgba(8,16,31,.96);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.22);
+
+    backdrop-filter:
+        blur(10px);
+}
+
+.zoom-button {
+    width: 46px;
+    height: 43px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.09);
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.zoom-button:hover:not(:disabled) {
+    background:
+        rgba(255,255,255,.08);
+}
+
+.zoom-button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+.zoom-label {
+    width: 46px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.09);
+
+    color:
+        rgba(255,255,255,.75);
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.zoom-reset {
+    width: 46px;
+    height: 39px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background: transparent;
+
+    color:
+        rgba(255,255,255,.75);
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+.zoom-reset:hover {
+    background:
+        rgba(255,255,255,.08);
+
+    color: white;
+}
+
+.zoom-help {
+    position: absolute;
+
+    left: 15px;
+    bottom: 13px;
+
+    z-index: 100;
+
+    padding: 7px 10px;
+
+    background:
+        rgba(8,16,31,.85);
+
+    color:
+        rgba(255,255,255,.74);
+
+    border-radius: 999px;
+
+    pointer-events: none;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.12);
 }
 
 
@@ -587,20 +660,17 @@ button {
 ========================================================== */
 
 .stage {
-
     width:
         min(620px,80%);
 
     margin:
         0 auto 38px;
 
-    padding:
-        16px;
+    padding: 16px;
 
     text-align: center;
 
-    color:
-        white;
+    color: white;
 
     background:
         linear-gradient(
@@ -615,19 +685,13 @@ button {
     box-shadow:
         0 12px 25px rgba(15,23,42,.15);
 
-    font-size:
-        12px;
+    font-size: 12px;
+    font-weight: 800;
 
-    font-weight:
-        800;
-
-    letter-spacing:
-        2px;
+    letter-spacing: 2px;
 }
 
-
 .stage-sub {
-
     display: block;
 
     margin-top: 4px;
@@ -635,11 +699,9 @@ button {
     color:
         rgba(255,255,255,.45);
 
-    font-size:
-        7px;
+    font-size: 7px;
 
-    letter-spacing:
-        .7px;
+    letter-spacing: .7px;
 }
 
 
@@ -648,7 +710,6 @@ button {
 ========================================================== */
 
 .tables-grid {
-
     display: grid;
 
     grid-template-columns:
@@ -657,8 +718,7 @@ button {
     gap:
         22px 24px;
 
-    justify-content:
-        center;
+    justify-content: center;
 }
 
 
@@ -667,11 +727,9 @@ button {
 ========================================================== */
 
 .table-card {
-
     min-height: 190px;
 
-    padding:
-        12px;
+    padding: 12px;
 
     display: grid;
 
@@ -680,42 +738,31 @@ button {
         1fr
         42px;
 
-    gap:
-        8px;
+    gap: 8px;
 
-    align-items:
-        center;
+    align-items: center;
 
-    background:
-        white;
+    background: white;
 
     border:
         1px solid #e5e7eb;
 
-    border-radius:
-        16px;
+    border-radius: 16px;
 
     box-shadow:
         0 6px 18px rgba(15,23,42,.055);
 }
 
-
 .seat-column {
-
     display: grid;
-
     gap: 8px;
 }
 
-
 .table-center {
-
     min-height: 115px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
@@ -730,44 +777,31 @@ button {
     border:
         1px solid #d6dde6;
 
-    border-radius:
-        12px;
+    border-radius: 12px;
 
-    color:
-        #334155;
+    color: #334155;
 
-    font-weight:
-        800;
+    font-weight: 800;
 }
 
-
 .table-center span {
-
     display: block;
 }
 
-
 .table-center small {
-
     display: block;
 
     margin-bottom: 4px;
 
-    color:
-        #94a3b8;
+    color: #94a3b8;
 
-    font-size:
-        7px;
+    font-size: 7px;
 
-    letter-spacing:
-        .8px;
+    letter-spacing: .8px;
 }
 
-
 .table-number {
-
-    font-size:
-        21px;
+    font-size: 21px;
 }
 
 
@@ -776,34 +810,25 @@ button {
 ========================================================== */
 
 .seat {
-
     width: 40px;
-
     height: 40px;
 
     padding: 0;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border: none;
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     cursor: pointer;
 
-    color:
-        white;
+    color: white;
 
-    font-size:
-        10px;
-
-    font-weight:
-        800;
+    font-size: 10px;
+    font-weight: 800;
 
     box-shadow:
         0 4px 9px rgba(15,23,42,.12);
@@ -814,9 +839,7 @@ button {
         opacity .15s;
 }
 
-
 .seat:hover:not(:disabled) {
-
     transform:
         scale(1.09);
 
@@ -824,50 +847,32 @@ button {
         0 6px 13px rgba(15,23,42,.18);
 }
 
-
 .seat.disponible {
-
-    background:
-        var(--green);
+    background: var(--green);
 }
-
 
 .seat.seleccionado {
+    background: var(--yellow);
 
-    background:
-        var(--yellow);
-
-    color:
-        #713f12;
+    color: #713f12;
 }
-
 
 .seat.bloqueado {
+    background: var(--purple);
 
-    background:
-        var(--purple);
-
-    cursor:
-        not-allowed;
+    cursor: not-allowed;
 }
-
 
 .seat.reservado,
 .seat.vendido,
 .seat.utilizado {
+    background: var(--sold);
 
-    background:
-        var(--sold);
-
-    cursor:
-        not-allowed;
+    cursor: not-allowed;
 }
 
-
 .seat:disabled {
-
-    opacity:
-        .96;
+    opacity: .96;
 }
 
 
@@ -876,66 +881,48 @@ button {
 ========================================================== */
 
 .summary-card {
-
     position: sticky;
 
     top: 98px;
 
     overflow: hidden;
 
-    background:
-        white;
+    background: white;
 
     border:
         1px solid #e5e9ef;
 
-    border-radius:
-        21px;
+    border-radius: 21px;
 
     box-shadow:
         0 14px 40px rgba(15,23,42,.08);
 }
 
-
 .summary-head {
-
-    padding:
-        19px 20px;
+    padding: 19px 20px;
 
     border-bottom:
         1px solid var(--line);
 }
 
-
 .summary-head h3 {
+    margin: 0 0 5px;
 
-    margin:
-        0 0 5px;
-
-    font-size:
-        18px;
+    font-size: 18px;
 }
-
 
 .summary-head p {
-
     margin: 0;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
-    font-size:
-        9px;
+    font-size: 9px;
 
-    line-height:
-        1.5;
+    line-height: 1.5;
 }
 
-
 .summary-content {
-
-    padding:
-        20px;
+    padding: 20px;
 }
 
 
@@ -944,182 +931,118 @@ button {
 ========================================================== */
 
 .availability {
+    margin-bottom: 18px;
 
-    margin-bottom:
-        18px;
+    padding: 12px 13px;
 
-    padding:
-        12px 13px;
+    display: flex;
+    justify-content: space-between;
 
-    display:
-        flex;
+    gap: 12px;
 
-    justify-content:
-        space-between;
-
-    gap:
-        12px;
-
-    background:
-        #f8fafc;
+    background: #f8fafc;
 
     border:
         1px solid #e7ebf0;
 
-    border-radius:
-        11px;
+    border-radius: 11px;
 
-    font-size:
-        9px;
+    font-size: 9px;
 }
-
 
 .availability span {
-
-    color:
-        #667085;
+    color: #667085;
 }
 
-
 .availability strong {
-
-    color:
-        #111827;
+    color: #111827;
 }
 
 
 /* ==========================================================
-   SELECTED LIST
+   SELECTED
 ========================================================== */
 
 .selected-title {
+    margin-bottom: 9px;
 
-    margin-bottom:
-        9px;
+    color: #344054;
 
-    color:
-        #344054;
+    font-size: 9px;
+    font-weight: 800;
 
-    font-size:
-        9px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        .5px;
+    letter-spacing: .5px;
 }
-
 
 .selected-list {
+    max-height: 210px;
 
-    max-height:
-        210px;
+    overflow-y: auto;
 
-    overflow-y:
-        auto;
+    display: grid;
 
-    display:
-        grid;
+    gap: 7px;
 
-    gap:
-        7px;
-
-    margin-bottom:
-        18px;
+    margin-bottom: 18px;
 }
 
-
 .empty-selection {
+    padding: 18px 10px;
 
-    padding:
-        18px 10px;
+    color: #98a2b3;
 
-    color:
-        #98a2b3;
+    text-align: center;
 
-    text-align:
-        center;
-
-    background:
-        #fafbfd;
+    background: #fafbfd;
 
     border:
         1px dashed #dce2e9;
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
-    font-size:
-        9px;
+    font-size: 9px;
 }
 
-
 .selected-item {
+    padding: 10px 11px;
 
-    padding:
-        10px 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    display:
-        flex;
+    gap: 10px;
 
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    gap:
-        10px;
-
-    background:
-        #fffbeb;
+    background: #fffbeb;
 
     border:
         1px solid #fde68a;
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
-    font-size:
-        9px;
+    font-size: 9px;
 }
-
 
 .selected-item strong {
-
-    color:
-        #713f12;
+    color: #713f12;
 }
 
-
 .remove-seat {
-
-    width:
-        24px;
-
-    height:
-        24px;
+    width: 24px;
+    height: 24px;
 
     padding: 0;
 
-    border:
-        none;
+    border: none;
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
-    background:
-        #fef3c7;
+    background: #fef3c7;
 
-    color:
-        #92400e;
+    color: #92400e;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
-    font-size:
-        13px;
+    font-size: 13px;
 }
 
 
@@ -1128,71 +1051,43 @@ button {
 ========================================================== */
 
 .summary-row {
-
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    justify-content:
-        space-between;
+    gap: 15px;
 
-    align-items:
-        center;
+    margin-bottom: 11px;
 
-    gap:
-        15px;
-
-    margin-bottom:
-        11px;
-
-    font-size:
-        10px;
+    font-size: 10px;
 }
-
 
 .summary-row span {
-
-    color:
-        var(--muted);
+    color: var(--muted);
 }
 
-
 .total-row {
-
-    margin-top:
-        17px;
-
-    padding-top:
-        17px;
+    margin-top: 17px;
+    padding-top: 17px;
 
     display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 
-    justify-content:
-        space-between;
-
-    align-items:
-        flex-end;
-
-    gap:
-        15px;
+    gap: 15px;
 
     border-top:
         1px solid var(--line);
 }
 
-
 .total-row span {
+    color: var(--muted);
 
-    color:
-        var(--muted);
-
-    font-size:
-        11px;
+    font-size: 11px;
 }
 
-
 .total-row strong {
-
-    font-size:
-        27px;
+    font-size: 27px;
 }
 
 
@@ -1201,75 +1096,48 @@ button {
 ========================================================== */
 
 .continue-button {
+    width: 100%;
+    min-height: 52px;
 
-    width:
-        100%;
+    margin-top: 19px;
 
-    min-height:
-        52px;
+    border: none;
 
-    margin-top:
-        19px;
+    border-radius: 12px;
 
-    border:
-        none;
+    background: var(--blue);
 
-    border-radius:
-        12px;
+    color: white;
 
-    background:
-        var(--blue);
+    cursor: pointer;
 
-    color:
-        white;
+    font-size: 11px;
+    font-weight: 800;
 
-    cursor:
-        pointer;
-
-    font-size:
-        11px;
-
-    font-weight:
-        800;
-
-    transition:
-        .2s;
+    transition: .2s;
 }
 
-
 .continue-button:hover:not(:disabled) {
-
     background:
         var(--blue-dark);
 }
 
-
 .continue-button:disabled {
+    background: #9ca3af;
 
-    background:
-        #9ca3af;
-
-    cursor:
-        not-allowed;
+    cursor: not-allowed;
 }
 
-
 .summary-note {
+    margin-top: 11px;
 
-    margin-top:
-        11px;
+    color: #98a2b3;
 
-    color:
-        #98a2b3;
+    text-align: center;
 
-    text-align:
-        center;
+    font-size: 8px;
 
-    font-size:
-        8px;
-
-    line-height:
-        1.55;
+    line-height: 1.55;
 }
 
 
@@ -1278,27 +1146,17 @@ button {
 ========================================================== */
 
 .mobile-cart {
+    position: fixed;
 
-    position:
-        fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
 
-    left:
-        10px;
+    z-index: 1500;
 
-    right:
-        10px;
+    display: none;
 
-    bottom:
-        10px;
-
-    z-index:
-        1500;
-
-    display:
-        none;
-
-    padding:
-        12px;
+    padding: 12px;
 
     background:
         rgba(8,16,31,.97);
@@ -1306,91 +1164,58 @@ button {
     border:
         1px solid rgba(255,255,255,.10);
 
-    border-radius:
-        15px;
+    border-radius: 15px;
 
     box-shadow:
         0 14px 40px rgba(0,0,0,.30);
 
-    color:
-        white;
+    color: white;
 }
-
 
 .mobile-cart-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    gap:
-        12px;
+    gap: 12px;
 }
 
-
 .mobile-cart-info span {
-
     color:
         rgba(255,255,255,.60);
 
-    font-size:
-        8px;
+    font-size: 8px;
 }
-
 
 .mobile-cart-info strong {
+    display: block;
 
-    display:
-        block;
+    margin-top: 2px;
 
-    margin-top:
-        2px;
-
-    font-size:
-        15px;
+    font-size: 15px;
 }
-
 
 .mobile-cart button {
+    min-height: 40px;
 
-    min-height:
-        40px;
+    padding: 0 14px;
 
-    padding:
-        0 14px;
+    border: none;
 
-    border:
-        none;
+    border-radius: 10px;
 
-    border-radius:
-        10px;
+    background: var(--blue);
 
-    background:
-        var(--blue);
+    color: white;
 
-    color:
-        white;
+    cursor: pointer;
 
-    cursor:
-        pointer;
-
-    font-size:
-        9px;
-
-    font-weight:
-        800;
+    font-size: 9px;
+    font-weight: 800;
 }
 
-
 .mobile-cart button:disabled {
-
-    background:
-        #64748b;
+    background: #64748b;
 }
 
 
@@ -1399,27 +1224,18 @@ button {
 ========================================================== */
 
 .modal {
+    position: fixed;
 
-    position:
-        fixed;
+    inset: 0;
 
-    inset:
-        0;
+    z-index: 5000;
 
-    z-index:
-        5000;
+    display: none;
 
-    display:
-        none;
+    align-items: center;
+    justify-content: center;
 
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    padding:
-        18px;
+    padding: 18px;
 
     background:
         rgba(5,10,20,.76);
@@ -1428,109 +1244,80 @@ button {
         blur(7px);
 }
 
-
 .modal.show {
-
-    display:
-        flex;
+    display: flex;
 }
 
-
 .modal-box {
-
     width:
         min(500px,100%);
 
-    overflow:
-        hidden;
+    max-height:
+        calc(100vh - 35px);
 
-    background:
-        white;
+    overflow-y: auto;
 
-    border-radius:
-        22px;
+    background: white;
+
+    border-radius: 22px;
 
     box-shadow:
         0 30px 90px rgba(0,0,0,.35);
 }
 
-
 .modal-header {
+    position: sticky;
+    top: 0;
 
-    padding:
-        20px 21px;
+    z-index: 3;
 
-    display:
-        flex;
+    padding: 20px 21px;
 
-    justify-content:
-        space-between;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    align-items:
-        center;
+    gap: 15px;
 
-    gap:
-        15px;
+    background: white;
 
     border-bottom:
         1px solid var(--line);
 }
 
-
 .modal-header h2 {
+    margin: 0 0 4px;
 
-    margin:
-        0 0 4px;
-
-    font-size:
-        20px;
+    font-size: 20px;
 }
-
 
 .modal-header p {
-
     margin: 0;
 
-    color:
-        var(--muted);
+    color: var(--muted);
 
-    font-size:
-        9px;
+    font-size: 9px;
 }
-
 
 .modal-close {
+    width: 36px;
+    height: 36px;
 
-    width:
-        36px;
+    flex-shrink: 0;
 
-    height:
-        36px;
+    border: none;
 
-    flex-shrink:
-        0;
+    border-radius: 50%;
 
-    border:
-        none;
+    background: #f3f4f6;
 
-    border-radius:
-        50%;
+    cursor: pointer;
 
-    background:
-        #f3f4f6;
-
-    cursor:
-        pointer;
-
-    font-size:
-        17px;
+    font-size: 17px;
 }
 
-
 .modal-content {
-
-    padding:
-        21px;
+    padding: 21px;
 }
 
 
@@ -1539,140 +1326,88 @@ button {
 ========================================================== */
 
 .form-group {
-
-    margin-bottom:
-        14px;
+    margin-bottom: 14px;
 }
-
 
 .form-group label {
+    display: flex;
+    align-items: center;
 
-    display:
-        flex;
+    gap: 5px;
 
-    align-items:
-        center;
+    margin-bottom: 7px;
 
-    gap:
-        5px;
+    color: #344054;
 
-    margin-bottom:
-        7px;
+    font-size: 9px;
+    font-weight: 800;
 
-    color:
-        #344054;
-
-    font-size:
-        9px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        .3px;
+    letter-spacing: .3px;
 }
-
 
 .required {
-
-    color:
-        var(--red);
+    color: var(--red);
 }
 
-
 .form-input {
+    width: 100%;
+    min-height: 47px;
 
-    width:
-        100%;
-
-    min-height:
-        47px;
-
-    padding:
-        0 13px;
+    padding: 0 13px;
 
     border:
         1px solid #d8dee7;
 
-    border-radius:
-        11px;
+    border-radius: 11px;
 
-    outline:
-        none;
+    outline: none;
 
-    background:
-        white;
+    background: white;
 
-    color:
-        #111827;
+    color: #111827;
 
-    font-size:
-        12px;
+    font-size: 12px;
 
-    transition:
-        .2s;
+    transition: .2s;
 }
 
-
 .form-input:focus {
-
-    border-color:
-        var(--blue);
+    border-color: var(--blue);
 
     box-shadow:
         0 0 0 3px rgba(37,99,235,.08);
 }
 
-
 .form-input.invalid {
-
-    border-color:
-        #ef4444;
+    border-color: #ef4444;
 
     box-shadow:
         0 0 0 3px rgba(239,68,68,.07);
 }
 
-
 .field-help {
+    margin-top: 5px;
 
-    margin-top:
-        5px;
+    color: #98a2b3;
 
-    color:
-        #98a2b3;
+    font-size: 8px;
 
-    font-size:
-        8px;
-
-    line-height:
-        1.5;
+    line-height: 1.5;
 }
-
 
 .field-error {
+    display: none;
 
-    display:
-        none;
+    margin-top: 5px;
 
-    margin-top:
-        5px;
+    color: #dc2626;
 
-    color:
-        #dc2626;
-
-    font-size:
-        8px;
-
-    font-weight:
-        600;
+    font-size: 8px;
+    font-weight: 600;
 }
 
-
 .field-error.show {
-
-    display:
-        block;
+    display: block;
 }
 
 
@@ -1681,234 +1416,152 @@ button {
 ========================================================== */
 
 .email-notice {
-
     margin:
         5px 0 18px;
 
-    padding:
-        12px 13px;
+    padding: 12px 13px;
 
-    display:
-        flex;
+    display: flex;
+    align-items: flex-start;
 
-    align-items:
-        flex-start;
+    gap: 10px;
 
-    gap:
-        10px;
-
-    background:
-        #eff6ff;
+    background: #eff6ff;
 
     border:
         1px solid #bfdbfe;
 
-    border-radius:
-        11px;
+    border-radius: 11px;
 }
-
 
 .email-notice-icon {
+    width: 28px;
+    height: 28px;
 
-    width:
-        28px;
+    flex-shrink: 0;
 
-    height:
-        28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    flex-shrink:
-        0;
+    background: #2563eb;
 
-    display:
-        flex;
+    color: white;
 
-    align-items:
-        center;
+    border-radius: 50%;
 
-    justify-content:
-        center;
-
-    background:
-        #2563eb;
-
-    color:
-        white;
-
-    border-radius:
-        50%;
-
-    font-size:
-        12px;
+    font-size: 12px;
 }
-
 
 .email-notice strong {
+    display: block;
 
-    display:
-        block;
+    margin-bottom: 3px;
 
-    margin-bottom:
-        3px;
+    color: #1e40af;
 
-    color:
-        #1e40af;
-
-    font-size:
-        9px;
+    font-size: 9px;
 }
 
-
 .email-notice span {
+    color: #475569;
 
-    color:
-        #475569;
+    font-size: 8px;
 
-    font-size:
-        8px;
-
-    line-height:
-        1.5;
+    line-height: 1.5;
 }
 
 
 /* ==========================================================
-   ORDER PREVIEW MODAL
+   ORDER PREVIEW
 ========================================================== */
 
 .modal-order {
+    margin-bottom: 18px;
 
-    margin-bottom:
-        18px;
+    padding: 14px;
 
-    padding:
-        14px;
-
-    background:
-        #f8fafc;
+    background: #f8fafc;
 
     border:
         1px solid #e7ebf0;
 
-    border-radius:
-        12px;
+    border-radius: 12px;
 }
-
 
 .modal-order-row {
+    display: flex;
+    justify-content: space-between;
 
-    display:
-        flex;
+    gap: 15px;
 
-    justify-content:
-        space-between;
+    margin-bottom: 8px;
 
-    gap:
-        15px;
-
-    margin-bottom:
-        8px;
-
-    font-size:
-        9px;
+    font-size: 9px;
 }
 
-
 .modal-order-row:last-child {
-
-    margin-bottom:
-        0;
-
-    padding-top:
-        9px;
+    margin-bottom: 0;
+    padding-top: 9px;
 
     border-top:
         1px solid #e5e7eb;
 
-    font-weight:
-        800;
+    font-weight: 800;
 }
 
-
 .modal-order-row span {
-
-    color:
-        #667085;
+    color: #667085;
 }
 
 
 /* ==========================================================
-   MODAL BUTTON
+   MODAL CONTINUE
 ========================================================== */
 
 .modal-continue {
+    width: 100%;
+    min-height: 50px;
 
-    width:
-        100%;
+    border: none;
 
-    min-height:
-        50px;
+    border-radius: 11px;
 
-    border:
-        none;
+    background: var(--blue);
 
-    border-radius:
-        11px;
+    color: white;
 
-    background:
-        var(--blue);
+    cursor: pointer;
 
-    color:
-        white;
-
-    cursor:
-        pointer;
-
-    font-size:
-        10px;
-
-    font-weight:
-        800;
+    font-size: 10px;
+    font-weight: 800;
 }
-
 
 .modal-continue:disabled {
+    background: #9ca3af;
 
-    background:
-        #9ca3af;
-
-    cursor:
-        not-allowed;
+    cursor: not-allowed;
 }
 
-
 .process-notice {
+    margin-top: 11px;
 
-    margin-top:
-        11px;
+    padding: 10px 11px;
 
-    padding:
-        10px 11px;
-
-    background:
-        #f5f3ff;
+    background: #f5f3ff;
 
     border:
         1px solid #ddd6fe;
 
-    border-radius:
-        10px;
+    border-radius: 10px;
 
-    color:
-        #6d28d9;
+    color: #6d28d9;
 
-    text-align:
-        center;
+    text-align: center;
 
-    font-size:
-        8px;
+    font-size: 8px;
 
-    line-height:
-        1.55;
+    line-height: 1.55;
 }
 
 
@@ -1917,44 +1570,26 @@ button {
 ========================================================== */
 
 .loading-screen {
+    position: fixed;
 
-    position:
-        fixed;
+    inset: 0;
 
-    inset:
-        0;
+    z-index: 9999;
 
-    z-index:
-        9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    background:
-        #f4f7fb;
+    background: #f4f7fb;
 }
-
 
 .loader {
-
-    text-align:
-        center;
+    text-align: center;
 }
 
-
 .spinner {
-
-    width:
-        43px;
-
-    height:
-        43px;
+    width: 43px;
+    height: 43px;
 
     margin:
         0 auto 13px;
@@ -1965,98 +1600,68 @@ button {
     border-top-color:
         var(--blue);
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     animation:
         spin .8s linear infinite;
 }
 
-
 @keyframes spin {
-
     to {
-        transform:
-            rotate(360deg);
+        transform: rotate(360deg);
     }
-
 }
-
 
 .loader strong {
+    display: block;
 
-    display:
-        block;
+    margin-bottom: 4px;
 
-    margin-bottom:
-        4px;
-
-    font-size:
-        13px;
+    font-size: 13px;
 }
 
-
 .loader span {
+    color: var(--muted);
 
-    color:
-        var(--muted);
-
-    font-size:
-        9px;
+    font-size: 9px;
 }
 
 
 /* ==========================================================
-   EMPTY / ERROR
+   ERROR
 ========================================================== */
 
 .message-card {
+    max-width: 700px;
 
-    max-width:
-        700px;
+    margin: 40px auto;
 
-    margin:
-        40px auto;
+    padding: 35px 24px;
 
-    padding:
-        35px 24px;
-
-    background:
-        white;
+    background: white;
 
     border:
         1px solid #e5e7eb;
 
-    border-radius:
-        20px;
+    border-radius: 20px;
 
-    text-align:
-        center;
+    text-align: center;
 }
-
 
 .message-card h2 {
+    margin: 0 0 7px;
 
-    margin:
-        0 0 7px;
-
-    font-size:
-        21px;
+    font-size: 21px;
 }
 
-
 .message-card p {
-
     margin: 0;
 
-    color:
-        #6b7280;
+    color: #6b7280;
 
-    font-size:
-        10px;
+    font-size: 10px;
 
-    line-height:
-        1.6;
+    line-height: 1.6;
 }
 
 
@@ -2067,19 +1672,12 @@ button {
 @media(max-width:1100px) {
 
     .layout {
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
-
     .summary-card {
-
-        position:
-            relative;
-
-        top:
-            auto;
+        position: relative;
+        top: auto;
     }
 
 }
@@ -2088,134 +1686,121 @@ button {
 @media(max-width:700px) {
 
     .nav {
-
-        min-height:
-            64px;
+        min-height: 64px;
 
         padding:
             0 13px;
     }
 
-
     .brand-logo {
-
-        height:
-            35px;
+        height: 35px;
     }
 
-
     .back-link {
-
-        min-height:
-            34px;
+        min-height: 34px;
 
         padding:
             0 10px;
 
-        font-size:
-            7px;
+        font-size: 7px;
     }
-
 
     .event-hero {
-
-        min-height:
-            235px;
+        min-height: 235px;
     }
 
-
     .event-hero-content {
-
-        min-height:
-            235px;
+        min-height: 235px;
 
         padding:
             25px 14px;
 
-        gap:
-            18px;
+        gap: 18px;
     }
-
 
     .event-poster {
+        width: 110px;
 
-        width:
-            110px;
-
-        border-radius:
-            12px;
+        border-radius: 12px;
     }
-
 
     .event-info h1 {
+        font-size: 25px;
 
-        font-size:
-            25px;
-
-        letter-spacing:
-            -.6px;
+        letter-spacing: -.6px;
     }
-
 
     .event-meta {
-
-        font-size:
-            9px;
+        font-size: 9px;
     }
 
-
     .event-price {
-
-        margin-top:
-            11px;
+        margin-top: 11px;
 
         padding:
             8px 10px;
 
-        font-size:
-            9px;
+        font-size: 9px;
     }
-
 
     .page {
-
         padding:
-            17px 10px 110px;
+            17px 10px 120px;
     }
 
-
     .map-header {
-
         padding:
             17px 15px;
     }
 
-
     .map-scroll {
+        padding: 14px;
 
-        padding:
-            12px;
+        /*
+        Una altura cómoda en celular.
+        El mapa puede desplazarse dentro.
+        */
+        max-height:
+            68vh;
     }
 
+    .zoom-controls {
+        position: absolute;
+
+        top: 10px;
+        right: 10px;
+    }
+
+    .zoom-button {
+        width: 43px;
+        height: 41px;
+    }
+
+    .zoom-label {
+        width: 43px;
+    }
+
+    .zoom-reset {
+        width: 43px;
+    }
+
+    .zoom-help {
+        left: 10px;
+        bottom: 9px;
+
+        font-size: 6px;
+    }
 
     .summary-card {
-
-        display:
-            none;
+        display: none;
     }
-
 
     .mobile-cart {
-
-        display:
-            block;
+        display: block;
     }
 
-
     .modal-box {
-
-        border-radius:
-            18px;
+        border-radius: 18px;
     }
 
 }
@@ -2224,40 +1809,25 @@ button {
 @media(max-width:470px) {
 
     .event-poster {
-
-        width:
-            88px;
+        width: 88px;
     }
-
 
     .event-info h1 {
-
-        font-size:
-            21px;
+        font-size: 21px;
     }
-
 
     .event-label {
-
-        font-size:
-            7px;
+        font-size: 7px;
     }
-
 
     .event-meta {
+        gap: 5px;
 
-        gap:
-            5px;
-
-        font-size:
-            8px;
+        font-size: 8px;
     }
 
-
     .event-price {
-
-        font-size:
-            8px;
+        font-size: 8px;
     }
 
 }
@@ -2330,7 +1900,7 @@ button {
 
 
 <!-- ======================================================
-     EVENT HERO
+     HERO
 ====================================================== -->
 
 <section class="event-hero">
@@ -2346,7 +1916,6 @@ button {
 
     <div class="event-hero-content">
 
-
         <img
             src="/FLYER%201080X1350.png"
             class="event-poster"
@@ -2356,37 +1925,25 @@ button {
 
         <div class="event-info">
 
-
             <div class="event-label">
-
                 EVENTO EN VENTA
-
             </div>
 
 
             <h1 id="eventName">
-
                 Live Tickets
-
             </h1>
 
 
             <div class="event-meta">
 
-
                 <div id="eventDate">
-
                     📅 —
-
                 </div>
-
 
                 <div id="eventPlace">
-
                     📍 —
-
                 </div>
-
 
             </div>
 
@@ -2399,9 +1956,7 @@ button {
 
             </div>
 
-
         </div>
-
 
     </div>
 
@@ -2445,7 +2000,6 @@ button {
 
         <div class="legend">
 
-
             <div class="legend-item">
 
                 <span class="legend-dot legend-available">
@@ -2485,43 +2039,117 @@ button {
 
             </div>
 
-
         </div>
-
 
     </div>
 
 
-    <div class="map-scroll">
+    <!-- ==================================================
+         MAP WRAPPER + ZOOM
+    =================================================== -->
+
+    <div class="map-wrapper">
 
 
-        <div
-            class="map"
-            id="map">
+        <!-- ZOOM CONTROLS -->
+
+        <div class="zoom-controls">
+
+            <button
+                type="button"
+                class="zoom-button"
+                id="zoomInButton"
+                onclick="zoomIn()"
+                title="Acercar">
+
+                +
+
+            </button>
 
 
-            <div class="stage">
+            <div
+                class="zoom-label"
+                id="zoomLabel">
 
-                ESCENARIO
-
-                <span class="stage-sub">
-
-                    FRONT STAGE
-
-                </span>
+                100%
 
             </div>
 
 
+            <button
+                type="button"
+                class="zoom-button"
+                id="zoomOutButton"
+                onclick="zoomOut()"
+                title="Alejar">
+
+                −
+
+            </button>
+
+
+            <button
+                type="button"
+                class="zoom-reset"
+                onclick="resetZoom()"
+                title="Restablecer zoom">
+
+                ↻
+
+            </button>
+
+        </div>
+
+
+        <div class="zoom-help">
+
+            ARRASTRA PARA MOVER · PELLIZCA PARA ZOOM
+
+        </div>
+
+
+        <!-- SCROLL AREA -->
+
+        <div
+            class="map-scroll"
+            id="mapScroll">
+
+
             <div
-                class="tables-grid"
-                id="tablesGrid">
+                class="map-zoom-shell"
+                id="mapZoomShell">
+
+
+                <div
+                    class="map"
+                    id="map">
+
+
+                    <div class="stage">
+
+                        ESCENARIO
+
+                        <span class="stage-sub">
+                            FRONT STAGE
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="tables-grid"
+                        id="tablesGrid">
+
+                    </div>
+
+
+                </div>
+
 
             </div>
 
 
         </div>
-
 
     </div>
 
@@ -2566,9 +2194,7 @@ button {
 
 
         <div class="selected-title">
-
             ASIENTOS SELECCIONADOS
-
         </div>
 
 
@@ -2577,9 +2203,7 @@ button {
             id="selectedList">
 
             <div class="empty-selection">
-
                 Aún no has seleccionado asientos.
-
             </div>
 
         </div>
@@ -2642,15 +2266,12 @@ button {
 
         </div>
 
-
     </div>
-
 
 </aside>
 
 
 </div>
-
 
 </main>
 
@@ -2692,7 +2313,6 @@ button {
 
     </div>
 
-
 </div>
 
 
@@ -2719,7 +2339,7 @@ button {
                 </h2>
 
                 <p>
-                    Esta información será utilizada para tu reserva.
+                    Verifica bien tu correo antes de continuar.
                 </p>
 
             </div>
@@ -2733,14 +2353,13 @@ button {
 
             </button>
 
-
         </div>
 
 
         <div class="modal-content">
 
 
-            <!-- NAME -->
+            <!-- NOMBRE -->
 
             <div class="form-group">
 
@@ -2762,6 +2381,7 @@ button {
                     autocomplete="name"
                     maxlength="120">
 
+
                 <div
                     class="field-error"
                     id="nameError">
@@ -2773,7 +2393,7 @@ button {
             </div>
 
 
-            <!-- PHONE -->
+            <!-- TELÉFONO -->
 
             <div class="form-group">
 
@@ -2795,11 +2415,13 @@ button {
                     autocomplete="tel"
                     maxlength="30">
 
+
                 <div class="field-help">
 
-                    Incluye un número donde podamos contactarte si es necesario.
+                    Ingresa un número donde podamos contactarte.
 
                 </div>
+
 
                 <div
                     class="field-error"
@@ -2833,7 +2455,10 @@ button {
                     placeholder="Ej. cliente@gmail.com"
                     autocomplete="email"
                     inputmode="email"
+                    autocapitalize="none"
+                    spellcheck="false"
                     maxlength="180">
+
 
                 <div
                     class="field-error"
@@ -2846,36 +2471,32 @@ button {
             </div>
 
 
-            <!-- EMAIL NOTICE -->
+            <!-- EMAIL INFO -->
 
             <div class="email-notice">
 
 
                 <div class="email-notice-icon">
-
                     ✉
-
                 </div>
 
 
                 <div>
 
                     <strong>
-
                         AQUÍ RECIBIRÁS TUS ENTRADAS
-
                     </strong>
 
                     <span>
 
-                        Después de aprobarse el pago, Live Tickets
-                        enviará todos tus códigos QR a este correo.
+                        Después de aprobarse el pago,
+                        Live Tickets enviará todos tus
+                        códigos QR a este correo.
                         Verifica que esté escrito correctamente.
 
                     </span>
 
                 </div>
-
 
             </div>
 
@@ -2923,7 +2544,6 @@ button {
 
                 </div>
 
-
             </div>
 
 
@@ -2940,17 +2560,16 @@ button {
             <div class="process-notice">
 
                 Al continuar, tus asientos pasarán a
-                <strong>En proceso</strong> durante aproximadamente
-                10 minutos mientras completas la compra.
+                <strong>En proceso</strong>
+                durante aproximadamente 10 minutos
+                mientras completas la compra.
 
             </div>
 
 
         </div>
 
-
     </div>
-
 
 </div>
 
@@ -2958,7 +2577,7 @@ button {
 <script>
 
 /* ==========================================================
-   CONFIGURACIÓN
+   SUPABASE
 ========================================================== */
 
 const SUPABASE_URL =
@@ -2981,7 +2600,7 @@ const db =
 
 
 /* ==========================================================
-   EVENT ID
+   EVENT
 ========================================================== */
 
 const params =
@@ -3019,6 +2638,50 @@ let selectedSeatIds =
 
 let refreshing =
     false;
+
+
+/* ==========================================================
+   ZOOM CONFIG
+========================================================== */
+
+const ZOOM_MIN =
+    0.60;
+
+
+const ZOOM_MAX =
+    1.80;
+
+
+const ZOOM_STEP =
+    0.10;
+
+
+let currentZoom =
+    1;
+
+
+let pinchStartDistance =
+    0;
+
+
+let pinchStartZoom =
+    1;
+
+
+let pinchCenterX =
+    0;
+
+
+let pinchCenterY =
+    0;
+
+
+let pinchContentX =
+    0;
+
+
+let pinchContentY =
+    0;
 
 
 /* ==========================================================
@@ -3065,7 +2728,7 @@ function escapeHTML(value) {
 
 
 /* ==========================================================
-   VALID EMAIL
+   EMAIL
 ========================================================== */
 
 function validEmail(value) {
@@ -3082,7 +2745,7 @@ function validEmail(value) {
 
 
 /* ==========================================================
-   VALID PHONE
+   PHONE
 ========================================================== */
 
 function validPhone(value) {
@@ -3160,20 +2823,14 @@ function formatEventDate(value) {
 
 
 /* ==========================================================
-   EVENT IMAGE
+   IMAGE
 ========================================================== */
 
-function getEventImage(
-    event
-) {
+function getEventImage(event) {
 
-    const image =
-        event?.flyer_url
+    return event?.flyer_url
         ||
         DEFAULT_FLYER;
-
-
-    return image;
 
 }
 
@@ -3208,7 +2865,6 @@ async function cleanupExpired() {
     }
 
     catch(error) {
-
 
         console.warn(
             "Cleanup:",
@@ -3252,18 +2908,14 @@ async function loadEvent() {
         .maybeSingle();
 
 
-    if (
-        error
-    ) {
+    if (error) {
 
         throw error;
 
     }
 
 
-    if (
-        !data
-    ) {
+    if (!data) {
 
         throw new Error(
             "Evento no encontrado."
@@ -3373,7 +3025,7 @@ function renderEvent() {
 
 
 /* ==========================================================
-   LOAD TABLES + SEATS
+   LOAD TABLES / SEATS
 ========================================================== */
 
 async function loadTablesAndSeats() {
@@ -3396,15 +3048,12 @@ async function loadTablesAndSeats() {
         .order(
             "numero",
             {
-                ascending:
-                    true
+                ascending: true
             }
         );
 
 
-    if (
-        tableError
-    ) {
+    if (tableError) {
 
         throw tableError;
 
@@ -3449,15 +3098,12 @@ async function loadTablesAndSeats() {
             .order(
                 "numero",
                 {
-                    ascending:
-                        true
+                    ascending: true
                 }
             );
 
 
-        if (
-            seatError
-        ) {
+        if (seatError) {
 
             throw seatError;
 
@@ -3470,11 +3116,30 @@ async function loadTablesAndSeats() {
     }
 
 
-    /*
-    Si un asiento seleccionado por el usuario
-    dejó de estar disponible mientras navegaba,
-    lo quitamos de la selección.
-    */
+    removeUnavailableSelections();
+
+
+    renderTables();
+
+    renderSummary();
+
+
+    requestAnimationFrame(
+        () => {
+
+            updateZoomLayout();
+
+        }
+    );
+
+}
+
+
+/* ==========================================================
+   REMOVE INVALID SELECTIONS
+========================================================== */
+
+function removeUnavailableSelections() {
 
     for (
         const seatId
@@ -3503,11 +3168,6 @@ async function loadTablesAndSeats() {
         }
 
     }
-
-
-    renderTables();
-
-    renderSummary();
 
 }
 
@@ -3691,9 +3351,7 @@ function renderTables() {
    CREATE SEAT
 ========================================================== */
 
-function createSeatButton(
-    seat
-) {
+function createSeatButton(seat) {
 
     const button =
         document
@@ -3720,9 +3378,7 @@ function createSeatButton(
         );
 
 
-    if (
-        selected
-    ) {
+    if (selected) {
 
         button.classList.add(
             "seleccionado"
@@ -3800,9 +3456,7 @@ function createSeatButton(
    TOGGLE SEAT
 ========================================================== */
 
-function toggleSeat(
-    seatId
-) {
+function toggleSeat(seatId) {
 
     const seat =
         seats.find(
@@ -3812,9 +3466,7 @@ function toggleSeat(
         );
 
 
-    if (
-        !seat
-    ) {
+    if (!seat) {
 
         return;
 
@@ -3834,6 +3486,7 @@ function toggleSeat(
     }
 
     else {
+
 
         if (
             seat.estado !==
@@ -3860,7 +3513,7 @@ function toggleSeat(
 
 
 /* ==========================================================
-   SEAT DETAILS
+   SELECTED DETAILS
 ========================================================== */
 
 function getSelectedDetails() {
@@ -3900,6 +3553,7 @@ function getSelectedDetails() {
 
         result.push(
             {
+
                 id:
                     seat.id,
 
@@ -3909,6 +3563,7 @@ function getSelectedDetails() {
                 mesa:
                     table?.numero
                     ?? "—"
+
             }
         );
 
@@ -4107,9 +3762,7 @@ function renderSummary() {
         );
 
 
-    if (
-        !quantity
-    ) {
+    if (!quantity) {
 
         list.innerHTML = `
 
@@ -4144,6 +3797,7 @@ function renderSummary() {
 
 
                     <button
+                        type="button"
                         class="remove-seat"
                         onclick="toggleSeat(${Number(item.id)})"
                         title="Quitar">
@@ -4162,7 +3816,654 @@ function renderSummary() {
 
 
 /* ==========================================================
-   MODAL
+   ZOOM - HELPERS
+========================================================== */
+
+function clampZoom(value) {
+
+    return Math.min(
+        ZOOM_MAX,
+        Math.max(
+            ZOOM_MIN,
+            value
+        )
+    );
+
+}
+
+
+/* ==========================================================
+   APPLY ZOOM
+========================================================== */
+
+function applyZoom(
+    newZoom,
+    preserveCenter = true
+) {
+
+    const map =
+        document
+        .getElementById(
+            "map"
+        );
+
+
+    const shell =
+        document
+        .getElementById(
+            "mapZoomShell"
+        );
+
+
+    const scroll =
+        document
+        .getElementById(
+            "mapScroll"
+        );
+
+
+    if (
+        !map ||
+        !shell ||
+        !scroll
+    ) {
+
+        return;
+
+    }
+
+
+    const oldZoom =
+        currentZoom;
+
+
+    const clampedZoom =
+        clampZoom(
+            newZoom
+        );
+
+
+    let contentCenterX =
+        null;
+
+
+    let contentCenterY =
+        null;
+
+
+    if (
+        preserveCenter &&
+        oldZoom > 0
+    ) {
+
+
+        contentCenterX =
+
+            (
+                scroll.scrollLeft
+                +
+                scroll.clientWidth / 2
+            )
+
+            /
+
+            oldZoom;
+
+
+        contentCenterY =
+
+            (
+                scroll.scrollTop
+                +
+                scroll.clientHeight / 2
+            )
+
+            /
+
+            oldZoom;
+
+    }
+
+
+    currentZoom =
+        clampedZoom;
+
+
+    map.style.transform =
+        `scale(${currentZoom})`;
+
+
+    updateZoomLayout();
+
+
+    if (
+        preserveCenter &&
+        contentCenterX !== null &&
+        contentCenterY !== null
+    ) {
+
+
+        scroll.scrollLeft =
+
+            contentCenterX
+            *
+            currentZoom
+
+            -
+
+            scroll.clientWidth / 2;
+
+
+        scroll.scrollTop =
+
+            contentCenterY
+            *
+            currentZoom
+
+            -
+
+            scroll.clientHeight / 2;
+
+    }
+
+
+    updateZoomControls();
+
+}
+
+
+/* ==========================================================
+   UPDATE ZOOM SHELL
+========================================================== */
+
+function updateZoomLayout() {
+
+    const map =
+        document
+        .getElementById(
+            "map"
+        );
+
+
+    const shell =
+        document
+        .getElementById(
+            "mapZoomShell"
+        );
+
+
+    if (
+        !map ||
+        !shell
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+    offsetWidth/offsetHeight no cambian
+    con CSS transform, por eso son ideales
+    para calcular el espacio físico necesario.
+    */
+
+    const width =
+        map.offsetWidth
+        *
+        currentZoom;
+
+
+    const height =
+        map.offsetHeight
+        *
+        currentZoom;
+
+
+    shell.style.width =
+        `${Math.ceil(width)}px`;
+
+
+    shell.style.height =
+        `${Math.ceil(height)}px`;
+
+
+    map.style.transform =
+        `scale(${currentZoom})`;
+
+
+    updateZoomControls();
+
+}
+
+
+/* ==========================================================
+   ZOOM BUTTONS
+========================================================== */
+
+function zoomIn() {
+
+    applyZoom(
+        currentZoom +
+        ZOOM_STEP
+    );
+
+}
+
+
+function zoomOut() {
+
+    applyZoom(
+        currentZoom -
+        ZOOM_STEP
+    );
+
+}
+
+
+function resetZoom() {
+
+    applyZoom(
+        1
+    );
+
+}
+
+
+/* ==========================================================
+   ZOOM CONTROLS UI
+========================================================== */
+
+function updateZoomControls() {
+
+    const label =
+        document
+        .getElementById(
+            "zoomLabel"
+        );
+
+
+    const plus =
+        document
+        .getElementById(
+            "zoomInButton"
+        );
+
+
+    const minus =
+        document
+        .getElementById(
+            "zoomOutButton"
+        );
+
+
+    if (label) {
+
+        label.textContent =
+
+            `${Math.round(
+                currentZoom *
+                100
+            )}%`;
+
+    }
+
+
+    if (plus) {
+
+        plus.disabled =
+            currentZoom >=
+            ZOOM_MAX -
+            0.001;
+
+    }
+
+
+    if (minus) {
+
+        minus.disabled =
+            currentZoom <=
+            ZOOM_MIN +
+            0.001;
+
+    }
+
+}
+
+
+/* ==========================================================
+   TOUCH DISTANCE
+========================================================== */
+
+function touchDistance(touches) {
+
+    const dx =
+        touches[0].clientX
+        -
+        touches[1].clientX;
+
+
+    const dy =
+        touches[0].clientY
+        -
+        touches[1].clientY;
+
+
+    return Math.sqrt(
+        dx * dx +
+        dy * dy
+    );
+
+}
+
+
+/* ==========================================================
+   TOUCH CENTER
+========================================================== */
+
+function touchCenter(touches) {
+
+    return {
+
+        x:
+            (
+                touches[0].clientX
+                +
+                touches[1].clientX
+            )
+            /
+            2,
+
+        y:
+            (
+                touches[0].clientY
+                +
+                touches[1].clientY
+            )
+            /
+            2
+
+    };
+
+}
+
+
+/* ==========================================================
+   SETUP PINCH ZOOM
+========================================================== */
+
+function setupPinchZoom() {
+
+    const scroll =
+        document
+        .getElementById(
+            "mapScroll"
+        );
+
+
+    if (!scroll) {
+
+        return;
+
+    }
+
+
+    scroll.addEventListener(
+        "touchstart",
+        event => {
+
+
+            if (
+                event.touches.length !==
+                2
+            ) {
+
+                pinchStartDistance =
+                    0;
+
+                return;
+
+            }
+
+
+            pinchStartDistance =
+                touchDistance(
+                    event.touches
+                );
+
+
+            pinchStartZoom =
+                currentZoom;
+
+
+            const center =
+                touchCenter(
+                    event.touches
+                );
+
+
+            const rect =
+                scroll
+                .getBoundingClientRect();
+
+
+            pinchCenterX =
+                center.x -
+                rect.left;
+
+
+            pinchCenterY =
+                center.y -
+                rect.top;
+
+
+            pinchContentX =
+
+                (
+                    scroll.scrollLeft
+                    +
+                    pinchCenterX
+                )
+
+                /
+
+                currentZoom;
+
+
+            pinchContentY =
+
+                (
+                    scroll.scrollTop
+                    +
+                    pinchCenterY
+                )
+
+                /
+
+                currentZoom;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    scroll.addEventListener(
+        "touchmove",
+        event => {
+
+
+            if (
+                event.touches.length !==
+                2
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                !pinchStartDistance
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+            Prevenimos el zoom nativo solamente
+            cuando realmente hay dos dedos.
+            */
+
+            event.preventDefault();
+
+
+            const newDistance =
+                touchDistance(
+                    event.touches
+                );
+
+
+            const scale =
+                newDistance
+                /
+                pinchStartDistance;
+
+
+            const newZoom =
+                clampZoom(
+                    pinchStartZoom
+                    *
+                    scale
+                );
+
+
+            currentZoom =
+                newZoom;
+
+
+            const map =
+                document
+                .getElementById(
+                    "map"
+                );
+
+
+            map.style.transform =
+                `scale(${currentZoom})`;
+
+
+            updateZoomLayout();
+
+
+            scroll.scrollLeft =
+
+                pinchContentX
+                *
+                currentZoom
+
+                -
+
+                pinchCenterX;
+
+
+            scroll.scrollTop =
+
+                pinchContentY
+                *
+                currentZoom
+
+                -
+
+                pinchCenterY;
+
+
+            updateZoomControls();
+
+        },
+        {
+            passive: false
+        }
+    );
+
+
+    scroll.addEventListener(
+        "touchend",
+        event => {
+
+
+            if (
+                event.touches.length <
+                2
+            ) {
+
+                pinchStartDistance =
+                    0;
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /*
+    Trackpad / Ctrl + rueda en computadora.
+    */
+
+    scroll.addEventListener(
+        "wheel",
+        event => {
+
+
+            if (
+                !event.ctrlKey &&
+                !event.metaKey
+            ) {
+
+                return;
+
+            }
+
+
+            event.preventDefault();
+
+
+            const direction =
+                event.deltaY < 0
+                ?
+                1
+                :
+                -1;
+
+
+            applyZoom(
+
+                currentZoom
+
+                +
+
+                direction *
+                ZOOM_STEP
+
+            );
+
+        },
+        {
+            passive: false
+        }
+    );
+
+}
+
+
+/* ==========================================================
+   BUYER MODAL
 ========================================================== */
 
 function openBuyerModal() {
@@ -4209,6 +4510,10 @@ function openBuyerModal() {
 }
 
 
+/* ==========================================================
+   CLOSE MODAL
+========================================================== */
+
 function closeBuyerModal() {
 
     document
@@ -4223,9 +4528,11 @@ function closeBuyerModal() {
 }
 
 
-function modalBackgroundClick(
-    event
-) {
+/* ==========================================================
+   MODAL BG
+========================================================== */
+
+function modalBackgroundClick(event) {
 
     if (
         event.target.id ===
@@ -4240,20 +4547,17 @@ function modalBackgroundClick(
 
 
 /* ==========================================================
-   CLEAR ERRORS
+   CLEAR FORM ERRORS
 ========================================================== */
 
 function clearFormErrors() {
 
-    const inputs =
-        [
-            "buyerName",
-            "buyerPhone",
-            "buyerEmail"
-        ];
-
-
-    inputs.forEach(
+    [
+        "buyerName",
+        "buyerPhone",
+        "buyerEmail"
+    ]
+    .forEach(
         id => {
 
             document
@@ -4435,9 +4739,11 @@ function validateBuyer() {
 
 
     return {
+
         name,
         phone,
         email
+
     };
 
 }
@@ -4495,10 +4801,19 @@ async function createPreReservation() {
 
 
         /*
-        Actualizamos estados antes de intentar reservar,
-        para reducir el riesgo de que el comprador esté
-        intentando tomar un asiento que otro usuario bloqueó.
+        Guardamos la selección original.
+        Si otro comprador tomó uno mientras
+        llenábamos los datos, NO continuamos
+        parcialmente con menos asientos.
         */
+
+        const originalSeatIds =
+            [...selectedSeatIds]
+            .map(
+                id =>
+                    Number(id)
+            );
+
 
         await cleanupExpired();
 
@@ -4506,7 +4821,7 @@ async function createPreReservation() {
         await refreshSeatsOnly();
 
 
-        const selectedIds =
+        const currentSeatIds =
             [...selectedSeatIds]
             .map(
                 id =>
@@ -4515,7 +4830,21 @@ async function createPreReservation() {
 
 
         if (
-            !selectedIds.length
+            currentSeatIds.length !==
+            originalSeatIds.length
+        ) {
+
+            throw new Error(
+
+                "Uno o más de los asientos seleccionados dejaron de estar disponibles. Revisa nuevamente tu selección."
+
+            );
+
+        }
+
+
+        if (
+            !currentSeatIds.length
         ) {
 
             throw new Error(
@@ -4543,15 +4872,13 @@ async function createPreReservation() {
                     buyer.email,
 
                 p_asientos:
-                    selectedIds
+                    currentSeatIds
 
             }
         );
 
 
-        if (
-            error
-        ) {
+        if (error) {
 
             throw error;
 
@@ -4607,15 +4934,13 @@ async function createPreReservation() {
         if (!token) {
 
             throw new Error(
+
                 "La reserva fue creada, pero no se recibió el token público."
+
             );
 
         }
 
-
-        /*
-        Redirigir al checkout.
-        */
 
         window.location.href =
 
@@ -4641,14 +4966,10 @@ async function createPreReservation() {
 
             ||
 
-            "No fue posible crear la reserva. Actualiza la página e intenta nuevamente."
+            "No fue posible crear la reserva. Intenta nuevamente."
 
         );
 
-
-        /*
-        Refrescamos mapa si hubo conflicto.
-        */
 
         try {
 
@@ -4683,7 +5004,7 @@ async function createPreReservation() {
 
 
 /* ==========================================================
-   REFRESH SEATS ONLY
+   REFRESH SEATS
 ========================================================== */
 
 async function refreshSeatsOnly() {
@@ -4730,15 +5051,12 @@ async function refreshSeatsOnly() {
             .order(
                 "numero",
                 {
-                    ascending:
-                        true
+                    ascending: true
                 }
             );
 
 
-        if (
-            error
-        ) {
+        if (error) {
 
             throw error;
 
@@ -4749,38 +5067,21 @@ async function refreshSeatsOnly() {
             data || [];
 
 
-        for (
-            const seatId
-            of [...selectedSeatIds]
-        ) {
-
-
-            const seat =
-                seats.find(
-                    item =>
-                        Number(item.id) ===
-                        Number(seatId)
-                );
-
-
-            if (
-                !seat ||
-                seat.estado !==
-                "disponible"
-            ) {
-
-                selectedSeatIds.delete(
-                    seatId
-                );
-
-            }
-
-        }
+        removeUnavailableSelections();
 
 
         renderTables();
 
         renderSummary();
+
+
+        requestAnimationFrame(
+            () => {
+
+                updateZoomLayout();
+
+            }
+        );
 
 
     }
@@ -4806,8 +5107,8 @@ function startLiveRefresh() {
 
 
             /*
-            No refrescamos mientras el modal del comprador
-            esté abierto para no interrumpir la experiencia.
+            No interrumpimos al comprador
+            mientras llena el formulario.
             */
 
             if (
@@ -4828,9 +5129,12 @@ function startLiveRefresh() {
 
             try {
 
+
                 await cleanupExpired();
 
+
                 await refreshSeatsOnly();
+
 
             }
 
@@ -4852,28 +5156,6 @@ function startLiveRefresh() {
 
 
 /* ==========================================================
-   KEYBOARD
-========================================================== */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-
-        if (
-            event.key ===
-            "Escape"
-        ) {
-
-            closeBuyerModal();
-
-        }
-
-    }
-);
-
-
-/* ==========================================================
    INPUT ERROR CLEAR
 ========================================================== */
 
@@ -4888,6 +5170,7 @@ document
             this.classList.remove(
                 "invalid"
             );
+
 
             document
                 .getElementById(
@@ -4914,6 +5197,7 @@ document
                 "invalid"
             );
 
+
             document
                 .getElementById(
                     "phoneError"
@@ -4939,6 +5223,7 @@ document
                 "invalid"
             );
 
+
             document
                 .getElementById(
                     "emailError"
@@ -4953,12 +5238,94 @@ document
 
 
 /* ==========================================================
+   KEYBOARD
+========================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeBuyerModal();
+
+        }
+
+
+        /*
+        Desktop:
+        + para acercar
+        - para alejar
+
+        Solo si no estamos escribiendo
+        dentro de un input.
+        */
+
+        const tag =
+            document.activeElement
+            ?.tagName
+            ?.toLowerCase();
+
+
+        const typing =
+            tag === "input"
+            ||
+            tag === "textarea";
+
+
+        if (typing) {
+
+            return;
+
+        }
+
+
+        if (
+            event.key === "+"
+            ||
+            event.key === "="
+        ) {
+
+            zoomIn();
+
+        }
+
+
+        if (
+            event.key === "-"
+        ) {
+
+            zoomOut();
+
+        }
+
+    }
+);
+
+
+/* ==========================================================
+   RESIZE
+========================================================== */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        updateZoomLayout();
+
+    }
+);
+
+
+/* ==========================================================
    ERROR PAGE
 ========================================================== */
 
-function showPageError(
-    message
-) {
+function showPageError(message) {
 
     document
         .getElementById(
@@ -5001,6 +5368,29 @@ async function initialize() {
 
 
         await loadTablesAndSeats();
+
+
+        setupPinchZoom();
+
+
+        /*
+        Zoom inicial normal.
+        */
+
+        currentZoom =
+            1;
+
+
+        requestAnimationFrame(
+            () => {
+
+                applyZoom(
+                    1,
+                    false
+                );
+
+            }
+        );
 
 
         startLiveRefresh();
@@ -5049,7 +5439,5 @@ initialize();
 
 </script>
 
-
 </body>
-
 </html>
