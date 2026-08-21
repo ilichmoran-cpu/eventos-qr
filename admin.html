@@ -11,6 +11,7 @@
 <title>Administración del Evento</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
 <style>
 
@@ -41,10 +42,12 @@ header p {
 }
 
 .contenedor {
-    max-width: 1200px;
+    max-width: 1250px;
     margin: 30px auto;
     padding: 0 20px 50px;
 }
+
+/* LOGIN */
 
 .login {
     background: white;
@@ -74,18 +77,35 @@ header p {
 }
 
 .boton {
-    width: 100%;
     background: #111;
     color: white;
     border: none;
-    padding: 14px;
+    padding: 12px 18px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .boton:hover {
     background: #333;
+}
+
+.boton-login {
+    width: 100%;
+    padding: 14px;
+}
+
+.boton-salir {
+    background: #c0392b;
+}
+
+.boton-salir:hover {
+    background: #a93226;
+}
+
+.boton-boletos {
+    background: #111;
+    white-space: nowrap;
 }
 
 .error {
@@ -95,6 +115,8 @@ header p {
     border-radius: 8px;
     margin-bottom: 15px;
 }
+
+/* PANEL */
 
 .dashboard {
     display: grid;
@@ -121,6 +143,16 @@ header p {
     font-size: 35px;
     font-weight: bold;
 }
+
+.barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+/* TABLA */
 
 .tabla-contenedor {
     background: white;
@@ -161,32 +193,107 @@ th {
     margin-bottom: 5px;
 }
 
-.oculto {
-    display: none;
-}
-
-.boton-salir {
-    background: #c0392b;
-    width: auto;
-    padding: 10px 20px;
-}
-
-.boton-salir:hover {
-    background: #a93226;
-}
-
-.barra-superior {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
 .cargando {
     text-align: center;
     padding: 30px;
     color: #777;
+}
+
+.oculto {
+    display: none;
+}
+
+/* MODAL BOLETOS */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.75);
+    overflow-y: auto;
+    padding: 25px;
+}
+
+.modal-contenido {
+    background: white;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.modal-contenido h2 {
+    margin-top: 0;
+}
+
+.cerrar-modal {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.lista-boletos {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.boleto-admin {
+    background: #f5f5f5;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.boleto-admin h3 {
+    margin-top: 0;
+}
+
+.qr-admin {
+    display: flex;
+    justify-content: center;
+    background: white;
+    padding: 15px;
+    width: fit-content;
+    margin: 15px auto;
+    border-radius: 10px;
+}
+
+.estado-boleto {
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.estado-valido {
+    background: #d9fbe5;
+    color: #146c35;
+}
+
+.estado-utilizado {
+    background: #ffe0e0;
+    color: #a00000;
+}
+
+.codigo-reserva-modal {
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 15px 0;
+    font-weight: bold;
 }
 
 @media(max-width:600px) {
@@ -203,7 +310,15 @@ th {
     th,
     td {
         font-size: 14px;
+        padding: 9px;
+    }
+
+    .modal {
         padding: 10px;
+    }
+
+    .modal-contenido {
+        padding: 25px 15px;
     }
 
 }
@@ -211,6 +326,7 @@ th {
 </style>
 
 </head>
+
 
 <body>
 
@@ -226,9 +342,7 @@ th {
 <div class="contenedor">
 
 
-<!-- ==============================
-     LOGIN
-============================== -->
+<!-- LOGIN -->
 
 <div id="login"
      class="login">
@@ -268,7 +382,7 @@ placeholder="Contraseña">
 </div>
 
 <button
-class="boton"
+class="boton boton-login"
 onclick="iniciarSesion()">
 
 INGRESAR
@@ -278,9 +392,7 @@ INGRESAR
 </div>
 
 
-<!-- ==============================
-     PANEL
-============================== -->
+<!-- PANEL -->
 
 <div id="panel"
      class="oculto">
@@ -314,9 +426,7 @@ CERRAR SESIÓN
 
 <div class="tarjeta">
 
-<h3>
-TOTAL ASIENTOS
-</h3>
+<h3>TOTAL ASIENTOS</h3>
 
 <div
 class="numero"
@@ -329,9 +439,7 @@ id="totalAsientos">
 
 <div class="tarjeta">
 
-<h3>
-DISPONIBLES
-</h3>
+<h3>DISPONIBLES</h3>
 
 <div
 class="numero"
@@ -344,9 +452,7 @@ id="disponibles">
 
 <div class="tarjeta">
 
-<h3>
-RESERVADOS
-</h3>
+<h3>RESERVADOS</h3>
 
 <div
 class="numero"
@@ -359,9 +465,7 @@ id="reservados">
 
 <div class="tarjeta">
 
-<h3>
-INGRESADOS
-</h3>
+<h3>INGRESADOS</h3>
 
 <div
 class="numero"
@@ -377,9 +481,7 @@ id="ingresados">
 
 <div class="tabla-contenedor">
 
-<h2>
-Reservas
-</h2>
+<h2>Reservas</h2>
 
 <div
 id="estadoCarga"
@@ -389,32 +491,25 @@ Cargando reservas...
 
 </div>
 
-<table id="tablaCompleta"
-       style="display:none;">
+<table
+id="tablaCompleta"
+style="display:none;">
 
 <thead>
 
 <tr>
 
-<th>
-Reserva
-</th>
+<th>Reserva</th>
 
-<th>
-Cliente
-</th>
+<th>Cliente</th>
 
-<th>
-Teléfono
-</th>
+<th>Teléfono</th>
 
-<th>
-Asientos
-</th>
+<th>Asientos</th>
 
-<th>
-Estado
-</th>
+<th>Estado</th>
+
+<th>Boletos</th>
 
 </tr>
 
@@ -432,6 +527,38 @@ Estado
 </div>
 
 
+<!-- MODAL BOLETOS -->
+
+<div
+id="modalBoletos"
+class="modal">
+
+<div class="modal-contenido">
+
+<span
+class="cerrar-modal"
+onclick="cerrarBoletos()">
+&times;
+</span>
+
+<h2>
+Boletos de la reserva
+</h2>
+
+<div
+id="informacionReserva">
+</div>
+
+<div
+id="listaBoletos"
+class="lista-boletos">
+</div>
+
+</div>
+
+</div>
+
+
 <script>
 
 /* ==========================================
@@ -441,15 +568,35 @@ Estado
 const SUPABASE_URL =
 "https://ysismkibffhzouxacaxv.supabase.co";
 
+/*
+PEGA AQUÍ TU PUBLISHABLE KEY
+NO USES SERVICE_ROLE
+*/
 
 const SUPABASE_KEY =
 "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
+
 
 const db =
 supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+
+
+/* ==========================================
+   DATOS GLOBALES
+========================================== */
+
+let datosReservas = [];
+
+let datosReservaAsientos = [];
+
+let datosAsientos = [];
+
+let datosMesas = [];
+
+let datosBoletos = [];
 
 
 /* ==========================================
@@ -460,8 +607,7 @@ async function iniciarSesion() {
 
     const email =
         document.getElementById("email")
-        .value
-        .trim();
+        .value.trim();
 
     const password =
         document.getElementById("password")
@@ -471,6 +617,7 @@ async function iniciarSesion() {
         document.getElementById("errorLogin");
 
     error.innerHTML = "";
+
 
     if (!email || !password) {
 
@@ -486,8 +633,8 @@ async function iniciarSesion() {
 
     const resultado =
         await db.auth.signInWithPassword({
-            email: email,
-            password: password
+            email,
+            password
         });
 
 
@@ -513,10 +660,13 @@ async function iniciarSesion() {
 
 async function mostrarPanel() {
 
-    document.getElementById("login")
+    document
+        .getElementById("login")
         .classList.add("oculto");
 
-    document.getElementById("panel")
+
+    document
+        .getElementById("panel")
         .classList.remove("oculto");
 
 
@@ -526,7 +676,8 @@ async function mostrarPanel() {
 
     if (usuario.data.user) {
 
-        document.getElementById("usuario")
+        document
+            .getElementById("usuario")
             .textContent =
             usuario.data.user.email;
     }
@@ -544,14 +695,13 @@ async function cargarDashboard() {
 
     try {
 
-        document.getElementById("estadoCarga")
+        document
+            .getElementById("estadoCarga")
             .textContent =
             "Cargando reservas...";
 
 
-        /* ==========================================
-           ASIENTOS
-        ========================================== */
+        /* ASIENTOS */
 
         const resultadoAsientos =
             await db
@@ -563,77 +713,79 @@ async function cargarDashboard() {
             throw resultadoAsientos.error;
 
 
-        const asientos =
+        datosAsientos =
             resultadoAsientos.data;
 
 
         const total =
-            asientos.length;
+            datosAsientos.length;
 
 
         const disponibles =
-            asientos.filter(
-                asiento =>
-                    asiento.estado === "disponible"
+            datosAsientos.filter(
+                a =>
+                a.estado === "disponible"
             ).length;
 
 
         const reservados =
-            asientos.filter(
-                asiento =>
-                    asiento.estado === "reservado" ||
-                    asiento.estado === "vendido"
+            datosAsientos.filter(
+                a =>
+                a.estado === "reservado" ||
+                a.estado === "vendido"
             ).length;
 
 
-        document.getElementById(
-            "totalAsientos"
-        ).textContent = total;
+        document
+            .getElementById("totalAsientos")
+            .textContent =
+            total;
 
 
-        document.getElementById(
-            "disponibles"
-        ).textContent = disponibles;
+        document
+            .getElementById("disponibles")
+            .textContent =
+            disponibles;
 
 
-        document.getElementById(
-            "reservados"
-        ).textContent = reservados;
+        document
+            .getElementById("reservados")
+            .textContent =
+            reservados;
 
 
-        /* ==========================================
-           BOLETOS / INGRESADOS
-        ========================================== */
+        /* BOLETOS */
 
         const resultadoBoletos =
             await db
             .from("boletos")
-            .select("id, estado");
+            .select(
+                "id, reserva_id, asiento_id, token, estado, fecha_ingreso"
+            );
 
 
         if (resultadoBoletos.error)
             throw resultadoBoletos.error;
 
 
-        const boletos =
+        datosBoletos =
             resultadoBoletos.data;
 
 
         const ingresados =
-            boletos.filter(
-                boleto =>
-                    boleto.estado === "utilizado"
+            datosBoletos.filter(
+                b =>
+                b.estado === "utilizado"
             ).length;
 
 
-        document.getElementById(
-            "ingresados"
-        ).textContent = ingresados;
+        document
+            .getElementById("ingresados")
+            .textContent =
+            ingresados;
 
 
-        /* ==========================================
-           RESERVAS
-        ========================================== */
+        /* RESERVAS */
 
         const resultadoReservas =
             await db
@@ -649,13 +801,11 @@ async function cargarDashboard() {
             throw resultadoReservas.error;
 
 
-        const reservas =
+        datosReservas =
             resultadoReservas.data;
 
 
-        /* ==========================================
-           RELACIÓN RESERVA - ASIENTOS
-        ========================================== */
+        /* RESERVA ASIENTOS */
 
         const resultadoReservaAsientos =
             await db
@@ -667,13 +817,11 @@ async function cargarDashboard() {
             throw resultadoReservaAsientos.error;
 
 
-        const reservaAsientos =
+        datosReservaAsientos =
             resultadoReservaAsientos.data;
 
 
-        /* ==========================================
-           MESAS
-        ========================================== */
+        /* MESAS */
 
         const resultadoMesas =
             await db
@@ -685,167 +833,23 @@ async function cargarDashboard() {
             throw resultadoMesas.error;
 
 
-        const mesas =
+        datosMesas =
             resultadoMesas.data;
 
 
-        /* ==========================================
-           CONSTRUIR TABLA
-        ========================================== */
-
-        const tabla =
-            document.getElementById(
-                "tablaReservas"
-            );
+        construirTabla();
 
 
-        tabla.innerHTML = "";
+        document
+            .getElementById("estadoCarga")
+            .style.display =
+            "none";
 
 
-        reservas.forEach(reserva => {
-
-            const fila =
-                document.createElement("tr");
-
-
-            /*
-            Buscar todos los registros de
-            reserva_asientos pertenecientes
-            a esta reserva.
-            */
-
-            const relaciones =
-                reservaAsientos.filter(
-                    relacion =>
-                        Number(relacion.reserva_id) ===
-                        Number(reserva.id)
-                );
-
-
-            /*
-            Construir detalle:
-            Mesa X — Asiento X
-            */
-
-            const detalles = [];
-
-
-            relaciones.forEach(relacion => {
-
-                const asiento =
-                    asientos.find(
-                        item =>
-                            Number(item.id) ===
-                            Number(relacion.asiento_id)
-                    );
-
-
-                if (!asiento)
-                    return;
-
-
-                const mesa =
-                    mesas.find(
-                        item =>
-                            Number(item.id) ===
-                            Number(asiento.mesa_id)
-                    );
-
-
-                if (!mesa)
-                    return;
-
-
-                detalles.push(
-                    `Mesa ${mesa.numero} — Asiento ${asiento.numero}`
-                );
-
-            });
-
-
-            /*
-            Construir contenido de columna Asientos
-            */
-
-            let textoAsientos = "";
-
-
-            if (detalles.length === 0) {
-
-                textoAsientos =
-                    `<span>Sin asientos</span>`;
-
-            } else {
-
-                textoAsientos = `
-
-                    <span class="cantidad-asientos">
-                        ${detalles.length}
-                        ${detalles.length === 1
-                            ? "asiento"
-                            : "asientos"}
-                    </span>
-
-                    <div class="detalle-asientos">
-
-                        ${detalles
-                            .map(
-                                detalle =>
-                                    `${detalle}<br>`
-                            )
-                            .join("")}
-
-                    </div>
-
-                `;
-
-            }
-
-
-            /*
-            Crear fila
-            */
-
-            fila.innerHTML = `
-
-                <td>
-                    ${reserva.codigo_reserva || reserva.id}
-                </td>
-
-                <td>
-                    ${reserva.nombre_cliente || ""}
-                </td>
-
-                <td>
-                    ${reserva.telefono || ""}
-                </td>
-
-                <td>
-                    ${textoAsientos}
-                </td>
-
-                <td class="estado">
-                    ${reserva.estado || "Registrada"}
-                </td>
-
-            `;
-
-
-            tabla.appendChild(fila);
-
-        });
-
-
-        document.getElementById(
-            "estadoCarga"
-        ).style.display =
-        "none";
-
-
-        document.getElementById(
-            "tablaCompleta"
-        ).style.display =
-        "table";
+        document
+            .getElementById("tablaCompleta")
+            .style.display =
+            "table";
 
     }
 
@@ -857,9 +861,9 @@ async function cargarDashboard() {
         );
 
 
-        document.getElementById(
-            "estadoCarga"
-        ).innerHTML = `
+        document
+            .getElementById("estadoCarga")
+            .innerHTML = `
 
             <div class="error">
                 No fue posible cargar
@@ -870,6 +874,452 @@ async function cargarDashboard() {
     }
 
 }
+
+
+/* ==========================================
+   CONSTRUIR TABLA
+========================================== */
+
+function construirTabla() {
+
+    const tabla =
+        document.getElementById(
+            "tablaReservas"
+        );
+
+
+    tabla.innerHTML = "";
+
+
+    datosReservas.forEach(
+        reserva => {
+
+
+        const relaciones =
+            datosReservaAsientos.filter(
+                relacion =>
+                Number(relacion.reserva_id) ===
+                Number(reserva.id)
+            );
+
+
+        const detalles = [];
+
+
+        relaciones.forEach(
+            relacion => {
+
+
+            const asiento =
+                datosAsientos.find(
+                    a =>
+                    Number(a.id) ===
+                    Number(relacion.asiento_id)
+                );
+
+
+            if (!asiento)
+                return;
+
+
+            const mesa =
+                datosMesas.find(
+                    m =>
+                    Number(m.id) ===
+                    Number(asiento.mesa_id)
+                );
+
+
+            if (!mesa)
+                return;
+
+
+            detalles.push(
+                `Mesa ${mesa.numero} — Asiento ${asiento.numero}`
+            );
+
+        });
+
+
+        let textoAsientos;
+
+
+        if (detalles.length === 0) {
+
+            textoAsientos =
+                "Sin asientos";
+
+        } else {
+
+            textoAsientos = `
+
+                <span class="cantidad-asientos">
+
+                    ${detalles.length}
+
+                    ${
+                        detalles.length === 1
+                        ? "asiento"
+                        : "asientos"
+                    }
+
+                </span>
+
+                <div class="detalle-asientos">
+
+                    ${detalles
+                        .map(
+                            detalle =>
+                            `${detalle}<br>`
+                        )
+                        .join("")}
+
+                </div>
+
+            `;
+
+        }
+
+
+        const fila =
+            document.createElement("tr");
+
+
+        fila.innerHTML = `
+
+            <td>
+                ${reserva.codigo_reserva || reserva.id}
+            </td>
+
+            <td>
+                ${reserva.nombre_cliente || ""}
+            </td>
+
+            <td>
+                ${reserva.telefono || ""}
+            </td>
+
+            <td>
+                ${textoAsientos}
+            </td>
+
+            <td class="estado">
+                ${reserva.estado || "Registrada"}
+            </td>
+
+            <td>
+
+                <button
+                class="boton boton-boletos"
+                onclick="abrirBoletos(${reserva.id})">
+
+                VER BOLETOS
+
+                </button>
+
+            </td>
+
+        `;
+
+
+        tabla.appendChild(
+            fila
+        );
+
+    });
+
+}
+
+
+/* ==========================================
+   ABRIR BOLETOS
+========================================== */
+
+function abrirBoletos(
+    reservaId
+) {
+
+    const reserva =
+        datosReservas.find(
+            r =>
+            Number(r.id) ===
+            Number(reservaId)
+        );
+
+
+    if (!reserva) {
+
+        alert(
+            "No se encontró la reserva."
+        );
+
+        return;
+    }
+
+
+    const boletos =
+        datosBoletos.filter(
+            boleto =>
+            Number(boleto.reserva_id) ===
+            Number(reservaId)
+        );
+
+
+    document
+        .getElementById(
+            "informacionReserva"
+        )
+        .innerHTML = `
+
+        <div class="codigo-reserva-modal">
+
+            Reserva:
+            ${reserva.codigo_reserva || reserva.id}
+
+            <br>
+
+            Cliente:
+            ${reserva.nombre_cliente || ""}
+
+            <br>
+
+            Teléfono:
+            ${reserva.telefono || ""}
+
+        </div>
+
+    `;
+
+
+    const contenedor =
+        document.getElementById(
+            "listaBoletos"
+        );
+
+
+    contenedor.innerHTML = "";
+
+
+    if (boletos.length === 0) {
+
+        contenedor.innerHTML = `
+
+            <div class="error">
+
+                Esta reserva todavía
+                no tiene boletos generados.
+
+            </div>
+
+        `;
+
+    }
+
+
+    boletos.forEach(
+        (boleto, index) => {
+
+
+        const asiento =
+            datosAsientos.find(
+                a =>
+                Number(a.id) ===
+                Number(boleto.asiento_id)
+            );
+
+
+        if (!asiento)
+            return;
+
+
+        const mesa =
+            datosMesas.find(
+                m =>
+                Number(m.id) ===
+                Number(asiento.mesa_id)
+            );
+
+
+        if (!mesa)
+            return;
+
+
+        const tarjeta =
+            document.createElement(
+                "div"
+            );
+
+
+        tarjeta.className =
+            "boleto-admin";
+
+
+        const utilizado =
+            boleto.estado ===
+            "utilizado";
+
+
+        tarjeta.innerHTML = `
+
+            <h3>
+                Mesa ${mesa.numero}
+                —
+                Asiento ${asiento.numero}
+            </h3>
+
+            <div
+                class="qr-admin"
+                id="qr-admin-${boleto.id}">
+            </div>
+
+            <div
+                class="
+                    estado-boleto
+                    ${
+                        utilizado
+                        ? "estado-utilizado"
+                        : "estado-valido"
+                    }
+                ">
+
+                ${
+                    utilizado
+                    ? "UTILIZADO"
+                    : "VÁLIDO"
+                }
+
+            </div>
+
+            ${
+                utilizado &&
+                boleto.fecha_ingreso
+
+                ?
+
+                `
+
+                <p>
+                    <strong>
+                        Ingreso:
+                    </strong>
+
+                    <br>
+
+                    ${formatearFecha(
+                        boleto.fecha_ingreso
+                    )}
+
+                </p>
+
+                `
+
+                :
+
+                `
+
+                <p>
+                    Pendiente de ingreso
+                </p>
+
+                `
+            }
+
+        `;
+
+
+        contenedor.appendChild(
+            tarjeta
+        );
+
+
+        new QRCode(
+            document.getElementById(
+                `qr-admin-${boleto.id}`
+            ),
+            {
+                text:
+                    boleto.token,
+
+                width:
+                    200,
+
+                height:
+                    200
+            }
+        );
+
+    });
+
+
+    document
+        .getElementById(
+            "modalBoletos"
+        )
+        .style.display =
+        "block";
+
+}
+
+
+/* ==========================================
+   FORMATEAR FECHA
+========================================== */
+
+function formatearFecha(
+    fecha
+) {
+
+    if (!fecha)
+        return "";
+
+
+    const fechaObjeto =
+        new Date(fecha);
+
+
+    return fechaObjeto
+        .toLocaleString(
+            "es-HN"
+        );
+}
+
+
+/* ==========================================
+   CERRAR BOLETOS
+========================================== */
+
+function cerrarBoletos() {
+
+    document
+        .getElementById(
+            "modalBoletos"
+        )
+        .style.display =
+        "none";
+}
+
+
+/* ==========================================
+   CERRAR MODAL AL TOCAR AFUERA
+========================================== */
+
+window.onclick =
+function(event) {
+
+    const modal =
+        document.getElementById(
+            "modalBoletos"
+        );
+
+
+    if (
+        event.target === modal
+    ) {
+
+        cerrarBoletos();
+    }
+
+};
 
 
 /* ==========================================
