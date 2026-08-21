@@ -5,219 +5,1662 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<meta name="referrer" content="no-referrer">
 
 <title>Checkout | Live Tickets</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+
 <style>
+
+/* ==========================================================
+   GENERAL
+========================================================== */
 
 * {
     box-sizing: border-box;
 }
 
+:root {
+
+    --bg: #f4f7fb;
+
+    --dark: #08101f;
+
+    --text: #111827;
+
+    --muted: #6b7280;
+
+    --line: #e5e7eb;
+
+    --primary: #2563eb;
+
+    --primary-dark: #1d4ed8;
+
+    --green: #16a34a;
+
+    --green-light: #ecfdf5;
+
+    --purple: #7c3aed;
+
+    --purple-light: #f5f3ff;
+
+    --red: #dc2626;
+
+    --orange: #ea580c;
+
+    --yellow: #facc15;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
+
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    color: #222;
+
+    min-height: 100vh;
+
+    font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    -webkit-font-smoothing:
+        antialiased;
 }
 
-header {
-    background: #111;
-    color: white;
-    text-align: center;
-    padding: 30px 20px;
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.topbar {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(8,16,31,.98);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.15);
 }
 
-header h1 {
-    margin: 0;
-    font-size: 30px;
-}
+.nav {
 
-header p {
-    margin: 7px 0 0;
-    color: #ccc;
-}
-
-.contenedor {
     width: 100%;
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 0 15px 50px;
-}
 
-.tarjeta {
-    background: white;
-    border-radius: 16px;
-    padding: 25px;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.08);
-}
+    max-width: 1250px;
 
-.centrado {
-    text-align: center;
-}
+    min-height: 76px;
 
-.estado {
-    text-align: center;
-    padding: 30px;
-    color: #666;
-}
+    margin: auto;
 
-.evento {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+    padding:
+        0 22px;
 
-.codigo {
-    background: #f1f1f1;
-    padding: 12px;
-    border-radius: 8px;
-    margin: 15px 0;
-    font-weight: bold;
-    text-align: center;
-}
-
-.contador-contenedor {
-    background: #fff4d6;
-    border: 1px solid #f0d889;
-    border-radius: 12px;
-    text-align: center;
-    padding: 18px;
-    margin: 20px 0;
-}
-
-.contador-titulo {
-    font-size: 14px;
-    margin-bottom: 7px;
-}
-
-.contador {
-    font-size: 38px;
-    font-weight: bold;
-}
-
-.detalle {
-    border-top: 1px solid #eee;
-    margin-top: 20px;
-    padding-top: 20px;
-}
-
-.fila {
     display: flex;
+
+    align-items: center;
+
     justify-content: space-between;
-    gap: 15px;
-    margin: 12px 0;
+
+    gap: 20px;
 }
 
-.total {
-    font-size: 27px;
-    font-weight: bold;
-    border-top: 2px solid #111;
-    padding-top: 16px;
-    margin-top: 18px;
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    text-decoration: none;
 }
 
-.boton {
-    width: 100%;
-    border: none;
-    padding: 16px;
-    border-radius: 10px;
-    background: #111;
+.brand-logo {
+
+    display: block;
+
+    width: auto;
+
+    height: 48px;
+
+    max-width: 240px;
+
+    object-fit: contain;
+}
+
+.secure-label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        9px 13px;
+
+    border:
+        1px solid rgba(255,255,255,.16);
+
+    border-radius: 999px;
+
+    color:
+        rgba(255,255,255,.78);
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.checkout-hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 205px;
+
+    background: #08101f;
+
     color: white;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 15px;
 }
 
-.boton:disabled {
-    background: #999;
+.checkout-hero-bg {
+
+    position: absolute;
+
+    inset: -50px;
+
+    background-image:
+        url("FLYER%201080X1350.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    filter: blur(35px);
+
+    transform: scale(1.2);
+
+    opacity: .35;
+}
+
+.checkout-hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(5,10,20,.98),
+            rgba(5,10,20,.82)
+        );
+}
+
+.checkout-hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    min-height: 205px;
+
+    margin: auto;
+
+    padding:
+        30px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.hero-info {
+
+    max-width: 780px;
+}
+
+.hero-label {
+
+    display: inline-flex;
+
+    margin-bottom: 10px;
+
+    padding:
+        7px 11px;
+
+    background:
+        rgba(37,99,235,.18);
+
+    border:
+        1px solid rgba(96,165,250,.25);
+
+    border-radius: 999px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: .9px;
+}
+
+.hero-info h1 {
+
+    margin:
+        0 0 10px;
+
+    font-size:
+        clamp(28px,4vw,44px);
+
+    line-height: 1.05;
+
+    letter-spacing: -1px;
+}
+
+.hero-info p {
+
+    margin: 0;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: 13px;
+}
+
+.hero-poster {
+
+    flex: 0 0 auto;
+
+    width: 105px;
+
+    aspect-ratio: 4 / 5;
+
+    border-radius: 12px;
+
+    background-image:
+        url("FLYER%201080X1350.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+}
+
+
+/* ==========================================================
+   MAIN
+========================================================== */
+
+.page {
+
+    width: 100%;
+
+    max-width: 1120px;
+
+    margin: auto;
+
+    padding:
+        34px 20px 80px;
+}
+
+.checkout-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0,1fr) 360px;
+
+    gap: 22px;
+
+    align-items: start;
+}
+
+
+/* ==========================================================
+   MAIN CARD
+========================================================== */
+
+.card {
+
+    background: white;
+
+    border:
+        1px solid #e5e9ef;
+
+    border-radius: 21px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.07);
+}
+
+.card-header {
+
+    padding:
+        21px 22px;
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+.card-header h2 {
+
+    margin:
+        0 0 5px;
+
+    font-size: 19px;
+}
+
+.card-header p {
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+.card-content {
+
+    padding: 22px;
+}
+
+
+/* ==========================================================
+   TIMER
+========================================================== */
+
+.timer-box {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 23px;
+
+    padding:
+        16px 17px;
+
+    background: var(--purple-light);
+
+    border:
+        1px solid #ddd6fe;
+
+    border-radius: 14px;
+}
+
+.timer-info strong {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #5b21b6;
+
+    font-size: 12px;
+}
+
+.timer-info span {
+
+    color: #7c3aed;
+
+    font-size: 10px;
+}
+
+.timer {
+
+    min-width: 78px;
+
+    text-align: right;
+
+    color: #5b21b6;
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    font-variant-numeric:
+        tabular-nums;
+}
+
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.status-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+
+    padding:
+        15px 16px;
+
+    border-radius: 13px;
+}
+
+.status-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+.status-content strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 12px;
+}
+
+.status-content span {
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* PENDIENTE */
+
+.status-pending {
+
+    background: #f5f3ff;
+
+    border:
+        1px solid #ddd6fe;
+}
+
+.status-pending .status-icon {
+
+    background: #7c3aed;
+
+    color: white;
+}
+
+.status-pending strong {
+
+    color: #5b21b6;
+}
+
+
+/* PAGADO */
+
+.status-paid {
+
+    background: #ecfdf5;
+
+    border:
+        1px solid #bbf7d0;
+}
+
+.status-paid .status-icon {
+
+    background: #16a34a;
+
+    color: white;
+}
+
+.status-paid strong {
+
+    color: #166534;
+}
+
+
+/* EXPIRADO */
+
+.status-expired {
+
+    background: #fef2f2;
+
+    border:
+        1px solid #fecaca;
+}
+
+.status-expired .status-icon {
+
+    background: #dc2626;
+
+    color: white;
+}
+
+.status-expired strong {
+
+    color: #991b1b;
+}
+
+
+/* ==========================================================
+   DETAIL ROWS
+========================================================== */
+
+.detail-list {
+
+    display: grid;
+}
+
+.detail-row {
+
+    min-height: 48px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    border-bottom:
+        1px solid #eef1f4;
+
+    font-size: 12px;
+}
+
+.detail-row:last-child {
+
+    border-bottom: none;
+}
+
+.detail-row span {
+
+    color: var(--muted);
+}
+
+.detail-row strong {
+
+    text-align: right;
+
+    color: #111827;
+}
+
+
+/* ==========================================================
+   RESERVATION CODE
+========================================================== */
+
+.reservation-code {
+
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        monospace;
+
+    letter-spacing: .6px;
+}
+
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+.order-card {
+
+    position: sticky;
+
+    top: 98px;
+
+    background: white;
+
+    border:
+        1px solid #e5e9ef;
+
+    border-radius: 21px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 40px rgba(15,23,42,.09);
+}
+
+.order-head {
+
+    padding:
+        20px;
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+.order-head h3 {
+
+    margin:
+        0 0 5px;
+
+    font-size: 17px;
+}
+
+.order-head p {
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.order-content {
+
+    padding: 20px;
+}
+
+.order-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 13px;
+
+    font-size: 12px;
+}
+
+.order-row span {
+
+    color: var(--muted);
+}
+
+.order-row strong {
+
+    color: #111827;
+}
+
+.order-total {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 15px;
+
+    margin-top: 19px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid var(--line);
+}
+
+.order-total span {
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.order-total strong {
+
+    font-size: 27px;
+}
+
+
+/* ==========================================================
+   PAY BUTTON
+========================================================== */
+
+.pay-button {
+
+    width: 100%;
+
+    min-height: 54px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: var(--primary);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    transition: .2s;
+}
+
+.pay-button:hover:not(:disabled) {
+
+    background:
+        var(--primary-dark);
+
+    transform:
+        translateY(-1px);
+}
+
+.pay-button:disabled {
+
+    background: #9ca3af;
+
     cursor: not-allowed;
 }
 
-.boton-secundario {
-    background: #eee;
-    color: #111;
-}
 
-.pago-pendiente {
-    background: #fff7dd;
-    padding: 15px;
+/* ==========================================================
+   PAYMENT DISABLED NOTICE
+========================================================== */
+
+.payment-notice {
+
+    margin-top: 12px;
+
+    padding:
+        11px 12px;
+
+    background: #f8fafc;
+
+    border:
+        1px solid #e5e7eb;
+
     border-radius: 10px;
+
+    color: #667085;
+
     text-align: center;
-    margin-top: 15px;
+
+    font-size: 9px;
+
+    line-height: 1.55;
 }
 
-.pagado {
-    background: #e3f6e9;
-    color: #12662e;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 20px;
+
+/* ==========================================================
+   TRUST
+========================================================== */
+
+.trust-list {
+
+    display: grid;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+    padding-top: 17px;
+
+    border-top:
+        1px solid var(--line);
 }
 
-.expirado {
-    background: #ffe5e5;
-    color: #9f1717;
-    border-radius: 12px;
-    padding: 22px;
-    text-align: center;
-}
+.trust-item {
 
-.boleto {
-    background: #f7f7f7;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 18px 0;
-    text-align: center;
-}
-
-.qr {
-    background: white;
-    padding: 15px;
     display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #667085;
+
+    font-size: 10px;
+}
+
+.trust-dot {
+
+    width: 20px;
+
+    height: 20px;
+
+    display: flex;
+
+    align-items: center;
+
     justify-content: center;
-    width: fit-content;
-    margin: 15px auto;
-    border-radius: 10px;
+
+    flex-shrink: 0;
+
+    background: #ecfdf5;
+
+    color: #166534;
+
+    border-radius: 50%;
+
+    font-size: 9px;
+
+    font-weight: 800;
 }
 
-.oculto {
+
+/* ==========================================================
+   QR SECTION
+========================================================== */
+
+.tickets-section {
+
     display: none;
+
+    margin-top: 23px;
 }
 
-@media(max-width:600px) {
+.tickets-section.show {
 
-    header {
-        padding: 25px 15px;
+    display: block;
+}
+
+.tickets-title {
+
+    margin-bottom: 17px;
+}
+
+.tickets-title h2 {
+
+    margin:
+        0 0 6px;
+
+    font-size: 22px;
+}
+
+.tickets-title p {
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+.tickets-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap: 18px;
+}
+
+
+/* ==========================================================
+   DIGITAL TICKET
+========================================================== */
+
+.ticket {
+
+    overflow: hidden;
+
+    background: white;
+
+    border:
+        1px solid #e2e7ed;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,.07);
+}
+
+.ticket-top {
+
+    position: relative;
+
+    min-height: 105px;
+
+    padding:
+        18px;
+
+    overflow: hidden;
+
+    background: #08101f;
+
+    color: white;
+}
+
+.ticket-top-bg {
+
+    position: absolute;
+
+    inset: -20px;
+
+    background-image:
+        url("FLYER%201080X1350.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    filter: blur(15px);
+
+    opacity: .28;
+}
+
+.ticket-top-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(8,16,31,.72);
+}
+
+.ticket-top-content {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.ticket-top small {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .6px;
+}
+
+.ticket-top strong {
+
+    display: block;
+
+    font-size: 16px;
+
+    line-height: 1.3;
+}
+
+.ticket-body {
+
+    padding: 20px;
+
+    text-align: center;
+}
+
+.ticket-seat {
+
+    margin-bottom: 14px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.ticket-seat span {
+
+    padding:
+        7px 10px;
+
+    background: #f3f4f6;
+
+    border-radius: 8px;
+
+    color: #374151;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.qr-box {
+
+    width: 190px;
+
+    min-height: 190px;
+
+    margin:
+        0 auto 15px;
+
+    padding: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 15px;
+}
+
+.qr-box img {
+
+    display: block !important;
+
+    max-width: 100%;
+
+    height: auto !important;
+}
+
+.ticket-code {
+
+    color: #667085;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+    word-break: break-all;
+}
+
+.ticket-warning {
+
+    margin-top: 14px;
+
+    padding-top: 13px;
+
+    border-top:
+        1px dashed #d9dde3;
+
+    color: #6b7280;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   SUCCESS HEADER
+========================================================== */
+
+.success-card {
+
+    display: none;
+
+    margin-bottom: 22px;
+
+    padding:
+        23px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ecfdf5,
+            #f0fdf4
+        );
+
+    border:
+        1px solid #bbf7d0;
+
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+.success-card.show {
+
+    display: block;
+}
+
+.success-icon {
+
+    width: 54px;
+
+    height: 54px;
+
+    margin:
+        0 auto 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #16a34a;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 25px;
+
+    font-weight: 800;
+}
+
+.success-card h2 {
+
+    margin:
+        0 0 7px;
+
+    color: #166534;
+
+    font-size: 23px;
+}
+
+.success-card p {
+
+    max-width: 560px;
+
+    margin: auto;
+
+    color: #4b5563;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* ==========================================================
+   EXPIRED CARD
+========================================================== */
+
+.expired-card {
+
+    display: none;
+
+    padding:
+        40px 24px;
+
+    background: white;
+
+    border:
+        1px solid #fecaca;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.07);
+}
+
+.expired-card.show {
+
+    display: block;
+}
+
+.expired-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    margin:
+        0 auto 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #dc2626;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 24px;
+
+    font-weight: 800;
+}
+
+.expired-card h2 {
+
+    margin:
+        0 0 8px;
+
+    font-size: 22px;
+}
+
+.expired-card p {
+
+    max-width: 510px;
+
+    margin:
+        0 auto 20px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.back-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding:
+        0 17px;
+
+    background: #111827;
+
+    color: white;
+
+    border-radius: 11px;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+/* ==========================================================
+   LOADER
+========================================================== */
+
+.loading-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #f4f7fb;
+}
+
+.loader {
+
+    text-align: center;
+}
+
+.spinner {
+
+    width: 42px;
+
+    height: 42px;
+
+    margin:
+        0 auto 14px;
+
+    border:
+        4px solid #dce3ec;
+
+    border-top-color:
+        var(--primary);
+
+    border-radius: 50%;
+
+    animation:
+        spin .8s linear infinite;
+}
+
+@keyframes spin {
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+}
+
+.loader strong {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 14px;
+}
+
+.loader span {
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+
+/* ==========================================================
+   ERROR
+========================================================== */
+
+.error-card {
+
+    display: none;
+
+    max-width: 600px;
+
+    margin:
+        50px auto;
+
+    padding:
+        35px 22px;
+
+    background: white;
+
+    border:
+        1px solid #fecaca;
+
+    border-radius: 20px;
+
+    text-align: center;
+}
+
+.error-card.show {
+
+    display: block;
+}
+
+.error-card strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 18px;
+}
+
+.error-card p {
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.footer {
+
+    margin-top: 50px;
+
+    background: #050b16;
+
+    color: white;
+}
+
+.footer-content {
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding:
+        28px 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.footer-logo {
+
+    height: 35px;
+
+    width: auto;
+
+    max-width: 180px;
+
+    object-fit: contain;
+}
+
+.footer-copy {
+
+    color:
+        rgba(255,255,255,.40);
+
+    text-align: right;
+
+    font-size: 9px;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 850px) {
+
+    .checkout-layout {
+
+        grid-template-columns: 1fr;
     }
 
-    header h1 {
-        font-size: 26px;
+    .order-card {
+
+        position: relative;
+
+        top: auto;
     }
 
-    .contenedor {
-        margin-top: 18px;
-        padding: 0 10px 40px;
+    .tickets-grid {
+
+        grid-template-columns: 1fr;
     }
 
-    .tarjeta {
-        padding: 20px 16px;
+}
+
+
+@media (max-width: 650px) {
+
+    .nav {
+
+        min-height: 64px;
+
+        padding:
+            0 14px;
     }
 
-    .contador {
-        font-size: 34px;
+    .brand-logo {
+
+        height: 35px;
+
+        max-width: 180px;
     }
 
-    .total {
-        font-size: 24px;
+    .secure-label {
+
+        padding:
+            8px 10px;
+
+        font-size: 8px;
+    }
+
+    .checkout-hero-content {
+
+        min-height: 170px;
+
+        padding:
+            24px 14px;
+
+        gap: 15px;
+    }
+
+    .hero-poster {
+
+        width: 78px;
+    }
+
+    .hero-info h1 {
+
+        font-size: 22px;
+    }
+
+    .hero-info p {
+
+        font-size: 10px;
+    }
+
+    .hero-label {
+
+        font-size: 8px;
+    }
+
+    .page {
+
+        padding:
+            18px 11px 55px;
+    }
+
+    .card {
+
+        border-radius: 16px;
+    }
+
+    .card-header {
+
+        padding:
+            18px 16px;
+    }
+
+    .card-content {
+
+        padding:
+            16px;
+    }
+
+    .timer {
+
+        font-size: 20px;
+    }
+
+    .order-card {
+
+        border-radius: 16px;
+    }
+
+    .order-content {
+
+        padding: 17px;
+    }
+
+    .ticket {
+
+        border-radius: 16px;
+    }
+
+    .qr-box {
+
+        width: 175px;
+
+        min-height: 175px;
+    }
+
+    .footer-content {
+
+        padding:
+            25px 16px;
+
+        display: grid;
+
+        gap: 13px;
+    }
+
+    .footer-copy {
+
+        text-align: left;
     }
 
 }
@@ -226,348 +1669,785 @@ header p {
 
 </head>
 
+
 <body>
 
 
-<header>
+<!-- ======================================================
+     CARGANDO
+====================================================== -->
 
-<h1>LIVE TICKETS</h1>
+<div
+    class="loading-screen"
+    id="loadingScreen">
 
-<p>Checkout seguro</p>
+    <div class="loader">
+
+        <div class="spinner"></div>
+
+        <strong>
+            Cargando tu reserva
+        </strong>
+
+        <span>
+            Verificando información...
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     HEADER
+====================================================== -->
+
+<header class="topbar">
+
+    <div class="nav">
+
+        <a
+            href="index.html"
+            class="brand">
+
+            <img
+                src="LIVE_TICKETS_BLANCO.png"
+                alt="Live Tickets"
+                class="brand-logo">
+
+        </a>
+
+
+        <div class="secure-label">
+
+            🔒 CHECKOUT SEGURO
+
+        </div>
+
+    </div>
 
 </header>
 
 
-<div class="contenedor">
+<!-- ======================================================
+     HERO
+====================================================== -->
+
+<section class="checkout-hero">
+
+    <div
+        class="checkout-hero-bg"
+        id="heroBg">
+    </div>
+
+    <div class="checkout-hero-overlay"></div>
 
 
-<div
-id="cargando"
-class="tarjeta estado">
-
-Cargando tu reserva...
-
-</div>
+    <div class="checkout-hero-content">
 
 
-<div
-id="checkout"
-class="tarjeta oculto">
+        <div class="hero-info">
+
+            <div class="hero-label">
+
+                TU RESERVA
+
+            </div>
 
 
-<div
-id="nombreEvento"
-class="evento">
-</div>
+            <h1 id="heroEventName">
+
+                Live Tickets
+
+            </h1>
 
 
-<div class="codigo">
+            <p>
 
-Reserva:
-<span id="codigoReserva"></span>
+                Revisa la información de tu compra
+                antes de continuar con el pago.
 
-</div>
+            </p>
 
-
-<div
-id="contenedorContador"
-class="contador-contenedor">
-
-<div class="contador-titulo">
-
-Tus asientos están reservados durante:
-
-</div>
-
-<div
-id="contador"
-class="contador">
-
-10:00
-
-</div>
-
-</div>
+        </div>
 
 
-<div class="detalle">
+        <div
+            class="hero-poster"
+            id="heroPoster">
+        </div>
+
+    </div>
+
+</section>
 
 
-<div class="fila">
+<!-- ======================================================
+     MAIN
+====================================================== -->
 
-<span>
-Cantidad de boletos
-</span>
-
-<strong id="cantidad">
-0
-</strong>
-
-</div>
+<main class="page">
 
 
-<div class="fila">
-
-<span>
-Precio por asiento
-</span>
-
-<strong id="precio">
-L 0.00
-</strong>
-
-</div>
-
-
-<div class="fila total">
-
-<span>
-TOTAL
-</span>
-
-<span id="total">
-L 0.00
-</span>
-
-</div>
-
-
-</div>
-
+<!-- ======================================================
+     COMPRA APROBADA
+====================================================== -->
 
 <div
-id="mensajePago"
-class="pago-pendiente">
+    class="success-card"
+    id="successCard">
 
-Tu reserva está pendiente de pago.
+    <div class="success-icon">
+
+        ✓
+
+    </div>
+
+    <h2>
+
+        Pago aprobado
+
+    </h2>
+
+    <p>
+
+        Tu compra fue confirmada correctamente.
+        Tus entradas digitales están listas.
+        Cada código QR corresponde a un acceso individual.
+
+    </p>
 
 </div>
 
 
-<button
-id="botonPagar"
-class="boton"
-disabled>
-
-PAGAR
-
-</button>
-
+<!-- ======================================================
+     RESERVA EXPIRADA
+====================================================== -->
 
 <div
-style="
-text-align:center;
-font-size:12px;
-color:#777;
-margin-top:12px;
-">
+    class="expired-card"
+    id="expiredCard">
 
-La pasarela de pago será habilitada
-cuando conectemos el proveedor bancario.
+    <div class="expired-icon">
+
+        ×
+
+    </div>
+
+    <h2>
+
+        La reserva ha expirado
+
+    </h2>
+
+    <p>
+
+        El tiempo disponible para completar esta reserva terminó
+        y los asientos fueron liberados para que puedan ser
+        seleccionados nuevamente.
+
+    </p>
+
+    <a
+        href="index.html"
+        class="back-button">
+
+        VER EVENTOS
+
+    </a>
 
 </div>
 
 
-<button
-class="boton boton-secundario"
-onclick="volverEvento()">
-
-VOLVER AL EVENTO
-
-</button>
-
-
-</div>
-
-
-
-<!-- RESERVA PAGADA -->
+<!-- ======================================================
+     ERROR
+====================================================== -->
 
 <div
-id="panelPagado"
-class="oculto">
+    class="error-card"
+    id="errorCard">
 
+    <strong>
 
-<div class="pagado">
+        No se pudo cargar la reserva
 
-<h2>
-✅ PAGO APROBADO
-</h2>
+    </strong>
 
-<p>
-Tu compra fue confirmada correctamente.
-</p>
+    <p id="errorMessage">
 
-<div>
+        Revisa el enlace o intenta nuevamente.
 
-Reserva:
-
-<strong id="codigoPagado"></strong>
+    </p>
 
 </div>
 
-</div>
 
+<!-- ======================================================
+     CHECKOUT
+====================================================== -->
 
 <div
-id="boletos">
-</div>
+    class="checkout-layout"
+    id="checkoutLayout">
+
+
+<!-- ======================================================
+     INFORMACIÓN RESERVA
+====================================================== -->
+
+<section class="card">
+
+
+    <div class="card-header">
+
+        <h2>
+
+            Detalles de tu reserva
+
+        </h2>
+
+        <p>
+
+            Mantén esta página abierta mientras completas tu compra.
+
+        </p>
+
+    </div>
+
+
+    <div class="card-content">
+
+
+        <!-- TIMER -->
+
+        <div
+            class="timer-box"
+            id="timerBox">
+
+            <div class="timer-info">
+
+                <strong>
+
+                    Tus asientos están en proceso
+
+                </strong>
+
+                <span>
+
+                    Completa el pago antes de que finalice el tiempo.
+
+                </span>
+
+            </div>
+
+
+            <div
+                class="timer"
+                id="countdown">
+
+                10:00
+
+            </div>
+
+        </div>
+
+
+        <!-- ESTADO -->
+
+        <div
+            class="status-box status-pending"
+            id="statusBox">
+
+
+            <div
+                class="status-icon"
+                id="statusIcon">
+
+                •
+
+            </div>
+
+
+            <div class="status-content">
+
+                <strong id="statusTitle">
+
+                    Esperando pago
+
+                </strong>
+
+                <span id="statusDescription">
+
+                    Tu reserva está activa y los asientos
+                    están bloqueados temporalmente.
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- INFO -->
+
+        <div class="detail-list">
+
+
+            <div class="detail-row">
+
+                <span>
+
+                    Evento
+
+                </span>
+
+                <strong id="eventName">
+
+                    —
+
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+
+                    Código de reserva
+
+                </span>
+
+                <strong
+                    class="reservation-code"
+                    id="reservationCode">
+
+                    —
+
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+
+                    Estado
+
+                </span>
+
+                <strong id="reservationStatus">
+
+                    —
+
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+
+                    Entradas
+
+                </span>
+
+                <strong id="ticketQuantity">
+
+                    0
+
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     RESUMEN COMPRA
+====================================================== -->
+
+<aside class="order-card">
+
+
+    <div class="order-head">
+
+        <h3>
+
+            Resumen de compra
+
+        </h3>
+
+        <p>
+
+            Confirma los datos antes de pagar.
+
+        </p>
+
+    </div>
+
+
+    <div class="order-content">
+
+
+        <div class="order-row">
+
+            <span>
+
+                Entradas
+
+            </span>
+
+            <strong id="orderQuantity">
+
+                0
+
+            </strong>
+
+        </div>
+
+
+        <div class="order-row">
+
+            <span>
+
+                Precio unitario
+
+            </span>
+
+            <strong id="unitPrice">
+
+                L 0.00
+
+            </strong>
+
+        </div>
+
+
+        <div class="order-total">
+
+            <span>
+
+                Total
+
+            </span>
+
+            <strong id="orderTotal">
+
+                L 0.00
+
+            </strong>
+
+        </div>
+
+
+        <!-- BOTÓN PIXELPAY -->
+
+        <button
+            class="pay-button"
+            id="payButton"
+            disabled>
+
+            PAGAR L 0.00
+
+        </button>
+
+
+        <div
+            class="payment-notice"
+            id="paymentNotice">
+
+            La pasarela de pago en línea será habilitada
+            cuando finalicemos la integración con PixelPay.
+
+        </div>
+
+
+        <div class="trust-list">
+
+
+            <div class="trust-item">
+
+                <div class="trust-dot">
+
+                    ✓
+
+                </div>
+
+                Asientos bloqueados temporalmente
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <div class="trust-dot">
+
+                    ✓
+
+                </div>
+
+                QR individual para cada entrada
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <div class="trust-dot">
+
+                    ✓
+
+                </div>
+
+                Confirmación automática de compra
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</aside>
 
 
 </div>
 
 
+<!-- ======================================================
+     BOLETOS QR
+====================================================== -->
 
-<!-- RESERVA EXPIRADA -->
-
-<div
-id="panelExpirado"
-class="tarjeta expirado oculto">
-
-<h2>
-RESERVA EXPIRADA
-</h2>
-
-<p>
-
-El tiempo para completar la compra terminó.
-
-</p>
-
-<p>
-
-Los asientos fueron liberados para
-que puedan ser seleccionados nuevamente.
-
-</p>
+<section
+    class="tickets-section"
+    id="ticketsSection">
 
 
-<button
-class="boton"
-onclick="volverEvento()">
+    <div class="tickets-title">
 
-VOLVER AL EVENTO
+        <h2>
 
-</button>
+            Tus entradas
 
-</div>
+        </h2>
 
+        <p>
 
+            Presenta cada código QR en el acceso al evento.
+            Cada QR puede utilizarse una sola vez.
 
-<!-- ERROR -->
+        </p>
 
-<div
-id="panelError"
-class="tarjeta expirado oculto">
-
-<h2>
-No se pudo cargar la reserva
-</h2>
-
-<p id="mensajeError"></p>
-
-</div>
+    </div>
 
 
-</div>
+    <div
+        class="tickets-grid"
+        id="ticketsGrid">
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <img
+            src="LIVE_TICKETS_BLANCO.png"
+            alt="Live Tickets"
+            class="footer-logo">
+
+
+        <div class="footer-copy">
+
+            © 2026 Live Tickets.
+            Todos los derechos reservados.
+
+        </div>
+
+    </div>
+
+</footer>
 
 
 <script>
 
-
-/* =====================================================
-   SUPABASE
-===================================================== */
-
+/* ==========================================================
+   CONFIGURACIÓN
+========================================================== */
 
 const SUPABASE_URL =
-"https://ysismkibffhzouxacaxv.supabase.co";
+    "https://ysismkibffhzouxacaxv.supabase.co";
 
 
 const SUPABASE_KEY =
-"sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
+    "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
+
+
+const DEFAULT_FLYER =
+    "FLYER%201080X1350.png";
 
 
 const db =
-supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-/* =====================================================
-   VARIABLES
-===================================================== */
-
-
-let reservaActual =
-null;
-
-
-let intervaloContador =
-null;
-
-
-let intervaloConsulta =
-null;
-
-
-/* =====================================================
+/* ==========================================================
    TOKEN
-===================================================== */
+========================================================== */
 
-
-const parametros =
-new URLSearchParams(
-    window.location.search
-);
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
 
 
 const PUBLIC_TOKEN =
-parametros.get(
-    "token"
-);
+    urlParams.get(
+        "token"
+    );
 
 
-/* =====================================================
-   FORMATO
-===================================================== */
+/* ==========================================================
+   VARIABLES
+========================================================== */
+
+let reservation = null;
+
+let countdownInterval = null;
+
+let pollingInterval = null;
+
+let lastRenderedState = null;
 
 
-function formatoLempiras(
-    valor
-) {
+/* ==========================================================
+   DINERO
+========================================================== */
 
-    return (
-        "L " +
-        Number(valor || 0)
+function money(value) {
+
+    return "L " +
+
+        Number(value || 0)
         .toLocaleString(
             "es-HN",
             {
-                minimumFractionDigits:
-                2,
-
-                maximumFractionDigits:
-                2
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
             }
-        )
-    );
+        );
 
 }
 
 
-/* =====================================================
-   CONSULTAR RESERVA
-===================================================== */
+/* ==========================================================
+   NORMALIZAR RESPUESTA
+========================================================== */
+
+function normalizeResult(data) {
+
+    if (!data) {
+        return null;
+    }
 
 
-async function consultarReserva() {
+    if (
+        Array.isArray(data)
+    ) {
 
+        if (!data.length) {
+            return null;
+        }
+
+        return data[0];
+
+    }
+
+
+    return data;
+
+}
+
+
+/* ==========================================================
+   OBTENER PROPIEDADES CON FALLBACK
+========================================================== */
+
+function getValue(
+    object,
+    names,
+    fallback = null
+) {
+
+    for (
+        const name
+        of names
+    ) {
+
+        if (
+            object &&
+            object[name] !== undefined &&
+            object[name] !== null
+        ) {
+
+            return object[name];
+
+        }
+
+    }
+
+    return fallback;
+
+}
+
+
+/* ==========================================================
+   ESTADO NORMALIZADO
+========================================================== */
+
+function normalizeStatus(value) {
+
+    return String(
+        value || ""
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* ==========================================================
+   CARGAR RESERVA
+========================================================== */
+
+async function loadReservation(
+    silent = false
+) {
 
     if (!PUBLIC_TOKEN) {
 
-        mostrarError(
-            "El enlace de checkout no contiene una reserva válida."
+        showError(
+            "El enlace de checkout no contiene un token de reserva válido."
         );
 
         return;
@@ -578,692 +2458,1257 @@ async function consultarReserva() {
     try {
 
 
-        const resultado =
+        const {
+            data,
+            error
+        } =
+
         await db.rpc(
             "consultar_reserva",
             {
                 p_token:
-                PUBLIC_TOKEN
+                    PUBLIC_TOKEN
             }
         );
 
 
-        if (
-            resultado.error
-        ) {
+        if (error) {
 
-            throw resultado.error;
+            throw error;
 
         }
 
 
-        const datos =
-        resultado.data;
-
-
-        if (
-            !datos ||
-            datos.success !== true
-        ) {
-
-            mostrarError(
-                datos?.mensaje ||
-                "Reserva no encontrada."
+        const result =
+            normalizeResult(
+                data
             );
 
-            return;
+
+        if (!result) {
+
+            throw new Error(
+                "La reserva no fue encontrada."
+            );
 
         }
 
 
-        reservaActual =
-        datos;
+        /*
+        Algunas funciones devuelven
+        success = false cuando el token
+        no existe o está vencido.
+        */
+
+        if (
+            result.success === false
+        ) {
+
+            const message =
+
+                result.message ||
+
+                result.mensaje ||
+
+                "No fue posible consultar la reserva.";
 
 
-        evaluarEstado(
-            datos
-        );
+            throw new Error(
+                message
+            );
+
+        }
+
+
+        reservation =
+            result;
+
+
+        renderReservation();
 
 
     }
-
 
     catch(error) {
 
 
         console.error(
+            "Error consultando reserva:",
             error
         );
 
 
-        mostrarError(
-            "No fue posible consultar la reserva."
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   EVALUAR ESTADO
-===================================================== */
-
-
-function evaluarEstado(
-    datos
-) {
-
-
-    document
-    .getElementById(
-        "cargando"
-    )
-    .style.display =
-    "none";
-
-
-    if (
-        datos.estado ===
-        "pagada"
-    ) {
-
-
-        mostrarPagada(
-            datos
-        );
-
-
-        return;
-
-    }
-
-
-    if (
-        datos.estado ===
-        "expirada" ||
-        datos.estado ===
-        "cancelada"
-    ) {
-
-
-        mostrarExpirada();
-
-
-        return;
-
-    }
-
-
-    if (
-        datos.estado ===
-        "pendiente_pago"
-    ) {
-
-
-        mostrarPendiente(
-            datos
-        );
-
-
-        return;
-
-    }
-
-
-    mostrarError(
-        "Esta reserva se encuentra en estado: " +
-        datos.estado
-    );
-
-}
-
-
-/* =====================================================
-   PENDIENTE
-===================================================== */
-
-
-function mostrarPendiente(
-    datos
-) {
-
-
-    document
-    .getElementById(
-        "checkout"
-    )
-    .style.display =
-    "block";
-
-
-    document
-    .getElementById(
-        "panelPagado"
-    )
-    .style.display =
-    "none";
-
-
-    document
-    .getElementById(
-        "panelExpirado"
-    )
-    .style.display =
-    "none";
-
-
-    document
-    .getElementById(
-        "nombreEvento"
-    )
-    .textContent =
-    datos.evento;
-
-
-    document
-    .getElementById(
-        "codigoReserva"
-    )
-    .textContent =
-    datos.codigo_reserva;
-
-
-    document
-    .getElementById(
-        "cantidad"
-    )
-    .textContent =
-    datos.cantidad_asientos;
-
-
-    document
-    .getElementById(
-        "precio"
-    )
-    .textContent =
-    formatoLempiras(
-        datos.precio_unitario
-    );
-
-
-    document
-    .getElementById(
-        "total"
-    )
-    .textContent =
-    formatoLempiras(
-        datos.total_reserva
-    );
-
-
-    document
-    .getElementById(
-        "botonPagar"
-    )
-    .textContent =
-    "PAGAR " +
-    formatoLempiras(
-        datos.total_reserva
-    );
-
-
-    iniciarContador(
-        datos.expires_at
-    );
-
-
-    /*
-    Cada 5 segundos comprobamos
-    si el backend cambió la reserva
-    a PAGADA.
-
-    Esto será útil cuando PixelPay
-    confirme el pago mediante webhook.
-    */
-
-
-    if (!intervaloConsulta) {
-
-
-        intervaloConsulta =
-        setInterval(
-            consultarReserva,
-            5000
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   CONTADOR
-===================================================== */
-
-
-function iniciarContador(
-    fechaExpiracion
-) {
-
-
-    if (
-        intervaloContador
-    ) {
-
-        clearInterval(
-            intervaloContador
-        );
-
-    }
-
-
-    function actualizar() {
-
-
-        const ahora =
-        new Date()
-        .getTime();
-
-
-        const expira =
-        new Date(
-            fechaExpiracion
-        )
-        .getTime();
-
-
-        let diferencia =
-        expira -
-        ahora;
-
-
-        if (
-            diferencia <=
-            0
-        ) {
-
-
-            diferencia =
-            0;
-
-
-            document
-            .getElementById(
-                "contador"
-            )
-            .textContent =
-            "00:00";
-
-
-            clearInterval(
-                intervaloContador
+        if (!silent) {
+
+            showError(
+                error.message ||
+                "No fue posible cargar la reserva."
             );
-
-
-            /*
-            Al llegar a cero
-            volvemos a consultar
-            Supabase.
-
-            consultar_reserva()
-            ejecutará la liberación
-            de bloqueos vencidos.
-            */
-
-
-            consultarReserva();
-
-
-            return;
 
         }
 
+    }
 
-        const minutos =
-        Math.floor(
-            diferencia /
-            60000
+    finally {
+
+
+        if (!silent) {
+
+            document
+                .getElementById(
+                    "loadingScreen"
+                )
+                .style.display =
+                "none";
+
+        }
+
+    }
+
+}
+
+
+/* ==========================================================
+   RENDER RESERVA
+========================================================== */
+
+function renderReservation() {
+
+    if (!reservation) {
+        return;
+    }
+
+
+    const status =
+
+        normalizeStatus(
+
+            getValue(
+                reservation,
+                [
+                    "estado",
+                    "status",
+                    "reserva_estado"
+                ],
+                ""
+            )
+
         );
 
 
-        const segundos =
-        Math.floor(
-            (
-                diferencia %
-                60000
-            ) /
-            1000
+    const eventName =
+
+        getValue(
+            reservation,
+            [
+                "evento_nombre",
+                "nombre_evento",
+                "event_name",
+                "evento"
+            ],
+            "Evento Live Tickets"
         );
 
 
-        document
+    const reservationCode =
+
+        getValue(
+            reservation,
+            [
+                "codigo_reserva",
+                "codigo",
+                "reservation_code"
+            ],
+            "—"
+        );
+
+
+    const quantity =
+
+        Number(
+
+            getValue(
+                reservation,
+                [
+                    "cantidad_asientos",
+                    "cantidad",
+                    "ticket_count"
+                ],
+                0
+            )
+
+        );
+
+
+    const price =
+
+        Number(
+
+            getValue(
+                reservation,
+                [
+                    "precio_unitario",
+                    "precio_asiento",
+                    "unit_price"
+                ],
+                0
+            )
+
+        );
+
+
+    const total =
+
+        Number(
+
+            getValue(
+                reservation,
+                [
+                    "total_reserva",
+                    "total",
+                    "amount"
+                ],
+                quantity * price
+            )
+
+        );
+
+
+    /*
+    INFORMACIÓN GENERAL
+    */
+
+    document.title =
+        `${eventName} | Checkout Live Tickets`;
+
+
+    document
         .getElementById(
-            "contador"
+            "heroEventName"
         )
         .textContent =
-        String(
-            minutos
+        eventName;
+
+
+    document
+        .getElementById(
+            "eventName"
         )
-        .padStart(
-            2,
-            "0"
+        .textContent =
+        eventName;
+
+
+    document
+        .getElementById(
+            "reservationCode"
         )
-        +
-        ":" +
-        String(
-            segundos
+        .textContent =
+        reservationCode;
+
+
+    document
+        .getElementById(
+            "ticketQuantity"
         )
-        .padStart(
-            2,
-            "0"
-        );
+        .textContent =
+        quantity;
+
+
+    document
+        .getElementById(
+            "orderQuantity"
+        )
+        .textContent =
+        quantity;
+
+
+    document
+        .getElementById(
+            "unitPrice"
+        )
+        .textContent =
+        money(price);
+
+
+    document
+        .getElementById(
+            "orderTotal"
+        )
+        .textContent =
+        money(total);
+
+
+    document
+        .getElementById(
+            "payButton"
+        )
+        .textContent =
+        "PAGAR " +
+        money(total);
+
+
+    /*
+    ESTADO
+    */
+
+    if (
+        status === "pagada" ||
+        status === "pagado" ||
+        status === "confirmada"
+    ) {
+
+        renderPaidState();
+
+        return;
 
     }
 
 
-    actualizar();
+    if (
+        status === "expirada" ||
+        status === "cancelada"
+    ) {
+
+        renderExpiredState();
+
+        return;
+
+    }
 
 
-    intervaloContador =
-    setInterval(
-        actualizar,
-        1000
+    renderPendingState();
+
+
+    /*
+    TIMER
+    */
+
+    const expiresAt =
+
+        getValue(
+            reservation,
+            [
+                "expires_at",
+                "expira_en",
+                "fecha_expiracion"
+            ],
+            null
+        );
+
+
+    startCountdown(
+        expiresAt
     );
 
 }
 
 
-/* =====================================================
-   PAGADA
-===================================================== */
+/* ==========================================================
+   ESTADO PENDIENTE
+========================================================== */
+
+function renderPendingState() {
+
+    const state =
+        normalizeStatus(
+            getValue(
+                reservation,
+                ["estado"],
+                "pendiente_pago"
+            )
+        );
 
 
-function mostrarPagada(
-    datos
-) {
-
-
-    limpiarIntervalos();
-
-
-    document
-    .getElementById(
-        "checkout"
-    )
-    .style.display =
-    "none";
-
-
-    document
-    .getElementById(
-        "panelExpirado"
-    )
-    .style.display =
-    "none";
+    lastRenderedState =
+        state;
 
 
     document
-    .getElementById(
-        "panelError"
-    )
-    .style.display =
-    "none";
+        .getElementById(
+            "checkoutLayout"
+        )
+        .style.display =
+        "grid";
 
 
     document
-    .getElementById(
-        "panelPagado"
-    )
-    .style.display =
-    "block";
+        .getElementById(
+            "expiredCard"
+        )
+        .classList
+        .remove(
+            "show"
+        );
 
 
     document
-    .getElementById(
-        "codigoPagado"
-    )
-    .textContent =
-    datos.codigo_reserva;
+        .getElementById(
+            "successCard"
+        )
+        .classList
+        .remove(
+            "show"
+        );
 
 
-    const contenedor =
     document
-    .getElementById(
-        "boletos"
+        .getElementById(
+            "ticketsSection"
+        )
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    const statusBox =
+
+        document.getElementById(
+            "statusBox"
+        );
+
+
+    statusBox.className =
+        "status-box status-pending";
+
+
+    document
+        .getElementById(
+            "statusIcon"
+        )
+        .textContent =
+        "•";
+
+
+    document
+        .getElementById(
+            "statusTitle"
+        )
+        .textContent =
+        "Esperando pago";
+
+
+    document
+        .getElementById(
+            "statusDescription"
+        )
+        .textContent =
+
+        "Tus asientos están en proceso y bloqueados temporalmente.";
+
+
+    document
+        .getElementById(
+            "reservationStatus"
+        )
+        .textContent =
+        "En proceso";
+
+
+    /*
+    Hasta conectar PixelPay,
+    botón deshabilitado.
+    */
+
+    document
+        .getElementById(
+            "payButton"
+        )
+        .disabled =
+        true;
+
+}
+
+
+/* ==========================================================
+   ESTADO PAGADO
+========================================================== */
+
+function renderPaidState() {
+
+    lastRenderedState =
+        "pagada";
+
+
+    clearInterval(
+        countdownInterval
     );
 
 
-    contenedor.innerHTML =
-    "";
+    document
+        .getElementById(
+            "timerBox"
+        )
+        .style.display =
+        "none";
 
 
-    const boletos =
-    datos.boletos ||
-    [];
+    document
+        .getElementById(
+            "checkoutLayout"
+        )
+        .style.display =
+        "grid";
+
+
+    document
+        .getElementById(
+            "expiredCard"
+        )
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    document
+        .getElementById(
+            "successCard"
+        )
+        .classList
+        .add(
+            "show"
+        );
+
+
+    const statusBox =
+
+        document.getElementById(
+            "statusBox"
+        );
+
+
+    statusBox.className =
+        "status-box status-paid";
+
+
+    document
+        .getElementById(
+            "statusIcon"
+        )
+        .textContent =
+        "✓";
+
+
+    document
+        .getElementById(
+            "statusTitle"
+        )
+        .textContent =
+        "Pago aprobado";
+
+
+    document
+        .getElementById(
+            "statusDescription"
+        )
+        .textContent =
+
+        "Tu compra fue confirmada y tus entradas están listas.";
+
+
+    document
+        .getElementById(
+            "reservationStatus"
+        )
+        .textContent =
+        "Pagada";
+
+
+    /*
+    Ocultar botón pago
+    */
+
+    document
+        .getElementById(
+            "payButton"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "paymentNotice"
+        )
+        .style.display =
+        "none";
+
+
+    renderTickets();
+
+}
+
+
+/* ==========================================================
+   EXPIRADA
+========================================================== */
+
+function renderExpiredState() {
+
+    lastRenderedState =
+        "expirada";
+
+
+    clearInterval(
+        countdownInterval
+    );
+
+
+    document
+        .getElementById(
+            "checkoutLayout"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "successCard"
+        )
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    document
+        .getElementById(
+            "ticketsSection"
+        )
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    document
+        .getElementById(
+            "expiredCard"
+        )
+        .classList
+        .add(
+            "show"
+        );
+
+}
+
+
+/* ==========================================================
+   BOLETOS
+========================================================== */
+
+function getTickets() {
+
+    /*
+    Compatible con varios nombres
+    posibles devueltos por la RPC.
+    */
+
+    let tickets =
+
+        getValue(
+            reservation,
+            [
+                "boletos",
+                "tickets",
+                "entradas"
+            ],
+            []
+        );
+
+
+    /*
+    Si Supabase devolviera JSON
+    como string por alguna razón.
+    */
+
+    if (
+        typeof tickets ===
+        "string"
+    ) {
+
+        try {
+
+            tickets =
+                JSON.parse(
+                    tickets
+                );
+
+        }
+
+        catch(error) {
+
+            tickets = [];
+
+        }
+
+    }
 
 
     if (
-        boletos.length ===
-        0
+        !Array.isArray(
+            tickets
+        )
+    ) {
+
+        tickets = [];
+
+    }
+
+
+    /*
+    Algunas funciones podrían devolver
+    un solo token directamente.
+    */
+
+    if (
+        !tickets.length
     ) {
 
 
-        contenedor.innerHTML = `
+        const singleToken =
 
-            <div class="tarjeta centrado">
+            getValue(
+                reservation,
+                [
+                    "token_boleto",
+                    "qr_token",
+                    "boleto_token"
+                ],
+                null
+            );
 
-                Pago confirmado.
 
-                <br><br>
+        if (singleToken) {
 
-                Los boletos están
-                siendo preparados.
+            tickets = [
+                {
+                    token:
+                        singleToken
+                }
+            ];
+
+        }
+
+    }
+
+
+    return tickets;
+
+}
+
+
+/* ==========================================================
+   RENDER QR
+========================================================== */
+
+function renderTickets() {
+
+    const tickets =
+        getTickets();
+
+
+    const section =
+
+        document.getElementById(
+            "ticketsSection"
+        );
+
+
+    const grid =
+
+        document.getElementById(
+            "ticketsGrid"
+        );
+
+
+    grid.innerHTML =
+        "";
+
+
+    if (
+        !tickets.length
+    ) {
+
+        /*
+        El pago está confirmado pero,
+        si aún no llegaron los QR,
+        dejamos que polling consulte de nuevo.
+        */
+
+        section
+            .classList
+            .add(
+                "show"
+            );
+
+
+        const message =
+
+            document.createElement(
+                "div"
+            );
+
+
+        message.className =
+            "card";
+
+
+        message.style.gridColumn =
+            "1 / -1";
+
+
+        message.innerHTML = `
+
+            <div class="card-content">
+
+                <div style="
+                    text-align:center;
+                    color:#6b7280;
+                    font-size:12px;
+                    padding:15px;
+                ">
+
+                    Tu pago está confirmado.
+                    Estamos preparando tus entradas digitales...
+
+                </div>
 
             </div>
 
         `;
 
 
+        grid.appendChild(
+            message
+        );
+
+
         return;
 
     }
 
 
-    boletos.forEach(
-        (boleto,index) => {
+    section
+        .classList
+        .add(
+            "show"
+        );
 
 
-            const div =
-            document.createElement(
-                "div"
+    tickets.forEach(
+        (
+            ticket,
+            index
+        ) => {
+
+
+            const token =
+
+                getValue(
+                    ticket,
+                    [
+                        "token",
+                        "qr_token",
+                        "boleto_token"
+                    ],
+                    null
+                );
+
+
+            if (!token) {
+                return;
+            }
+
+
+            const mesa =
+
+                getValue(
+                    ticket,
+                    [
+                        "mesa",
+                        "mesa_numero",
+                        "numero_mesa"
+                    ],
+                    null
+                );
+
+
+            const asiento =
+
+                getValue(
+                    ticket,
+                    [
+                        "asiento",
+                        "asiento_numero",
+                        "numero_asiento"
+                    ],
+                    null
+                );
+
+
+            const asientoId =
+
+                getValue(
+                    ticket,
+                    [
+                        "asiento_id"
+                    ],
+                    null
+                );
+
+
+            const eventName =
+
+                getValue(
+                    reservation,
+                    [
+                        "evento_nombre",
+                        "nombre_evento",
+                        "evento"
+                    ],
+                    "Evento Live Tickets"
+                );
+
+
+            const card =
+
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "ticket";
+
+
+            /*
+            TOP
+            */
+
+            const top =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            top.className =
+                "ticket-top";
+
+
+            const topBg =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            topBg.className =
+                "ticket-top-bg";
+
+
+            const overlay =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            overlay.className =
+                "ticket-top-overlay";
+
+
+            const topContent =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            topContent.className =
+                "ticket-top-content";
+
+
+            const small =
+
+                document.createElement(
+                    "small"
+                );
+
+
+            small.textContent =
+                `ENTRADA ${index + 1}`;
+
+
+            const strong =
+
+                document.createElement(
+                    "strong"
+                );
+
+
+            strong.textContent =
+                eventName;
+
+
+            topContent.appendChild(
+                small
             );
 
 
-            div.className =
-            "tarjeta boleto";
-
-
-            div.innerHTML = `
-
-                <h3>
-                    Boleto ${index + 1}
-                </h3>
-
-                <div>
-                    Asiento ID:
-                    ${boleto.asiento_id}
-                </div>
-
-                <div
-                id="qr-${index}"
-                class="qr">
-                </div>
-
-                <p>
-
-                    Presenta este código QR
-                    al ingresar al evento.
-
-                </p>
-
-            `;
-
-
-            contenedor.appendChild(
-                div
+            topContent.appendChild(
+                strong
             );
 
+
+            top.appendChild(
+                topBg
+            );
+
+
+            top.appendChild(
+                overlay
+            );
+
+
+            top.appendChild(
+                topContent
+            );
+
+
+            /*
+            BODY
+            */
+
+            const body =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            body.className =
+                "ticket-body";
+
+
+            const seatInfo =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            seatInfo.className =
+                "ticket-seat";
+
+
+            if (
+                mesa !== null
+            ) {
+
+
+                const mesaTag =
+
+                    document.createElement(
+                        "span"
+                    );
+
+
+                mesaTag.textContent =
+                    `Mesa ${mesa}`;
+
+
+                seatInfo.appendChild(
+                    mesaTag
+                );
+
+            }
+
+
+            const seatTag =
+
+                document.createElement(
+                    "span"
+                );
+
+
+            if (
+                asiento !== null
+            ) {
+
+                seatTag.textContent =
+                    `Asiento ${asiento}`;
+
+            }
+
+            else if (
+                asientoId !== null
+            ) {
+
+                seatTag.textContent =
+                    `Asiento ID ${asientoId}`;
+
+            }
+
+            else {
+
+                seatTag.textContent =
+                    `Entrada ${index + 1}`;
+
+            }
+
+
+            seatInfo.appendChild(
+                seatTag
+            );
+
+
+            /*
+            QR
+            */
+
+            const qrBox =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            qrBox.className =
+                "qr-box";
+
+
+            qrBox.id =
+                `qr-${index}`;
+
+
+            /*
+            TOKEN
+            */
+
+            const code =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            code.className =
+                "ticket-code";
+
+
+            code.textContent =
+                token;
+
+
+            /*
+            AVISO
+            */
+
+            const warning =
+
+                document.createElement(
+                    "div"
+                );
+
+
+            warning.className =
+                "ticket-warning";
+
+
+            warning.textContent =
+
+                "Este QR es personal y permite un solo ingreso. No lo compartas públicamente.";
+
+
+            body.appendChild(
+                seatInfo
+            );
+
+
+            body.appendChild(
+                qrBox
+            );
+
+
+            body.appendChild(
+                code
+            );
+
+
+            body.appendChild(
+                warning
+            );
+
+
+            card.appendChild(
+                top
+            );
+
+
+            card.appendChild(
+                body
+            );
+
+
+            grid.appendChild(
+                card
+            );
+
+
+            /*
+            GENERAR QR
+            */
 
             new QRCode(
-                document
-                .getElementById(
-                    `qr-${index}`
-                ),
+                qrBox,
                 {
-
                     text:
-                    boleto.token,
+                        String(
+                            token
+                        ),
 
                     width:
-                    220,
+                        165,
 
                     height:
-                    220
+                        165,
 
+                    correctLevel:
+                        QRCode.CorrectLevel.H
                 }
             );
 
-        });
+        }
+    );
 
 }
 
 
-/* =====================================================
-   EXPIRADA
-===================================================== */
+/* ==========================================================
+   CONTADOR
+========================================================== */
 
-
-function mostrarExpirada() {
-
-
-    limpiarIntervalos();
-
-
-    document
-    .getElementById(
-        "checkout"
-    )
-    .style.display =
-    "none";
-
-
-    document
-    .getElementById(
-        "panelPagado"
-    )
-    .style.display =
-    "none";
-
-
-    document
-    .getElementById(
-        "panelError"
-    )
-    .style.display =
-    "none";
-
-
-    document
-    .getElementById(
-        "panelExpirado"
-    )
-    .style.display =
-    "block";
-
-}
-
-
-/* =====================================================
-   ERROR
-===================================================== */
-
-
-function mostrarError(
-    mensaje
+function startCountdown(
+    expiresAt
 ) {
 
-
-    limpiarIntervalos();
-
-
-    document
-    .getElementById(
-        "cargando"
-    )
-    .style.display =
-    "none";
+    clearInterval(
+        countdownInterval
+    );
 
 
-    document
-    .getElementById(
-        "checkout"
-    )
-    .style.display =
-    "none";
+    if (!expiresAt) {
 
-
-    document
-    .getElementById(
-        "panelPagado"
-    )
-    .style.display =
-    "none";
-
-
-    document
-    .getElementById(
-        "panelExpirado"
-    )
-    .style.display =
-    "none";
-
-
-    document
-    .getElementById(
-        "panelError"
-    )
-    .style.display =
-    "block";
-
-
-    document
-    .getElementById(
-        "mensajeError"
-    )
-    .textContent =
-    mensaje;
-
-}
-
-
-/* =====================================================
-   VOLVER EVENTO
-===================================================== */
-
-
-function volverEvento() {
-
-
-    if (
-        reservaActual &&
-        reservaActual.evento_id
-    ) {
-
-
-        window.location.href =
-        "evento.html?id=" +
-        reservaActual.evento_id;
+        document
+            .getElementById(
+                "countdown"
+            )
+            .textContent =
+            "--:--";
 
 
         return;
@@ -1271,61 +3716,228 @@ function volverEvento() {
     }
 
 
-    window.location.href =
-    "index.html";
-
-}
+    function update() {
 
 
-/* =====================================================
-   LIMPIAR INTERVALOS
-===================================================== */
+        const now =
+            Date.now();
 
 
-function limpiarIntervalos() {
+        const end =
+
+            new Date(
+                expiresAt
+            )
+            .getTime();
 
 
-    if (
-        intervaloContador
-    ) {
+        let difference =
+
+            end -
+            now;
 
 
-        clearInterval(
-            intervaloContador
-        );
+        if (
+            difference <= 0
+        ) {
 
 
-        intervaloContador =
-        null;
+            document
+                .getElementById(
+                    "countdown"
+                )
+                .textContent =
+                "00:00";
+
+
+            clearInterval(
+                countdownInterval
+            );
+
+
+            /*
+            Consultamos backend porque
+            será quien confirme expiración.
+            */
+
+            setTimeout(
+                () => {
+                    loadReservation(
+                        true
+                    );
+                },
+                700
+            );
+
+
+            return;
+
+        }
+
+
+        const minutes =
+
+            Math.floor(
+                difference /
+                60000
+            );
+
+
+        const seconds =
+
+            Math.floor(
+                (
+                    difference %
+                    60000
+                )
+                /
+                1000
+            );
+
+
+        document
+            .getElementById(
+                "countdown"
+            )
+            .textContent =
+
+            String(minutes)
+                .padStart(
+                    2,
+                    "0"
+                )
+
+            +
+
+            ":"
+
+            +
+
+            String(seconds)
+                .padStart(
+                    2,
+                    "0"
+                );
 
     }
 
 
-    if (
-        intervaloConsulta
-    ) {
+    update();
 
 
-        clearInterval(
-            intervaloConsulta
+    countdownInterval =
+
+        setInterval(
+            update,
+            1000
         );
-
-
-        intervaloConsulta =
-        null;
-
-    }
 
 }
 
 
-/* =====================================================
-   INICIO
-===================================================== */
+/* ==========================================================
+   ERROR
+========================================================== */
+
+function showError(message) {
+
+    document
+        .getElementById(
+            "loadingScreen"
+        )
+        .style.display =
+        "none";
 
 
-consultarReserva();
+    document
+        .getElementById(
+            "checkoutLayout"
+        )
+        .style.display =
+        "none";
 
+
+    document
+        .getElementById(
+            "expiredCard"
+        )
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    const errorCard =
+
+        document.getElementById(
+            "errorCard"
+        );
+
+
+    errorCard
+        .classList
+        .add(
+            "show"
+        );
+
+
+    document
+        .getElementById(
+            "errorMessage"
+        )
+        .textContent =
+        message;
+
+}
+
+
+/* ==========================================================
+   POLLING
+========================================================== */
+
+function startPolling() {
+
+    clearInterval(
+        pollingInterval
+    );
+
+
+    pollingInterval =
+
+        setInterval(
+            () => {
+
+
+                loadReservation(
+                    true
+                );
+
+
+            },
+            5000
+        );
+
+}
+
+
+/* ==========================================================
+   INICIAR
+========================================================== */
+
+async function initialize() {
+
+
+    await loadReservation(
+        false
+    );
+
+
+    startPolling();
+
+}
+
+
+initialize();
 
 </script>
 
