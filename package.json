@@ -1,0 +1,11 @@
+{
+  "name": "live-tickets-hn",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.0",
+    "qrcode": "^1.5.4",
+    "resend": "^6.0.0"
+  }
+}
