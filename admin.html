@@ -608,6 +608,10 @@ ingresados;
 
 /* RESERVAS */
 
+/* ==========================================
+   RESERVAS
+========================================== */
+
 const resultadoReservas =
 await db
 .from("reservas")
@@ -616,6 +620,172 @@ await db
     ascending: false
 });
 
+if (resultadoReservas.error)
+    throw resultadoReservas.error;
+
+const reservas =
+resultadoReservas.data;
+
+
+/* ==========================================
+   RESERVA_ASIENTOS
+========================================== */
+
+const resultadoReservaAsientos =
+await db
+.from("reserva_asientos")
+.select("*");
+
+if (resultadoReservaAsientos.error)
+    throw resultadoReservaAsientos.error;
+
+const reservaAsientos =
+resultadoReservaAsientos.data;
+
+
+/* ==========================================
+   ASIENTOS
+========================================== */
+
+const resultadoAsientosAdmin =
+await db
+.from("asientos")
+.select("*");
+
+if (resultadoAsientosAdmin.error)
+    throw resultadoAsientosAdmin.error;
+
+const asientosAdmin =
+resultadoAsientosAdmin.data;
+
+
+/* ==========================================
+   MESAS
+========================================== */
+
+const resultadoMesasAdmin =
+await db
+.from("mesas")
+.select("*");
+
+if (resultadoMesasAdmin.error)
+    throw resultadoMesasAdmin.error;
+
+const mesasAdmin =
+resultadoMesasAdmin.data;
+
+
+/* ==========================================
+   CONSTRUIR TABLA
+========================================== */
+
+const tabla =
+document.getElementById(
+    "tablaReservas"
+);
+
+tabla.innerHTML = "";
+
+
+reservas.forEach(
+reserva => {
+
+    const fila =
+    document.createElement("tr");
+
+
+    /*
+       Buscar los asientos de esta reserva
+    */
+
+    const asientosReserva =
+    reservaAsientos.filter(
+        ra =>
+        ra.reserva_id === reserva.id
+    );
+
+
+    /*
+       Convertir cada asiento en:
+       Mesa X - Asiento X
+    */
+
+    const listaAsientos =
+    asientosReserva.map(
+        ra => {
+
+            const asiento =
+            asientosAdmin.find(
+                a => a.id === ra.asiento_id
+            );
+
+
+            if (!asiento)
+                return "";
+
+
+            const mesa =
+            mesasAdmin.find(
+                m => m.id === asiento.mesa_id
+            );
+
+
+            if (!mesa)
+                return `Asiento ${asiento.numero}`;
+
+
+            return `
+                Mesa ${mesa.numero}
+                - Asiento ${asiento.numero}
+            `;
+
+        }
+    )
+    .filter(Boolean);
+
+
+    /*
+       Mostrar los asientos
+    */
+
+    const textoAsientos =
+    listaAsientos.length > 0
+        ?
+        listaAsientos.join("<br>")
+        :
+        "Sin asientos";
+
+
+    fila.innerHTML = `
+
+        <td>
+            ${reserva.codigo_reserva || reserva.id}
+        </td>
+
+        <td>
+            ${reserva.nombre_cliente || ""}
+        </td>
+
+        <td>
+            ${reserva.telefono || ""}
+        </td>
+
+        <td>
+            ${textoAsientos}
+        </td>
+
+        <td class="estado">
+            ${reserva.estado || "Registrada"}
+        </td>
+
+    `;
+
+
+    tabla.appendChild(
+        fila
+    );
+
+});
 
 if (resultadoReservas.error)
 throw resultadoReservas.error;
