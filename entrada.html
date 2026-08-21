@@ -9,17 +9,25 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<meta name="theme-color" content="#08101f">
+<meta
+    name="theme-color"
+    content="#08101f">
 
-<meta name="referrer" content="no-referrer">
+<meta
+    name="referrer"
+    content="no-referrer">
 
 <title>Control de Acceso | Live Tickets</title>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com">
 
 <link
     rel="preconnect"
@@ -34,23 +42,21 @@
 <style>
 
 /* ==========================================================
-   VARIABLES
+   GENERAL
 ========================================================== */
 
 * {
     box-sizing: border-box;
 }
 
+
 :root {
 
     --bg:
-        #f2f5f9;
+        #f3f6fa;
 
     --dark:
         #08101f;
-
-    --dark2:
-        #101a2d;
 
     --text:
         #111827;
@@ -73,40 +79,20 @@
     --green-dark:
         #166534;
 
-    --green-soft:
-        #ecfdf5;
-
     --red:
         #dc2626;
 
     --red-dark:
         #991b1b;
 
-    --red-soft:
-        #fef2f2;
-
     --orange:
         #f97316;
-
-    --orange-soft:
-        #fff7ed;
-
-    --yellow:
-        #eab308;
-
-    --gray:
-        #64748b;
 }
 
 
-/* ==========================================================
-   GENERAL
-========================================================== */
-
 html {
 
-    min-height:
-        100%;
+    min-height: 100%;
 
     background:
         var(--bg);
@@ -115,11 +101,9 @@ html {
 
 body {
 
-    margin:
-        0;
+    margin: 0;
 
-    min-height:
-        100vh;
+    min-height: 100vh;
 
     font-family:
         "Inter",
@@ -181,14 +165,14 @@ button {
 
         radial-gradient(
             circle at 20% 10%,
-            rgba(37,99,235,.27),
+            rgba(37,99,235,.28),
             transparent 32%
         ),
 
         radial-gradient(
             circle at 90% 90%,
             rgba(124,58,237,.18),
-            transparent 34%
+            transparent 35%
         ),
 
         linear-gradient(
@@ -210,9 +194,6 @@ button {
     background:
         white;
 
-    border:
-        1px solid rgba(255,255,255,.1);
-
     border-radius:
         27px;
 
@@ -230,7 +211,7 @@ button {
         17px;
 
     background:
-        var(--dark);
+        #08101f;
 
     border-radius:
         16px;
@@ -245,11 +226,11 @@ button {
     display:
         block;
 
-    width:
-        auto;
-
     height:
         51px;
+
+    width:
+        auto;
 
     max-width:
         235px;
@@ -322,10 +303,6 @@ button {
 }
 
 
-/* ==========================================================
-   FORM
-========================================================== */
-
 .form-group {
 
     margin-bottom:
@@ -378,14 +355,8 @@ button {
     background:
         white;
 
-    color:
-        #111827;
-
     font-size:
         13px;
-
-    transition:
-        .15s;
 }
 
 
@@ -430,9 +401,6 @@ button {
 
     font-weight:
         900;
-
-    letter-spacing:
-        .3px;
 }
 
 
@@ -455,10 +423,10 @@ button {
         13px;
 
     padding:
-        11px 12px;
+        11px;
 
     background:
-        var(--red-soft);
+        #fef2f2;
 
     border:
         1px solid #fecaca;
@@ -467,7 +435,7 @@ button {
         10px;
 
     color:
-        var(--red-dark);
+        #991b1b;
 
     text-align:
         center;
@@ -579,7 +547,7 @@ button {
         center;
 
     gap:
-        11px;
+        12px;
 }
 
 
@@ -671,13 +639,13 @@ button {
 
 
 /* ==========================================================
-   TITLE
+   PAGE HEAD
 ========================================================== */
 
 .page-head {
 
     margin-bottom:
-        20px;
+        18px;
 
     display:
         flex;
@@ -689,7 +657,7 @@ button {
         space-between;
 
     gap:
-        20px;
+        18px;
 
     flex-wrap:
         wrap;
@@ -744,7 +712,63 @@ button {
 }
 
 
+.head-controls {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    flex-wrap:
+        wrap;
+}
+
+
+.event-select {
+
+    min-width:
+        260px;
+
+    min-height:
+        42px;
+
+    padding:
+        0 12px;
+
+    border:
+        1px solid #d7dde5;
+
+    border-radius:
+        11px;
+
+    background:
+        white;
+
+    outline:
+        none;
+
+    color:
+        #111827;
+
+    font-size:
+        9px;
+
+    font-weight:
+        700;
+}
+
+
 .connection-status {
+
+    min-height:
+        42px;
+
+    padding:
+        0 11px;
 
     display:
         inline-flex;
@@ -754,9 +778,6 @@ button {
 
     gap:
         7px;
-
-    padding:
-        8px 11px;
 
     background:
         white;
@@ -795,7 +816,7 @@ button {
 
 
 /* ==========================================================
-   STATS
+   GLOBAL STATS
 ========================================================== */
 
 .stats-grid {
@@ -875,17 +896,30 @@ button {
 }
 
 
-.stat-value.red {
-
-    color:
-        var(--red-dark);
-}
-
-
 .stat-value.blue {
 
     color:
         var(--blue-dark);
+}
+
+
+.stat-value.orange {
+
+    color:
+        #c2410c;
+}
+
+
+.stat-subtitle {
+
+    margin-top:
+        4px;
+
+    color:
+        #98a2b3;
+
+    font-size:
+        7px;
 }
 
 
@@ -1016,7 +1050,7 @@ button {
 
 
 /* ==========================================================
-   CAMERA AREA
+   CAMERA
 ========================================================== */
 
 .camera-area {
@@ -1071,11 +1105,6 @@ button {
 }
 
 
-/*
-Elimina textos propios de html5-qrcode
-cuando se renderizan.
-*/
-
 #reader__dashboard_section_csr span,
 #reader__dashboard_section_swaplink,
 #reader__status_span {
@@ -1086,7 +1115,7 @@ cuando se renderizan.
 
 
 /* ==========================================================
-   CAMERA PLACEHOLDER
+   PLACEHOLDER
 ========================================================== */
 
 .camera-placeholder {
@@ -1401,12 +1430,14 @@ cuando se renderizan.
 
         top:
             18%;
+
     }
 
     50% {
 
         top:
             80%;
+
     }
 
 }
@@ -1487,7 +1518,7 @@ cuando se renderizan.
 
 
 /* ==========================================================
-   RIGHT COLUMN
+   SIDE
 ========================================================== */
 
 .side-column {
@@ -1507,7 +1538,7 @@ cuando se renderizan.
 
 
 /* ==========================================================
-   RESULT CARD
+   RESULT
 ========================================================== */
 
 .result-card {
@@ -1617,10 +1648,6 @@ cuando se renderizan.
 }
 
 
-/* ==========================================================
-   RESULT SUCCESS
-========================================================== */
-
 .result-content {
 
     display:
@@ -1725,9 +1752,6 @@ cuando se renderizan.
 
     font-weight:
         900;
-
-    letter-spacing:
-        -.5px;
 }
 
 
@@ -1741,9 +1765,6 @@ cuando se renderizan.
 
     font-size:
         9px;
-
-    line-height:
-        1.5;
 }
 
 
@@ -1783,9 +1804,6 @@ cuando se renderizan.
 
     font-weight:
         900;
-
-    letter-spacing:
-        .6px;
 }
 
 
@@ -1794,14 +1812,8 @@ cuando se renderizan.
     display:
         block;
 
-    color:
-        #111827;
-
     font-size:
         16px;
-
-    line-height:
-        1.25;
 }
 
 
@@ -1872,13 +1884,6 @@ cuando se renderizan.
 }
 
 
-.detail-list {
-
-    display:
-        grid;
-}
-
-
 .detail-row {
 
     min-height:
@@ -1923,19 +1928,13 @@ cuando se renderizan.
     max-width:
         65%;
 
-    color:
-        #111827;
-
     text-align:
         right;
-
-    word-break:
-        break-word;
 }
 
 
 /* ==========================================================
-   MANUAL CARD
+   MANUAL
 ========================================================== */
 
 .manual-card {
@@ -1951,9 +1950,6 @@ cuando se renderizan.
 
     border-radius:
         17px;
-
-    box-shadow:
-        0 8px 25px rgba(15,23,42,.045);
 }
 
 
@@ -1977,9 +1973,6 @@ cuando se renderizan.
 
     font-size:
         8px;
-
-    line-height:
-        1.5;
 }
 
 
@@ -1998,9 +1991,6 @@ cuando se renderizan.
 
 .manual-input {
 
-    width:
-        100%;
-
     min-height:
         43px;
 
@@ -2018,13 +2008,6 @@ cuando se renderizan.
 
     font-size:
         10px;
-}
-
-
-.manual-input:focus {
-
-    border-color:
-        var(--blue);
 }
 
 
@@ -2079,9 +2062,6 @@ cuando se renderizan.
 
     border-radius:
         20px;
-
-    box-shadow:
-        0 9px 28px rgba(15,23,42,.045);
 }
 
 
@@ -2093,14 +2073,11 @@ cuando se renderizan.
     display:
         flex;
 
-    align-items:
-        center;
-
     justify-content:
         space-between;
 
-    gap:
-        12px;
+    align-items:
+        center;
 
     border-bottom:
         1px solid var(--line);
@@ -2147,9 +2124,6 @@ cuando se renderizan.
     background:
         white;
 
-    color:
-        #667085;
-
     cursor:
         pointer;
 
@@ -2164,7 +2138,7 @@ cuando se renderizan.
 .history-list {
 
     max-height:
-        315px;
+        320px;
 
     overflow-y:
         auto;
@@ -2174,7 +2148,7 @@ cuando se renderizan.
 .history-empty {
 
     padding:
-        30px 20px;
+        30px;
 
     color:
         #98a2b3;
@@ -2209,13 +2183,6 @@ cuando se renderizan.
 }
 
 
-.history-item:last-child {
-
-    border-bottom:
-        none;
-}
-
-
 .history-icon {
 
     width:
@@ -2239,32 +2206,21 @@ cuando se renderizan.
     color:
         white;
 
-    font-size:
-        13px;
-
     font-weight:
         900;
 }
 
 
 .history-icon.success {
-
-    background:
-        var(--green);
+    background: var(--green);
 }
-
 
 .history-icon.error {
-
-    background:
-        var(--red);
+    background: var(--red);
 }
 
-
 .history-icon.warning {
-
-    background:
-        var(--orange);
+    background: var(--orange);
 }
 
 
@@ -2276,9 +2232,6 @@ cuando se renderizan.
     margin-bottom:
         3px;
 
-    color:
-        #111827;
-
     font-size:
         9px;
 }
@@ -2286,17 +2239,11 @@ cuando se renderizan.
 
 .history-info span {
 
-    display:
-        block;
-
     color:
         #667085;
 
     font-size:
         7px;
-
-    line-height:
-        1.45;
 }
 
 
@@ -2305,16 +2252,13 @@ cuando se renderizan.
     color:
         #98a2b3;
 
-    text-align:
-        right;
-
     font-size:
         7px;
 }
 
 
 /* ==========================================================
-   VALIDATING OVERLAY
+   VALIDATING
 ========================================================== */
 
 .validating-overlay {
@@ -2336,9 +2280,6 @@ cuando se renderizan.
 
     justify-content:
         center;
-
-    padding:
-        20px;
 
     background:
         rgba(5,10,19,.76);
@@ -2371,9 +2312,6 @@ cuando se renderizan.
 
     text-align:
         center;
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.35);
 }
 
 
@@ -2405,35 +2343,10 @@ cuando se renderizan.
 @keyframes spin {
 
     to {
-
         transform:
             rotate(360deg);
-
     }
 
-}
-
-
-.validating-box strong {
-
-    display:
-        block;
-
-    margin-bottom:
-        4px;
-
-    font-size:
-        13px;
-}
-
-
-.validating-box span {
-
-    color:
-        var(--muted);
-
-    font-size:
-        8px;
 }
 
 
@@ -2459,21 +2372,7 @@ cuando se renderizan.
             auto;
 
         grid-template-columns:
-            repeat(2,minmax(0,1fr));
-    }
-
-
-    .result-card {
-
-        min-height:
-            auto;
-    }
-
-
-    .result-empty {
-
-        min-height:
-            300px;
+            repeat(2,1fr);
     }
 
 }
@@ -2495,9 +2394,6 @@ cuando se renderizan.
 
         height:
             34px;
-
-        max-width:
-            170px;
     }
 
 
@@ -2515,10 +2411,20 @@ cuando se renderizan.
     }
 
 
-    .page-title h1 {
+    .head-controls {
 
-        font-size:
-            23px;
+        width:
+            100%;
+    }
+
+
+    .event-select {
+
+        width:
+            100%;
+
+        min-width:
+            0;
     }
 
 
@@ -2529,27 +2435,6 @@ cuando se renderizan.
 
         gap:
             9px;
-    }
-
-
-    .stat-card {
-
-        padding:
-            14px;
-    }
-
-
-    .stat-value {
-
-        font-size:
-            22px;
-    }
-
-
-    .scanner-card {
-
-        border-radius:
-            17px;
     }
 
 
@@ -2568,13 +2453,6 @@ cuando se renderizan.
     }
 
 
-    .scan-frame {
-
-        width:
-            min(280px,76%);
-    }
-
-
     .side-column {
 
         grid-template-columns:
@@ -2586,63 +2464,6 @@ cuando se renderizan.
 
         grid-template-columns:
             1fr;
-    }
-
-
-    .manual-button {
-
-        width:
-            100%;
-    }
-
-}
-
-
-@media(max-width:420px) {
-
-    .login-card {
-
-        padding:
-            24px 19px;
-
-        border-radius:
-            21px;
-    }
-
-
-    .camera-area,
-    #reader {
-
-        min-height:
-            390px;
-    }
-
-
-    #reader video {
-
-        height:
-            390px !important;
-    }
-
-
-    .scanner-head {
-
-        padding:
-            15px;
-    }
-
-
-    .camera-controls {
-
-        padding:
-            10px;
-    }
-
-
-    .result-details {
-
-        padding:
-            16px;
     }
 
 }
@@ -2672,9 +2493,16 @@ cuando se renderizan.
             Validando entrada
         </strong>
 
-        <span>
+        <div
+            style="
+                margin-top:5px;
+                color:#667085;
+                font-size:8px;
+            ">
+
             Consultando Live Tickets...
-        </span>
+
+        </div>
 
     </div>
 
@@ -2689,7 +2517,6 @@ cuando se renderizan.
     class="login-screen"
     id="loginScreen">
 
-
     <div class="login-card">
 
 
@@ -2697,8 +2524,8 @@ cuando se renderizan.
 
             <img
                 src="LIVE_TICKETS_BLANCO.png"
-                alt="Live Tickets"
-                class="login-logo">
+                class="login-logo"
+                alt="Live Tickets">
 
         </div>
 
@@ -2711,14 +2538,16 @@ cuando se renderizan.
 
 
         <h1>
+
             Ingreso al evento
+
         </h1>
 
 
         <p>
 
-            Acceso exclusivo para personal autorizado.
-            Inicia sesión para habilitar el lector de entradas.
+            Inicia sesión con el usuario asignado
+            a este punto de acceso.
 
         </p>
 
@@ -2726,16 +2555,14 @@ cuando se renderizan.
         <div class="form-group">
 
             <label class="form-label">
-
                 USUARIO
-
             </label>
 
             <input
-                type="text"
                 id="loginUser"
                 class="form-input"
-                placeholder="Ej. admin1"
+                type="text"
+                placeholder="Ej. scanner1"
                 autocomplete="username">
 
         </div>
@@ -2744,16 +2571,14 @@ cuando se renderizan.
         <div class="form-group">
 
             <label class="form-label">
-
                 CONTRASEÑA
-
             </label>
 
             <input
-                type="password"
                 id="loginPassword"
                 class="form-input"
-                placeholder="••••••••••"
+                type="password"
+                placeholder="••••••••"
                 autocomplete="current-password">
 
         </div>
@@ -2789,10 +2614,6 @@ cuando se renderizan.
     id="accessApp">
 
 
-<!-- ======================================================
-     HEADER
-====================================================== -->
-
 <header class="topbar">
 
     <div class="nav">
@@ -2800,8 +2621,8 @@ cuando se renderizan.
 
         <img
             src="LIVE_TICKETS_BLANCO.png"
-            alt="Live Tickets"
-            class="brand-logo">
+            class="brand-logo"
+            alt="Live Tickets">
 
 
         <div class="header-right">
@@ -2837,15 +2658,11 @@ cuando se renderizan.
 </header>
 
 
-<!-- ======================================================
-     PAGE
-====================================================== -->
-
 <main class="page">
 
 
 <!-- ======================================================
-     TITLE
+     HEAD
 ====================================================== -->
 
 <div class="page-head">
@@ -2862,24 +2679,40 @@ cuando se renderizan.
         </h1>
 
         <p>
-            Escanea el código QR de cada entrada para autorizar el ingreso.
+            Validación simultánea desde múltiples dispositivos.
         </p>
 
     </div>
 
 
-    <div class="connection-status">
+    <div class="head-controls">
 
-        <span
-            class="connection-dot"
-            id="connectionDot">
-        </span>
 
-        <span id="connectionText">
+        <select
+            id="eventSelect"
+            class="event-select"
+            onchange="changeEvent()">
 
-            Sistema conectado
+            <option value="">
+                Cargando evento...
+            </option>
 
-        </span>
+        </select>
+
+
+        <div class="connection-status">
+
+            <span
+                class="connection-dot"
+                id="connectionDot">
+            </span>
+
+            <span id="connectionText">
+                Sistema conectado
+            </span>
+
+        </div>
+
 
     </div>
 
@@ -2888,7 +2721,7 @@ cuando se renderizan.
 
 
 <!-- ======================================================
-     STATS
+     GLOBAL STATS
 ====================================================== -->
 
 <div class="stats-grid">
@@ -2897,32 +2730,19 @@ cuando se renderizan.
     <div class="stat-card">
 
         <div class="stat-label">
-            Escaneados sesión
-        </div>
-
-        <div
-            class="stat-value blue"
-            id="sessionScans">
-
-            0
-
-        </div>
-
-    </div>
-
-
-    <div class="stat-card">
-
-        <div class="stat-label">
-            Autorizados
+            Ingresados evento
         </div>
 
         <div
             class="stat-value green"
-            id="sessionSuccess">
+            id="globalEntered">
 
             0
 
+        </div>
+
+        <div class="stat-subtitle">
+            Todos los teléfonos
         </div>
 
     </div>
@@ -2931,15 +2751,19 @@ cuando se renderizan.
     <div class="stat-card">
 
         <div class="stat-label">
-            Rechazados
+            Pendientes ingreso
         </div>
 
         <div
-            class="stat-value red"
-            id="sessionRejected">
+            class="stat-value orange"
+            id="globalPending">
 
             0
 
+        </div>
+
+        <div class="stat-subtitle">
+            Boletos emitidos no usados
         </div>
 
     </div>
@@ -2948,16 +2772,40 @@ cuando se renderizan.
     <div class="stat-card">
 
         <div class="stat-label">
-            Último escaneo
+            Boletos emitidos
+        </div>
+
+        <div
+            class="stat-value blue"
+            id="globalIssued">
+
+            0
+
+        </div>
+
+        <div class="stat-subtitle">
+            Reservas pagadas
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Este teléfono
         </div>
 
         <div
             class="stat-value"
-            id="lastScanTime"
-            style="font-size:18px;">
+            id="phoneApproved">
 
-            —
+            0
 
+        </div>
+
+        <div class="stat-subtitle">
+            Autorizados en esta sesión
         </div>
 
     </div>
@@ -2967,7 +2815,7 @@ cuando se renderizan.
 
 
 <!-- ======================================================
-     MAIN GRID
+     ACCESS GRID
 ====================================================== -->
 
 <div class="access-grid">
@@ -2990,7 +2838,7 @@ cuando se renderizan.
             </h2>
 
             <p>
-                Coloca el código del boleto dentro del recuadro.
+                Coloca el QR dentro del recuadro.
             </p>
 
         </div>
@@ -3009,8 +2857,7 @@ cuando se renderizan.
     <div class="camera-area">
 
 
-        <div
-            id="reader">
+        <div id="reader">
         </div>
 
 
@@ -3035,8 +2882,8 @@ cuando se renderizan.
 
                 <p>
 
-                    Presiona iniciar cámara y permite el acceso
-                    a la cámara del dispositivo.
+                    Presiona iniciar cámara y permite
+                    el acceso a la cámara del teléfono.
 
                 </p>
 
@@ -3121,10 +2968,6 @@ cuando se renderizan.
 <div class="side-column">
 
 
-<!-- ======================================================
-     RESULT
-====================================================== -->
-
 <section class="result-card">
 
 
@@ -3136,9 +2979,7 @@ cuando se renderizan.
 
 
             <div class="result-empty-icon">
-
                 ✓
-
             </div>
 
 
@@ -3149,8 +2990,7 @@ cuando se renderizan.
 
             <p>
 
-                El resultado de la próxima validación
-                aparecerá aquí.
+                El resultado del próximo QR aparecerá aquí.
 
             </p>
 
@@ -3187,9 +3027,7 @@ cuando se renderizan.
 
 
             <p id="resultMessage">
-
-                El boleto fue validado correctamente.
-
+                —
             </p>
 
 
@@ -3206,9 +3044,7 @@ cuando se renderizan.
                 </small>
 
                 <strong id="resultEvent">
-
                     —
-
                 </strong>
 
             </div>
@@ -3224,9 +3060,7 @@ cuando se renderizan.
                     </small>
 
                     <strong id="resultTable">
-
                         —
-
                     </strong>
 
                 </div>
@@ -3239,9 +3073,7 @@ cuando se renderizan.
                     </small>
 
                     <strong id="resultSeat">
-
                         —
-
                     </strong>
 
                 </div>
@@ -3250,53 +3082,41 @@ cuando se renderizan.
             </div>
 
 
-            <div class="detail-list">
+            <div class="detail-row">
+
+                <span>
+                    Comprador
+                </span>
+
+                <strong id="resultBuyer">
+                    —
+                </strong>
+
+            </div>
 
 
-                <div class="detail-row">
+            <div class="detail-row">
 
-                    <span>
-                        Comprador
-                    </span>
+                <span>
+                    Reserva
+                </span>
 
-                    <strong id="resultBuyer">
+                <strong id="resultReservation">
+                    —
+                </strong>
 
-                        —
-
-                    </strong>
-
-                </div>
+            </div>
 
 
-                <div class="detail-row">
+            <div class="detail-row">
 
-                    <span>
-                        Reserva
-                    </span>
+                <span>
+                    Hora
+                </span>
 
-                    <strong id="resultReservation">
-
-                        —
-
-                    </strong>
-
-                </div>
-
-
-                <div class="detail-row">
-
-                    <span>
-                        Hora
-                    </span>
-
-                    <strong id="resultTime">
-
-                        —
-
-                    </strong>
-
-                </div>
-
+                <strong id="resultTime">
+                    —
+                </strong>
 
             </div>
 
@@ -3323,9 +3143,7 @@ cuando se renderizan.
 
 
     <p>
-
-        Úsala cuando la cámara no pueda leer el código QR.
-
+        Úsala si la cámara no puede leer el código.
     </p>
 
 
@@ -3333,9 +3151,9 @@ cuando se renderizan.
 
 
         <input
-            type="text"
             id="manualToken"
             class="manual-input"
+            type="text"
             placeholder="Pegar token del boleto">
 
 
@@ -3373,11 +3191,11 @@ cuando se renderizan.
         <div>
 
             <h3>
-                Actividad reciente
+                Actividad de este teléfono
             </h3>
 
             <p>
-                Últimas validaciones realizadas en este dispositivo.
+                Las estadísticas superiores incluyen todos los dispositivos.
             </p>
 
         </div>
@@ -3399,13 +3217,11 @@ cuando se renderizan.
         class="history-list"
         id="historyList">
 
-
         <div class="history-empty">
 
-            Todavía no hay escaneos en esta sesión.
+            Todavía no hay escaneos en este dispositivo.
 
         </div>
-
 
     </div>
 
@@ -3422,7 +3238,7 @@ cuando se renderizan.
 <script>
 
 /* ==========================================================
-   SUPABASE
+   CONFIG
 ========================================================== */
 
 const SUPABASE_URL =
@@ -3445,8 +3261,16 @@ const db =
 
 
 /* ==========================================================
-   SCANNER STATE
+   GLOBAL STATE
 ========================================================== */
+
+let events =
+    [];
+
+
+let currentEventId =
+    null;
+
 
 let html5QrCode =
     null;
@@ -3468,40 +3292,28 @@ let lastTokenTime =
     0;
 
 
-/*
-Evita que la cámara lea exactamente
-el mismo QR muchas veces en milisegundos.
-*/
-
-const SAME_QR_COOLDOWN =
-    3500;
+let phoneApproved =
+    0;
 
 
-/* ==========================================================
-   SESSION STATS
-========================================================== */
-
-let sessionStats =
-    {
-
-        scans:
-            0,
-
-        success:
-            0,
-
-        rejected:
-            0
-
-    };
+let phoneRejected =
+    0;
 
 
 let scanHistory =
     [];
 
 
+let statsInterval =
+    null;
+
+
+const SAME_QR_COOLDOWN =
+    3500;
+
+
 /* ==========================================================
-   RESULT OBJECT
+   HELPERS
 ========================================================== */
 
 function resultObject(data) {
@@ -3517,9 +3329,7 @@ function resultObject(data) {
 
 
     if (
-        Array.isArray(
-            data
-        )
+        Array.isArray(data)
     ) {
 
         return data[0] || null;
@@ -3531,95 +3341,6 @@ function resultObject(data) {
 
 }
 
-
-/* ==========================================================
-   GET VALUE
-========================================================== */
-
-function getValue(
-    object,
-    keys,
-    fallback = null
-) {
-
-    if (!object) {
-
-        return fallback;
-
-    }
-
-
-    for (
-        const key
-        of keys
-    ) {
-
-        if (
-            object[key] !== undefined &&
-            object[key] !== null &&
-            object[key] !== ""
-        ) {
-
-            return object[key];
-
-        }
-
-    }
-
-
-    return fallback;
-
-}
-
-
-/* ==========================================================
-   NORMALIZE BOOLEAN
-========================================================== */
-
-function isSuccessResult(
-    result
-) {
-
-    if (!result) {
-
-        return false;
-
-    }
-
-
-    const value =
-        getValue(
-            result,
-            [
-                "success",
-                "ok",
-                "valido",
-                "valid",
-                "autorizado"
-            ],
-            false
-        );
-
-
-    if (
-        value === true ||
-        value === 1 ||
-        value === "true"
-    ) {
-
-        return true;
-
-    }
-
-
-    return false;
-
-}
-
-
-/* ==========================================================
-   ESCAPE
-========================================================== */
 
 function escapeHTML(value) {
 
@@ -3637,10 +3358,6 @@ function escapeHTML(value) {
 
 }
 
-
-/* ==========================================================
-   TIME
-========================================================== */
 
 function timeNow() {
 
@@ -3662,18 +3379,11 @@ function timeNow() {
 }
 
 
-/* ==========================================================
-   RESERVATION CODE
-========================================================== */
-
-function reservationCode(
-    id
-) {
+function reservationCode(id) {
 
     if (
         id === null ||
-        id === undefined ||
-        id === ""
+        id === undefined
     ) {
 
         return "—";
@@ -3683,9 +3393,7 @@ function reservationCode(
 
     return "LT-" +
 
-        String(
-            id
-        )
+        String(id)
         .padStart(
             6,
             "0"
@@ -3725,14 +3433,11 @@ async function login() {
         );
 
 
-    const errorBox =
-        document
+    document
         .getElementById(
             "loginError"
-        );
-
-
-    errorBox.style.display =
+        )
+        .style.display =
         "none";
 
 
@@ -3750,38 +3455,21 @@ async function login() {
     }
 
 
-    let internalEmail;
+    let email;
 
 
     if (
         username.includes("@")
     ) {
 
-        internalEmail =
+        email =
             username;
 
     }
 
     else {
 
-
-        if (
-            !/^[a-z0-9._-]{2,30}$/
-            .test(
-                username
-            )
-        ) {
-
-            showLoginError(
-                "Usuario no válido."
-            );
-
-            return;
-
-        }
-
-
-        internalEmail =
+        email =
             `${username}@${ADMIN_DOMAIN}`;
 
     }
@@ -3805,7 +3493,7 @@ async function login() {
             .signInWithPassword(
                 {
                     email:
-                        internalEmail,
+                        email,
 
                     password:
                         password
@@ -3820,14 +3508,29 @@ async function login() {
         }
 
 
-        /*
-        No dependemos aquí de un rol escrito
-        en el frontend.
+        const {
+            data: permission,
+            error: permissionError
+        } =
+        await db.rpc(
+            "puede_validar_acceso"
+        );
 
-        La función validar_boleto de Supabase
-        seguirá siendo la responsable de permitir
-        o negar la validación al usuario autenticado.
-        */
+
+        if (
+            permissionError ||
+            permission !== true
+        ) {
+
+            await db.auth
+                .signOut();
+
+
+            throw new Error(
+                "Este usuario no tiene permisos de control de acceso."
+            );
+
+        }
 
 
         await showApp();
@@ -3839,12 +3542,13 @@ async function login() {
 
 
         console.error(
-            "Login:",
             error
         );
 
 
         showLoginError(
+            error.message
+            ||
             "Usuario o contraseña incorrectos."
         );
 
@@ -3870,9 +3574,7 @@ async function login() {
    LOGIN ERROR
 ========================================================== */
 
-function showLoginError(
-    message
-) {
+function showLoginError(message) {
 
     const box =
         document
@@ -3910,20 +3612,17 @@ async function showApp() {
 
     if (!session) {
 
-        showLogin();
-
         return;
 
     }
 
 
     const email =
-        session.user?.email
-        ||
+        session.user.email ||
         "Usuario";
 
 
-    let displayName =
+    let name =
         email;
 
 
@@ -3933,7 +3632,7 @@ async function showApp() {
         )
     ) {
 
-        displayName =
+        name =
             email.split("@")[0];
 
     }
@@ -3944,7 +3643,7 @@ async function showApp() {
             "operatorName"
         )
         .textContent =
-        displayName;
+        name;
 
 
     document
@@ -3963,31 +3662,270 @@ async function showApp() {
         "block";
 
 
+    await loadEvents();
+
+
+    startGlobalStatsRefresh();
+
+
     updateConnectionStatus();
 
 }
 
 
 /* ==========================================================
-   SHOW LOGIN
+   LOAD EVENTS
 ========================================================== */
 
-function showLogin() {
+async function loadEvents() {
 
-    document
+    const {
+        data,
+        error
+    } =
+    await db.rpc(
+        "listar_eventos_acceso"
+    );
+
+
+    if (error) {
+
+        throw error;
+
+    }
+
+
+    events =
+        Array.isArray(data)
+        ?
+        data
+        :
+        [];
+
+
+    const select =
+        document
         .getElementById(
-            "loginScreen"
-        )
-        .style.display =
-        "flex";
+            "eventSelect"
+        );
 
 
-    document
-        .getElementById(
-            "accessApp"
-        )
-        .style.display =
-        "none";
+    select.innerHTML =
+        "";
+
+
+    if (
+        !events.length
+    ) {
+
+        select.innerHTML = `
+
+            <option value="">
+
+                No hay eventos activos
+
+            </option>
+
+        `;
+
+
+        currentEventId =
+            null;
+
+
+        return;
+
+    }
+
+
+    events.forEach(
+        event => {
+
+
+            const option =
+                document
+                .createElement(
+                    "option"
+                );
+
+
+            option.value =
+                event.id;
+
+
+            option.textContent =
+                event.nombre;
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    currentEventId =
+        Number(
+            events[0].id
+        );
+
+
+    select.value =
+        currentEventId;
+
+
+    await refreshGlobalStats();
+
+}
+
+
+/* ==========================================================
+   CHANGE EVENT
+========================================================== */
+
+async function changeEvent() {
+
+    currentEventId =
+        Number(
+            document
+            .getElementById(
+                "eventSelect"
+            )
+            .value
+        );
+
+
+    await refreshGlobalStats();
+
+}
+
+
+/* ==========================================================
+   GLOBAL STATS
+========================================================== */
+
+async function refreshGlobalStats() {
+
+    if (
+        !currentEventId
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+
+        const {
+            data,
+            error
+        } =
+        await db.rpc(
+            "resumen_acceso_evento",
+            {
+                p_evento_id:
+                    currentEventId
+            }
+        );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        const result =
+            resultObject(
+                data
+            );
+
+
+        if (
+            !result ||
+            result.success !== true
+        ) {
+
+            return;
+
+        }
+
+
+        document
+            .getElementById(
+                "globalEntered"
+            )
+            .textContent =
+            Number(
+                result.ingresados ||
+                0
+            );
+
+
+        document
+            .getElementById(
+                "globalPending"
+            )
+            .textContent =
+            Number(
+                result.pendientes ||
+                0
+            );
+
+
+        document
+            .getElementById(
+                "globalIssued"
+            )
+            .textContent =
+            Number(
+                result.emitidos ||
+                0
+            );
+
+
+        document
+            .getElementById(
+                "phoneApproved"
+            )
+            .textContent =
+            phoneApproved;
+
+
+    }
+
+    catch(error) {
+
+        console.warn(
+            "Resumen acceso:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   AUTO REFRESH GLOBAL
+========================================================== */
+
+function startGlobalStatsRefresh() {
+
+    clearInterval(
+        statsInterval
+    );
+
+
+    statsInterval =
+        setInterval(
+            refreshGlobalStats,
+            2500
+        );
 
 }
 
@@ -3998,19 +3936,18 @@ function showLogin() {
 
 async function logout() {
 
+    clearInterval(
+        statsInterval
+    );
+
+
     try {
 
         await stopScanner();
 
     }
 
-    catch(error) {
-
-        console.warn(
-            error
-        );
-
-    }
+    catch {}
 
 
     await db.auth
@@ -4037,6 +3974,19 @@ async function startScanner() {
     }
 
 
+    if (
+        !currentEventId
+    ) {
+
+        alert(
+            "Selecciona un evento."
+        );
+
+        return;
+
+    }
+
+
     try {
 
 
@@ -4052,29 +4002,32 @@ async function startScanner() {
         }
 
 
-        const config =
+        await html5QrCode.start(
+
+            {
+                facingMode:
+                    "environment"
+            },
+
             {
 
                 fps:
                     12,
 
                 qrbox:
-                    function(
-                        viewfinderWidth,
-                        viewfinderHeight
-                    ) {
-
-
-                        const minEdge =
-                            Math.min(
-                                viewfinderWidth,
-                                viewfinderHeight
-                            );
+                    (
+                        width,
+                        height
+                    ) => {
 
 
                         const size =
                             Math.floor(
-                                minEdge *
+                                Math.min(
+                                    width,
+                                    height
+                                )
+                                *
                                 .68
                             );
 
@@ -4089,35 +4042,15 @@ async function startScanner() {
 
                         };
 
-                    },
+                    }
 
-                aspectRatio:
-                    1.0,
+            },
 
-                disableFlip:
-                    false
+            onScanSuccess,
 
-            };
+            () => {}
 
-
-        /*
-        Pedimos cámara trasera.
-        En teléfonos suele seleccionar la cámara principal.
-        */
-
-        await html5QrCode
-            .start(
-                {
-                    facingMode:
-                        "environment"
-                },
-
-                config,
-
-                onScanSuccess,
-
-                onScanFailure
-            );
+        );
 
 
         scannerRunning =
@@ -4164,22 +4097,15 @@ async function startScanner() {
 
 
         console.error(
-            "Cámara:",
             error
         );
 
 
-        scannerRunning =
-            false;
-
-
         alert(
 
-            "No fue posible abrir la cámara.\n\n" +
+            "No fue posible abrir la cámara. " +
 
-            "Verifica que hayas permitido el acceso a la cámara " +
-
-            "y que estés usando HTTPS."
+            "Verifica los permisos del navegador."
 
         );
 
@@ -4204,73 +4130,54 @@ async function stopScanner() {
     }
 
 
-    try {
+    await html5QrCode.stop();
 
 
-        await html5QrCode
-            .stop();
+    scannerRunning =
+        false;
 
 
-        scannerRunning =
-            false;
-
-
-        document
-            .getElementById(
-                "cameraPlaceholder"
-            )
-            .classList
-            .remove(
-                "hide"
-            );
-
-
-        document
-            .getElementById(
-                "scanFrame"
-            )
-            .style.display =
-            "none";
-
-
-        document
-            .getElementById(
-                "startCameraButton"
-            )
-            .disabled =
-            false;
-
-
-        document
-            .getElementById(
-                "stopCameraButton"
-            )
-            .disabled =
-            true;
-
-
-    }
-
-    catch(error) {
-
-
-        console.warn(
-            "Detener cámara:",
-            error
+    document
+        .getElementById(
+            "cameraPlaceholder"
+        )
+        .classList
+        .remove(
+            "hide"
         );
 
-    }
+
+    document
+        .getElementById(
+            "scanFrame"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "startCameraButton"
+        )
+        .disabled =
+        false;
+
+
+    document
+        .getElementById(
+            "stopCameraButton"
+        )
+        .disabled =
+        true;
 
 }
 
 
 /* ==========================================================
-   SCAN SUCCESS
+   QR SUCCESS
 ========================================================== */
 
-function onScanSuccess(
-    decodedText
-) {
+function onScanSuccess(decodedText) {
 
     const token =
         extractToken(
@@ -4289,19 +4196,9 @@ function onScanSuccess(
         Date.now();
 
 
-    /*
-    La cámara puede detectar el QR 10-20 veces
-    antes de que desaparezca del cuadro.
-
-    No enviamos validaciones repetidas al servidor.
-    */
-
     if (
         token === lastToken &&
-        (
-            now -
-            lastTokenTime
-        ) <
+        now - lastTokenTime <
         SAME_QR_COOLDOWN
     ) {
 
@@ -4335,35 +4232,14 @@ function onScanSuccess(
 
 
 /* ==========================================================
-   SCAN FAILURE
-========================================================== */
-
-function onScanFailure(
-    error
-) {
-
-    /*
-    html5-qrcode dispara errores constantemente
-    mientras busca un QR.
-
-    No los mostramos al usuario.
-    */
-
-}
-
-
-/* ==========================================================
    EXTRACT TOKEN
 ========================================================== */
 
-function extractToken(
-    raw
-) {
+function extractToken(raw) {
 
     let value =
         String(
-            raw ||
-            ""
+            raw || ""
         )
         .trim();
 
@@ -4373,17 +4249,6 @@ function extractToken(
         return null;
 
     }
-
-
-    /*
-    Actualmente los QR de Live Tickets contienen
-    directamente el UUID.
-
-    Pero también dejamos soporte por si en el futuro
-    usamos una URL como:
-
-    checkout.html?token=...
-    */
 
 
     try {
@@ -4406,40 +4271,33 @@ function extractToken(
                 );
 
 
-            const token =
+            value =
                 url.searchParams.get(
                     "token"
-                );
-
-
-            if (token) {
-
-                return token.trim();
-
-            }
+                )
+                ||
+                value;
 
         }
 
 
     }
 
-    catch(error) {
-
-        console.warn(
-            "Token URL:",
-            error
-        );
-
-    }
+    catch {}
 
 
     /*
-    Evitamos mandar cadenas absurdamente largas.
+    Los tokens actuales son UUID.
     */
 
+    const uuidRegex =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+
     if (
-        value.length >
-        500
+        !uuidRegex.test(
+            value
+        )
     ) {
 
         return null;
@@ -4453,7 +4311,7 @@ function extractToken(
 
 
 /* ==========================================================
-   VALIDACIÓN MANUAL
+   MANUAL
 ========================================================== */
 
 function validateManual() {
@@ -4482,15 +4340,6 @@ function validateManual() {
     }
 
 
-    if (
-        validating
-    ) {
-
-        return;
-
-    }
-
-
     input.value =
         "";
 
@@ -4503,12 +4352,10 @@ function validateManual() {
 
 
 /* ==========================================================
-   VALIDAR BOLETO
+   VALIDATE TICKET
 ========================================================== */
 
-async function validateTicket(
-    token
-) {
+async function validateTicket(token) {
 
     if (
         validating
@@ -4519,45 +4366,35 @@ async function validateTicket(
     }
 
 
+    if (
+        !currentEventId
+    ) {
+
+        alert(
+            "Selecciona el evento."
+        );
+
+        return;
+
+    }
+
+
     validating =
         true;
 
 
-    showValidating(
-        true
-    );
+    document
+        .getElementById(
+            "validatingOverlay"
+        )
+        .classList
+        .add(
+            "show"
+        );
 
 
     try {
 
-
-        /* ====================================================
-           COMPROBAR SESIÓN
-        ==================================================== */
-
-        const {
-            data: sessionData
-        } =
-        await db.auth
-            .getSession();
-
-
-        const session =
-            sessionData?.session;
-
-
-        if (!session) {
-
-            throw new Error(
-                "La sesión del operador expiró."
-            );
-
-        }
-
-
-        /* ====================================================
-           LLAMAR RPC SEGURA
-        ==================================================== */
 
         const {
             data,
@@ -4566,94 +4403,20 @@ async function validateTicket(
         await db.rpc(
             "validar_boleto",
             {
+
                 p_token:
-                    token
+                    token,
+
+                p_evento_id:
+                    currentEventId
+
             }
         );
 
 
         if (error) {
 
-
-            /*
-            Si la función devuelve error de permisos
-            o una excepción SQL, no contamos esto como
-            entrada autorizada.
-            */
-
-
-            console.error(
-                "validar_boleto:",
-                error
-            );
-
-
-            const errorMessage =
-                error.message
-                ||
-                "No fue posible validar el boleto.";
-
-
-            showResult(
-                {
-
-                    type:
-                        "error",
-
-                    title:
-                        "Entrada rechazada",
-
-                    message:
-                        errorMessage,
-
-                    event:
-                        "—",
-
-                    table:
-                        "—",
-
-                    seat:
-                        "—",
-
-                    buyer:
-                        "—",
-
-                    reservation:
-                        "—"
-
-                }
-            );
-
-
-            addHistory(
-                {
-
-                    type:
-                        "error",
-
-                    title:
-                        "Entrada rechazada",
-
-                    description:
-                        errorMessage
-
-                }
-            );
-
-
-            sessionStats.scans++;
-
-
-            sessionStats.rejected++;
-
-
-            updateStats();
-
-
-            vibrateReject();
-
-
-            return;
+            throw error;
 
         }
 
@@ -4664,347 +4427,111 @@ async function validateTicket(
             );
 
 
-        console.log(
-            "Resultado validar_boleto:",
-            result
-        );
-
-
         if (!result) {
 
-
-            showResult(
-                {
-
-                    type:
-                        "error",
-
-                    title:
-                        "Entrada rechazada",
-
-                    message:
-                        "El servidor no devolvió información del boleto.",
-
-                    event:
-                        "—",
-
-                    table:
-                        "—",
-
-                    seat:
-                        "—",
-
-                    buyer:
-                        "—",
-
-                    reservation:
-                        "—"
-
-                }
+            throw new Error(
+                "Respuesta vacía del servidor."
             );
-
-
-            addHistory(
-                {
-
-                    type:
-                        "error",
-
-                    title:
-                        "Entrada rechazada",
-
-                    description:
-                        "Respuesta vacía del servidor."
-
-                }
-            );
-
-
-            sessionStats.scans++;
-
-
-            sessionStats.rejected++;
-
-
-            updateStats();
-
-
-            vibrateReject();
-
-
-            return;
 
         }
 
-
-        /* ====================================================
-           INTERPRETAR RESPUESTA
-        ==================================================== */
 
         const success =
-            isSuccessResult(
-                result
-            );
+            result.success ===
+            true;
 
 
-        const message =
-            getValue(
-                result,
-                [
-                    "message",
-                    "mensaje",
-                    "detalle",
-                    "descripcion"
-                ],
-                success
-                ?
-                "El boleto fue validado correctamente."
-                :
-                "La entrada no puede ser utilizada."
-            );
+        const code =
+            result.code ||
+            "";
 
 
-        const eventName =
-            getValue(
-                result,
-                [
-                    "evento_nombre",
-                    "nombre_evento",
-                    "evento",
-                    "event_name"
-                ],
-                "—"
-            );
-
-
-        const tableNumber =
-            getValue(
-                result,
-                [
-                    "mesa",
-                    "mesa_numero",
-                    "numero_mesa",
-                    "table_number"
-                ],
-                "—"
-            );
-
-
-        const seatNumber =
-            getValue(
-                result,
-                [
-                    "asiento",
-                    "asiento_numero",
-                    "numero_asiento",
-                    "seat_number"
-                ],
-                "—"
-            );
-
-
-        const buyer =
-            getValue(
-                result,
-                [
-                    "nombre_cliente",
-                    "cliente",
-                    "comprador",
-                    "customer_name"
-                ],
-                "—"
-            );
-
-
-        const reservationId =
-            getValue(
-                result,
-                [
-                    "reserva_id",
-                    "reservation_id"
-                ],
-                null
-            );
-
-
-        const explicitCode =
-            getValue(
-                result,
-                [
-                    "codigo_reserva",
-                    "reservation_code"
-                ],
-                null
-            );
-
-
-        const reservationDisplay =
-            explicitCode
-            ||
-            reservationCode(
-                reservationId
-            );
-
-
-        /* ====================================================
-           SUCCESS
-        ==================================================== */
-
-        if (
-            success
-        ) {
-
-
-            showResult(
-                {
-
-                    type:
-                        "success",
-
-                    title:
-                        "Entrada autorizada",
-
-                    message:
-                        message,
-
-                    event:
-                        eventName,
-
-                    table:
-                        tableNumber,
-
-                    seat:
-                        seatNumber,
-
-                    buyer:
-                        buyer,
-
-                    reservation:
-                        reservationDisplay
-
-                }
-            );
-
-
-            addHistory(
-                {
-
-                    type:
-                        "success",
-
-                    title:
-                        `Mesa ${tableNumber} · Asiento ${seatNumber}`,
-
-                    description:
-                        `${eventName} · Entrada autorizada`
-
-                }
-            );
-
-
-            sessionStats.scans++;
-
-
-            sessionStats.success++;
-
-
-            updateStats();
-
-
-            vibrateSuccess();
-
-
-            /*
-            SONIDO opcional generado por Web Audio.
-            No requiere ningún archivo externo.
-            */
-
-            playSuccessSound();
-
-
-            return;
-
-        }
-
-
-        /* ====================================================
-           RECHAZADO
-        ==================================================== */
-
-
-        /*
-        Intentamos identificar si el mensaje corresponde
-        a un boleto ya utilizado.
-        */
-
-
-        const normalizedMessage =
-            String(
-                message
-            )
-            .toLowerCase();
-
-
-        const alreadyUsed =
-            normalizedMessage.includes(
-                "utiliz"
-            )
-            ||
-            normalizedMessage.includes(
-                "ingres"
-            )
-            ||
-            normalizedMessage.includes(
-                "usado"
-            )
-            ||
-            normalizedMessage.includes(
-                "validado"
-            );
-
-
-        const resultType =
-            alreadyUsed
-            ?
-            "warning"
-            :
+        let type =
             "error";
 
 
-        const resultTitle =
-            alreadyUsed
-            ?
-            "Entrada ya utilizada"
-            :
+        let title =
             "Entrada rechazada";
+
+
+        if (success) {
+
+            type =
+                "success";
+
+
+            title =
+                "Entrada autorizada";
+
+        }
+
+        else if (
+            code ===
+            "ALREADY_USED"
+        ) {
+
+            type =
+                "warning";
+
+
+            title =
+                "Entrada ya utilizada";
+
+        }
+
+        else if (
+            code ===
+            "WRONG_EVENT"
+        ) {
+
+            type =
+                "error";
+
+
+            title =
+                "Entrada de otro evento";
+
+        }
 
 
         showResult(
             {
 
                 type:
-                    resultType,
+                    type,
 
                 title:
-                    resultTitle,
+                    title,
 
                 message:
-                    message,
+                    result.message
+                    ||
+                    "Resultado de validación.",
 
                 event:
-                    eventName,
+                    result.evento_nombre
+                    ||
+                    "—",
 
                 table:
-                    tableNumber,
+                    result.mesa
+                    ??
+                    "—",
 
                 seat:
-                    seatNumber,
+                    result.asiento
+                    ??
+                    "—",
 
                 buyer:
-                    buyer,
+                    result.nombre_cliente
+                    ||
+                    "—",
 
                 reservation:
-                    reservationDisplay
+                    reservationCode(
+                        result.reserva_id
+                    )
 
             }
         );
@@ -5014,40 +4541,54 @@ async function validateTicket(
             {
 
                 type:
-                    resultType,
+                    type,
 
                 title:
-                    resultTitle,
-
-                description:
-
-                    tableNumber !== "—"
+                    success
 
                     ?
 
-                    `Mesa ${tableNumber} · Asiento ${seatNumber}`
+                    `Mesa ${result.mesa} · Asiento ${result.asiento}`
 
                     :
 
-                    message
+                    title,
+
+                description:
+                    result.message
+                    ||
+                    ""
 
             }
         );
 
 
-        sessionStats.scans++;
+        if (success) {
+
+            phoneApproved++;
 
 
-        sessionStats.rejected++;
+            vibrateSuccess();
 
 
-        updateStats();
+            playSuccessSound();
+
+        }
+
+        else {
+
+            phoneRejected++;
 
 
-        vibrateReject();
+            vibrateReject();
 
 
-        playRejectSound();
+            playRejectSound();
+
+        }
+
+
+        await refreshGlobalStats();
 
 
     }
@@ -5056,7 +4597,6 @@ async function validateTicket(
 
 
         console.error(
-            "Validación:",
             error
         );
 
@@ -5094,31 +4634,7 @@ async function validateTicket(
         );
 
 
-        addHistory(
-            {
-
-                type:
-                    "error",
-
-                title:
-                    "Error de validación",
-
-                description:
-                    error.message
-                    ||
-                    "Error desconocido."
-
-            }
-        );
-
-
-        sessionStats.scans++;
-
-
-        sessionStats.rejected++;
-
-
-        updateStats();
+        phoneRejected++;
 
 
         vibrateReject();
@@ -5133,9 +4649,14 @@ async function validateTicket(
             false;
 
 
-        showValidating(
-            false
-        );
+        document
+            .getElementById(
+                "validatingOverlay"
+            )
+            .classList
+            .remove(
+                "show"
+            );
 
     }
 
@@ -5143,12 +4664,10 @@ async function validateTicket(
 
 
 /* ==========================================================
-   SHOW RESULT
+   RESULT
 ========================================================== */
 
-function showResult(
-    result
-) {
+function showResult(result) {
 
     document
         .getElementById(
@@ -5179,38 +4698,31 @@ function showResult(
         `result-status ${result.type}`;
 
 
-    let icon =
-        "×";
-
-
-    if (
-        result.type ===
-        "success"
-    ) {
-
-        icon =
-            "✓";
-
-    }
-
-
-    else if (
-        result.type ===
-        "warning"
-    ) {
-
-        icon =
-            "!";
-
-    }
-
-
     document
         .getElementById(
             "resultIcon"
         )
         .textContent =
-        icon;
+
+        result.type ===
+        "success"
+
+        ?
+
+        "✓"
+
+        :
+
+        result.type ===
+        "warning"
+
+        ?
+
+        "!"
+
+        :
+
+        "×";
 
 
     document
@@ -5280,50 +4792,19 @@ function showResult(
 
 
 /* ==========================================================
-   VALIDATING UI
-========================================================== */
-
-function showValidating(
-    show
-) {
-
-    document
-        .getElementById(
-            "validatingOverlay"
-        )
-        .classList
-        .toggle(
-            "show",
-            show
-        );
-
-}
-
-
-/* ==========================================================
    HISTORY
 ========================================================== */
 
-function addHistory(
-    item
-) {
+function addHistory(item) {
 
     scanHistory.unshift(
         {
-
             ...item,
-
             time:
                 timeNow()
-
         }
     );
 
-
-    /*
-    Solo mostramos los últimos 20
-    en el dispositivo.
-    */
 
     scanHistory =
         scanHistory.slice(
@@ -5336,10 +4817,6 @@ function addHistory(
 
 }
 
-
-/* ==========================================================
-   RENDER HISTORY
-========================================================== */
 
 function renderHistory() {
 
@@ -5358,7 +4835,7 @@ function renderHistory() {
 
             <div class="history-empty">
 
-                Todavía no hay escaneos en esta sesión.
+                Todavía no hay escaneos en este dispositivo.
 
             </div>
 
@@ -5372,41 +4849,35 @@ function renderHistory() {
 
     list.innerHTML =
         scanHistory
-
         .map(
             item => {
 
 
-                let icon =
-                    "×";
-
-
-                if (
+                const icon =
                     item.type ===
                     "success"
-                ) {
 
-                    icon =
-                        "✓";
+                    ?
 
-                }
+                    "✓"
 
+                    :
 
-                else if (
                     item.type ===
                     "warning"
-                ) {
 
-                    icon =
-                        "!";
+                    ?
 
-                }
+                    "!"
+
+                    :
+
+                    "×";
 
 
                 return `
 
                     <div class="history-item">
-
 
                         <div
                             class="history-icon ${escapeHTML(item.type)}">
@@ -5445,7 +4916,6 @@ function renderHistory() {
 
                         </div>
 
-
                     </div>
 
                 `;
@@ -5456,10 +4926,6 @@ function renderHistory() {
 
 }
 
-
-/* ==========================================================
-   CLEAR HISTORY
-========================================================== */
 
 function clearHistory() {
 
@@ -5473,47 +4939,7 @@ function clearHistory() {
 
 
 /* ==========================================================
-   UPDATE STATS
-========================================================== */
-
-function updateStats() {
-
-    document
-        .getElementById(
-            "sessionScans"
-        )
-        .textContent =
-        sessionStats.scans;
-
-
-    document
-        .getElementById(
-            "sessionSuccess"
-        )
-        .textContent =
-        sessionStats.success;
-
-
-    document
-        .getElementById(
-            "sessionRejected"
-        )
-        .textContent =
-        sessionStats.rejected;
-
-
-    document
-        .getElementById(
-            "lastScanTime"
-        )
-        .textContent =
-        timeNow();
-
-}
-
-
-/* ==========================================================
-   CONNECTION STATUS
+   CONNECTION
 ========================================================== */
 
 function updateConnectionStatus() {
@@ -5522,43 +4948,30 @@ function updateConnectionStatus() {
         navigator.onLine;
 
 
-    const dot =
-        document
+    document
         .getElementById(
             "connectionDot"
-        );
+        )
+        .style.background =
+
+        online
+        ?
+        "#16a34a"
+        :
+        "#dc2626";
 
 
-    const text =
-        document
+    document
         .getElementById(
             "connectionText"
-        );
+        )
+        .textContent =
 
-
-    if (
         online
-    ) {
-
-        dot.style.background =
-            "#16a34a";
-
-
-        text.textContent =
-            "Sistema conectado";
-
-    }
-
-    else {
-
-        dot.style.background =
-            "#dc2626";
-
-
-        text.textContent =
-            "Sin conexión";
-
-    }
+        ?
+        "Sistema conectado"
+        :
+        "Sin conexión";
 
 }
 
@@ -5591,7 +5004,7 @@ function vibrateReject() {
         navigator.vibrate(
             [
                 120,
-                80,
+                70,
                 180
             ]
         );
@@ -5602,7 +5015,7 @@ function vibrateReject() {
 
 
 /* ==========================================================
-   SOUNDS
+   AUDIO
 ========================================================== */
 
 function playSuccessSound() {
@@ -5610,13 +5023,13 @@ function playSuccessSound() {
     try {
 
 
-        const AudioContext =
+        const AC =
             window.AudioContext
             ||
             window.webkitAudioContext;
 
 
-        if (!AudioContext) {
+        if (!AC) {
 
             return;
 
@@ -5624,7 +5037,7 @@ function playSuccessSound() {
 
 
         const context =
-            new AudioContext();
+            new AC();
 
 
         const oscillator =
@@ -5643,10 +5056,6 @@ function playSuccessSound() {
         gain.connect(
             context.destination
         );
-
-
-        oscillator.type =
-            "sine";
 
 
         oscillator.frequency
@@ -5690,13 +5099,7 @@ function playSuccessSound() {
 
     }
 
-    catch(error) {
-
-        console.warn(
-            error
-        );
-
-    }
+    catch {}
 
 }
 
@@ -5706,13 +5109,13 @@ function playRejectSound() {
     try {
 
 
-        const AudioContext =
+        const AC =
             window.AudioContext
             ||
             window.webkitAudioContext;
 
 
-        if (!AudioContext) {
+        if (!AC) {
 
             return;
 
@@ -5720,7 +5123,7 @@ function playRejectSound() {
 
 
         const context =
-            new AudioContext();
+            new AC();
 
 
         const oscillator =
@@ -5745,18 +5148,12 @@ function playRejectSound() {
             "square";
 
 
-        oscillator.frequency
-            .setValueAtTime(
-                210,
-                context.currentTime
-            );
+        oscillator.frequency.value =
+            210;
 
 
-        gain.gain
-            .setValueAtTime(
-                .07,
-                context.currentTime
-            );
+        gain.gain.value =
+            .07;
 
 
         gain.gain
@@ -5778,13 +5175,7 @@ function playRejectSound() {
 
     }
 
-    catch(error) {
-
-        console.warn(
-            error
-        );
-
-    }
+    catch {}
 
 }
 
@@ -5806,7 +5197,7 @@ window.addEventListener(
 
 
 /* ==========================================================
-   KEYBOARD
+   ENTER KEY
 ========================================================== */
 
 document.addEventListener(
@@ -5814,23 +5205,10 @@ document.addEventListener(
     event => {
 
 
-        const loginVisible =
-            document
-            .getElementById(
-                "loginScreen"
-            )
-            .style.display !==
-            "none";
-
-
         if (
-            event.key ===
+            event.key !==
             "Enter"
-            &&
-            loginVisible
         ) {
-
-            login();
 
             return;
 
@@ -5838,9 +5216,6 @@ document.addEventListener(
 
 
         if (
-            event.key ===
-            "Enter"
-            &&
             document.activeElement ===
             document.getElementById(
                 "manualToken"
@@ -5848,6 +5223,22 @@ document.addEventListener(
         ) {
 
             validateManual();
+
+            return;
+
+        }
+
+
+        if (
+            document
+            .getElementById(
+                "loginScreen"
+            )
+            .style.display !==
+            "none"
+        ) {
+
+            login();
 
         }
 
@@ -5875,7 +5266,24 @@ async function initialize() {
 
 
         if (
-            data?.session
+            !data?.session
+        ) {
+
+            return;
+
+        }
+
+
+        const {
+            data: allowed
+        } =
+        await db.rpc(
+            "puede_validar_acceso"
+        );
+
+
+        if (
+            allowed === true
         ) {
 
             await showApp();
@@ -5884,7 +5292,8 @@ async function initialize() {
 
         else {
 
-            showLogin();
+            await db.auth
+                .signOut();
 
         }
 
@@ -5893,14 +5302,9 @@ async function initialize() {
 
     catch(error) {
 
-
         console.error(
-            "Inicialización:",
             error
         );
-
-
-        showLogin();
 
     }
 
