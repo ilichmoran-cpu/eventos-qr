@@ -825,9 +825,78 @@ ${reserva.nombre_cliente || ""}
 ${reserva.telefono || ""}
 </td>
 
-<td>
-${reserva.id}
-</td>
+reservas.forEach(reserva => {
+
+    const fila = document.createElement("tr");
+
+    const asientosReserva =
+        reservaAsientos.filter(
+            ra => ra.reserva_id === reserva.id
+        );
+
+    let textoAsientos = "";
+
+    if (asientosReserva.length === 0) {
+
+        textoAsientos = "Sin asientos";
+
+    } else {
+
+        textoAsientos =
+            `<strong>${asientosReserva.length} asiento(s)</strong><br><br>`;
+
+        asientosReserva.forEach(ra => {
+
+            const asiento =
+                asientosAdmin.find(
+                    a => a.id === ra.asiento_id
+                );
+
+            if (!asiento) return;
+
+            const mesa =
+                mesasAdmin.find(
+                    m => m.id === asiento.mesa_id
+                );
+
+            if (!mesa) return;
+
+            textoAsientos +=
+                `Mesa ${mesa.numero} — Asiento ${asiento.numero}<br>`;
+
+        });
+
+    }
+
+
+    fila.innerHTML = `
+
+        <td>
+            ${reserva.codigo_reserva || reserva.id}
+        </td>
+
+        <td>
+            ${reserva.nombre_cliente || ""}
+        </td>
+
+        <td>
+            ${reserva.telefono || ""}
+        </td>
+
+        <td>
+            ${textoAsientos}
+        </td>
+
+        <td class="estado">
+            ${reserva.estado || "Registrada"}
+        </td>
+
+    `;
+
+
+    tabla.appendChild(fila);
+
+});
 
 <td class="estado">
 ${reserva.estado || "Registrada"}
