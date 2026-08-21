@@ -6,14 +6,11 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
-<title>Reserva de Asientos</title>
+<title>Próximos Eventos</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
 
 <style>
 
@@ -24,790 +21,118 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
+    background: #f4f4f4;
     color: #222;
 }
-
-
-/* ==========================================
-   HEADER
-========================================== */
 
 header {
     background: #111;
     color: white;
     text-align: center;
-    padding: 50px 20px;
+    padding: 45px 20px;
 }
 
 header h1 {
-    margin: 0 0 10px;
-    font-size: 40px;
+    margin: 0;
+    font-size: 38px;
 }
 
 header p {
-    margin: 6px;
+    margin-top: 10px;
+    color: #ccc;
 }
 
-
-/* ==========================================
-   CONTENEDOR
-========================================== */
-
 .container {
-    max-width: 1300px;
+    max-width: 1200px;
     margin: 35px auto;
-    padding: 0 20px 220px;
+    padding: 0 20px 50px;
 }
 
 .titulo {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+}
+
+.eventos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.evento {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.evento:hover {
+    transform: translateY(-4px);
+}
+
+.flyer {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
+
+.flyer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info {
+    padding: 20px;
+}
+
+.info h2 {
+    margin: 0 0 12px;
+    font-size: 22px;
+}
+
+.info p {
+    margin: 6px 0;
+}
+
+.precio {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.boton {
+    margin-top: 16px;
+    width: 100%;
+    padding: 14px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .estado {
     text-align: center;
-    font-weight: bold;
-    margin: 20px;
-}
-
-
-/* ==========================================
-   LEYENDA
-========================================== */
-
-.leyenda {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    margin: 25px;
-}
-
-.leyenda-item {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-}
-
-.circulo {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-}
-
-.verde {
-    background: #2ecc71;
-}
-
-.amarillo {
-    background: #f1c40f;
-}
-
-.rojo {
-    background: #e74c3c;
-}
-
-
-/* ==========================================
-   CONTENEDOR DE MESAS
-========================================== */
-
-.mesas {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(260px, 1fr));
-
-    gap: 28px;
-
-    align-items: start;
-}
-
-
-/* ==========================================
-   TARJETA DE CADA MESA
-========================================== */
-
-.mesa {
-    background: white;
-
-    border-radius: 16px;
-
-    padding: 20px 12px 25px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.08);
-
-    text-align: center;
-
-    min-width: 0;
-}
-
-.mesa h3 {
-    margin: 0 0 18px;
-    font-size: 18px;
-}
-
-
-/* ==========================================
-   DISTRIBUCIÓN VERTICAL DE LA MESA
-
-   ASIENTOS:
-   1            6
-   2            7
-   3    MESA    8
-   4            9
-   5           10
-========================================== */
-
-.distribucion-mesa {
-
-    display: grid;
-
-    grid-template-columns:
-        46px
-        110px
-        46px;
-
-    grid-template-rows:
-        repeat(5, 48px);
-
-    column-gap: 12px;
-
-    row-gap: 8px;
-
-    justify-content: center;
-
-    align-items: center;
-
-    margin: auto;
-}
-
-
-/* ==========================================
-   RECTÁNGULO DE LA MESA
-========================================== */
-
-.rectangulo-mesa {
-
-    grid-column: 2;
-
-    grid-row: 1 / 6;
-
-    height: 100%;
-
-    min-height: 260px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #2b2b2b,
-            #111
-        );
-
-    border-radius: 12px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: white;
-
-    font-weight: bold;
-
-    writing-mode: vertical-rl;
-
-    transform: rotate(180deg);
-
-    letter-spacing: 2px;
-
-    box-shadow:
-        inset 0 0 0 2px rgba(255,255,255,.08);
-}
-
-
-/* ==========================================
-   ASIENTOS
-========================================== */
-
-.asiento {
-
-    width: 42px;
-
-    height: 42px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #2ecc71;
-
-    color: white;
-
-    font-weight: bold;
-
-    font-size: 14px;
-
-    cursor: pointer;
-
-    transition:
-        transform .15s,
-        background .15s;
-
-    padding: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-}
-
-.asiento:hover {
-    transform: scale(1.08);
-}
-
-
-/* IZQUIERDA */
-
-.asiento-izquierda {
-    grid-column: 1;
-}
-
-
-/* DERECHA */
-
-.asiento-derecha {
-    grid-column: 3;
-}
-
-
-/* FILAS */
-
-.fila-1 {
-    grid-row: 1;
-}
-
-.fila-2 {
-    grid-row: 2;
-}
-
-.fila-3 {
-    grid-row: 3;
-}
-
-.fila-4 {
-    grid-row: 4;
-}
-
-.fila-5 {
-    grid-row: 5;
-}
-
-
-/* ==========================================
-   ESTADOS DE LOS ASIENTOS
-========================================== */
-
-.asiento.seleccionado {
-    background: #f1c40f;
-    color: #111;
-
-    transform: scale(1.08);
-}
-
-.asiento.reservado {
-    background: #e74c3c;
-    cursor: not-allowed;
-}
-
-.asiento.vendido {
-    background: #8e44ad;
-    cursor: not-allowed;
-}
-
-.asiento.utilizado {
-    background: #555;
-    cursor: not-allowed;
-}
-
-
-/* ==========================================
-   RESUMEN INFERIOR
-========================================== */
-
-.resumen {
-
-    position: fixed;
-
-    bottom: 0;
-
-    left: 0;
-
-    right: 0;
-
-    background: white;
-
-    padding: 14px 20px;
-
-    box-shadow:
-        0 -5px 20px rgba(0,0,0,.15);
-
-    text-align: center;
-
-    z-index: 100;
-}
-
-.resumen-seleccion {
-    font-size: 14px;
-    margin: 5px auto 10px;
-    max-width: 900px;
-}
-
-.resumen-precio {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 25px;
-
-    flex-wrap: wrap;
-
-    margin: 8px 0 12px;
-}
-
-.resumen-precio-item {
-    font-size: 15px;
-}
-
-.total-resumen {
-
-    font-size: 22px;
-
-    font-weight: bold;
-
-    color: #111;
-}
-
-
-/* ==========================================
-   BOTONES
-========================================== */
-
-.boton {
-    background: #111;
-    color: white;
-    border: none;
-    padding: 14px 30px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.boton:hover {
-    background: #333;
-}
-
-
-/* ==========================================
-   MODAL
-========================================== */
-
-.modal {
-
-    display: none;
-
-    position: fixed;
-
-    z-index: 500;
-
-    left: 0;
-
-    top: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    background: rgba(0,0,0,.65);
-
-    padding: 20px;
-
-    overflow-y: auto;
-}
-
-.modal-contenido {
-
-    background: white;
-
-    max-width: 520px;
-
-    margin: 50px auto;
-
     padding: 30px;
-
-    border-radius: 15px;
 }
 
-.modal-contenido h2 {
-    margin-top: 0;
-}
-
-.campo {
-    margin-bottom: 18px;
-}
-
-.campo label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 7px;
-}
-
-.campo input {
-
-    width: 100%;
-
-    padding: 13px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 7px;
-
-    font-size: 16px;
-}
-
-.botones-modal {
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 20px;
-}
-
-.boton-cancelar {
-
-    flex: 1;
-
-    padding: 13px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    background: #ddd;
-}
-
-.boton-confirmar {
-
-    flex: 2;
-
-    padding: 13px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    background: #111;
-
-    color: white;
-
-    font-size: 16px;
-}
-
-
-/* ==========================================
-   RESUMEN DENTRO DEL FORMULARIO
-========================================== */
-
-.resumen-compra {
-
-    background: #f7f7f7;
-
-    padding: 16px;
-
-    border-radius: 10px;
-
-    margin: 15px 0 22px;
-
-    line-height: 1.7;
-}
-
-.total-modal {
-
-    font-size: 22px;
-
-    font-weight: bold;
-
-    margin-top: 10px;
-}
-
-
-/* ==========================================
-   RESERVA EXITOSA
-========================================== */
-
-.mensaje-exito {
-    text-align: center;
-}
-
-.boleto {
-
-    background: #f7f7f7;
-
-    border-radius: 12px;
-
-    padding: 20px;
-
-    margin: 20px 0;
-}
-
-.boleto h3 {
-    margin-top: 0;
-}
-
-.qr {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    margin: 15px auto;
-
-    background: white;
-
-    padding: 15px;
-
-    width: fit-content;
-
-    border-radius: 10px;
-}
-
-.codigo {
-
-    background: #f1f1f1;
-
-    padding: 15px;
-
-    border-radius: 8px;
-
-    font-size: 20px;
-
-    font-weight: bold;
-
-    margin: 20px 0;
-}
-
-.total-confirmacion {
-
-    background: #111;
-
-    color: white;
-
-    padding: 18px;
-
-    border-radius: 10px;
-
-    margin: 20px 0;
-}
-
-.total-confirmacion .monto {
-
-    font-size: 28px;
-
-    font-weight: bold;
-
-    margin-top: 5px;
-}
-
-.error {
-
-    background: #ffe5e5;
-
-    color: #b00000;
-
-    padding: 15px;
-
-    border-radius: 8px;
-
-    margin-bottom: 15px;
-}
-
-
-/* ==========================================
-   CELULAR
-========================================== */
-
-@media(max-width: 600px) {
-
-    header {
-        padding: 35px 15px;
-    }
+@media(max-width:600px) {
 
     header h1 {
-        font-size: 27px;
+        font-size: 29px;
     }
 
-    header p {
-        font-size: 14px;
-    }
-
-    .container {
-        padding:
-            0
-            12px
-            240px;
-    }
-
-
-    /*
-    IMPORTANTE:
-
-    Cada mesa ocupa una fila completa
-    en teléfono.
-
-    Pero internamente conserva:
-    5 asientos izquierda
-    mesa vertical
-    5 asientos derecha.
-    */
-
-    .mesas {
+    .eventos {
         grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .mesa {
-
-        width: 100%;
-
-        max-width: 330px;
-
-        margin: auto;
-
-        padding:
-            18px
-            8px
-            22px;
-    }
-
-
-    .distribucion-mesa {
-
-        grid-template-columns:
-            44px
-            105px
-            44px;
-
-        grid-template-rows:
-            repeat(5, 48px);
-
-        column-gap: 10px;
-
-        row-gap: 7px;
-    }
-
-    .rectangulo-mesa {
-        min-height: 255px;
-    }
-
-    .asiento {
-
-        width: 42px;
-
-        height: 42px;
-
-        font-size: 14px;
-    }
-
-
-    .leyenda {
-        gap: 15px;
-        margin: 20px 5px;
-        font-size: 13px;
-    }
-
-
-    .resumen {
-
-        padding:
-            12px
-            10px
-            14px;
-    }
-
-    .resumen-seleccion {
-
-        max-height: 45px;
-
-        overflow-y: auto;
-
-        font-size: 12px;
-    }
-
-    .resumen-precio {
-        gap: 12px;
-        margin: 6px 0;
-    }
-
-    .resumen-precio-item {
-        font-size: 13px;
-    }
-
-    .total-resumen {
-        font-size: 20px;
-    }
-
-    .boton {
-        padding: 12px 25px;
-    }
-
-
-    .modal {
-        padding: 10px;
-    }
-
-    .modal-contenido {
-
-        margin: 20px auto;
-
-        padding: 22px 18px;
-    }
-
-}
-
-
-/* ==========================================
-   TELÉFONOS MUY PEQUEÑOS
-========================================== */
-
-@media(max-width: 350px) {
-
-    .distribucion-mesa {
-
-        grid-template-columns:
-            40px
-            95px
-            40px;
-
-        column-gap: 7px;
-    }
-
-    .asiento {
-
-        width: 38px;
-
-        height: 38px;
     }
 
 }
@@ -816,288 +141,45 @@ header p {
 
 </head>
 
-
 <body>
-
 
 <header>
 
-<h1>
-CONCIERTO LOS INQUIETOS DE OLANCHO
-</h1>
+<h1>PRÓXIMOS EVENTOS</h1>
 
-<p>
-Reserva tus asientos
-</p>
-
-<p>
-📅 30 DE OCTUBRE
-</p>
-
-<p>
-📍 ESTACIONAMIENTO LA BIKINA
-</p>
+<p>Selecciona el evento que deseas reservar</p>
 
 </header>
 
-
 <div class="container">
-
 
 <div class="titulo">
 
-<h2>
-Selecciona tus asientos
-</h2>
-
-<p>
-Cada asiento tiene un valor de
-<strong>L 350.00</strong>.
-</p>
+<h2>Eventos disponibles</h2>
 
 </div>
 
-
-<div class="leyenda">
-
-<div class="leyenda-item">
-
-<div class="circulo verde"></div>
-
-Disponible
-
-</div>
-
-
-<div class="leyenda-item">
-
-<div class="circulo amarillo"></div>
-
-Seleccionado
-
-</div>
-
-
-<div class="leyenda-item">
-
-<div class="circulo rojo"></div>
-
-Reservado
-
-</div>
-
-</div>
-
-
-<div
-id="estado"
+<div id="estado"
 class="estado">
 
-Cargando asientos...
+Cargando eventos...
 
 </div>
 
-
-<div
-id="mesas"
-class="mesas">
-
-</div>
-
-
-</div>
-
-
-<!-- ==========================================
-     RESUMEN INFERIOR
-========================================== -->
-
-<div class="resumen">
-
-<strong>
-Asientos seleccionados:
-</strong>
-
-
-<div
-id="seleccion"
-class="resumen-seleccion">
-
-Ninguno
-
-</div>
-
-
-<div class="resumen-precio">
-
-<div class="resumen-precio-item">
-
-Cantidad:
-<strong id="cantidadSeleccionada">
-0
-</strong>
-
-</div>
-
-
-<div class="resumen-precio-item">
-
-Precio:
-<strong>
-L 350.00
-</strong>
-
-</div>
-
-
-<div class="total-resumen">
-
-TOTAL:
-<span id="totalSeleccion">
-L 0.00
-</span>
+<div id="eventos"
+class="eventos">
 
 </div>
 
 </div>
-
-
-<button
-class="boton"
-onclick="abrirFormulario()">
-
-CONTINUAR
-
-</button>
-
-</div>
-
-
-
-<!-- ==========================================
-     FORMULARIO
-========================================== -->
-
-<div
-id="modal"
-class="modal">
-
-
-<div
-class="modal-contenido"
-id="modalContenido">
-
-
-<h2>
-Datos del comprador
-</h2>
-
-
-<p>
-Completa tus datos para realizar la reserva.
-</p>
-
-
-<div
-id="resumenModal"
-class="resumen-compra">
-</div>
-
-
-<div id="mensajeError"></div>
-
-
-<div class="campo">
-
-<label>
-Nombre completo
-</label>
-
-<input
-type="text"
-id="nombre"
-placeholder="Nombre completo">
-
-</div>
-
-
-<div class="campo">
-
-<label>
-Teléfono
-</label>
-
-<input
-type="tel"
-id="telefono"
-placeholder="9999-9999">
-
-</div>
-
-
-<div class="campo">
-
-<label>
-Correo electrónico
-</label>
-
-<input
-type="email"
-id="correo"
-placeholder="correo@email.com">
-
-</div>
-
-
-<div class="botones-modal">
-
-<button
-class="boton-cancelar"
-onclick="cerrarFormulario()">
-
-Cancelar
-
-</button>
-
-
-<button
-class="boton-confirmar"
-onclick="confirmarReserva()">
-
-CONFIRMAR RESERVA
-
-</button>
-
-</div>
-
-
-</div>
-
-</div>
-
 
 <script>
-
-
-/* =====================================================
-   CONFIGURACIÓN
-===================================================== */
-
-
-const PRECIO_ASIENTO =
-350;
-
 
 const SUPABASE_URL =
 "https://ysismkibffhzouxacaxv.supabase.co";
 
-
-
-
-
 const SUPABASE_KEY =
 "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
-
 
 const db =
 supabase.createClient(
@@ -1105,1124 +187,144 @@ supabase.createClient(
     SUPABASE_KEY
 );
 
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
-
-let mesas = [];
-
-let asientos = [];
-
-let seleccionados = [];
-
-
-/* =====================================================
-   FORMATO LEMPIRAS
-===================================================== */
-
-
 function formatoLempiras(valor) {
 
-    return (
-        "L " +
-        Number(valor)
-        .toLocaleString(
+    return "L " +
+    Number(valor).toLocaleString(
+        "es-HN",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+
+}
+
+function formatearFecha(fecha) {
+
+    if (!fecha)
+        return "";
+
+    return new Date(fecha)
+        .toLocaleDateString(
             "es-HN",
             {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
             }
-        )
-    );
+        );
 
 }
 
-
-/* =====================================================
-   CARGAR DATOS
-===================================================== */
-
-
-async function cargarDatos() {
+async function cargarEventos() {
 
     try {
-
-        document
-        .getElementById("estado")
-        .textContent =
-        "Cargando asientos...";
-
-
-        const resultadoMesas =
-        await db
-        .from("mesas")
-        .select("*")
-        .order("numero");
-
-
-        if (resultadoMesas.error)
-            throw resultadoMesas.error;
-
-
-        mesas =
-        resultadoMesas.data;
-
-
-        const resultadoAsientos =
-        await db
-        .from("asientos")
-        .select("*")
-        .order("id");
-
-
-        if (resultadoAsientos.error)
-            throw resultadoAsientos.error;
-
-
-        asientos =
-        resultadoAsientos.data;
-
-
-        mostrarMesas();
-
-
-        document
-        .getElementById("estado")
-        .textContent =
-        "Selecciona tus asientos";
-
-    }
-
-    catch(error) {
-
-        console.error(
-            "ERROR EN cargarDatos:",
-            error
-        );
-
-
-        document
-        .getElementById("estado")
-        .textContent =
-        "No se pudo cargar el sistema.";
-
-    }
-
-}
-
-
-/* =====================================================
-   MOSTRAR MESAS
-===================================================== */
-
-
-function mostrarMesas() {
-
-    const contenedor =
-    document.getElementById(
-        "mesas"
-    );
-
-
-    contenedor.innerHTML =
-    "";
-
-
-    mesas.forEach(
-        mesa => {
-
-
-        const mesaDiv =
-        document.createElement(
-            "div"
-        );
-
-
-        mesaDiv.className =
-        "mesa";
-
-
-        const titulo =
-        document.createElement(
-            "h3"
-        );
-
-
-        titulo.textContent =
-        "MESA " +
-        mesa.numero;
-
-
-        mesaDiv.appendChild(
-            titulo
-        );
-
-
-        /*
-        DISTRIBUCIÓN VERTICAL
-        */
-
-        const distribucion =
-        document.createElement(
-            "div"
-        );
-
-
-        distribucion.className =
-        "distribucion-mesa";
-
-
-        /*
-        RECTÁNGULO CENTRAL
-        */
-
-        const rectangulo =
-        document.createElement(
-            "div"
-        );
-
-
-        rectangulo.className =
-        "rectangulo-mesa";
-
-
-        rectangulo.textContent =
-        "MESA " +
-        mesa.numero;
-
-
-        distribucion.appendChild(
-            rectangulo
-        );
-
-
-        /*
-        OBTENER LOS 10 ASIENTOS
-        */
-
-        const asientosMesa =
-        asientos
-        .filter(
-            asiento =>
-            Number(asiento.mesa_id) ===
-            Number(mesa.id)
-        )
-        .sort(
-            (a,b) =>
-            Number(a.numero) -
-            Number(b.numero)
-        );
-
-
-        asientosMesa.forEach(
-            asiento => {
-
-
-            const boton =
-            document.createElement(
-                "button"
-            );
-
-
-            boton.className =
-            "asiento";
-
-
-            boton.textContent =
-            asiento.numero;
-
-
-            /*
-            Asientos 1-5 izquierda
-            */
-
-            if (
-                Number(asiento.numero) <= 5
-            ) {
-
-                boton.classList.add(
-                    "asiento-izquierda"
-                );
-
-
-                boton.classList.add(
-                    `fila-${asiento.numero}`
-                );
-
-            }
-
-
-            /*
-            Asientos 6-10 derecha
-
-            6 → fila 1
-            7 → fila 2
-            ...
-            10 → fila 5
-            */
-
-            else {
-
-                boton.classList.add(
-                    "asiento-derecha"
-                );
-
-
-                const fila =
-                    Number(asiento.numero)
-                    - 5;
-
-
-                boton.classList.add(
-                    `fila-${fila}`
-                );
-
-            }
-
-
-            actualizarEstadoVisual(
-                boton,
-                asiento
-            );
-
-
-            boton.onclick =
-            () =>
-            seleccionarAsiento(
-                asiento,
-                boton
-            );
-
-
-            distribucion.appendChild(
-                boton
-            );
-
-        });
-
-
-        mesaDiv.appendChild(
-            distribucion
-        );
-
-
-        contenedor.appendChild(
-            mesaDiv
-        );
-
-    });
-
-}
-
-
-/* =====================================================
-   ESTADO VISUAL
-===================================================== */
-
-
-function actualizarEstadoVisual(
-    boton,
-    asiento
-) {
-
-    boton.classList.remove(
-        "reservado",
-        "vendido",
-        "utilizado"
-    );
-
-
-    if (
-        asiento.estado ===
-        "reservado"
-    ) {
-
-        boton.classList.add(
-            "reservado"
-        );
-
-        boton.disabled =
-        true;
-
-    }
-
-    else if (
-        asiento.estado ===
-        "vendido"
-    ) {
-
-        boton.classList.add(
-            "vendido"
-        );
-
-        boton.disabled =
-        true;
-
-    }
-
-    else if (
-        asiento.estado ===
-        "utilizado"
-    ) {
-
-        boton.classList.add(
-            "utilizado"
-        );
-
-        boton.disabled =
-        true;
-
-    }
-
-    else {
-
-        boton.disabled =
-        false;
-
-    }
-
-}
-
-
-/* =====================================================
-   SELECCIONAR ASIENTO
-===================================================== */
-
-
-function seleccionarAsiento(
-    asiento,
-    boton
-) {
-
-    if (
-        asiento.estado !==
-        "disponible"
-    ) {
-
-        return;
-    }
-
-
-    const existe =
-    seleccionados.find(
-        item =>
-        Number(item.id) ===
-        Number(asiento.id)
-    );
-
-
-    if (existe) {
-
-        seleccionados =
-        seleccionados.filter(
-            item =>
-            Number(item.id) !==
-            Number(asiento.id)
-        );
-
-
-        boton.classList.remove(
-            "seleccionado"
-        );
-
-    }
-
-    else {
-
-        seleccionados.push(
-            asiento
-        );
-
-
-        boton.classList.add(
-            "seleccionado"
-        );
-
-    }
-
-
-    actualizarResumen();
-
-}
-
-
-/* =====================================================
-   RESUMEN
-===================================================== */
-
-
-function actualizarResumen() {
-
-    const elemento =
-    document.getElementById(
-        "seleccion"
-    );
-
-
-    const cantidad =
-    seleccionados.length;
-
-
-    const total =
-    cantidad *
-    PRECIO_ASIENTO;
-
-
-    document
-    .getElementById(
-        "cantidadSeleccionada"
-    )
-    .textContent =
-    cantidad;
-
-
-    document
-    .getElementById(
-        "totalSeleccion"
-    )
-    .textContent =
-    formatoLempiras(total);
-
-
-    if (
-        cantidad === 0
-    ) {
-
-        elemento.textContent =
-        "Ninguno";
-
-        return;
-    }
-
-
-    elemento.textContent =
-    seleccionados
-    .map(
-        asiento => {
-
-
-            const mesa =
-            mesas.find(
-                item =>
-                Number(item.id) ===
-                Number(asiento.mesa_id)
-            );
-
-
-            return (
-                "Mesa " +
-                mesa.numero +
-                " - Asiento " +
-                asiento.numero
-            );
-
-        }
-    )
-    .join(" | ");
-
-}
-
-
-/* =====================================================
-   ABRIR FORMULARIO
-===================================================== */
-
-
-function abrirFormulario() {
-
-    if (
-        seleccionados.length ===
-        0
-    ) {
-
-        alert(
-            "Selecciona al menos un asiento."
-        );
-
-        return;
-    }
-
-
-    document
-    .getElementById(
-        "mensajeError"
-    )
-    .innerHTML =
-    "";
-
-
-    const cantidad =
-    seleccionados.length;
-
-
-    const total =
-    cantidad *
-    PRECIO_ASIENTO;
-
-
-    const detalle =
-    seleccionados
-    .map(
-        asiento => {
-
-
-            const mesa =
-            mesas.find(
-                item =>
-                Number(item.id) ===
-                Number(asiento.mesa_id)
-            );
-
-
-            return (
-                "Mesa " +
-                mesa.numero +
-                " — Asiento " +
-                asiento.numero
-            );
-
-        }
-    );
-
-
-    document
-    .getElementById(
-        "resumenModal"
-    )
-    .innerHTML = `
-
-        <strong>
-            Resumen de la reserva
-        </strong>
-
-        <br><br>
-
-        ${detalle.join("<br>")}
-
-        <br><br>
-
-        Cantidad:
-        <strong>
-            ${cantidad}
-        </strong>
-
-        <br>
-
-        Precio por asiento:
-        <strong>
-            ${formatoLempiras(PRECIO_ASIENTO)}
-        </strong>
-
-        <div class="total-modal">
-
-            TOTAL:
-            ${formatoLempiras(total)}
-
-        </div>
-
-    `;
-
-
-    document
-    .getElementById(
-        "modal"
-    )
-    .style.display =
-    "block";
-
-}
-
-
-/* =====================================================
-   CERRAR FORMULARIO
-===================================================== */
-
-
-function cerrarFormulario() {
-
-    document
-    .getElementById(
-        "modal"
-    )
-    .style.display =
-    "none";
-
-}
-
-
-/* =====================================================
-   CREAR RESERVA
-===================================================== */
-
-
-async function confirmarReserva() {
-
-    const nombre =
-    document
-    .getElementById("nombre")
-    .value
-    .trim();
-
-
-    const telefono =
-    document
-    .getElementById("telefono")
-    .value
-    .trim();
-
-
-    const correo =
-    document
-    .getElementById("correo")
-    .value
-    .trim();
-
-
-    const mensaje =
-    document
-    .getElementById(
-        "mensajeError"
-    );
-
-
-    mensaje.innerHTML =
-    "";
-
-
-    if (
-        nombre === "" ||
-        telefono === "" ||
-        correo === ""
-    ) {
-
-        mensaje.innerHTML = `
-
-            <div class="error">
-
-                Completa todos
-                los campos.
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    const boton =
-    document.querySelector(
-        ".boton-confirmar"
-    );
-
-
-    boton.disabled =
-    true;
-
-
-    boton.textContent =
-    "Procesando...";
-
-
-    /*
-    Guardamos la cantidad y total
-    ANTES de modificar seleccionados.
-    */
-
-    const cantidadReserva =
-    seleccionados.length;
-
-
-    const totalReserva =
-    cantidadReserva *
-    PRECIO_ASIENTO;
-
-
-    try {
-
-
-        const ids =
-        seleccionados.map(
-            asiento =>
-            asiento.id
-        );
-
-
-        /*
-        CREAR RESERVA
-        */
 
         const resultado =
-        await db.rpc(
-            "crear_reserva",
-            {
+        await db
+        .from("eventos")
+        .select("*")
+        .eq("activo", true)
+        .order("fecha");
 
-                p_nombre_cliente:
-                nombre,
-
-                p_telefono:
-                telefono,
-
-                p_email:
-                correo,
-
-                p_asientos:
-                ids
-
-            }
-        );
-
-
-        if (
-            resultado.error
-        ) {
-
+        if (resultado.error)
             throw resultado.error;
 
-        }
-
-
-        const datos =
+        const eventos =
         resultado.data;
 
-
-        let codigo =
-        "Reserva creada";
-
-
-        if (
-            typeof datos ===
-            "object" &&
-            datos !== null
-        ) {
-
-            codigo =
-            datos.codigo_reserva ||
-            datos.codigo ||
-            datos.reserva_id ||
-            "Reserva creada";
-
-        }
-
-
-        /*
-        GENERAR BOLETOS
-        */
-
-        const resultadoBoletos =
-        await db.rpc(
-            "generar_boletos",
-            {
-
-                p_reserva_id:
-                datos.reserva_id
-
-            }
+        const contenedor =
+        document.getElementById(
+            "eventos"
         );
 
+        contenedor.innerHTML = "";
 
-        if (
-            resultadoBoletos.error
-        ) {
+        eventos.forEach(evento => {
 
-            throw resultadoBoletos.error;
+            const tarjeta =
+            document.createElement("div");
 
-        }
+            tarjeta.className =
+            "evento";
 
+            const flyer =
+            evento.flyer_url
+            ?
+            `<img src="${evento.flyer_url}" alt="${evento.nombre}">`
+            :
+            `<span>FLYER DEL EVENTO</span>`;
 
-        const boletos =
-        resultadoBoletos.data;
+            tarjeta.innerHTML = `
 
+                <div class="flyer">
+                    ${flyer}
+                </div>
 
-        /*
-        CONSTRUIR BOLETOS
-        */
+                <div class="info">
 
-        let htmlBoletos =
-        "";
+                    <h2>
+                        ${evento.nombre}
+                    </h2>
 
+                    <p>
+                        📅 ${formatearFecha(evento.fecha)}
+                    </p>
 
-        boletos.forEach(
-            (boleto, index) => {
+                    <p>
+                        📍 ${evento.lugar || ""}
+                    </p>
 
-
-            const asiento =
-            asientos.find(
-                item =>
-                Number(item.id) ===
-                Number(
-                    boleto.o_asiento_id
-                )
-            );
-
-
-            if (!asiento)
-                return;
-
-
-            const mesa =
-            mesas.find(
-                item =>
-                Number(item.id) ===
-                Number(
-                    asiento.mesa_id
-                )
-            );
-
-
-            if (!mesa)
-                return;
-
-
-            htmlBoletos += `
-
-                <div class="boleto">
-
-                    <h3>
-
-                        Mesa
-                        ${mesa.numero}
-
-                        —
-
-                        Asiento
-                        ${asiento.numero}
-
-                    </h3>
-
-
-                    <div
-                    id="qr-${index}"
-                    class="qr">
+                    <div class="precio">
+                        Desde ${formatoLempiras(evento.precio_asiento)}
                     </div>
 
-
-                    <p>
-
-                        Valor:
-                        <strong>
-                            ${formatoLempiras(
-                                PRECIO_ASIENTO
-                            )}
-                        </strong>
-
-                    </p>
-
-
-                    <p>
-
-                        Presenta este QR
-                        al ingresar.
-
-                    </p>
+                    <button class="boton">
+                        VER EVENTO
+                    </button>
 
                 </div>
 
             `;
 
+            tarjeta.onclick =
+            () => {
+
+                window.location.href =
+                `evento.html?id=${evento.id}`;
+
+            };
+
+            contenedor.appendChild(
+                tarjeta
+            );
+
         });
 
-
-        /*
-        MOSTRAR CONFIRMACIÓN
-        */
-
         document
-        .getElementById(
-            "modalContenido"
-        )
-        .innerHTML = `
-
-            <div class="mensaje-exito">
-
-
-                <h2>
-                    ✅ Reserva confirmada
-                </h2>
-
-
-                <p>
-
-                    Tu reserva fue
-                    registrada correctamente.
-
-                </p>
-
-
-                <div class="codigo">
-
-                    ${codigo}
-
-                </div>
-
-
-                <div class="total-confirmacion">
-
-                    <div>
-
-                        ${cantidadReserva}
-
-                        ${
-                            cantidadReserva === 1
-                            ? "boleto"
-                            : "boletos"
-                        }
-
-                    </div>
-
-
-                    <div>
-
-                        Precio por asiento:
-
-                        ${formatoLempiras(
-                            PRECIO_ASIENTO
-                        )}
-
-                    </div>
-
-
-                    <div class="monto">
-
-                        TOTAL:
-
-                        ${formatoLempiras(
-                            totalReserva
-                        )}
-
-                    </div>
-
-                </div>
-
-
-                <h3>
-                    Tus boletos
-                </h3>
-
-
-                ${htmlBoletos}
-
-
-                <br>
-
-
-                <button
-                class="boton"
-                onclick="location.reload()">
-
-                    FINALIZAR
-
-                </button>
-
-
-            </div>
-
-        `;
-
-
-        /*
-        DIBUJAR QR
-        */
-
-        boletos.forEach(
-            (boleto, index) => {
-
-
-                new QRCode(
-                    document
-                    .getElementById(
-                        `qr-${index}`
-                    ),
-                    {
-
-                        text:
-                        boleto.o_token,
-
-                        width:
-                        220,
-
-                        height:
-                        220
-
-                    }
-                );
-
-            }
-        );
-
-
-        /*
-        ACTUALIZAR ESTADO LOCAL
-        */
-
-        seleccionados.forEach(
-            asiento => {
-
-                asiento.estado =
-                "reservado";
-
-            }
-        );
-
-
-        seleccionados =
-        [];
+        .getElementById("estado")
+        .style.display =
+        "none";
 
     }
 
-
     catch(error) {
-
 
         console.error(error);
 
-
-        mensaje.innerHTML = `
-
-            <div class="error">
-
-                No fue posible
-                realizar la reserva.
-
-                <br><br>
-
-                Es posible que uno
-                de los asientos haya
-                sido reservado por
-                otra persona.
-
-            </div>
-
-        `;
-
-
-        boton.disabled =
-        false;
-
-
-        boton.textContent =
-        "CONFIRMAR RESERVA";
-
-
-        await cargarDatos();
+        document
+        .getElementById("estado")
+        .textContent =
+        "No fue posible cargar los eventos.";
 
     }
 
 }
 
-
-/* =====================================================
-   INICIO
-===================================================== */
-
-
-cargarDatos();
-
+cargarEventos();
 
 </script>
-
 
 </body>
 
