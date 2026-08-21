@@ -16,10 +16,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -54,7 +51,7 @@
     --primary-dark: #1d4ed8;
 
 
-    /* ESTADOS DE ASIENTOS */
+    /* COLORES DE ASIENTOS */
 
     --available: #16a34a;
 
@@ -64,10 +61,6 @@
 
     --sold: #374151;
 
-    --used: #374151;
-
-
-    --radius: 18px;
 }
 
 html {
@@ -92,9 +85,7 @@ body {
 
 .topbar {
 
-    background: rgba(8,16,31,.97);
-
-    backdrop-filter: blur(14px);
+    background: #08101f;
 
     position: sticky;
 
@@ -103,16 +94,19 @@ body {
     z-index: 1000;
 
     border-bottom:
-        1px solid rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.18);
 }
 
 .nav {
 
     max-width: 1500px;
 
-    margin: auto;
+    min-height: 76px;
 
-    min-height: 70px;
+    margin: auto;
 
     padding: 0 22px;
 
@@ -125,36 +119,33 @@ body {
     gap: 20px;
 }
 
+
+/* LOGO */
+
 .brand {
-
-    text-decoration: none;
-
-    color: white;
 
     display: flex;
 
-    flex-direction: column;
+    align-items: center;
 
-    line-height: 1;
+    text-decoration: none;
 }
 
-.brand strong {
+.brand-logo {
 
-    font-size: 21px;
+    display: block;
 
-    letter-spacing: 1px;
+    width: auto;
+
+    height: 48px;
+
+    max-width: 240px;
+
+    object-fit: contain;
 }
 
-.brand span {
 
-    font-size: 10px;
-
-    margin-top: 5px;
-
-    color: rgba(255,255,255,.65);
-
-    letter-spacing: .5px;
-}
+/* BOTÓN REGRESAR */
 
 .back-link {
 
@@ -163,21 +154,26 @@ body {
     text-decoration: none;
 
     border:
-        1px solid rgba(255,255,255,.18);
+        1px solid rgba(255,255,255,.20);
 
     border-radius: 999px;
 
-    padding: 10px 15px;
+    padding: 10px 16px;
 
-    font-size: 13px;
+    font-size: 12px;
 
     font-weight: 700;
+
+    transition: .2s;
 }
 
 .back-link:hover {
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.09);
+
+    border-color:
+        rgba(255,255,255,.35);
 }
 
 
@@ -187,45 +183,42 @@ body {
 
 .event-hero {
 
-    min-height: 315px;
-
-    color: white;
-
     position: relative;
 
     overflow: hidden;
 
-    background:
+    min-height: 355px;
 
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(37,99,235,.45),
-            transparent 35%
-        ),
+    color: white;
 
-        linear-gradient(
-            135deg,
-            #091224,
-            #131f3b
-        );
+    background: #091224;
 }
+
+
+/* FONDO DESENFOCADO */
 
 .event-hero-bg {
 
     position: absolute;
 
-    inset: 0;
+    inset: -40px;
+
+    background-image:
+        url("FLYER%201080X1350.png");
 
     background-position: center;
 
     background-size: cover;
 
-    filter: blur(25px);
+    filter: blur(30px);
 
     transform: scale(1.15);
 
-    opacity: .42;
+    opacity: .52;
 }
+
+
+/* CAPA OSCURA */
 
 .event-hero-overlay {
 
@@ -237,11 +230,14 @@ body {
 
         linear-gradient(
             90deg,
-            rgba(5,10,20,.97) 0%,
-            rgba(5,10,20,.86) 45%,
-            rgba(5,10,20,.55) 100%
+            rgba(4,9,18,.98) 0%,
+            rgba(4,9,18,.89) 45%,
+            rgba(4,9,18,.58) 100%
         );
 }
+
+
+/* CONTENIDO HERO */
 
 .event-hero-content {
 
@@ -258,41 +254,46 @@ body {
     display: grid;
 
     grid-template-columns:
-        190px 1fr;
+        205px minmax(0,1fr);
 
-    gap: 30px;
+    gap: 32px;
 
     align-items: center;
 }
 
+
+/* FLYER */
+
 .event-poster {
 
-    width: 190px;
+    width: 205px;
 
-    aspect-ratio: 4/5;
+    aspect-ratio: 4 / 5;
 
-    border-radius: 18px;
+    border-radius: 17px;
 
     overflow: hidden;
 
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #111827
-        );
+    background-image:
+        url("FLYER%201080X1350.png");
 
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.35);
+    background-size: cover;
 
     background-position: center;
 
-    background-size: cover;
+    box-shadow:
+        0 24px 55px rgba(0,0,0,.45);
+
+    border:
+        1px solid rgba(255,255,255,.15);
 }
+
+
+/* INFORMACIÓN */
 
 .event-copy {
 
-    max-width: 850px;
+    max-width: 900px;
 }
 
 .event-type {
@@ -303,33 +304,35 @@ body {
 
     gap: 7px;
 
+    margin-bottom: 14px;
+
+    padding: 8px 13px;
+
     background:
-        rgba(37,99,235,.25);
+        rgba(37,99,235,.20);
 
     border:
         1px solid rgba(96,165,250,.35);
 
-    padding: 8px 12px;
-
     border-radius: 999px;
 
-    font-size: 12px;
+    font-size: 11px;
 
-    font-weight: 700;
+    font-weight: 800;
 
-    margin-bottom: 14px;
+    letter-spacing: .7px;
 }
 
 .event-copy h1 {
 
-    margin: 0 0 15px;
+    margin: 0 0 16px;
 
     font-size:
-        clamp(32px,4vw,54px);
+        clamp(34px,4vw,56px);
 
     line-height: 1.02;
 
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
 }
 
 .event-info-line {
@@ -340,29 +343,29 @@ body {
 
     gap: 12px 25px;
 
+    margin-bottom: 20px;
+
     color:
         rgba(255,255,255,.82);
 
     font-size: 14px;
-
-    margin-bottom: 18px;
 }
 
 .event-price-big {
 
-    font-size: 24px;
+    font-size: 27px;
 
     font-weight: 800;
 }
 
 .event-price-big small {
 
-    font-weight: 500;
-
     font-size: 13px;
 
+    font-weight: 500;
+
     color:
-        rgba(255,255,255,.65);
+        rgba(255,255,255,.62);
 }
 
 
@@ -394,7 +397,7 @@ body {
 
 
 /* ==========================================================
-   MAP CARD
+   MAPA
 ========================================================== */
 
 .map-card {
@@ -409,8 +412,7 @@ body {
     overflow: hidden;
 
     box-shadow:
-        0 12px 35px
-        rgba(15,23,42,.07);
+        0 12px 35px rgba(15,23,42,.07);
 }
 
 .map-header {
@@ -446,6 +448,11 @@ body {
 
     font-size: 13px;
 }
+
+
+/* ==========================================================
+   ZOOM
+========================================================== */
 
 .zoom-controls {
 
@@ -483,9 +490,9 @@ body {
 
 .zoom-fit {
 
-    padding: 0 13px;
-
     width: auto;
+
+    padding: 0 13px;
 
     font-size: 11px;
 }
@@ -503,7 +510,7 @@ body {
 
     flex-wrap: wrap;
 
-    gap: 10px 18px;
+    gap: 10px 20px;
 
     border-bottom:
         1px solid var(--line);
@@ -517,18 +524,20 @@ body {
 
     align-items: center;
 
-    gap: 7px;
+    gap: 8px;
 
     font-size: 12px;
+
+    font-weight: 500;
 
     color: #4b5563;
 }
 
 .legend-dot {
 
-    width: 12px;
+    width: 13px;
 
-    height: 12px;
+    height: 13px;
 
     border-radius: 50%;
 }
@@ -564,6 +573,12 @@ body {
 
     overflow: auto;
 
+    min-height: 700px;
+
+    position: relative;
+
+    touch-action: pan-x pan-y;
+
     background:
 
         radial-gradient(
@@ -571,20 +586,13 @@ body {
             #ffffff 0%,
             #f1f5f9 100%
         );
-
-    min-height: 700px;
-
-    position: relative;
-
-    touch-action: pan-x pan-y;
 }
 
 .map-transform {
 
     width: 1380px;
 
-    transform-origin:
-        top left;
+    transform-origin: top left;
 
     transition:
         transform .15s ease;
@@ -595,7 +603,7 @@ body {
 
 
 /* ==========================================================
-   STAGE
+   ESCENARIO
 ========================================================== */
 
 .stage-wrap {
@@ -606,48 +614,48 @@ body {
 
     justify-content: center;
 
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 
 .stage {
 
     width: 680px;
 
-    padding: 17px 20px;
-
-    color: white;
+    padding: 18px 20px;
 
     text-align: center;
 
+    color: white;
+
     border-radius:
-        10px 10px 30px 30px;
+        10px 10px 35px 35px;
 
     background:
 
         linear-gradient(
             135deg,
-            #101827,
-            #1f2937
+            #0f172a,
+            #273449
         );
 
     box-shadow:
 
         0 15px 35px
-        rgba(15,23,42,.20),
+        rgba(15,23,42,.22),
 
         inset 0 -3px 0
         rgba(255,255,255,.08);
 
+    font-size: 17px;
+
     font-weight: 800;
 
     letter-spacing: 7px;
-
-    font-size: 17px;
 }
 
 
 /* ==========================================================
-   TABLE GRID
+   MESAS
 ========================================================== */
 
 .tables-grid {
@@ -664,33 +672,32 @@ body {
 
 .table-card {
 
-    background: white;
+    position: relative;
 
-    border-radius: 18px;
+    padding: 14px 12px;
+
+    background: white;
 
     border:
         1px solid #dce3eb;
 
-    padding: 14px 12px;
+    border-radius: 18px;
 
     box-shadow:
-        0 8px 22px
-        rgba(15,23,42,.08);
-
-    position: relative;
+        0 8px 22px rgba(15,23,42,.08);
 }
 
 .table-number {
 
+    margin-bottom: 9px;
+
     text-align: center;
+
+    color: #667085;
 
     font-size: 12px;
 
     font-weight: 800;
-
-    color: #667085;
-
-    margin-bottom: 9px;
 
     letter-spacing: .8px;
 }
@@ -744,15 +751,14 @@ body {
 
     writing-mode: vertical-rl;
 
-    transform:
-        rotate(180deg);
+    transform: rotate(180deg);
+
+    color:
+        rgba(68,41,20,.68);
 
     font-size: 12px;
 
     font-weight: 800;
-
-    color:
-        rgba(68,41,20,.65);
 
     letter-spacing: 2px;
 }
@@ -774,23 +780,20 @@ body {
 
     cursor: pointer;
 
-    font-size: 11px;
-
-    font-weight: 800;
-
     display: flex;
 
     align-items: center;
 
     justify-content: center;
 
+    font-size: 11px;
+
+    font-weight: 800;
+
     transition:
-
         transform .13s ease,
-
         box-shadow .13s ease,
-
-        opacity .13s ease;
+        background .13s ease;
 }
 
 .seat:hover:not(:disabled) {
@@ -800,29 +803,31 @@ body {
 }
 
 
-/* DISPONIBLE - VERDE */
+/* DISPONIBLE */
 
 .seat.disponible {
 
-    background: #dcfce7;
+    background: #22c55e;
 
-    color: #166534;
+    color: white;
 
     border:
-        1px solid #4ade80;
+        1px solid #16a34a;
+
+    box-shadow:
+        0 3px 8px rgba(22,163,74,.15);
 }
 
 .seat.disponible:hover {
 
-    background: #bbf7d0;
+    background: #16a34a;
 
     box-shadow:
-        0 5px 14px
-        rgba(22,163,74,.20);
+        0 5px 14px rgba(22,163,74,.28);
 }
 
 
-/* SELECCIONADO - AMARILLO */
+/* SELECCIONADO */
 
 .seat.seleccionado {
 
@@ -835,11 +840,11 @@ body {
 
     box-shadow:
         0 0 0 3px
-        rgba(250,204,21,.20);
+        rgba(250,204,21,.22);
 }
 
 
-/* EN PROCESO - MORADO */
+/* EN PROCESO */
 
 .seat.bloqueado {
 
@@ -853,12 +858,11 @@ body {
     cursor: not-allowed;
 
     box-shadow:
-        inset 0 -2px 0
-        rgba(0,0,0,.10);
+        0 3px 8px rgba(124,58,237,.20);
 }
 
 
-/* RESERVADO = VISUALMENTE VENDIDO */
+/* RESERVADO */
 
 .seat.reservado {
 
@@ -873,7 +877,7 @@ body {
 }
 
 
-/* VENDIDO - GRIS OSCURO */
+/* VENDIDO */
 
 .seat.vendido {
 
@@ -888,7 +892,7 @@ body {
 }
 
 
-/* UTILIZADO TAMBIÉN SE VE COMO VENDIDO */
+/* UTILIZADO */
 
 .seat.utilizado {
 
@@ -901,32 +905,31 @@ body {
 
     cursor: not-allowed;
 
-    opacity: .72;
+    opacity: .78;
 }
 
 
 /* ==========================================================
-   SIDEBAR
+   RESUMEN COMPRA
 ========================================================== */
 
 .summary-card {
 
     position: sticky;
 
-    top: 92px;
+    top: 98px;
 
     background: white;
-
-    border-radius: 22px;
 
     border:
         1px solid #e6eaf0;
 
-    box-shadow:
-        0 15px 40px
-        rgba(15,23,42,.09);
+    border-radius: 22px;
 
     overflow: hidden;
+
+    box-shadow:
+        0 15px 40px rgba(15,23,42,.09);
 }
 
 .summary-head {
@@ -949,9 +952,9 @@ body {
 
     margin: 0;
 
-    font-size: 12px;
-
     color: var(--muted);
+
+    font-size: 12px;
 }
 
 .summary-content {
@@ -960,18 +963,11 @@ body {
 }
 
 
-/* ==========================================================
-   DISPONIBILIDAD
-========================================================== */
+/* DISPONIBILIDAD */
 
 .availability {
 
-    background: #ecfdf5;
-
-    border:
-        1px solid #bbf7d0;
-
-    border-radius: 13px;
+    margin-bottom: 18px;
 
     padding: 12px 14px;
 
@@ -981,7 +977,12 @@ body {
 
     justify-content: space-between;
 
-    margin-bottom: 18px;
+    background: #ecfdf5;
+
+    border:
+        1px solid #bbf7d0;
+
+    border-radius: 13px;
 }
 
 .availability span {
@@ -995,15 +996,17 @@ body {
 
     color: #166534;
 
-    font-size: 14px;
+    font-size: 15px;
 }
 
 
-/* ==========================================================
-   SELECCIÓN
-========================================================== */
+/* SIN SELECCIÓN */
 
 .selection-empty {
+
+    margin-bottom: 18px;
+
+    padding: 18px 15px;
 
     background: #f7f9fc;
 
@@ -1011,14 +1014,13 @@ body {
 
     border-radius: 13px;
 
-    padding: 18px 15px;
-
     text-align: center;
 
     font-size: 13px;
-
-    margin-bottom: 18px;
 }
+
+
+/* LISTA SELECCIONADOS */
 
 .selected-list {
 
@@ -1035,6 +1037,8 @@ body {
 
 .selected-ticket {
 
+    padding: 11px 12px;
+
     display: flex;
 
     justify-content: space-between;
@@ -1042,8 +1046,6 @@ body {
     align-items: center;
 
     gap: 10px;
-
-    padding: 11px 12px;
 
     border:
         1px solid #e5e7eb;
@@ -1067,15 +1069,15 @@ body {
 
 .remove-seat {
 
-    border: none;
-
-    background: #f3f4f6;
-
     width: 27px;
 
     height: 27px;
 
+    border: none;
+
     border-radius: 50%;
+
+    background: #f3f4f6;
 
     cursor: pointer;
 
@@ -1088,19 +1090,17 @@ body {
 }
 
 
-/* ==========================================================
-   TOTAL
-========================================================== */
+/* RESUMEN */
 
 .summary-row {
+
+    margin: 12px 0;
 
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
-
-    margin: 12px 0;
 
     font-size: 13px;
 }
@@ -1110,22 +1110,17 @@ body {
     color: var(--muted);
 }
 
-.summary-row strong {
-
-    color: var(--text);
-}
-
 .summary-total {
+
+    margin-top: 16px;
+
+    padding-top: 17px;
 
     display: flex;
 
     justify-content: space-between;
 
     align-items: end;
-
-    padding-top: 17px;
-
-    margin-top: 16px;
 
     border-top:
         1px solid var(--line);
@@ -1143,21 +1138,24 @@ body {
     font-size: 27px;
 }
 
+
+/* BOTÓN */
+
 .checkout-btn {
 
     width: 100%;
 
     margin-top: 20px;
 
+    padding: 16px;
+
     border: none;
+
+    border-radius: 13px;
 
     background: var(--primary);
 
     color: white;
-
-    padding: 16px;
-
-    border-radius: 13px;
 
     cursor: pointer;
 
@@ -1165,18 +1163,14 @@ body {
 
     font-weight: 800;
 
-    transition:
-        background .2s,
-        transform .15s;
+    transition: .2s;
 }
 
 .checkout-btn:hover:not(:disabled) {
 
-    background:
-        var(--primary-dark);
+    background: var(--primary-dark);
 
-    transform:
-        translateY(-1px);
+    transform: translateY(-1px);
 }
 
 .checkout-btn:disabled {
@@ -1188,9 +1182,9 @@ body {
 
 .security-note {
 
-    text-align: center;
-
     margin-top: 12px;
+
+    text-align: center;
 
     color: var(--muted);
 
@@ -1212,9 +1206,6 @@ body {
 
     z-index: 5000;
 
-    background:
-        rgba(4,10,20,.73);
-
     display: none;
 
     align-items: center;
@@ -1223,8 +1214,10 @@ body {
 
     padding: 18px;
 
-    backdrop-filter:
-        blur(6px);
+    background:
+        rgba(4,10,20,.73);
+
+    backdrop-filter: blur(6px);
 }
 
 .modal.show {
@@ -1241,19 +1234,15 @@ body {
 
     border-radius: 22px;
 
-    box-shadow:
-        0 30px 80px
-        rgba(0,0,0,.28);
-
     overflow: hidden;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.28);
 }
 
 .modal-head {
 
     padding: 22px 23px;
-
-    border-bottom:
-        1px solid var(--line);
 
     display: flex;
 
@@ -1262,6 +1251,9 @@ body {
     justify-content: space-between;
 
     gap: 15px;
+
+    border-bottom:
+        1px solid var(--line);
 }
 
 .modal-head h3 {
@@ -1282,15 +1274,15 @@ body {
 
 .modal-close {
 
-    border: none;
-
-    background: #f3f4f6;
-
     width: 34px;
 
     height: 34px;
 
+    border: none;
+
     border-radius: 50%;
+
+    background: #f3f4f6;
 
     cursor: pointer;
 
@@ -1324,12 +1316,12 @@ body {
 
     width: 100%;
 
+    padding: 13px 14px;
+
     border:
         1px solid #d7dde5;
 
     border-radius: 11px;
-
-    padding: 13px 14px;
 
     outline: none;
 
@@ -1340,15 +1332,20 @@ body {
 
 .form-group input:focus {
 
-    border-color:
-        var(--primary);
+    border-color: var(--primary);
 
     box-shadow:
-        0 0 0 3px
-        rgba(37,99,235,.10);
+        0 0 0 3px rgba(37,99,235,.10);
 }
 
+
+/* AVISO MORADO */
+
 .hold-notice {
+
+    margin: 18px 0;
+
+    padding: 13px 14px;
 
     background: #f5f3ff;
 
@@ -1359,16 +1356,16 @@ body {
 
     border-radius: 12px;
 
-    padding: 13px 14px;
-
     font-size: 12px;
 
-    line-height: 1.5;
-
-    margin: 18px 0;
+    line-height: 1.55;
 }
 
 .modal-total {
+
+    margin-bottom: 17px;
+
+    padding: 15px;
 
     display: flex;
 
@@ -1376,13 +1373,9 @@ body {
 
     align-items: center;
 
-    padding: 15px;
-
     background: #f7f9fc;
 
     border-radius: 12px;
-
-    margin-bottom: 17px;
 }
 
 .modal-total span {
@@ -1411,17 +1404,16 @@ body {
 
     color: white;
 
-    font-weight: 800;
-
     cursor: pointer;
 
     font-size: 14px;
+
+    font-weight: 800;
 }
 
 .modal-submit:hover:not(:disabled) {
 
-    background:
-        var(--primary-dark);
+    background: var(--primary-dark);
 }
 
 .modal-submit:disabled {
@@ -1440,8 +1432,6 @@ body {
 
     inset: 0;
 
-    background: #f4f7fb;
-
     z-index: 9999;
 
     display: flex;
@@ -1449,6 +1439,8 @@ body {
     align-items: center;
 
     justify-content: center;
+
+    background: #f4f7fb;
 }
 
 .loader-box {
@@ -1462,19 +1454,18 @@ body {
 
     height: 42px;
 
+    margin:
+        0 auto 15px;
+
     border:
         4px solid #dbe4ef;
 
-    border-top-color:
-        #2563eb;
+    border-top-color: #2563eb;
 
     border-radius: 50%;
 
     animation:
         spin .8s linear infinite;
-
-    margin:
-        0 auto 15px;
 }
 
 @keyframes spin {
@@ -1489,9 +1480,9 @@ body {
 
     display: block;
 
-    font-size: 16px;
-
     margin-bottom: 5px;
+
+    font-size: 16px;
 }
 
 .loader-box span {
@@ -1516,17 +1507,16 @@ body {
 
     z-index: 6000;
 
+    padding: 13px 17px;
+
     background: #111827;
 
     color: white;
 
-    padding: 13px 17px;
-
     border-radius: 12px;
 
     box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.25);
+        0 15px 40px rgba(0,0,0,.25);
 
     font-size: 12px;
 
@@ -1565,8 +1555,7 @@ body {
 
     .booking-layout {
 
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .summary-card {
@@ -1588,34 +1577,42 @@ body {
 
     .nav {
 
+        min-height: 65px;
+
         padding:
             0 14px;
-
-        min-height: 62px;
     }
 
-    .brand strong {
 
-        font-size: 18px;
+    /* LOGO MÓVIL */
+
+    .brand-logo {
+
+        height: 36px;
+
+        max-width: 190px;
     }
+
 
     .back-link {
 
-        font-size: 11px;
-
         padding:
-            9px 12px;
+            9px 11px;
+
+        font-size: 10px;
     }
+
 
     .event-hero {
 
         min-height: auto;
     }
 
+
     .event-hero-content {
 
         grid-template-columns:
-            100px 1fr;
+            105px minmax(0,1fr);
 
         gap: 17px;
 
@@ -1623,17 +1620,22 @@ body {
             25px 14px;
     }
 
+
     .event-poster {
 
-        width: 100px;
+        width: 105px;
 
-        border-radius: 13px;
+        border-radius: 12px;
     }
+
 
     .event-copy h1 {
 
         font-size: 25px;
+
+        letter-spacing: -.6px;
     }
+
 
     .event-info-line {
 
@@ -1641,21 +1643,28 @@ body {
 
         gap: 6px;
 
-        font-size: 12px;
+        margin-bottom: 13px;
+
+        font-size: 11px;
     }
+
 
     .event-price-big {
 
-        font-size: 20px;
+        font-size: 19px;
     }
+
 
     .event-type {
 
-        font-size: 10px;
-
         padding:
             6px 9px;
+
+        margin-bottom: 9px;
+
+        font-size: 9px;
     }
+
 
     .page {
 
@@ -1663,10 +1672,12 @@ body {
             15px 10px 30px;
     }
 
+
     .map-card {
 
         border-radius: 15px;
     }
+
 
     .map-header {
 
@@ -1674,10 +1685,12 @@ body {
             15px 14px;
     }
 
+
     .map-title h2 {
 
         font-size: 18px;
     }
+
 
     .legend {
 
@@ -1685,23 +1698,29 @@ body {
             12px 14px;
 
         gap:
-            8px 13px;
+            10px 15px;
     }
+
 
     .map-viewport {
 
         min-height: 590px;
     }
 
+
     .map-transform {
 
         padding-top: 25px;
     }
 
+
     .summary-card {
 
         margin-bottom: 15px;
     }
+
+
+    /* BARRA DE COMPRA MÓVIL */
 
     .mobile-cart {
 
@@ -1715,6 +1734,21 @@ body {
 
         z-index: 3000;
 
+        display: none;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 12px;
+
+        padding:
+            10px 12px
+            calc(
+                10px +
+                env(safe-area-inset-bottom)
+            );
+
         background: white;
 
         border-top:
@@ -1723,63 +1757,49 @@ body {
         box-shadow:
             0 -10px 35px
             rgba(15,23,42,.14);
-
-        padding:
-
-            10px 12px
-            calc(
-                10px +
-                env(safe-area-inset-bottom)
-            );
-
-        display: none;
-
-        align-items: center;
-
-        justify-content:
-            space-between;
-
-        gap: 12px;
     }
+
 
     .mobile-cart.show {
 
         display: flex;
     }
 
+
     .mobile-cart-info small {
 
         display: block;
 
+        margin-bottom: 2px;
+
         color: var(--muted);
 
         font-size: 10px;
-
-        margin-bottom: 2px;
     }
+
 
     .mobile-cart-info strong {
 
         font-size: 17px;
     }
 
+
     .mobile-cart button {
-
-        border: none;
-
-        background:
-            var(--primary);
-
-        color: white;
-
-        border-radius: 10px;
 
         padding:
             12px 16px;
 
-        font-weight: 800;
+        border: none;
+
+        border-radius: 10px;
+
+        background: var(--primary);
+
+        color: white;
 
         cursor: pointer;
+
+        font-weight: 800;
     }
 
 }
@@ -1790,12 +1810,12 @@ body {
     .event-hero-content {
 
         grid-template-columns:
-            82px 1fr;
+            87px minmax(0,1fr);
     }
 
     .event-poster {
 
-        width: 82px;
+        width: 87px;
     }
 
     .event-copy h1 {
@@ -1854,15 +1874,13 @@ body {
             href="index.html"
             class="brand">
 
-            <strong>
-                LIVE TICKETS
-            </strong>
-
-            <span>
-                EXPERIENCIAS EN VIVO
-            </span>
+            <img
+                src="LIVE_TICKETS_BLANCO.png"
+                alt="Live Tickets"
+                class="brand-logo">
 
         </a>
+
 
         <a
             href="index.html"
@@ -1878,7 +1896,7 @@ body {
 
 
 <!-- ======================================================
-     HERO
+     HERO DEL EVENTO
 ====================================================== -->
 
 <section class="event-hero">
@@ -1892,21 +1910,29 @@ body {
         class="event-hero-overlay">
     </div>
 
+
     <div
         class="event-hero-content">
+
+
+        <!-- FLYER -->
 
         <div
             class="event-poster"
             id="eventPoster">
         </div>
 
+
+        <!-- INFORMACIÓN -->
+
         <div class="event-copy">
 
             <div class="event-type">
 
-                🎵 CONCIERTO
+                ● CONCIERTO
 
             </div>
+
 
             <h1 id="eventName">
 
@@ -1914,25 +1940,26 @@ body {
 
             </h1>
 
-            <div
-                class="event-info-line">
+
+            <div class="event-info-line">
 
                 <span id="eventDate">
 
-                    📅 Fecha
+                    Fecha
 
                 </span>
 
+
                 <span id="eventPlace">
 
-                    📍 Lugar
+                    Lugar
 
                 </span>
 
             </div>
 
-            <div
-                class="event-price-big">
+
+            <div class="event-price-big">
 
                 <span id="eventPrice">
 
@@ -1956,7 +1983,7 @@ body {
 
 
 <!-- ======================================================
-     MAIN
+     CONTENIDO
 ====================================================== -->
 
 <main class="page">
@@ -1969,6 +1996,7 @@ body {
 ====================================================== -->
 
 <section class="map-card">
+
 
     <div class="map-header">
 
@@ -1984,6 +2012,7 @@ body {
 
         </div>
 
+
         <div class="zoom-controls">
 
             <button
@@ -1994,6 +2023,7 @@ body {
 
             </button>
 
+
             <button
                 class="zoom-btn zoom-fit"
                 onclick="fitMap()">
@@ -2001,6 +2031,7 @@ body {
                 AJUSTAR
 
             </button>
+
 
             <button
                 class="zoom-btn"
@@ -2015,9 +2046,7 @@ body {
     </div>
 
 
-    <!-- ==================================================
-         LEYENDA
-    ================================================== -->
+    <!-- LEYENDA -->
 
     <div class="legend">
 
@@ -2067,9 +2096,7 @@ body {
     </div>
 
 
-    <!-- ==================================================
-         MAPA
-    ================================================== -->
+    <!-- MAPA -->
 
     <div
         class="map-viewport"
@@ -2079,8 +2106,6 @@ body {
             class="map-transform"
             id="mapTransform">
 
-
-            <!-- ESCENARIO -->
 
             <div class="stage-wrap">
 
@@ -2092,8 +2117,6 @@ body {
 
             </div>
 
-
-            <!-- MESAS -->
 
             <div
                 class="tables-grid"
@@ -2109,7 +2132,7 @@ body {
 
 
 <!-- ======================================================
-     RESUMEN COMPRA
+     RESUMEN
 ====================================================== -->
 
 <aside class="summary-card">
@@ -2126,10 +2149,9 @@ body {
 
     </div>
 
+
     <div class="summary-content">
 
-
-        <!-- DISPONIBILIDAD -->
 
         <div class="availability">
 
@@ -2146,27 +2168,20 @@ body {
         </div>
 
 
-        <!-- VACÍO -->
-
         <div
             class="selection-empty"
             id="selectionEmpty">
 
-            Aún no has seleccionado
-            ningún asiento.
+            Aún no has seleccionado ningún asiento.
 
         </div>
 
-
-        <!-- ASIENTOS -->
 
         <div
             class="selected-list"
             id="selectedList">
         </div>
 
-
-        <!-- CANTIDAD -->
 
         <div class="summary-row">
 
@@ -2183,8 +2198,6 @@ body {
         </div>
 
 
-        <!-- PRECIO -->
-
         <div class="summary-row">
 
             <span>
@@ -2199,8 +2212,6 @@ body {
 
         </div>
 
-
-        <!-- TOTAL -->
 
         <div class="summary-total">
 
@@ -2230,17 +2241,14 @@ body {
 
         <div class="security-note">
 
-            Los asientos serán bloqueados
-            temporalmente durante el proceso
-            de compra.
+            Los asientos serán bloqueados temporalmente
+            durante el proceso de compra.
 
         </div>
-
 
     </div>
 
 </aside>
-
 
 </div>
 
@@ -2248,7 +2256,7 @@ body {
 
 
 <!-- ======================================================
-     MOBILE CART
+     BARRA MÓVIL
 ====================================================== -->
 
 <div
@@ -2271,6 +2279,7 @@ body {
 
     </div>
 
+
     <button
         onclick="openBuyerModal()">
 
@@ -2291,6 +2300,7 @@ body {
 
     <div class="modal-box">
 
+
         <div class="modal-head">
 
             <div>
@@ -2300,11 +2310,11 @@ body {
                 </h3>
 
                 <p>
-                    Completa tus datos para continuar
-                    con la reserva.
+                    Completa tus datos para continuar.
                 </p>
 
             </div>
+
 
             <button
                 class="modal-close"
@@ -2319,8 +2329,6 @@ body {
 
         <div class="modal-content">
 
-
-            <!-- NOMBRE -->
 
             <div class="form-group">
 
@@ -2337,8 +2345,6 @@ body {
             </div>
 
 
-            <!-- TELÉFONO -->
-
             <div class="form-group">
 
                 <label>
@@ -2353,8 +2359,6 @@ body {
 
             </div>
 
-
-            <!-- EMAIL -->
 
             <div class="form-group">
 
@@ -2371,23 +2375,16 @@ body {
             </div>
 
 
-            <!-- AVISO -->
-
             <div class="hold-notice">
 
-                ⏱️ Al continuar, tus asientos quedarán
-                bloqueados durante aproximadamente
-
-                <strong>
-                    10 minutos
-                </strong>
-
-                mientras completas el proceso.
+                Al continuar, tus asientos quedarán
+                en estado <strong>En proceso</strong>
+                durante aproximadamente
+                <strong>10 minutos</strong> mientras
+                completas la compra.
 
             </div>
 
-
-            <!-- TOTAL -->
 
             <div class="modal-total">
 
@@ -2403,8 +2400,6 @@ body {
 
             </div>
 
-
-            <!-- CONTINUAR -->
 
             <button
                 class="modal-submit"
@@ -2435,22 +2430,38 @@ body {
 <script>
 
 /* ==========================================================
+   ARCHIVOS VISUALES
+========================================================== */
+
+/*
+Si tus imágenes están directamente
+en la raíz del repositorio, déjalo así.
+*/
+
+const LOGO_FILE =
+    "LIVE_TICKETS_BLANCO.png";
+
+const DEFAULT_FLYER =
+    "FLYER%201080X1350.png";
+
+
+/* ==========================================================
    SUPABASE
 ========================================================== */
 
 const SUPABASE_URL =
-"https://ysismkibffhzouxacaxv.supabase.co";
+    "https://ysismkibffhzouxacaxv.supabase.co";
 
 
 const SUPABASE_KEY =
-"sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
+    "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
 
 
 const db =
-supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
 /* ==========================================================
@@ -2458,15 +2469,15 @@ supabase.createClient(
 ========================================================== */
 
 const params =
-new URLSearchParams(
-    window.location.search
-);
+    new URLSearchParams(
+        window.location.search
+    );
 
 
 const EVENT_ID =
-Number(
-    params.get("id") || 1
-);
+    Number(
+        params.get("id") || 1
+    );
 
 
 /* ==========================================================
@@ -2475,30 +2486,23 @@ Number(
 
 let currentEvent = null;
 
-
 let mesas = [];
-
 
 let asientos = [];
 
-
 let selectedSeats =
-new Map();
-
+    new Map();
 
 let currentZoom = 1;
 
-
 const MAP_WIDTH =
-1380;
-
+    1380;
 
 const MIN_ZOOM =
-0.40;
-
+    0.40;
 
 const MAX_ZOOM =
-1.40;
+    1.40;
 
 
 /* ==========================================================
@@ -2533,6 +2537,7 @@ function formatDate(date) {
 
     }
 
+
     return new Date(date)
         .toLocaleDateString(
             "es-HN",
@@ -2548,10 +2553,19 @@ function formatDate(date) {
 
 
 /* ==========================================================
-   IMAGEN
+   IMAGEN EVENTO
 ========================================================== */
 
 function getEventImage(evento) {
+
+    /*
+    Si después agregamos flyer_url
+    en Supabase para otros eventos,
+    lo usará automáticamente.
+
+    Para este primer evento utiliza
+    FLYER 1080X1350.png.
+    */
 
     return (
 
@@ -2567,7 +2581,7 @@ function getEventImage(evento) {
 
         evento.banner_url ||
 
-        ""
+        DEFAULT_FLYER
 
     );
 
@@ -2575,7 +2589,7 @@ function getEventImage(evento) {
 
 
 /* ==========================================================
-   INICIAR
+   INICIALIZAR
 ========================================================== */
 
 async function initialize() {
@@ -2583,24 +2597,16 @@ async function initialize() {
     try {
 
 
-        /* LIBERAR BLOQUEOS VENCIDOS */
-
         await db.rpc(
             "liberar_bloqueos_expirados"
         );
 
 
-        /* EVENTO */
-
         await loadEvent();
 
 
-        /* MESAS Y ASIENTOS */
-
         await loadTablesAndSeats();
 
-
-        /* DISEÑO */
 
         renderEvent();
 
@@ -2617,7 +2623,10 @@ async function initialize() {
         );
 
 
-        /* ACTUALIZAR DISPONIBILIDAD */
+        /*
+        Actualiza disponibilidad
+        cada 12 segundos.
+        */
 
         setInterval(
             refreshSeatStates,
@@ -2628,9 +2637,8 @@ async function initialize() {
 
     catch(error) {
 
-        console.error(
-            error
-        );
+        console.error(error);
+
 
         alert(
             "No fue posible cargar el evento."
@@ -2696,7 +2704,7 @@ async function loadEvent() {
 
 
 /* ==========================================================
-   CARGAR MESAS Y ASIENTOS
+   MESAS Y ASIENTOS
 ========================================================== */
 
 async function loadTablesAndSeats() {
@@ -2748,6 +2756,7 @@ async function loadTablesAndSeats() {
 
 
     const tableIds =
+
         mesas.map(
             mesa =>
                 mesa.id
@@ -2861,6 +2870,10 @@ function renderEvent() {
         );
 
 
+    /*
+    IMAGEN
+    */
+
     const image =
 
         getEventImage(
@@ -2868,33 +2881,28 @@ function renderEvent() {
         );
 
 
-    if (image) {
+    document
+        .getElementById(
+            "eventPoster"
+        )
+        .style.backgroundImage =
+
+        `url("${image}")`;
 
 
-        document
-            .getElementById(
-                "eventPoster"
-            )
-            .style.backgroundImage =
+    document
+        .getElementById(
+            "eventHeroBg"
+        )
+        .style.backgroundImage =
 
-            `url("${image}")`;
-
-
-        document
-            .getElementById(
-                "eventHeroBg"
-            )
-            .style.backgroundImage =
-
-            `url("${image}")`;
-
-    }
+        `url("${image}")`;
 
 }
 
 
 /* ==========================================================
-   RENDERIZAR MAPA
+   RENDER MAPA
 ========================================================== */
 
 function renderMap() {
@@ -2918,18 +2926,18 @@ function renderMap() {
 
                 asientos
 
-                    .filter(
-                        seat =>
-                            seat.mesa_id ===
-                            mesa.id
-                    )
+                .filter(
+                    seat =>
+                        seat.mesa_id ===
+                        mesa.id
+                )
 
-                    .sort(
-                        (a,b) =>
+                .sort(
+                    (a,b) =>
 
-                            Number(a.numero) -
-                            Number(b.numero)
-                    );
+                        Number(a.numero) -
+                        Number(b.numero)
+                );
 
 
             const leftSeats =
@@ -2963,28 +2971,28 @@ function renderMap() {
 
                 leftSeats
 
-                    .map(
-                        seat =>
-                            seatHTML(
-                                seat
-                            )
-                    )
+                .map(
+                    seat =>
+                        seatHTML(
+                            seat
+                        )
+                )
 
-                    .join("");
+                .join("");
 
 
             const rightColumn =
 
                 rightSeats
 
-                    .map(
-                        seat =>
-                            seatHTML(
-                                seat
-                            )
-                    )
+                .map(
+                    seat =>
+                        seatHTML(
+                            seat
+                        )
+                )
 
-                    .join("");
+                .join("");
 
 
             card.innerHTML = `
@@ -3042,7 +3050,7 @@ function renderMap() {
 
 
 /* ==========================================================
-   HTML ASIENTO
+   ASIENTO
 ========================================================== */
 
 function seatHTML(seat) {
@@ -3052,6 +3060,11 @@ function seatHTML(seat) {
         seat.estado ||
         "disponible";
 
+
+    /*
+    Si fue seleccionado por
+    este comprador, mostrar amarillo.
+    */
 
     if (
         selectedSeats.has(
@@ -3067,13 +3080,11 @@ function seatHTML(seat) {
 
     const disabled =
 
-        status !==
-        "disponible"
+        status !== "disponible"
 
         &&
 
-        status !==
-        "seleccionado";
+        status !== "seleccionado";
 
 
     return `
@@ -3098,7 +3109,7 @@ function seatHTML(seat) {
 
 
 /* ==========================================================
-   EVENTO CLICK ASIENTOS
+   CLIC ASIENTO
 ========================================================== */
 
 function bindSeatClicks() {
@@ -3141,7 +3152,7 @@ function bindSeatClicks() {
 
 
 /* ==========================================================
-   SELECCIONAR
+   SELECCIONAR / QUITAR
 ========================================================== */
 
 function toggleSeat(seatId) {
@@ -3205,8 +3216,8 @@ function toggleSeat(seatId) {
 
                 mesaNumero:
                     mesa
-                        ? mesa.numero
-                        : "-"
+                    ? mesa.numero
+                    : "-"
 
             }
         );
@@ -3223,12 +3234,10 @@ function toggleSeat(seatId) {
 
 
 /* ==========================================================
-   QUITAR ASIENTO
+   QUITAR DESDE RESUMEN
 ========================================================== */
 
-function removeSelectedSeat(
-    seatId
-) {
+function removeSelectedSeat(seatId) {
 
     selectedSeats.delete(
         Number(seatId)
@@ -3250,7 +3259,6 @@ function removeSelectedSeat(
 function updateSummary() {
 
     const quantity =
-
         selectedSeats.size;
 
 
@@ -3264,9 +3272,7 @@ function updateSummary() {
 
 
     const total =
-
-        quantity *
-        price;
+        quantity * price;
 
 
     document
@@ -3274,7 +3280,6 @@ function updateSummary() {
             "summaryQuantity"
         )
         .textContent =
-
         quantity;
 
 
@@ -3283,7 +3288,6 @@ function updateSummary() {
             "summaryTotal"
         )
         .textContent =
-
         money(total);
 
 
@@ -3292,7 +3296,6 @@ function updateSummary() {
             "modalTotal"
         )
         .textContent =
-
         money(total);
 
 
@@ -3304,9 +3307,9 @@ function updateSummary() {
 
         quantity === 1
 
-            ? "1 asiento"
+        ? "1 asiento"
 
-            : `${quantity} asientos`;
+        : `${quantity} asientos`;
 
 
     document
@@ -3314,7 +3317,6 @@ function updateSummary() {
             "mobileTotal"
         )
         .textContent =
-
         money(total);
 
 
@@ -3326,7 +3328,6 @@ function updateSummary() {
 
 
     button.disabled =
-
         quantity === 0;
 
 
@@ -3422,15 +3423,9 @@ function updateSummary() {
 
             return (
 
-                Number(
-                    a.numero
-                )
-
+                Number(a.numero)
                 -
-
-                Number(
-                    b.numero
-                )
+                Number(b.numero)
 
             );
 
@@ -3442,8 +3437,8 @@ function updateSummary() {
 
         selected
 
-            .map(
-                seat => `
+        .map(
+            seat => `
 
                 <div class="selected-ticket">
 
@@ -3477,9 +3472,9 @@ function updateSummary() {
                 </div>
 
             `
-            )
+        )
 
-            .join("");
+        .join("");
 
 }
 
@@ -3504,14 +3499,13 @@ function updateAvailability() {
             "availableCount"
         )
         .textContent =
-
         available;
 
 }
 
 
 /* ==========================================================
-   ACTUALIZAR ESTADOS
+   REFRESCAR DISPONIBILIDAD
 ========================================================== */
 
 async function refreshSeatStates() {
@@ -3532,9 +3526,7 @@ async function refreshSeatStates() {
             );
 
 
-        if (
-            !tableIds.length
-        ) {
+        if (!tableIds.length) {
 
             return;
 
@@ -3562,9 +3554,7 @@ async function refreshSeatStates() {
 
         if (error) {
 
-            console.error(
-                error
-            );
+            console.error(error);
 
             return;
 
@@ -3572,14 +3562,13 @@ async function refreshSeatStates() {
 
 
         asientos =
-
             data || [];
 
 
         /*
-        SI OTRO CLIENTE BLOQUEÓ UN
-        ASIENTO QUE TENÍAMOS SELECCIONADO
-        LO QUITAMOS AUTOMÁTICAMENTE.
+        Si otro usuario tomó
+        un asiento mientras este
+        comprador lo tenía seleccionado.
         */
 
         for (
@@ -3635,11 +3624,8 @@ async function refreshSeatStates() {
     catch(error) {
 
         console.error(
-
             "Error actualizando asientos:",
-
             error
-
         );
 
     }
@@ -3672,8 +3658,6 @@ function applyZoom() {
 }
 
 
-/* ZOOM + */
-
 function zoomIn() {
 
     currentZoom =
@@ -3689,8 +3673,6 @@ function zoomIn() {
 }
 
 
-/* ZOOM - */
-
 function zoomOut() {
 
     currentZoom =
@@ -3705,8 +3687,6 @@ function zoomOut() {
 
 }
 
-
-/* AJUSTAR */
 
 function fitMap() {
 
@@ -3751,7 +3731,7 @@ function fitMap() {
 
 
 /* ==========================================================
-   ABRIR MODAL
+   MODAL
 ========================================================== */
 
 function openBuyerModal() {
@@ -3781,10 +3761,6 @@ function openBuyerModal() {
 }
 
 
-/* ==========================================================
-   CERRAR MODAL
-========================================================== */
-
 function closeBuyerModal() {
 
     document
@@ -3808,31 +3784,31 @@ async function createPreReservation() {
     const nombre =
 
         document
-            .getElementById(
-                "buyerName"
-            )
-            .value
-            .trim();
+        .getElementById(
+            "buyerName"
+        )
+        .value
+        .trim();
 
 
     const telefono =
 
         document
-            .getElementById(
-                "buyerPhone"
-            )
-            .value
-            .trim();
+        .getElementById(
+            "buyerPhone"
+        )
+        .value
+        .trim();
 
 
     const email =
 
         document
-            .getElementById(
-                "buyerEmail"
-            )
-            .value
-            .trim();
+        .getElementById(
+            "buyerEmail"
+        )
+        .value
+        .trim();
 
 
     if (!nombre) {
@@ -3865,9 +3841,7 @@ async function createPreReservation() {
             "No hay asientos seleccionados."
         );
 
-
         closeBuyerModal();
-
 
         return;
 
@@ -3944,25 +3918,22 @@ async function createPreReservation() {
 
             Array.isArray(data)
 
-                ? data[0]
+            ? data[0]
 
-                : data;
+            : data;
 
 
         if (!result) {
 
             throw new Error(
-
                 "No se recibió respuesta de la reserva."
-
             );
 
         }
 
 
         if (
-            result.success ===
-            false
+            result.success === false
         ) {
 
             throw new Error(
@@ -3983,7 +3954,6 @@ async function createPreReservation() {
 
 
         const token =
-
             result.public_token;
 
 
@@ -3991,26 +3961,17 @@ async function createPreReservation() {
 
 
             console.error(
-
                 "Respuesta RPC:",
-
                 result
-
             );
 
 
             throw new Error(
-
                 "La reserva se creó pero no recibimos el token de checkout."
-
             );
 
         }
 
-
-        /*
-        ENVIAR AL CHECKOUT
-        */
 
         window.location.href =
 
@@ -4027,9 +3988,7 @@ async function createPreReservation() {
     catch(error) {
 
 
-        console.error(
-            error
-        );
+        console.error(error);
 
 
         button.disabled =
@@ -4066,7 +4025,7 @@ async function createPreReservation() {
 ========================================================== */
 
 let toastTimer =
-null;
+    null;
 
 
 function showToast(message) {
@@ -4191,7 +4150,7 @@ window.addEventListener(
 
 
 /* ==========================================================
-   CTRL + RUEDA = ZOOM
+   CTRL + RUEDA PARA ZOOM
 ========================================================== */
 
 document
@@ -4203,9 +4162,7 @@ document
         function(event) {
 
 
-            if (
-                !event.ctrlKey
-            ) {
+            if (!event.ctrlKey) {
 
                 return;
 
