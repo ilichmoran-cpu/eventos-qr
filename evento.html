@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -15,7 +16,10 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
 
 <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -23,26 +27,45 @@
 
 <style>
 
+/* ==========================================================
+   GENERAL
+========================================================== */
+
 * {
     box-sizing: border-box;
 }
 
 :root {
+
     --bg: #f4f7fb;
+
     --dark: #08101f;
+
     --dark2: #101a31;
+
     --text: #111827;
+
     --muted: #6b7280;
+
     --line: #e5e7eb;
+
     --primary: #2563eb;
+
     --primary-dark: #1d4ed8;
 
+
+    /* ESTADOS DE ASIENTOS */
+
     --available: #16a34a;
+
     --selected: #facc15;
-    --blocked: #f97316;
-    --reserved: #dc2626;
-    --sold: #7c3aed;
-    --used: #6b7280;
+
+    --blocked: #7c3aed;
+
+    --sold: #374151;
+
+    --used: #374151;
+
 
     --radius: 18px;
 }
@@ -52,103 +75,166 @@ html {
 }
 
 body {
+
     margin: 0;
+
     font-family: "Inter", sans-serif;
+
     background: var(--bg);
+
     color: var(--text);
 }
 
-/* ==========================================
+
+/* ==========================================================
    HEADER
-========================================== */
+========================================================== */
 
 .topbar {
+
     background: rgba(8,16,31,.97);
+
     backdrop-filter: blur(14px);
+
     position: sticky;
+
     top: 0;
+
     z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,.08);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
 }
 
 .nav {
+
     max-width: 1500px;
+
     margin: auto;
+
     min-height: 70px;
+
     padding: 0 22px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     gap: 20px;
 }
 
 .brand {
+
     text-decoration: none;
+
     color: white;
+
     display: flex;
+
     flex-direction: column;
+
     line-height: 1;
 }
 
 .brand strong {
+
     font-size: 21px;
+
     letter-spacing: 1px;
 }
 
 .brand span {
+
     font-size: 10px;
+
     margin-top: 5px;
+
     color: rgba(255,255,255,.65);
+
     letter-spacing: .5px;
 }
 
 .back-link {
+
     color: white;
+
     text-decoration: none;
-    border: 1px solid rgba(255,255,255,.18);
+
+    border:
+        1px solid rgba(255,255,255,.18);
+
     border-radius: 999px;
+
     padding: 10px 15px;
+
     font-size: 13px;
+
     font-weight: 700;
 }
 
 .back-link:hover {
-    background: rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.08);
 }
 
-/* ==========================================
+
+/* ==========================================================
    HERO EVENTO
-========================================== */
+========================================================== */
 
 .event-hero {
+
     min-height: 315px;
+
     color: white;
+
     position: relative;
+
     overflow: hidden;
 
     background:
-        radial-gradient(circle at 20% 20%, rgba(37,99,235,.45), transparent 35%),
-        linear-gradient(135deg,#091224,#131f3b);
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(37,99,235,.45),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #091224,
+            #131f3b
+        );
 }
 
 .event-hero-bg {
+
     position: absolute;
+
     inset: 0;
 
     background-position: center;
+
     background-size: cover;
 
     filter: blur(25px);
+
     transform: scale(1.15);
+
     opacity: .42;
 }
 
 .event-hero-overlay {
+
     position: absolute;
+
     inset: 0;
 
     background:
+
         linear-gradient(
             90deg,
             rgba(5,10,20,.97) 0%,
@@ -158,313 +244,484 @@ body {
 }
 
 .event-hero-content {
+
     position: relative;
+
     z-index: 2;
 
     max-width: 1500px;
+
     margin: auto;
+
     padding: 38px 22px;
 
     display: grid;
-    grid-template-columns: 190px 1fr;
+
+    grid-template-columns:
+        190px 1fr;
+
     gap: 30px;
+
     align-items: center;
 }
 
 .event-poster {
+
     width: 190px;
+
     aspect-ratio: 4/5;
 
     border-radius: 18px;
+
     overflow: hidden;
 
     background:
-        linear-gradient(135deg,#2563eb,#111827);
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #111827
+        );
 
-    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.35);
 
     background-position: center;
+
     background-size: cover;
 }
 
 .event-copy {
+
     max-width: 850px;
 }
 
 .event-type {
+
     display: inline-flex;
+
     align-items: center;
+
     gap: 7px;
 
-    background: rgba(37,99,235,.25);
-    border: 1px solid rgba(96,165,250,.35);
+    background:
+        rgba(37,99,235,.25);
+
+    border:
+        1px solid rgba(96,165,250,.35);
 
     padding: 8px 12px;
+
     border-radius: 999px;
 
     font-size: 12px;
+
     font-weight: 700;
+
     margin-bottom: 14px;
 }
 
 .event-copy h1 {
+
     margin: 0 0 15px;
 
-    font-size: clamp(32px,4vw,54px);
+    font-size:
+        clamp(32px,4vw,54px);
+
     line-height: 1.02;
+
     letter-spacing: -1px;
 }
 
 .event-info-line {
+
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 12px 25px;
 
-    color: rgba(255,255,255,.82);
+    color:
+        rgba(255,255,255,.82);
+
     font-size: 14px;
+
     margin-bottom: 18px;
 }
 
 .event-price-big {
+
     font-size: 24px;
+
     font-weight: 800;
 }
 
 .event-price-big small {
+
     font-weight: 500;
+
     font-size: 13px;
-    color: rgba(255,255,255,.65);
+
+    color:
+        rgba(255,255,255,.65);
 }
 
-/* ==========================================
-   MAIN AREA
-========================================== */
+
+/* ==========================================================
+   MAIN
+========================================================== */
 
 .page {
+
     max-width: 1500px;
+
     margin: auto;
-    padding: 28px 22px 100px;
+
+    padding:
+        28px 22px 100px;
 }
 
 .booking-layout {
+
     display: grid;
-    grid-template-columns: minmax(0,1fr) 340px;
+
+    grid-template-columns:
+        minmax(0,1fr) 340px;
+
     gap: 22px;
+
     align-items: start;
 }
 
-/* ==========================================
+
+/* ==========================================================
    MAP CARD
-========================================== */
+========================================================== */
 
 .map-card {
+
     background: white;
+
     border-radius: 22px;
-    border: 1px solid #e7ebf0;
+
+    border:
+        1px solid #e7ebf0;
+
     overflow: hidden;
 
-    box-shadow: 0 12px 35px rgba(15,23,42,.07);
+    box-shadow:
+        0 12px 35px
+        rgba(15,23,42,.07);
 }
 
 .map-header {
+
     padding: 20px 22px;
-    border-bottom: 1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     gap: 16px;
+
     flex-wrap: wrap;
 }
 
 .map-title h2 {
+
     margin: 0 0 5px;
+
     font-size: 22px;
 }
 
 .map-title p {
+
     margin: 0;
+
     color: var(--muted);
+
     font-size: 13px;
 }
 
 .zoom-controls {
+
     display: flex;
+
     align-items: center;
+
     gap: 7px;
 }
 
 .zoom-btn {
-    border: 1px solid #dce2e9;
+
+    border:
+        1px solid #dce2e9;
+
     background: white;
 
     min-width: 40px;
+
     height: 40px;
 
     border-radius: 10px;
 
     cursor: pointer;
+
     font-size: 16px;
+
     font-weight: 800;
 }
 
 .zoom-btn:hover {
+
     background: #f5f7fa;
 }
 
 .zoom-fit {
+
     padding: 0 13px;
+
     width: auto;
+
     font-size: 11px;
 }
 
-/* ==========================================
-   LEGEND
-========================================== */
+
+/* ==========================================================
+   LEYENDA
+========================================================== */
 
 .legend {
+
     padding: 14px 22px;
+
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 10px 18px;
 
-    border-bottom: 1px solid var(--line);
+    border-bottom:
+        1px solid var(--line);
+
     background: #fafbfd;
 }
 
 .legend-item {
+
     display: flex;
+
     align-items: center;
+
     gap: 7px;
 
     font-size: 12px;
+
     color: #4b5563;
 }
 
 .legend-dot {
+
     width: 12px;
+
     height: 12px;
 
     border-radius: 50%;
 }
 
-.legend-dot.available { background: var(--available); }
-.legend-dot.selected { background: var(--selected); }
-.legend-dot.blocked { background: var(--blocked); }
-.legend-dot.sold { background: var(--sold); }
-.legend-dot.unavailable { background: #9ca3af; }
+.legend-dot.available {
 
-/* ==========================================
+    background: #16a34a;
+}
+
+.legend-dot.selected {
+
+    background: #facc15;
+}
+
+.legend-dot.blocked {
+
+    background: #7c3aed;
+}
+
+.legend-dot.sold {
+
+    background: #374151;
+}
+
+
+/* ==========================================================
    MAP VIEWPORT
-========================================== */
+========================================================== */
 
 .map-viewport {
+
     width: 100%;
+
     overflow: auto;
 
     background:
-        radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%);
+
+        radial-gradient(
+            circle at center,
+            #ffffff 0%,
+            #f1f5f9 100%
+        );
 
     min-height: 700px;
 
     position: relative;
+
     touch-action: pan-x pan-y;
 }
 
 .map-transform {
+
     width: 1380px;
-    transform-origin: top left;
 
-    transition: transform .15s ease;
+    transform-origin:
+        top left;
 
-    padding: 35px 30px 70px;
+    transition:
+        transform .15s ease;
+
+    padding:
+        35px 30px 70px;
 }
 
-/* ==========================================
+
+/* ==========================================================
    STAGE
-========================================== */
+========================================================== */
 
 .stage-wrap {
+
     width: 100%;
+
     display: flex;
+
     justify-content: center;
+
     margin-bottom: 35px;
 }
 
 .stage {
+
     width: 680px;
+
     padding: 17px 20px;
 
     color: white;
+
     text-align: center;
 
-    border-radius: 10px 10px 30px 30px;
+    border-radius:
+        10px 10px 30px 30px;
 
     background:
-        linear-gradient(135deg,#101827,#1f2937);
+
+        linear-gradient(
+            135deg,
+            #101827,
+            #1f2937
+        );
 
     box-shadow:
-        0 15px 35px rgba(15,23,42,.20),
-        inset 0 -3px 0 rgba(255,255,255,.08);
+
+        0 15px 35px
+        rgba(15,23,42,.20),
+
+        inset 0 -3px 0
+        rgba(255,255,255,.08);
 
     font-weight: 800;
+
     letter-spacing: 7px;
+
     font-size: 17px;
 }
 
-/* ==========================================
+
+/* ==========================================================
    TABLE GRID
-========================================== */
+========================================================== */
 
 .tables-grid {
+
     display: grid;
-    grid-template-columns: repeat(5, 250px);
+
+    grid-template-columns:
+        repeat(5, 250px);
+
     gap: 30px 25px;
+
     justify-content: center;
 }
 
 .table-card {
+
     background: white;
 
     border-radius: 18px;
-    border: 1px solid #dce3eb;
+
+    border:
+        1px solid #dce3eb;
 
     padding: 14px 12px;
 
     box-shadow:
-        0 8px 22px rgba(15,23,42,.08);
+        0 8px 22px
+        rgba(15,23,42,.08);
 
     position: relative;
 }
 
 .table-number {
+
     text-align: center;
+
     font-size: 12px;
+
     font-weight: 800;
+
     color: #667085;
+
     margin-bottom: 9px;
+
     letter-spacing: .8px;
 }
 
 .table-layout {
+
     display: grid;
-    grid-template-columns: 52px 1fr 52px;
+
+    grid-template-columns:
+        52px 1fr 52px;
+
     gap: 8px;
+
     align-items: center;
 }
 
 .seat-column {
+
     display: grid;
+
     gap: 8px;
 }
 
 .table-shape {
+
     height: 190px;
 
     border-radius: 11px;
 
     background:
+
         linear-gradient(
             135deg,
             #d4a373,
@@ -472,138 +729,284 @@ body {
         );
 
     box-shadow:
-        inset 0 0 0 3px rgba(255,255,255,.22),
-        0 8px 15px rgba(92,61,30,.15);
+
+        inset 0 0 0 3px
+        rgba(255,255,255,.22),
+
+        0 8px 15px
+        rgba(92,61,30,.15);
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     writing-mode: vertical-rl;
-    transform: rotate(180deg);
+
+    transform:
+        rotate(180deg);
 
     font-size: 12px;
+
     font-weight: 800;
 
-    color: rgba(68,41,20,.65);
+    color:
+        rgba(68,41,20,.65);
+
     letter-spacing: 2px;
 }
 
-/* ==========================================
-   SEATS
-========================================== */
+
+/* ==========================================================
+   ASIENTOS
+========================================================== */
 
 .seat {
+
     width: 43px;
+
     height: 34px;
 
     border: none;
+
     border-radius: 8px;
 
     cursor: pointer;
 
     font-size: 11px;
+
     font-weight: 800;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     transition:
+
         transform .13s ease,
+
         box-shadow .13s ease,
+
         opacity .13s ease;
 }
 
 .seat:hover:not(:disabled) {
-    transform: scale(1.08);
+
+    transform:
+        scale(1.08);
 }
+
+
+/* DISPONIBLE - VERDE */
 
 .seat.disponible {
+
     background: #dcfce7;
+
     color: #166534;
-    border: 1px solid #86efac;
+
+    border:
+        1px solid #4ade80;
 }
 
-.seat.seleccionado {
-    background: #fde047;
-    color: #713f12;
+.seat.disponible:hover {
 
-    border: 2px solid #eab308;
+    background: #bbf7d0;
 
     box-shadow:
-        0 0 0 3px rgba(250,204,21,.18);
+        0 5px 14px
+        rgba(22,163,74,.20);
 }
+
+
+/* SELECCIONADO - AMARILLO */
+
+.seat.seleccionado {
+
+    background: #facc15;
+
+    color: #713f12;
+
+    border:
+        2px solid #eab308;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(250,204,21,.20);
+}
+
+
+/* EN PROCESO - MORADO */
 
 .seat.bloqueado {
-    background: #ffedd5;
-    color: #9a3412;
-    border: 1px solid #fdba74;
+
+    background: #7c3aed;
+
+    color: white;
+
+    border:
+        1px solid #6d28d9;
+
     cursor: not-allowed;
+
+    box-shadow:
+        inset 0 -2px 0
+        rgba(0,0,0,.10);
 }
+
+
+/* RESERVADO = VISUALMENTE VENDIDO */
 
 .seat.reservado {
-    background: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fca5a5;
+
+    background: #374151;
+
+    color: white;
+
+    border:
+        1px solid #1f2937;
+
     cursor: not-allowed;
 }
+
+
+/* VENDIDO - GRIS OSCURO */
 
 .seat.vendido {
-    background: #ede9fe;
-    color: #5b21b6;
-    border: 1px solid #c4b5fd;
+
+    background: #374151;
+
+    color: white;
+
+    border:
+        1px solid #1f2937;
+
     cursor: not-allowed;
 }
+
+
+/* UTILIZADO TAMBIÉN SE VE COMO VENDIDO */
 
 .seat.utilizado {
-    background: #e5e7eb;
-    color: #4b5563;
-    border: 1px solid #cbd5e1;
+
+    background: #374151;
+
+    color: white;
+
+    border:
+        1px solid #1f2937;
+
     cursor: not-allowed;
+
+    opacity: .72;
 }
 
-/* ==========================================
-   SUMMARY SIDEBAR
-========================================== */
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
 
 .summary-card {
+
     position: sticky;
+
     top: 92px;
 
     background: white;
+
     border-radius: 22px;
 
-    border: 1px solid #e6eaf0;
+    border:
+        1px solid #e6eaf0;
 
     box-shadow:
-        0 15px 40px rgba(15,23,42,.09);
+        0 15px 40px
+        rgba(15,23,42,.09);
 
     overflow: hidden;
 }
 
 .summary-head {
-    padding: 21px 21px 17px;
-    border-bottom: 1px solid var(--line);
+
+    padding:
+        21px 21px 17px;
+
+    border-bottom:
+        1px solid var(--line);
 }
 
 .summary-head h3 {
+
     margin: 0 0 5px;
+
     font-size: 19px;
 }
 
 .summary-head p {
+
     margin: 0;
+
     font-size: 12px;
+
     color: var(--muted);
 }
 
 .summary-content {
+
     padding: 20px;
 }
 
+
+/* ==========================================================
+   DISPONIBILIDAD
+========================================================== */
+
+.availability {
+
+    background: #ecfdf5;
+
+    border:
+        1px solid #bbf7d0;
+
+    border-radius: 13px;
+
+    padding: 12px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.availability span {
+
+    color: #166534;
+
+    font-size: 12px;
+}
+
+.availability strong {
+
+    color: #166534;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   SELECCIÓN
+========================================================== */
+
 .selection-empty {
+
     background: #f7f9fc;
+
     color: var(--muted);
 
     border-radius: 13px;
@@ -611,61 +1014,90 @@ body {
     padding: 18px 15px;
 
     text-align: center;
+
     font-size: 13px;
 
     margin-bottom: 18px;
 }
 
 .selected-list {
+
     display: grid;
+
     gap: 8px;
 
     max-height: 230px;
+
     overflow-y: auto;
 
     margin-bottom: 18px;
 }
 
 .selected-ticket {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     gap: 10px;
 
     padding: 11px 12px;
 
-    border: 1px solid #e5e7eb;
+    border:
+        1px solid #e5e7eb;
+
     border-radius: 12px;
 
     font-size: 12px;
 }
 
 .selected-ticket strong {
+
     display: block;
+
     margin-bottom: 3px;
 }
 
 .selected-ticket span {
+
     color: var(--muted);
 }
 
 .remove-seat {
+
     border: none;
+
     background: #f3f4f6;
 
     width: 27px;
+
     height: 27px;
 
     border-radius: 50%;
 
     cursor: pointer;
+
     font-size: 13px;
 }
 
+.remove-seat:hover {
+
+    background: #e5e7eb;
+}
+
+
+/* ==========================================================
+   TOTAL
+========================================================== */
+
 .summary-row {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     margin: 12px 0;
@@ -674,34 +1106,45 @@ body {
 }
 
 .summary-row span {
+
     color: var(--muted);
 }
 
 .summary-row strong {
+
     color: var(--text);
 }
 
 .summary-total {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: end;
 
     padding-top: 17px;
+
     margin-top: 16px;
 
-    border-top: 1px solid var(--line);
+    border-top:
+        1px solid var(--line);
 }
 
 .summary-total span {
+
     color: var(--muted);
+
     font-size: 13px;
 }
 
 .summary-total strong {
+
     font-size: 27px;
 }
 
 .checkout-btn {
+
     width: 100%;
 
     margin-top: 20px;
@@ -709,6 +1152,7 @@ body {
     border: none;
 
     background: var(--primary);
+
     color: white;
 
     padding: 16px;
@@ -718,21 +1162,32 @@ body {
     cursor: pointer;
 
     font-size: 14px;
+
     font-weight: 800;
 
-    transition: background .2s;
+    transition:
+        background .2s,
+        transform .15s;
 }
 
 .checkout-btn:hover:not(:disabled) {
-    background: var(--primary-dark);
+
+    background:
+        var(--primary-dark);
+
+    transform:
+        translateY(-1px);
 }
 
 .checkout-btn:disabled {
+
     background: #cbd5e1;
+
     cursor: not-allowed;
 }
 
 .security-note {
+
     text-align: center;
 
     margin-top: 12px;
@@ -740,102 +1195,99 @@ body {
     color: var(--muted);
 
     font-size: 11px;
+
     line-height: 1.5;
 }
 
-/* ==========================================
-   AVAILABILITY
-========================================== */
 
-.availability {
-    background: #ecfdf5;
-
-    border: 1px solid #bbf7d0;
-
-    border-radius: 13px;
-
-    padding: 12px 14px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 18px;
-}
-
-.availability span {
-    color: #166534;
-    font-size: 12px;
-}
-
-.availability strong {
-    color: #166534;
-    font-size: 14px;
-}
-
-/* ==========================================
+/* ==========================================================
    MODAL
-========================================== */
+========================================================== */
 
 .modal {
+
     position: fixed;
+
     inset: 0;
 
     z-index: 5000;
 
-    background: rgba(4,10,20,.73);
+    background:
+        rgba(4,10,20,.73);
 
     display: none;
+
     align-items: center;
+
     justify-content: center;
 
     padding: 18px;
 
-    backdrop-filter: blur(6px);
+    backdrop-filter:
+        blur(6px);
 }
 
 .modal.show {
+
     display: flex;
 }
 
 .modal-box {
-    width: min(520px,100%);
+
+    width:
+        min(520px,100%);
 
     background: white;
+
     border-radius: 22px;
 
     box-shadow:
-        0 30px 80px rgba(0,0,0,.28);
+        0 30px 80px
+        rgba(0,0,0,.28);
 
     overflow: hidden;
 }
 
 .modal-head {
+
     padding: 22px 23px;
-    border-bottom: 1px solid var(--line);
+
+    border-bottom:
+        1px solid var(--line);
 
     display: flex;
+
     align-items: start;
+
     justify-content: space-between;
+
     gap: 15px;
 }
 
 .modal-head h3 {
+
     margin: 0 0 5px;
+
     font-size: 20px;
 }
 
 .modal-head p {
+
     margin: 0;
+
     color: var(--muted);
+
     font-size: 12px;
 }
 
 .modal-close {
+
     border: none;
+
     background: #f3f4f6;
 
     width: 34px;
+
     height: 34px;
 
     border-radius: 50%;
@@ -846,14 +1298,17 @@ body {
 }
 
 .modal-content {
+
     padding: 23px;
 }
 
 .form-group {
+
     margin-bottom: 16px;
 }
 
 .form-group label {
+
     display: block;
 
     margin-bottom: 7px;
@@ -861,13 +1316,16 @@ body {
     color: #374151;
 
     font-size: 12px;
+
     font-weight: 700;
 }
 
 .form-group input {
+
     width: 100%;
 
-    border: 1px solid #d7dde5;
+    border:
+        1px solid #d7dde5;
 
     border-radius: 11px;
 
@@ -876,36 +1334,46 @@ body {
     outline: none;
 
     font-family: inherit;
+
     font-size: 14px;
 }
 
 .form-group input:focus {
-    border-color: var(--primary);
+
+    border-color:
+        var(--primary);
 
     box-shadow:
-        0 0 0 3px rgba(37,99,235,.10);
+        0 0 0 3px
+        rgba(37,99,235,.10);
 }
 
 .hold-notice {
-    background: #fff7ed;
 
-    color: #9a3412;
+    background: #f5f3ff;
 
-    border: 1px solid #fed7aa;
+    color: #5b21b6;
+
+    border:
+        1px solid #ddd6fe;
 
     border-radius: 12px;
 
     padding: 13px 14px;
 
     font-size: 12px;
+
     line-height: 1.5;
 
     margin: 18px 0;
 }
 
 .modal-total {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     padding: 15px;
@@ -918,15 +1386,19 @@ body {
 }
 
 .modal-total span {
+
     color: var(--muted);
+
     font-size: 13px;
 }
 
 .modal-total strong {
+
     font-size: 22px;
 }
 
 .modal-submit {
+
     width: 100%;
 
     padding: 15px;
@@ -936,6 +1408,7 @@ body {
     border-radius: 12px;
 
     background: var(--primary);
+
     color: white;
 
     font-weight: 800;
@@ -945,16 +1418,26 @@ body {
     font-size: 14px;
 }
 
+.modal-submit:hover:not(:disabled) {
+
+    background:
+        var(--primary-dark);
+}
+
 .modal-submit:disabled {
+
     background: #9ca3af;
 }
 
-/* ==========================================
+
+/* ==========================================================
    LOADER
-========================================== */
+========================================================== */
 
 .loading-screen {
+
     position: fixed;
+
     inset: 0;
 
     background: #f4f7fb;
@@ -962,69 +1445,93 @@ body {
     z-index: 9999;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 }
 
 .loader-box {
+
     text-align: center;
 }
 
 .spinner {
+
     width: 42px;
+
     height: 42px;
 
-    border: 4px solid #dbe4ef;
-    border-top-color: #2563eb;
+    border:
+        4px solid #dbe4ef;
+
+    border-top-color:
+        #2563eb;
 
     border-radius: 50%;
 
-    animation: spin .8s linear infinite;
+    animation:
+        spin .8s linear infinite;
 
-    margin: 0 auto 15px;
+    margin:
+        0 auto 15px;
 }
 
 @keyframes spin {
+
     to {
-        transform: rotate(360deg);
+        transform:
+            rotate(360deg);
     }
 }
 
 .loader-box strong {
+
     display: block;
+
     font-size: 16px;
+
     margin-bottom: 5px;
 }
 
 .loader-box span {
+
     color: var(--muted);
+
     font-size: 12px;
 }
 
-/* ==========================================
+
+/* ==========================================================
    TOAST
-========================================== */
+========================================================== */
 
 .toast {
+
     position: fixed;
 
     right: 22px;
+
     bottom: 22px;
 
     z-index: 6000;
 
     background: #111827;
+
     color: white;
 
     padding: 13px 17px;
 
     border-radius: 12px;
 
-    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.25);
 
     font-size: 12px;
 
-    transform: translateY(130px);
+    transform:
+        translateY(130px);
 
     opacity: 0;
 
@@ -1032,236 +1539,324 @@ body {
 }
 
 .toast.show {
-    transform: translateY(0);
+
+    transform:
+        translateY(0);
+
     opacity: 1;
 }
 
-/* ==========================================
-   MOBILE BAR
-========================================== */
+
+/* ==========================================================
+   MOBILE CART
+========================================================== */
 
 .mobile-cart {
+
     display: none;
 }
 
-/* ==========================================
+
+/* ==========================================================
    RESPONSIVE
-========================================== */
+========================================================== */
 
 @media (max-width: 1100px) {
 
     .booking-layout {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
     }
 
     .summary-card {
+
         position: relative;
+
         top: auto;
     }
 
 }
 
+
 @media (max-width: 760px) {
 
     body {
+
         padding-bottom: 80px;
     }
 
     .nav {
-        padding: 0 14px;
+
+        padding:
+            0 14px;
+
         min-height: 62px;
     }
 
     .brand strong {
+
         font-size: 18px;
     }
 
     .back-link {
+
         font-size: 11px;
-        padding: 9px 12px;
+
+        padding:
+            9px 12px;
     }
 
     .event-hero {
+
         min-height: auto;
     }
 
     .event-hero-content {
-        grid-template-columns: 100px 1fr;
+
+        grid-template-columns:
+            100px 1fr;
+
         gap: 17px;
 
-        padding: 25px 14px;
+        padding:
+            25px 14px;
     }
 
     .event-poster {
+
         width: 100px;
+
         border-radius: 13px;
     }
 
     .event-copy h1 {
+
         font-size: 25px;
     }
 
     .event-info-line {
+
         display: grid;
+
         gap: 6px;
+
         font-size: 12px;
     }
 
     .event-price-big {
+
         font-size: 20px;
     }
 
     .event-type {
+
         font-size: 10px;
-        padding: 6px 9px;
+
+        padding:
+            6px 9px;
     }
 
     .page {
-        padding: 15px 10px 30px;
+
+        padding:
+            15px 10px 30px;
     }
 
     .map-card {
+
         border-radius: 15px;
     }
 
     .map-header {
-        padding: 15px 14px;
+
+        padding:
+            15px 14px;
     }
 
     .map-title h2 {
+
         font-size: 18px;
     }
 
     .legend {
-        padding: 12px 14px;
-        gap: 8px 13px;
+
+        padding:
+            12px 14px;
+
+        gap:
+            8px 13px;
     }
 
     .map-viewport {
+
         min-height: 590px;
     }
 
     .map-transform {
+
         padding-top: 25px;
     }
 
     .summary-card {
+
         margin-bottom: 15px;
     }
 
     .mobile-cart {
+
         position: fixed;
 
         left: 0;
+
         right: 0;
+
         bottom: 0;
 
         z-index: 3000;
 
         background: white;
 
-        border-top: 1px solid #e5e7eb;
+        border-top:
+            1px solid #e5e7eb;
 
         box-shadow:
-            0 -10px 35px rgba(15,23,42,.14);
+            0 -10px 35px
+            rgba(15,23,42,.14);
 
         padding:
+
             10px 12px
-            calc(10px + env(safe-area-inset-bottom));
+            calc(
+                10px +
+                env(safe-area-inset-bottom)
+            );
 
         display: none;
 
         align-items: center;
-        justify-content: space-between;
+
+        justify-content:
+            space-between;
 
         gap: 12px;
     }
 
     .mobile-cart.show {
+
         display: flex;
     }
 
     .mobile-cart-info small {
+
         display: block;
+
         color: var(--muted);
+
         font-size: 10px;
+
         margin-bottom: 2px;
     }
 
     .mobile-cart-info strong {
+
         font-size: 17px;
     }
 
     .mobile-cart button {
+
         border: none;
 
-        background: var(--primary);
+        background:
+            var(--primary);
+
         color: white;
 
         border-radius: 10px;
 
-        padding: 12px 16px;
+        padding:
+            12px 16px;
 
         font-weight: 800;
+
         cursor: pointer;
     }
 
 }
 
+
 @media (max-width: 480px) {
 
     .event-hero-content {
-        grid-template-columns: 82px 1fr;
+
+        grid-template-columns:
+            82px 1fr;
     }
 
     .event-poster {
+
         width: 82px;
     }
 
     .event-copy h1 {
+
         font-size: 21px;
     }
 
     .event-price-big {
+
         font-size: 17px;
     }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- ==========================================
-     LOADING
-========================================== -->
 
-<div class="loading-screen" id="loadingScreen">
+<!-- ======================================================
+     CARGANDO
+====================================================== -->
+
+<div
+    class="loading-screen"
+    id="loadingScreen">
+
     <div class="loader-box">
 
         <div class="spinner"></div>
 
-        <strong>Cargando mapa del evento</strong>
+        <strong>
+            Cargando mapa del evento
+        </strong>
 
         <span>
             Preparando los asientos disponibles...
         </span>
 
     </div>
+
 </div>
 
-<!-- ==========================================
+
+<!-- ======================================================
      HEADER
-========================================== -->
+====================================================== -->
 
 <header class="topbar">
 
     <div class="nav">
 
-        <a href="index.html" class="brand">
+        <a
+            href="index.html"
+            class="brand">
 
-            <strong>LIVE TICKETS</strong>
+            <strong>
+                LIVE TICKETS
+            </strong>
 
             <span>
                 EXPERIENCIAS EN VIVO
@@ -1269,17 +1864,22 @@ body {
 
         </a>
 
-        <a href="index.html" class="back-link">
+        <a
+            href="index.html"
+            class="back-link">
+
             ← TODOS LOS EVENTOS
+
         </a>
 
     </div>
 
 </header>
 
-<!-- ==========================================
+
+<!-- ======================================================
      HERO
-========================================== -->
+====================================================== -->
 
 <section class="event-hero">
 
@@ -1288,9 +1888,12 @@ body {
         id="eventHeroBg">
     </div>
 
-    <div class="event-hero-overlay"></div>
+    <div
+        class="event-hero-overlay">
+    </div>
 
-    <div class="event-hero-content">
+    <div
+        class="event-hero-content">
 
         <div
             class="event-poster"
@@ -1300,33 +1903,47 @@ body {
         <div class="event-copy">
 
             <div class="event-type">
+
                 🎵 CONCIERTO
+
             </div>
 
             <h1 id="eventName">
+
                 Evento
+
             </h1>
 
-            <div class="event-info-line">
+            <div
+                class="event-info-line">
 
                 <span id="eventDate">
+
                     📅 Fecha
+
                 </span>
 
                 <span id="eventPlace">
+
                     📍 Lugar
+
                 </span>
 
             </div>
 
-            <div class="event-price-big">
+            <div
+                class="event-price-big">
 
                 <span id="eventPrice">
+
                     L 0.00
+
                 </span>
 
                 <small>
+
                     / por asiento
+
                 </small>
 
             </div>
@@ -1337,229 +1954,302 @@ body {
 
 </section>
 
-<!-- ==========================================
-     CONTENT
-========================================== -->
+
+<!-- ======================================================
+     MAIN
+====================================================== -->
 
 <main class="page">
 
-    <div class="booking-layout">
+<div class="booking-layout">
 
-        <!-- ==================================
-             MAPA
-        =================================== -->
 
-        <section class="map-card">
+<!-- ======================================================
+     MAPA
+====================================================== -->
 
-            <div class="map-header">
+<section class="map-card">
 
-                <div class="map-title">
+    <div class="map-header">
 
-                    <h2>
-                        Selecciona tus asientos
-                    </h2>
+        <div class="map-title">
 
-                    <p>
-                        Haz clic sobre los asientos verdes disponibles.
-                    </p>
+            <h2>
+                Selecciona tus asientos
+            </h2>
 
-                </div>
+            <p>
+                Haz clic sobre los asientos verdes disponibles.
+            </p>
 
-                <div class="zoom-controls">
+        </div>
 
-                    <button
-                        class="zoom-btn"
-                        onclick="zoomOut()">
-                        −
-                    </button>
+        <div class="zoom-controls">
 
-                    <button
-                        class="zoom-btn zoom-fit"
-                        onclick="fitMap()">
-                        AJUSTAR
-                    </button>
+            <button
+                class="zoom-btn"
+                onclick="zoomOut()">
 
-                    <button
-                        class="zoom-btn"
-                        onclick="zoomIn()">
-                        +
-                    </button>
+                −
 
-                </div>
+            </button>
 
-            </div>
+            <button
+                class="zoom-btn zoom-fit"
+                onclick="fitMap()">
 
-            <!-- LEYENDA -->
+                AJUSTAR
 
-            <div class="legend">
+            </button>
 
-                <div class="legend-item">
-                    <div class="legend-dot available"></div>
-                    Disponible
-                </div>
+            <button
+                class="zoom-btn"
+                onclick="zoomIn()">
 
-                <div class="legend-item">
-                    <div class="legend-dot selected"></div>
-                    Seleccionado
-                </div>
+                +
 
-                <div class="legend-item">
-                    <div class="legend-dot blocked"></div>
-                    En proceso
-                </div>
+            </button>
 
-                <div class="legend-item">
-                    <div class="legend-dot sold"></div>
-                    Vendido
-                </div>
-
-                <div class="legend-item">
-                    <div class="legend-dot unavailable"></div>
-                    No disponible
-                </div>
-
-            </div>
-
-            <!-- VIEWPORT -->
-
-            <div
-                class="map-viewport"
-                id="mapViewport">
-
-                <div
-                    class="map-transform"
-                    id="mapTransform">
-
-                    <div class="stage-wrap">
-
-                        <div class="stage">
-                            ESCENARIO
-                        </div>
-
-                    </div>
-
-                    <div
-                        class="tables-grid"
-                        id="tablesGrid">
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- ==================================
-             RESUMEN
-        =================================== -->
-
-        <aside class="summary-card">
-
-            <div class="summary-head">
-
-                <h3>
-                    Tu selección
-                </h3>
-
-                <p>
-                    Revisa tus asientos antes de continuar.
-                </p>
-
-            </div>
-
-            <div class="summary-content">
-
-                <div class="availability">
-
-                    <span>
-                        Asientos disponibles
-                    </span>
-
-                    <strong id="availableCount">
-                        0
-                    </strong>
-
-                </div>
-
-                <div
-                    class="selection-empty"
-                    id="selectionEmpty">
-
-                    Aún no has seleccionado
-                    ningún asiento.
-
-                </div>
-
-                <div
-                    class="selected-list"
-                    id="selectedList">
-                </div>
-
-                <div class="summary-row">
-
-                    <span>
-                        Cantidad
-                    </span>
-
-                    <strong id="summaryQuantity">
-                        0
-                    </strong>
-
-                </div>
-
-                <div class="summary-row">
-
-                    <span>
-                        Precio por asiento
-                    </span>
-
-                    <strong id="summaryPrice">
-                        L 0.00
-                    </strong>
-
-                </div>
-
-                <div class="summary-total">
-
-                    <span>
-                        Total
-                    </span>
-
-                    <strong id="summaryTotal">
-                        L 0.00
-                    </strong>
-
-                </div>
-
-                <button
-                    class="checkout-btn"
-                    id="checkoutButton"
-                    disabled
-                    onclick="openBuyerModal()">
-
-                    CONTINUAR
-
-                </button>
-
-                <div class="security-note">
-
-                    Los asientos serán bloqueados
-                    temporalmente durante el proceso
-                    de compra.
-
-                </div>
-
-            </div>
-
-        </aside>
+        </div>
 
     </div>
 
+
+    <!-- ==================================================
+         LEYENDA
+    ================================================== -->
+
+    <div class="legend">
+
+        <div class="legend-item">
+
+            <div
+                class="legend-dot available">
+            </div>
+
+            Disponible
+
+        </div>
+
+
+        <div class="legend-item">
+
+            <div
+                class="legend-dot selected">
+            </div>
+
+            Seleccionado
+
+        </div>
+
+
+        <div class="legend-item">
+
+            <div
+                class="legend-dot blocked">
+            </div>
+
+            En proceso
+
+        </div>
+
+
+        <div class="legend-item">
+
+            <div
+                class="legend-dot sold">
+            </div>
+
+            Vendido
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         MAPA
+    ================================================== -->
+
+    <div
+        class="map-viewport"
+        id="mapViewport">
+
+        <div
+            class="map-transform"
+            id="mapTransform">
+
+
+            <!-- ESCENARIO -->
+
+            <div class="stage-wrap">
+
+                <div class="stage">
+
+                    ESCENARIO
+
+                </div>
+
+            </div>
+
+
+            <!-- MESAS -->
+
+            <div
+                class="tables-grid"
+                id="tablesGrid">
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     RESUMEN COMPRA
+====================================================== -->
+
+<aside class="summary-card">
+
+    <div class="summary-head">
+
+        <h3>
+            Tu selección
+        </h3>
+
+        <p>
+            Revisa tus asientos antes de continuar.
+        </p>
+
+    </div>
+
+    <div class="summary-content">
+
+
+        <!-- DISPONIBILIDAD -->
+
+        <div class="availability">
+
+            <span>
+                Asientos disponibles
+            </span>
+
+            <strong id="availableCount">
+
+                0
+
+            </strong>
+
+        </div>
+
+
+        <!-- VACÍO -->
+
+        <div
+            class="selection-empty"
+            id="selectionEmpty">
+
+            Aún no has seleccionado
+            ningún asiento.
+
+        </div>
+
+
+        <!-- ASIENTOS -->
+
+        <div
+            class="selected-list"
+            id="selectedList">
+        </div>
+
+
+        <!-- CANTIDAD -->
+
+        <div class="summary-row">
+
+            <span>
+                Cantidad
+            </span>
+
+            <strong id="summaryQuantity">
+
+                0
+
+            </strong>
+
+        </div>
+
+
+        <!-- PRECIO -->
+
+        <div class="summary-row">
+
+            <span>
+                Precio por asiento
+            </span>
+
+            <strong id="summaryPrice">
+
+                L 0.00
+
+            </strong>
+
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <div class="summary-total">
+
+            <span>
+                Total
+            </span>
+
+            <strong id="summaryTotal">
+
+                L 0.00
+
+            </strong>
+
+        </div>
+
+
+        <button
+            class="checkout-btn"
+            id="checkoutButton"
+            disabled
+            onclick="openBuyerModal()">
+
+            CONTINUAR
+
+        </button>
+
+
+        <div class="security-note">
+
+            Los asientos serán bloqueados
+            temporalmente durante el proceso
+            de compra.
+
+        </div>
+
+
+    </div>
+
+</aside>
+
+
+</div>
+
 </main>
 
-<!-- ==========================================
+
+<!-- ======================================================
      MOBILE CART
-========================================== -->
+====================================================== -->
 
 <div
     class="mobile-cart"
@@ -1568,24 +2258,32 @@ body {
     <div class="mobile-cart-info">
 
         <small id="mobileQuantity">
+
             0 asientos
+
         </small>
 
         <strong id="mobileTotal">
+
             L 0.00
+
         </strong>
 
     </div>
 
-    <button onclick="openBuyerModal()">
+    <button
+        onclick="openBuyerModal()">
+
         CONTINUAR
+
     </button>
 
 </div>
 
-<!-- ==========================================
-     BUYER MODAL
-========================================== -->
+
+<!-- ======================================================
+     MODAL COMPRADOR
+====================================================== -->
 
 <div
     class="modal"
@@ -1611,12 +2309,18 @@ body {
             <button
                 class="modal-close"
                 onclick="closeBuyerModal()">
+
                 ×
+
             </button>
 
         </div>
 
+
         <div class="modal-content">
+
+
+            <!-- NOMBRE -->
 
             <div class="form-group">
 
@@ -1632,6 +2336,9 @@ body {
 
             </div>
 
+
+            <!-- TELÉFONO -->
+
             <div class="form-group">
 
                 <label>
@@ -1645,6 +2352,9 @@ body {
                     placeholder="+504 9999-9999">
 
             </div>
+
+
+            <!-- EMAIL -->
 
             <div class="form-group">
 
@@ -1660,14 +2370,24 @@ body {
 
             </div>
 
+
+            <!-- AVISO -->
+
             <div class="hold-notice">
 
                 ⏱️ Al continuar, tus asientos quedarán
                 bloqueados durante aproximadamente
-                <strong>10 minutos</strong> mientras
-                completas el proceso.
+
+                <strong>
+                    10 minutos
+                </strong>
+
+                mientras completas el proceso.
 
             </div>
+
+
+            <!-- TOTAL -->
 
             <div class="modal-total">
 
@@ -1676,10 +2396,15 @@ body {
                 </span>
 
                 <strong id="modalTotal">
+
                     L 0.00
+
                 </strong>
 
             </div>
+
+
+            <!-- CONTINUAR -->
 
             <button
                 class="modal-submit"
@@ -1696,26 +2421,30 @@ body {
 
 </div>
 
-<!-- ==========================================
+
+<!-- ======================================================
      TOAST
-========================================== -->
+====================================================== -->
 
 <div
     class="toast"
     id="toast">
 </div>
 
+
 <script>
 
-/* ==========================================
+/* ==========================================================
    SUPABASE
-========================================== */
+========================================================== */
 
 const SUPABASE_URL =
 "https://ysismkibffhzouxacaxv.supabase.co";
 
+
 const SUPABASE_KEY =
 "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
+
 
 const db =
 supabase.createClient(
@@ -1723,61 +2452,85 @@ supabase.createClient(
     SUPABASE_KEY
 );
 
-/* ==========================================
-   EVENT
-========================================== */
+
+/* ==========================================================
+   EVENTO
+========================================================== */
 
 const params =
 new URLSearchParams(
     window.location.search
 );
 
-const EVENT_ID =
-Number(params.get("id") || 1);
 
-/* ==========================================
+const EVENT_ID =
+Number(
+    params.get("id") || 1
+);
+
+
+/* ==========================================================
    VARIABLES
-========================================== */
+========================================================== */
 
 let currentEvent = null;
 
+
 let mesas = [];
 
+
 let asientos = [];
+
 
 let selectedSeats =
 new Map();
 
+
 let currentZoom = 1;
 
-const MAP_WIDTH = 1380;
 
-const MIN_ZOOM = 0.40;
+const MAP_WIDTH =
+1380;
 
-const MAX_ZOOM = 1.40;
 
-/* ==========================================
-   FORMATTERS
-========================================== */
+const MIN_ZOOM =
+0.40;
+
+
+const MAX_ZOOM =
+1.40;
+
+
+/* ==========================================================
+   DINERO
+========================================================== */
 
 function money(value) {
 
     return "L " +
+
         Number(value || 0)
-            .toLocaleString(
-                "es-HN",
-                {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                }
-            );
+        .toLocaleString(
+            "es-HN",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
 
 }
+
+
+/* ==========================================================
+   FECHA
+========================================================== */
 
 function formatDate(date) {
 
     if (!date) {
+
         return "Fecha por confirmar";
+
     }
 
     return new Date(date)
@@ -1793,60 +2546,78 @@ function formatDate(date) {
 
 }
 
-/* ==========================================
-   IMAGE
-========================================== */
+
+/* ==========================================================
+   IMAGEN
+========================================================== */
 
 function getEventImage(evento) {
 
     return (
+
         evento.flyer_url ||
+
         evento.flyer ||
+
         evento.imagen_url ||
+
         evento.imagen ||
+
         evento.portada_url ||
+
         evento.banner_url ||
+
         ""
+
     );
 
 }
 
-/* ==========================================
-   LOAD
-========================================== */
+
+/* ==========================================================
+   INICIAR
+========================================================== */
 
 async function initialize() {
 
     try {
 
-        /*
-        Limpia reservas vencidas
-        antes de mostrar disponibilidad.
-        */
+
+        /* LIBERAR BLOQUEOS VENCIDOS */
 
         await db.rpc(
             "liberar_bloqueos_expirados"
         );
 
+
+        /* EVENTO */
+
         await loadEvent();
+
+
+        /* MESAS Y ASIENTOS */
 
         await loadTablesAndSeats();
 
+
+        /* DISEÑO */
+
         renderEvent();
+
 
         renderMap();
 
+
         updateSummary();
+
 
         setTimeout(
             fitMap,
             150
         );
 
-        /*
-        Refresca disponibilidad
-        cada 12 segundos.
-        */
+
+        /* ACTUALIZAR DISPONIBILIDAD */
 
         setInterval(
             refreshSeatStates,
@@ -1857,7 +2628,9 @@ async function initialize() {
 
     catch(error) {
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         alert(
             "No fue posible cargar el evento."
@@ -1878,9 +2651,10 @@ async function initialize() {
 
 }
 
-/* ==========================================
-   LOAD EVENT
-========================================== */
+
+/* ==========================================================
+   CARGAR EVENTO
+========================================================== */
 
 async function loadEvent() {
 
@@ -1888,24 +2662,42 @@ async function loadEvent() {
         data,
         error
     } =
+
     await db
+
         .from("eventos")
+
         .select("*")
-        .eq("id", EVENT_ID)
-        .eq("activo", true)
+
+        .eq(
+            "id",
+            EVENT_ID
+        )
+
+        .eq(
+            "activo",
+            true
+        )
+
         .single();
 
+
     if (error) {
+
         throw error;
+
     }
 
-    currentEvent = data;
+
+    currentEvent =
+        data;
 
 }
 
-/* ==========================================
-   LOAD TABLES + SEATS
-========================================== */
+
+/* ==========================================================
+   CARGAR MESAS Y ASIENTOS
+========================================================== */
 
 async function loadTablesAndSeats() {
 
@@ -1913,10 +2705,20 @@ async function loadTablesAndSeats() {
         data: tableData,
         error: tableError
     } =
+
     await db
+
         .from("mesas")
-        .select("id, numero")
-        .eq("evento_id", EVENT_ID)
+
+        .select(
+            "id, numero"
+        )
+
+        .eq(
+            "evento_id",
+            EVENT_ID
+        )
+
         .order(
             "numero",
             {
@@ -1924,12 +2726,17 @@ async function loadTablesAndSeats() {
             }
         );
 
+
     if (tableError) {
+
         throw tableError;
+
     }
+
 
     mesas =
         tableData || [];
+
 
     if (!mesas.length) {
 
@@ -1939,24 +2746,32 @@ async function loadTablesAndSeats() {
 
     }
 
+
     const tableIds =
         mesas.map(
-            m => m.id
+            mesa =>
+                mesa.id
         );
+
 
     const {
         data: seatData,
         error: seatError
     } =
+
     await db
+
         .from("asientos")
+
         .select(
             "id, mesa_id, numero, estado"
         )
+
         .in(
             "mesa_id",
             tableIds
         )
+
         .order(
             "numero",
             {
@@ -1964,183 +2779,251 @@ async function loadTablesAndSeats() {
             }
         );
 
+
     if (seatError) {
+
         throw seatError;
+
     }
+
 
     asientos =
         seatData || [];
 
 }
 
-/* ==========================================
-   HERO
-========================================== */
+
+/* ==========================================================
+   MOSTRAR EVENTO
+========================================================== */
 
 function renderEvent() {
 
     document.title =
+
         `${currentEvent.nombre} | Live Tickets`;
+
 
     document
         .getElementById(
             "eventName"
         )
         .textContent =
+
         currentEvent.nombre;
+
 
     document
         .getElementById(
             "eventDate"
         )
         .textContent =
+
         "📅 " +
         formatDate(
             currentEvent.fecha
         );
+
 
     document
         .getElementById(
             "eventPlace"
         )
         .textContent =
+
         "📍 " +
+
         (
             currentEvent.lugar ||
             "Lugar por confirmar"
         );
+
 
     document
         .getElementById(
             "eventPrice"
         )
         .textContent =
+
         money(
             currentEvent.precio_asiento
         );
+
 
     document
         .getElementById(
             "summaryPrice"
         )
         .textContent =
+
         money(
             currentEvent.precio_asiento
         );
 
+
     const image =
+
         getEventImage(
             currentEvent
         );
 
+
     if (image) {
+
 
         document
             .getElementById(
                 "eventPoster"
             )
             .style.backgroundImage =
+
             `url("${image}")`;
+
 
         document
             .getElementById(
                 "eventHeroBg"
             )
             .style.backgroundImage =
+
             `url("${image}")`;
 
     }
 
 }
 
-/* ==========================================
-   MAP
-========================================== */
+
+/* ==========================================================
+   RENDERIZAR MAPA
+========================================================== */
 
 function renderMap() {
 
     const grid =
+
         document.getElementById(
             "tablesGrid"
         );
 
-    grid.innerHTML = "";
+
+    grid.innerHTML =
+        "";
+
 
     mesas.forEach(
         mesa => {
 
+
             const tableSeats =
+
                 asientos
+
                     .filter(
                         seat =>
                             seat.mesa_id ===
                             mesa.id
                     )
+
                     .sort(
                         (a,b) =>
+
                             Number(a.numero) -
                             Number(b.numero)
                     );
 
+
             const leftSeats =
+
                 tableSeats.slice(
                     0,
                     5
                 );
 
+
             const rightSeats =
+
                 tableSeats.slice(
                     5,
                     10
                 );
 
+
             const card =
+
                 document.createElement(
                     "div"
                 );
 
+
             card.className =
                 "table-card";
 
+
             const leftColumn =
+
                 leftSeats
+
                     .map(
                         seat =>
-                            seatHTML(seat)
+                            seatHTML(
+                                seat
+                            )
                     )
+
                     .join("");
 
+
             const rightColumn =
+
                 rightSeats
+
                     .map(
                         seat =>
-                            seatHTML(seat)
+                            seatHTML(
+                                seat
+                            )
                     )
+
                     .join("");
+
 
             card.innerHTML = `
 
                 <div class="table-number">
+
                     MESA ${mesa.numero}
+
                 </div>
+
 
                 <div class="table-layout">
 
+
                     <div class="seat-column">
+
                         ${leftColumn}
+
                     </div>
+
 
                     <div class="table-shape">
+
                         MESA ${mesa.numero}
+
                     </div>
 
+
                     <div class="seat-column">
+
                         ${rightColumn}
+
                     </div>
+
 
                 </div>
 
             `;
+
 
             grid.appendChild(
                 card
@@ -2149,21 +3032,26 @@ function renderMap() {
         }
     );
 
+
     bindSeatClicks();
+
 
     updateAvailability();
 
 }
 
-/* ==========================================
-   SEAT HTML
-========================================== */
+
+/* ==========================================================
+   HTML ASIENTO
+========================================================== */
 
 function seatHTML(seat) {
 
     let status =
+
         seat.estado ||
         "disponible";
+
 
     if (
         selectedSeats.has(
@@ -2176,18 +3064,28 @@ function seatHTML(seat) {
 
     }
 
+
     const disabled =
+
         status !==
-        "disponible" &&
+        "disponible"
+
+        &&
+
         status !==
         "seleccionado";
+
 
     return `
 
         <button
+
             class="seat ${status}"
+
             data-seat-id="${seat.id}"
+
             ${disabled ? "disabled" : ""}
+
             title="Asiento ${seat.numero}">
 
             ${seat.numero}
@@ -2198,28 +3096,36 @@ function seatHTML(seat) {
 
 }
 
-/* ==========================================
-   BIND SEATS
-========================================== */
+
+/* ==========================================================
+   EVENTO CLICK ASIENTOS
+========================================================== */
 
 function bindSeatClicks() {
 
     document
+
         .querySelectorAll(
             ".seat"
         )
+
         .forEach(
             button => {
+
 
                 button.addEventListener(
                     "click",
                     () => {
 
+
                         const seatId =
+
                             Number(
-                                button.dataset
+                                button
+                                    .dataset
                                     .seatId
                             );
+
 
                         toggleSeat(
                             seatId
@@ -2233,21 +3139,28 @@ function bindSeatClicks() {
 
 }
 
-/* ==========================================
-   SELECT / UNSELECT
-========================================== */
+
+/* ==========================================================
+   SELECCIONAR
+========================================================== */
 
 function toggleSeat(seatId) {
 
     const seat =
+
         asientos.find(
             item =>
-                item.id === seatId
+                item.id ===
+                seatId
         );
 
+
     if (!seat) {
+
         return;
+
     }
+
 
     if (
         seat.estado !==
@@ -2258,11 +3171,13 @@ function toggleSeat(seatId) {
 
     }
 
+
     if (
         selectedSeats.has(
             seatId
         )
     ) {
+
 
         selectedSeats.delete(
             seatId
@@ -2272,35 +3187,44 @@ function toggleSeat(seatId) {
 
     else {
 
+
         const mesa =
+
             mesas.find(
                 item =>
                     item.id ===
                     seat.mesa_id
             );
 
+
         selectedSeats.set(
             seatId,
             {
+
                 ...seat,
+
                 mesaNumero:
                     mesa
                         ? mesa.numero
                         : "-"
+
             }
         );
 
     }
 
+
     renderMap();
+
 
     updateSummary();
 
 }
 
-/* ==========================================
-   REMOVE FROM SIDEBAR
-========================================== */
+
+/* ==========================================================
+   QUITAR ASIENTO
+========================================================== */
 
 function removeSelectedSeat(
     seatId
@@ -2310,121 +3234,169 @@ function removeSelectedSeat(
         Number(seatId)
     );
 
+
     renderMap();
+
 
     updateSummary();
 
 }
 
-/* ==========================================
-   SUMMARY
-========================================== */
+
+/* ==========================================================
+   RESUMEN
+========================================================== */
 
 function updateSummary() {
 
     const quantity =
+
         selectedSeats.size;
 
+
     const price =
+
         Number(
             currentEvent
                 ?.precio_asiento ||
             0
         );
 
+
     const total =
-        quantity * price;
+
+        quantity *
+        price;
+
 
     document
         .getElementById(
             "summaryQuantity"
         )
         .textContent =
+
         quantity;
+
 
     document
         .getElementById(
             "summaryTotal"
         )
         .textContent =
+
         money(total);
+
 
     document
         .getElementById(
             "modalTotal"
         )
         .textContent =
+
         money(total);
+
 
     document
         .getElementById(
             "mobileQuantity"
         )
         .textContent =
+
         quantity === 1
-        ? "1 asiento"
-        : `${quantity} asientos`;
+
+            ? "1 asiento"
+
+            : `${quantity} asientos`;
+
 
     document
         .getElementById(
             "mobileTotal"
         )
         .textContent =
+
         money(total);
 
+
     const button =
+
         document.getElementById(
             "checkoutButton"
         );
 
+
     button.disabled =
+
         quantity === 0;
 
+
     const empty =
+
         document.getElementById(
             "selectionEmpty"
         );
 
+
     const list =
+
         document.getElementById(
             "selectedList"
         );
 
+
     const mobile =
+
         document.getElementById(
             "mobileCart"
         );
 
-    if (quantity === 0) {
+
+    if (
+        quantity === 0
+    ) {
+
 
         empty.style.display =
             "block";
 
+
         list.innerHTML =
             "";
 
-        mobile.classList.remove(
-            "show"
-        );
+
+        mobile
+            .classList
+            .remove(
+                "show"
+            );
+
 
         return;
 
     }
 
+
     empty.style.display =
         "none";
 
-    mobile.classList.add(
-        "show"
-    );
+
+    mobile
+        .classList
+        .add(
+            "show"
+        );
+
 
     const selected =
+
         Array.from(
             selectedSeats.values()
         );
 
+
     selected.sort(
         (a,b) => {
+
 
             if (
                 a.mesaNumero !==
@@ -2432,26 +3404,44 @@ function updateSummary() {
             ) {
 
                 return (
+
                     Number(
                         a.mesaNumero
-                    ) -
+                    )
+
+                    -
+
                     Number(
                         b.mesaNumero
                     )
+
                 );
 
             }
 
+
             return (
-                Number(a.numero) -
-                Number(b.numero)
+
+                Number(
+                    a.numero
+                )
+
+                -
+
+                Number(
+                    b.numero
+                )
+
             );
 
         }
     );
 
+
     list.innerHTML =
+
         selected
+
             .map(
                 seat => `
 
@@ -2460,17 +3450,24 @@ function updateSummary() {
                     <div>
 
                         <strong>
+
                             Mesa ${seat.mesaNumero}
+
                         </strong>
 
                         <span>
+
                             Asiento ${seat.numero}
+
                         </span>
 
                     </div>
 
+
                     <button
+
                         class="remove-seat"
+
                         onclick="removeSelectedSeat(${seat.id})">
 
                         ×
@@ -2481,78 +3478,108 @@ function updateSummary() {
 
             `
             )
+
             .join("");
 
 }
 
-/* ==========================================
-   AVAILABILITY
-========================================== */
+
+/* ==========================================================
+   DISPONIBILIDAD
+========================================================== */
 
 function updateAvailability() {
 
     const available =
+
         asientos.filter(
             seat =>
                 seat.estado ===
                 "disponible"
         ).length;
 
+
     document
         .getElementById(
             "availableCount"
         )
         .textContent =
+
         available;
 
 }
 
-/* ==========================================
-   REFRESH STATES
-========================================== */
+
+/* ==========================================================
+   ACTUALIZAR ESTADOS
+========================================================== */
 
 async function refreshSeatStates() {
 
     try {
 
+
         await db.rpc(
             "liberar_bloqueos_expirados"
         );
 
+
         const tableIds =
+
             mesas.map(
-                mesa => mesa.id
+                mesa =>
+                    mesa.id
             );
 
-        if (!tableIds.length) {
+
+        if (
+            !tableIds.length
+        ) {
+
             return;
+
         }
+
 
         const {
             data,
             error
         } =
+
         await db
+
             .from("asientos")
+
             .select(
                 "id, mesa_id, numero, estado"
             )
+
             .in(
                 "mesa_id",
                 tableIds
             );
 
+
         if (error) {
+
+            console.error(
+                error
+            );
+
             return;
+
         }
 
+
         asientos =
+
             data || [];
 
+
         /*
-        Si otro comprador tomó
-        un asiento que teníamos
-        seleccionado, lo quitamos.
+        SI OTRO CLIENTE BLOQUEÓ UN
+        ASIENTO QUE TENÍAMOS SELECCIONADO
+        LO QUITAMOS AUTOMÁTICAMENTE.
         */
 
         for (
@@ -2560,32 +3587,46 @@ async function refreshSeatStates() {
             of selectedSeats.keys()
         ) {
 
+
             const current =
+
                 asientos.find(
                     seat =>
                         seat.id ===
                         seatId
                 );
 
+
             if (
-                !current ||
+
+                !current
+
+                ||
+
                 current.estado !==
                 "disponible"
+
             ) {
+
 
                 selectedSeats.delete(
                     seatId
                 );
 
+
                 showToast(
+
                     "Uno de los asientos seleccionados ya no está disponible."
+
                 );
 
             }
 
         }
 
+
         renderMap();
+
 
         updateSummary();
 
@@ -2594,90 +3635,124 @@ async function refreshSeatStates() {
     catch(error) {
 
         console.error(
+
             "Error actualizando asientos:",
+
             error
+
         );
 
     }
 
 }
 
-/* ==========================================
+
+/* ==========================================================
    ZOOM
-========================================== */
+========================================================== */
 
 function applyZoom() {
 
     const map =
+
         document.getElementById(
             "mapTransform"
         );
 
+
     map.style.transform =
+
         `scale(${currentZoom})`;
 
-    /*
-    Ajustamos el alto visual
-    para evitar demasiado espacio vacío.
-    */
 
     map.style.marginBottom =
+
         `${-(1-currentZoom) * 900}px`;
 
 }
 
+
+/* ZOOM + */
+
 function zoomIn() {
 
     currentZoom =
+
         Math.min(
             MAX_ZOOM,
             currentZoom + 0.10
         );
 
+
     applyZoom();
 
 }
 
+
+/* ZOOM - */
+
 function zoomOut() {
 
     currentZoom =
+
         Math.max(
             MIN_ZOOM,
             currentZoom - 0.10
         );
 
+
     applyZoom();
 
 }
+
+
+/* AJUSTAR */
 
 function fitMap() {
 
     const viewport =
+
         document.getElementById(
             "mapViewport"
         );
 
+
     const available =
-        viewport.clientWidth - 20;
+
+        viewport.clientWidth -
+        20;
+
 
     currentZoom =
+
         Math.min(
+
             1,
+
             Math.max(
+
                 MIN_ZOOM,
-                available / MAP_WIDTH
+
+                available /
+                MAP_WIDTH
+
             )
+
         );
+
 
     applyZoom();
 
-    viewport.scrollLeft = 0;
+
+    viewport.scrollLeft =
+        0;
 
 }
 
-/* ==========================================
-   MODAL
-========================================== */
+
+/* ==========================================================
+   ABRIR MODAL
+========================================================== */
 
 function openBuyerModal() {
 
@@ -2693,15 +3768,22 @@ function openBuyerModal() {
 
     }
 
+
     document
         .getElementById(
             "buyerModal"
         )
-        .classList.add(
+        .classList
+        .add(
             "show"
         );
 
 }
+
+
+/* ==========================================================
+   CERRAR MODAL
+========================================================== */
 
 function closeBuyerModal() {
 
@@ -2709,19 +3791,22 @@ function closeBuyerModal() {
         .getElementById(
             "buyerModal"
         )
-        .classList.remove(
+        .classList
+        .remove(
             "show"
         );
 
 }
 
-/* ==========================================
-   CREATE PRE RESERVATION
-========================================== */
+
+/* ==========================================================
+   CREAR PRE-RESERVA
+========================================================== */
 
 async function createPreReservation() {
 
     const nombre =
+
         document
             .getElementById(
                 "buyerName"
@@ -2729,7 +3814,9 @@ async function createPreReservation() {
             .value
             .trim();
 
+
     const telefono =
+
         document
             .getElementById(
                 "buyerPhone"
@@ -2737,13 +3824,16 @@ async function createPreReservation() {
             .value
             .trim();
 
+
     const email =
+
         document
             .getElementById(
                 "buyerEmail"
             )
             .value
             .trim();
+
 
     if (!nombre) {
 
@@ -2755,6 +3845,7 @@ async function createPreReservation() {
 
     }
 
+
     if (!telefono) {
 
         showToast(
@@ -2765,6 +3856,7 @@ async function createPreReservation() {
 
     }
 
+
     if (
         selectedSeats.size === 0
     ) {
@@ -2773,39 +3865,57 @@ async function createPreReservation() {
             "No hay asientos seleccionados."
         );
 
+
         closeBuyerModal();
+
 
         return;
 
     }
 
+
     const button =
+
         document.getElementById(
             "modalSubmit"
         );
 
+
     const originalText =
+
         button.textContent;
 
-    button.disabled = true;
+
+    button.disabled =
+        true;
+
 
     button.textContent =
+
         "PROCESANDO...";
+
 
     try {
 
+
         const seatIds =
+
             Array.from(
                 selectedSeats.keys()
             );
+
 
         const {
             data,
             error
         } =
+
         await db.rpc(
+
             "crear_pre_reserva",
+
             {
+
                 p_nombre_cliente:
                     nombre,
 
@@ -2817,66 +3927,97 @@ async function createPreReservation() {
 
                 p_asientos:
                     seatIds
+
             }
+
         );
 
+
         if (error) {
+
             throw error;
+
         }
 
-        /*
-        RPC puede devolver objeto
-        o un arreglo de una fila,
-        dependiendo de su definición.
-        */
 
         const result =
+
             Array.isArray(data)
-            ? data[0]
-            : data;
+
+                ? data[0]
+
+                : data;
+
 
         if (!result) {
 
             throw new Error(
+
                 "No se recibió respuesta de la reserva."
+
             );
 
         }
 
+
         if (
-            result.success === false
+            result.success ===
+            false
         ) {
 
             throw new Error(
-                result.message ||
-                result.mensaje ||
+
+                result.message
+
+                ||
+
+                result.mensaje
+
+                ||
+
                 "No fue posible crear la reserva."
+
             );
 
         }
 
+
         const token =
+
             result.public_token;
+
 
         if (!token) {
 
+
             console.error(
+
                 "Respuesta RPC:",
+
                 result
+
             );
 
+
             throw new Error(
+
                 "La reserva se creó pero no recibimos el token de checkout."
+
             );
 
         }
 
+
         /*
-        Redirección al checkout.
+        ENVIAR AL CHECKOUT
         */
 
         window.location.href =
-            "checkout.html?token=" +
+
+            "checkout.html?token="
+
+            +
+
             encodeURIComponent(
                 token
             );
@@ -2885,25 +4026,33 @@ async function createPreReservation() {
 
     catch(error) {
 
-        console.error(error);
 
-        button.disabled = false;
+        console.error(
+            error
+        );
+
+
+        button.disabled =
+            false;
+
 
         button.textContent =
             originalText;
 
+
         closeBuyerModal();
 
+
         showToast(
-            error.message ||
+
+            error.message
+
+            ||
+
             "No fue posible crear la reserva."
+
         );
 
-        /*
-        Actualizamos mapa porque
-        algún asiento puede haber sido
-        tomado por otro usuario.
-        */
 
         await refreshSeatStates();
 
@@ -2911,37 +4060,52 @@ async function createPreReservation() {
 
 }
 
-/* ==========================================
-   TOAST
-========================================== */
 
-let toastTimer = null;
+/* ==========================================================
+   TOAST
+========================================================== */
+
+let toastTimer =
+null;
+
 
 function showToast(message) {
 
     const toast =
+
         document.getElementById(
             "toast"
         );
 
+
     toast.textContent =
         message;
 
-    toast.classList.add(
-        "show"
-    );
+
+    toast
+        .classList
+        .add(
+            "show"
+        );
+
 
     clearTimeout(
         toastTimer
     );
 
+
     toastTimer =
+
         setTimeout(
             () => {
 
-                toast.classList.remove(
-                    "show"
-                );
+
+                toast
+                    .classList
+                    .remove(
+                        "show"
+                    );
+
 
             },
             3500
@@ -2949,9 +4113,10 @@ function showToast(message) {
 
 }
 
-/* ==========================================
-   CLOSE MODAL
-========================================== */
+
+/* ==========================================================
+   CERRAR MODAL AL TOCAR FONDO
+========================================================== */
 
 document
     .getElementById(
@@ -2960,6 +4125,7 @@ document
     .addEventListener(
         "click",
         function(event) {
+
 
             if (
                 event.target ===
@@ -2973,13 +4139,15 @@ document
         }
     );
 
-/* ==========================================
-   ESC
-========================================== */
+
+/* ==========================================================
+   ESCAPE
+========================================================== */
 
 document.addEventListener(
     "keydown",
     function(event) {
+
 
         if (
             event.key ===
@@ -2993,21 +4161,26 @@ document.addEventListener(
     }
 );
 
-/* ==========================================
+
+/* ==========================================================
    RESIZE
-========================================== */
+========================================================== */
 
 let resizeTimer;
+
 
 window.addEventListener(
     "resize",
     function() {
 
+
         clearTimeout(
             resizeTimer
         );
 
+
         resizeTimer =
+
             setTimeout(
                 fitMap,
                 180
@@ -3016,9 +4189,10 @@ window.addEventListener(
     }
 );
 
-/* ==========================================
-   CTRL + MOUSE WHEEL ZOOM
-========================================== */
+
+/* ==========================================================
+   CTRL + RUEDA = ZOOM
+========================================================== */
 
 document
     .getElementById(
@@ -3028,11 +4202,18 @@ document
         "wheel",
         function(event) {
 
-            if (!event.ctrlKey) {
+
+            if (
+                !event.ctrlKey
+            ) {
+
                 return;
+
             }
 
+
             event.preventDefault();
+
 
             if (
                 event.deltaY < 0
@@ -3054,13 +4235,15 @@ document
         }
     );
 
-/* ==========================================
-   START
-========================================== */
+
+/* ==========================================================
+   INICIAR
+========================================================== */
 
 initialize();
 
 </script>
 
 </body>
+
 </html>
