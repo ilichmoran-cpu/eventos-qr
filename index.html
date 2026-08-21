@@ -9,17 +9,25 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0">
 
-<meta name="referrer" content="no-referrer">
+<meta
+    name="theme-color"
+    content="#08101f">
 
-<title>Live Tickets | Eventos</title>
+<meta
+    name="referrer"
+    content="no-referrer">
+
+<title>Live Tickets | Eventos en Honduras</title>
 
 <meta
     name="description"
-    content="Compra y reserva entradas para los mejores eventos con Live Tickets.">
+    content="Compra tus entradas para conciertos y eventos en Honduras con Live Tickets. Selecciona tus asientos y recibe tu entrada digital con QR.">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com">
 
 <link
     rel="preconnect"
@@ -27,7 +35,7 @@
     crossorigin>
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
 
@@ -41,55 +49,95 @@
     box-sizing: border-box;
 }
 
+
 :root {
 
-    --bg: #f4f7fb;
+    --bg:
+        #f4f7fb;
 
-    --dark: #08101f;
+    --dark:
+        #08101f;
 
-    --dark-soft: #101a31;
+    --dark-soft:
+        #101a31;
 
-    --text: #111827;
+    --dark-card:
+        #0d1729;
 
-    --muted: #6b7280;
+    --text:
+        #111827;
 
-    --line: #e5e7eb;
+    --muted:
+        #667085;
 
-    --primary: #2563eb;
+    --line:
+        #e5e7eb;
 
-    --primary-dark: #1d4ed8;
+    --primary:
+        #2563eb;
 
-    --white: #ffffff;
+    --primary-dark:
+        #1d4ed8;
 
-    --success: #16a34a;
+    --primary-soft:
+        #eff6ff;
 
-    --radius: 20px;
+    --green:
+        #16a34a;
+
+    --green-soft:
+        #ecfdf5;
+
+    --white:
+        #ffffff;
+
 }
+
 
 html {
-    scroll-behavior: smooth;
+
+    scroll-behavior:
+        smooth;
+
 }
+
 
 body {
 
-    margin: 0;
+    margin:
+        0;
 
     font-family:
         "Inter",
         Arial,
         sans-serif;
 
-    background: var(--bg);
+    background:
+        var(--bg);
 
-    color: var(--text);
+    color:
+        var(--text);
 
     -webkit-font-smoothing:
         antialiased;
+
 }
+
 
 button,
 input {
-    font-family: inherit;
+
+    font-family:
+        inherit;
+
+}
+
+
+a {
+
+    -webkit-tap-highlight-color:
+        transparent;
+
 }
 
 
@@ -99,145 +147,269 @@ input {
 
 .topbar {
 
-    position: sticky;
+    position:
+        sticky;
 
-    top: 0;
+    top:
+        0;
 
-    z-index: 1000;
+    z-index:
+        1000;
 
     background:
-        rgba(8,16,31,.97);
+        rgba(8,16,31,.98);
 
     backdrop-filter:
-        blur(15px);
+        blur(18px);
 
     border-bottom:
         1px solid rgba(255,255,255,.08);
 
     box-shadow:
-        0 4px 22px rgba(0,0,0,.15);
+        0 4px 25px rgba(0,0,0,.16);
+
 }
 
 
 .nav {
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: 1450px;
+    max-width:
+        1450px;
 
-    min-height: 76px;
+    min-height:
+        76px;
 
-    margin: auto;
+    margin:
+        auto;
 
     padding:
         0 24px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: space-between;
+    gap:
+        28px;
 
-    gap: 30px;
 }
 
 
-/* ==========================================================
-   LOGO
-========================================================== */
-
 .brand {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    text-decoration: none;
+    flex-shrink:
+        0;
 
-    flex-shrink: 0;
+    text-decoration:
+        none;
+
 }
 
 
 .brand-logo {
 
-    display: block;
+    display:
+        block;
 
-    width: auto;
+    width:
+        auto;
 
-    height: 49px;
+    height:
+        49px;
 
-    max-width: 245px;
+    max-width:
+        245px;
 
-    object-fit: contain;
+    object-fit:
+        contain;
+
 }
 
 
 /* ==========================================================
-   NAVEGACIÓN
+   NAVIGATION
 ========================================================== */
 
 .nav-links {
 
-    display: flex;
+    margin-left:
+        auto;
 
-    align-items: center;
+    display:
+        flex;
 
-    gap: 27px;
+    align-items:
+        center;
 
-    margin-left: auto;
+    gap:
+        26px;
+
 }
 
 
 .nav-links a {
 
     color:
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.74);
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    font-size: 13px;
+    font-size:
+        12px;
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    transition: .2s;
+    transition:
+        .2s;
+
 }
 
 
 .nav-links a:hover {
 
-    color: white;
+    color:
+        white;
+
 }
 
 
-.nav-button {
+.nav-actions {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+}
+
+
+.nav-pass {
+
+    min-height:
+        39px;
 
     padding:
-        11px 18px;
+        0 16px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        7px;
 
     border:
-        1px solid rgba(255,255,255,.18);
+        1px solid rgba(96,165,250,.35);
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
-    color: white;
+    background:
+        rgba(37,99,235,.14);
 
-    text-decoration: none;
+    color:
+        white;
 
-    font-size: 12px;
+    text-decoration:
+        none;
 
-    font-weight: 700;
+    white-space:
+        nowrap;
 
-    transition: .2s;
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    transition:
+        .2s;
+
 }
 
 
-.nav-button:hover {
+.nav-pass:hover {
 
     background:
-        rgba(255,255,255,.10);
+        rgba(37,99,235,.28);
 
     border-color:
-        rgba(255,255,255,.35);
+        rgba(96,165,250,.55);
+
+}
+
+
+.nav-events {
+
+    min-height:
+        39px;
+
+    padding:
+        0 16px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    border-radius:
+        999px;
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    white-space:
+        nowrap;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    transition:
+        .2s;
+
+}
+
+
+.nav-events:hover {
+
+    background:
+        rgba(255,255,255,.08);
+
 }
 
 
@@ -247,318 +419,418 @@ input {
 
 .hero {
 
-    position: relative;
+    position:
+        relative;
 
-    overflow: hidden;
+    min-height:
+        540px;
 
-    min-height: 525px;
+    overflow:
+        hidden;
 
     background:
         #07101f;
 
-    color: white;
+    color:
+        white;
+
 }
 
 
-/* ==========================================================
-   FONDO HERO
-========================================================== */
-
 .hero-bg {
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: -50px;
+    inset:
+        -60px;
 
     background-image:
         url("FLYER%201080X1350.png");
 
-    background-size: cover;
+    background-size:
+        cover;
 
-    background-position: center;
+    background-position:
+        center;
 
     filter:
-        blur(35px);
+        blur(38px);
 
     transform:
         scale(1.18);
 
-    opacity: .48;
+    opacity:
+        .48;
+
 }
 
 
 .hero-overlay {
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
 
     background:
 
         linear-gradient(
             90deg,
             rgba(5,10,20,.99) 0%,
-            rgba(5,10,20,.91) 45%,
-            rgba(5,10,20,.58) 100%
+            rgba(5,10,20,.91) 43%,
+            rgba(5,10,20,.59) 100%
         ),
 
         linear-gradient(
             0deg,
             #07101f 0%,
-            transparent 45%
+            transparent 48%
         );
+
 }
 
-
-/* ==========================================================
-   CONTENIDO HERO
-========================================================== */
 
 .hero-content {
 
-    position: relative;
+    position:
+        relative;
 
-    z-index: 2;
+    z-index:
+        2;
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: 1450px;
+    max-width:
+        1450px;
 
-    min-height: 525px;
+    min-height:
+        540px;
 
-    margin: auto;
+    margin:
+        auto;
 
     padding:
-        48px 24px;
+        50px 24px;
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-        270px minmax(0,1fr);
+        285px minmax(0,1fr);
 
-    gap: 48px;
+    gap:
+        50px;
 
-    align-items: center;
+    align-items:
+        center;
+
 }
 
 
 /* ==========================================================
-   FLYER HERO
+   HERO POSTER
 ========================================================== */
 
 .hero-poster {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 270px;
+    width:
+        285px;
 
-    aspect-ratio: 4 / 5;
+    aspect-ratio:
+        4 / 5;
 
-    border-radius: 22px;
+    overflow:
+        hidden;
 
-    overflow: hidden;
+    border:
+        1px solid rgba(255,255,255,.14);
+
+    border-radius:
+        23px;
 
     background-image:
         url("FLYER%201080X1350.png");
 
-    background-size: cover;
+    background-size:
+        cover;
 
-    background-position: center;
+    background-position:
+        center;
 
     box-shadow:
-        0 30px 70px rgba(0,0,0,.48);
+        0 35px 80px rgba(0,0,0,.52);
 
-    border:
-        1px solid rgba(255,255,255,.14);
 }
 
 
 .hero-poster::after {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
+
+    border-radius:
+        inherit;
 
     box-shadow:
         inset 0 0 0 1px rgba(255,255,255,.08);
 
-    border-radius: inherit;
+    pointer-events:
+        none;
 
-    pointer-events: none;
 }
 
 
 /* ==========================================================
-   INFORMACIÓN HERO
+   HERO INFO
 ========================================================== */
 
 .hero-info {
 
-    max-width: 850px;
+    max-width:
+        850px;
+
 }
 
 
 .hero-badge {
 
-    display: inline-flex;
+    width:
+        fit-content;
 
-    align-items: center;
-
-    gap: 8px;
-
-    margin-bottom: 17px;
+    margin-bottom:
+        16px;
 
     padding:
-        8px 13px;
+        8px 12px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
 
     border:
-        1px solid rgba(96,165,250,.35);
+        1px solid rgba(96,165,250,.30);
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
     background:
-        rgba(37,99,235,.20);
+        rgba(37,99,235,.18);
 
-    color: white;
+    color:
+        #dbeafe;
 
-    font-size: 11px;
+    font-size:
+        9px;
 
-    font-weight: 800;
+    font-weight:
+        900;
 
-    letter-spacing: .8px;
+    letter-spacing:
+        .8px;
+
 }
 
 
 .hero-badge-dot {
 
-    width: 7px;
+    width:
+        7px;
 
-    height: 7px;
+    height:
+        7px;
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
         #60a5fa;
+
+    box-shadow:
+        0 0 12px rgba(96,165,250,.9);
+
 }
 
 
 .hero-info h1 {
 
+    max-width:
+        900px;
+
     margin:
         0 0 18px;
 
-    max-width: 900px;
-
     font-size:
-        clamp(40px,5vw,67px);
+        clamp(41px,5vw,69px);
 
-    line-height: .98;
+    line-height:
+        .98;
 
     letter-spacing:
-        -2px;
+        -2.2px;
 
-    font-weight: 800;
+    font-weight:
+        900;
+
 }
 
 
 .hero-meta {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-wrap: wrap;
+    flex-wrap:
+        wrap;
 
     gap:
-        11px 27px;
+        10px 28px;
 
-    margin-bottom: 19px;
+    margin-bottom:
+        20px;
 
     color:
-        rgba(255,255,255,.78);
+        rgba(255,255,255,.76);
 
-    font-size: 14px;
+    font-size:
+        13px;
 
-    line-height: 1.6;
+    line-height:
+        1.6;
+
 }
 
 
 .hero-price-label {
 
-    margin-bottom: 5px;
+    margin-bottom:
+        5px;
 
     color:
-        rgba(255,255,255,.60);
+        rgba(255,255,255,.48);
 
-    font-size: 12px;
+    font-size:
+        10px;
 
-    font-weight: 500;
+    font-weight:
+        600;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .7px;
+
 }
 
 
 .hero-price {
 
-    margin-bottom: 25px;
+    margin-bottom:
+        25px;
 
-    font-size: 31px;
+    font-size:
+        31px;
 
-    font-weight: 800;
+    font-weight:
+        900;
+
 }
 
 
 .hero-price small {
 
-    font-size: 13px;
-
-    font-weight: 500;
-
     color:
-        rgba(255,255,255,.58);
+        rgba(255,255,255,.52);
+
+    font-size:
+        11px;
+
+    font-weight:
+        500;
+
 }
 
 
 /* ==========================================================
-   BOTONES HERO
+   HERO BUTTONS
 ========================================================== */
 
 .hero-actions {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-wrap: wrap;
+    flex-wrap:
+        wrap;
 
-    gap: 12px;
+    gap:
+        10px;
+
+}
+
+
+.hero-primary,
+.hero-secondary,
+.hero-pass {
+
+    min-height:
+        50px;
+
+    padding:
+        0 21px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        12px;
+
+    text-decoration:
+        none;
+
+    font-size:
+        11px;
+
+    font-weight:
+        900;
+
+    transition:
+        .2s;
+
 }
 
 
 .hero-primary {
 
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-height: 50px;
-
-    padding:
-        0 23px;
-
-    border-radius: 13px;
-
     background:
         var(--primary);
 
-    color: white;
+    color:
+        white;
 
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-    transition:
-        .2s;
 }
 
 
@@ -569,121 +841,292 @@ input {
 
     transform:
         translateY(-2px);
+
 }
 
 
 .hero-secondary {
 
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-height: 50px;
-
-    padding:
-        0 21px;
-
     border:
-        1px solid rgba(255,255,255,.20);
-
-    border-radius: 13px;
+        1px solid rgba(255,255,255,.17);
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.07);
 
-    color: white;
+    color:
+        white;
 
-    text-decoration: none;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    transition: .2s;
 }
 
 
 .hero-secondary:hover {
 
     background:
-        rgba(255,255,255,.14);
+        rgba(255,255,255,.13);
+
+}
+
+
+.hero-pass {
+
+    border:
+        1px solid rgba(96,165,250,.23);
+
+    background:
+        rgba(37,99,235,.10);
+
+    color:
+        #dbeafe;
+
+}
+
+
+.hero-pass:hover {
+
+    background:
+        rgba(37,99,235,.20);
+
 }
 
 
 /* ==========================================================
-   SEARCH CONTAINER
+   TRUST BAR
+========================================================== */
+
+.trust-wrapper {
+
+    position:
+        relative;
+
+    z-index:
+        20;
+
+    width:
+        100%;
+
+    max-width:
+        1180px;
+
+    margin:
+        -34px auto 0;
+
+    padding:
+        0 20px;
+
+}
+
+
+.trust-bar {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    overflow:
+        hidden;
+
+    background:
+        white;
+
+    border:
+        1px solid #e5eaf1;
+
+    border-radius:
+        19px;
+
+    box-shadow:
+        0 18px 50px rgba(15,23,42,.12);
+
+}
+
+
+.trust-item {
+
+    min-height:
+        73px;
+
+    padding:
+        15px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
+
+    border-right:
+        1px solid #edf0f4;
+
+}
+
+
+.trust-item:last-child {
+
+    border-right:
+        none;
+
+}
+
+
+.trust-icon {
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        9px;
+
+    background:
+        #eff6ff;
+
+    color:
+        var(--primary);
+
+    font-size:
+        15px;
+
+}
+
+
+.trust-copy strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    font-size:
+        10px;
+
+}
+
+
+.trust-copy span {
+
+    display:
+        block;
+
+    color:
+        var(--muted);
+
+    font-size:
+        8px;
+
+    line-height:
+        1.35;
+
+}
+
+
+/* ==========================================================
+   SEARCH
 ========================================================== */
 
 .search-area {
 
-    position: relative;
+    width:
+        100%;
 
-    z-index: 20;
-
-    width: 100%;
-
-    max-width: 1200px;
+    max-width:
+        1200px;
 
     margin:
-        -36px auto 0;
+        28px auto 0;
 
     padding:
         0 20px;
+
 }
 
 
 .search-box {
 
-    display: grid;
+    padding:
+        17px;
+
+    display:
+        grid;
 
     grid-template-columns:
         minmax(0,1.6fr)
         minmax(0,1fr)
         auto;
 
-    align-items: end;
+    align-items:
+        end;
 
-    gap: 13px;
+    gap:
+        12px;
 
-    padding: 18px;
-
-    background: white;
+    background:
+        white;
 
     border:
-        1px solid #e8ecf2;
+        1px solid #e7ebf1;
 
-    border-radius: 21px;
+    border-radius:
+        18px;
 
     box-shadow:
-        0 18px 50px rgba(15,23,42,.13);
+        0 10px 30px rgba(15,23,42,.06);
+
 }
 
 
 .search-field label {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 7px;
+    margin-bottom:
+        7px;
 
-    color: #667085;
+    color:
+        #667085;
 
-    font-size: 10px;
+    font-size:
+        8px;
 
-    font-weight: 800;
+    font-weight:
+        900;
 
-    letter-spacing: .7px;
+    letter-spacing:
+        .7px;
 
-    text-transform: uppercase;
 }
 
 
 .search-field input {
 
-    width: 100%;
+    width:
+        100%;
 
-    min-height: 49px;
+    min-height:
+        48px;
 
     padding:
         0 14px;
@@ -691,17 +1134,21 @@ input {
     border:
         1px solid #d9dfe7;
 
-    border-radius: 11px;
+    border-radius:
+        10px;
 
-    outline: none;
+    outline:
+        none;
 
-    background: #fff;
+    background:
+        white;
 
-    color: #111827;
+    color:
+        #111827;
 
-    font-size: 13px;
+    font-size:
+        12px;
 
-    transition: .2s;
 }
 
 
@@ -711,39 +1158,48 @@ input {
         var(--primary);
 
     box-shadow:
-        0 0 0 3px
-        rgba(37,99,235,.09);
+        0 0 0 3px rgba(37,99,235,.08);
+
 }
 
 
 .search-button {
 
-    min-height: 49px;
+    min-height:
+        48px;
 
     padding:
         0 24px;
 
-    border: none;
+    border:
+        none;
 
-    border-radius: 11px;
+    border-radius:
+        10px;
 
-    background: #111827;
+    background:
+        #111827;
 
-    color: white;
+    color:
+        white;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    font-size: 12px;
+    font-size:
+        10px;
 
-    font-weight: 800;
+    font-weight:
+        900;
 
-    transition: .2s;
 }
 
 
 .search-button:hover {
 
-    background: #000;
+    background:
+        #000;
+
 }
 
 
@@ -753,32 +1209,58 @@ input {
 
 .main {
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: 1450px;
+    max-width:
+        1450px;
 
-    margin: auto;
+    margin:
+        auto;
 
     padding:
-        74px 24px 90px;
+        65px 24px 90px;
+
 }
 
 
-/* ==========================================================
-   SECTION HEADER
-========================================================== */
-
 .section-head {
 
-    display: flex;
+    margin-bottom:
+        23px;
 
-    align-items: flex-end;
+    display:
+        flex;
 
-    justify-content: space-between;
+    align-items:
+        flex-end;
 
-    gap: 20px;
+    justify-content:
+        space-between;
 
-    margin-bottom: 25px;
+    gap:
+        20px;
+
+}
+
+
+.section-kicker {
+
+    margin-bottom:
+        7px;
+
+    color:
+        var(--primary);
+
+    font-size:
+        8px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        1px;
+
 }
 
 
@@ -787,67 +1269,77 @@ input {
     margin:
         0 0 7px;
 
-    font-size: 29px;
+    font-size:
+        28px;
 
     letter-spacing:
         -.6px;
+
 }
 
 
 .section-head p {
 
-    margin: 0;
+    margin:
+        0;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 13px;
+    font-size:
+        11px;
+
 }
 
 
 /* ==========================================================
-   EVENTOS
+   EVENTS
 ========================================================== */
 
 .events-grid {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         repeat(3,minmax(0,1fr));
 
-    gap: 23px;
+    gap:
+        22px;
+
 }
 
 
-/* ==========================================================
-   EVENT CARD
-========================================================== */
-
 .event-card {
 
-    position: relative;
+    min-width:
+        0;
 
-    display: flex;
+    overflow:
+        hidden;
 
-    flex-direction: column;
+    display:
+        flex;
 
-    min-width: 0;
+    flex-direction:
+        column;
 
-    overflow: hidden;
-
-    background: white;
+    background:
+        white;
 
     border:
-        1px solid #e6eaf0;
+        1px solid #e5eaf0;
 
-    border-radius: 21px;
+    border-radius:
+        20px;
 
     box-shadow:
-        0 10px 30px rgba(15,23,42,.07);
+        0 10px 30px rgba(15,23,42,.065);
 
     transition:
-        transform .20s ease,
-        box-shadow .20s ease;
+        transform .2s,
+        box-shadow .2s;
+
 }
 
 
@@ -857,233 +1349,291 @@ input {
         translateY(-5px);
 
     box-shadow:
-        0 20px 45px rgba(15,23,42,.12);
+        0 22px 50px rgba(15,23,42,.12);
+
 }
 
 
-/* ==========================================================
-   IMAGEN EVENTO
-========================================================== */
-
 .event-image {
 
-    position: relative;
+    position:
+        relative;
 
-    width: 100%;
+    width:
+        100%;
 
-    aspect-ratio: 16 / 10;
+    aspect-ratio:
+        16 / 10;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 
     background:
         #111827;
 
-    background-size: cover;
+    background-size:
+        cover;
 
     background-position:
         center 28%;
+
 }
 
 
 .event-image::after {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        0;
 
     background:
-
         linear-gradient(
             0deg,
-            rgba(0,0,0,.45),
+            rgba(0,0,0,.44),
             transparent 55%
         );
+
 }
 
 
 .available-badge {
 
-    position: absolute;
+    position:
+        absolute;
 
-    top: 14px;
+    top:
+        13px;
 
-    left: 14px;
+    left:
+        13px;
 
-    z-index: 3;
+    z-index:
+        4;
 
     padding:
-        8px 11px;
+        7px 10px;
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
     background:
-        rgba(255,255,255,.94);
+        rgba(255,255,255,.95);
 
-    color: #166534;
+    color:
+        #166534;
 
     box-shadow:
         0 5px 15px rgba(0,0,0,.13);
 
-    font-size: 10px;
+    font-size:
+        8px;
 
-    font-weight: 800;
+    font-weight:
+        900;
 
-    letter-spacing: .5px;
+    letter-spacing:
+        .5px;
+
 }
 
 
-/* ==========================================================
-   CARD BODY
-========================================================== */
-
 .event-body {
 
-    display: flex;
+    flex:
+        1;
 
-    flex-direction: column;
+    padding:
+        19px;
 
-    flex: 1;
+    display:
+        flex;
 
-    padding: 20px;
+    flex-direction:
+        column;
+
 }
 
 
 .event-date-small {
 
-    margin-bottom: 9px;
+    margin-bottom:
+        8px;
 
-    color: var(--primary);
+    color:
+        var(--primary);
 
-    font-size: 11px;
+    font-size:
+        9px;
 
-    font-weight: 800;
+    font-weight:
+        900;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 
-    letter-spacing: .4px;
 }
 
 
 .event-title {
 
     margin:
-        0 0 15px;
+        0 0 14px;
 
-    color: #111827;
+    color:
+        #111827;
 
-    font-size: 21px;
+    font-size:
+        20px;
 
-    line-height: 1.20;
+    line-height:
+        1.2;
 
     letter-spacing:
         -.4px;
 
-    font-weight: 800;
+    font-weight:
+        900;
+
 }
 
 
 .event-meta {
 
-    display: grid;
+    margin-bottom:
+        18px;
 
-    gap: 9px;
+    display:
+        grid;
 
-    margin-bottom: 19px;
+    gap:
+        8px;
 
-    color: #667085;
+    color:
+        #667085;
 
-    font-size: 12px;
+    font-size:
+        10px;
 
-    line-height: 1.45;
+    line-height:
+        1.45;
+
 }
 
 
 .event-meta-row {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: flex-start;
+    align-items:
+        flex-start;
 
-    gap: 8px;
+    gap:
+        8px;
+
 }
 
 
-/* ==========================================================
-   CARD FOOTER
-========================================================== */
-
 .event-footer {
 
-    display: flex;
+    margin-top:
+        auto;
 
-    align-items: center;
+    padding-top:
+        16px;
 
-    justify-content: space-between;
+    display:
+        flex;
 
-    gap: 12px;
+    align-items:
+        center;
 
-    margin-top: auto;
+    justify-content:
+        space-between;
 
-    padding-top: 17px;
+    gap:
+        12px;
 
     border-top:
         1px solid #edf0f4;
+
 }
 
 
 .event-price-box small {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 4px;
+    margin-bottom:
+        4px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 10px;
+    font-size:
+        8px;
+
 }
 
 
 .event-price-box strong {
 
-    color: #111827;
+    color:
+        #111827;
 
-    font-size: 19px;
+    font-size:
+        18px;
 
-    font-weight: 800;
+    font-weight:
+        900;
+
 }
 
 
 .event-button {
 
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-height: 42px;
+    min-height:
+        41px;
 
     padding:
-        0 15px;
+        0 14px;
 
-    border-radius: 10px;
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        9px;
 
     background:
         var(--primary);
 
-    color: white;
+    color:
+        white;
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 
-    font-size: 11px;
+    font-size:
+        9px;
 
-    font-weight: 800;
+    font-weight:
+        900;
 
-    transition: .2s;
 }
 
 
@@ -1091,37 +1641,329 @@ input {
 
     background:
         var(--primary-dark);
+
 }
 
 
 /* ==========================================================
-   BENEFICIOS
+   LIVE PASS PROMO
+========================================================== */
+
+.livepass-section {
+
+    margin-top:
+        72px;
+
+}
+
+
+.livepass-card {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    min-height:
+        300px;
+
+    padding:
+        43px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0,1.1fr)
+        minmax(320px,.9fr);
+
+    align-items:
+        center;
+
+    gap:
+        40px;
+
+    border-radius:
+        26px;
+
+    background:
+
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(37,99,235,.40),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(124,58,237,.16),
+            transparent 30%
+        ),
+
+        #08101f;
+
+    color:
+        white;
+
+    box-shadow:
+        0 25px 65px rgba(15,23,42,.17);
+
+}
+
+
+.livepass-badge {
+
+    width:
+        fit-content;
+
+    margin-bottom:
+        13px;
+
+    padding:
+        7px 10px;
+
+    border:
+        1px solid rgba(96,165,250,.27);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(37,99,235,.16);
+
+    color:
+        #bfdbfe;
+
+    font-size:
+        8px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        1px;
+
+}
+
+
+.livepass-copy h2 {
+
+    max-width:
+        620px;
+
+    margin:
+        0 0 12px;
+
+    font-size:
+        clamp(30px,4vw,44px);
+
+    line-height:
+        1.05;
+
+    letter-spacing:
+        -1.4px;
+
+}
+
+
+.livepass-copy p {
+
+    max-width:
+        560px;
+
+    margin:
+        0 0 22px;
+
+    color:
+        rgba(255,255,255,.60);
+
+    font-size:
+        11px;
+
+    line-height:
+        1.7;
+
+}
+
+
+.livepass-button {
+
+    min-height:
+        49px;
+
+    padding:
+        0 20px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        11px;
+
+    background:
+        var(--primary);
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        10px;
+
+    font-weight:
+        900;
+
+}
+
+
+.livepass-button:hover {
+
+    background:
+        var(--primary-dark);
+
+}
+
+
+.livepass-features {
+
+    display:
+        grid;
+
+    gap:
+        10px;
+
+}
+
+
+.livepass-feature {
+
+    padding:
+        16px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        13px;
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    backdrop-filter:
+        blur(12px);
+
+}
+
+
+.livepass-feature-icon {
+
+    width:
+        36px;
+
+    height:
+        36px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(37,99,235,.24);
+
+    font-size:
+        15px;
+
+}
+
+
+.livepass-feature strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    font-size:
+        10px;
+
+}
+
+
+.livepass-feature span {
+
+    display:
+        block;
+
+    color:
+        rgba(255,255,255,.50);
+
+    font-size:
+        8px;
+
+    line-height:
+        1.4;
+
+}
+
+
+/* ==========================================================
+   BENEFITS
 ========================================================== */
 
 .benefits {
 
-    margin-top: 70px;
+    margin-top:
+        72px;
 
-    padding:
-        35px;
-
-    background:
-        #08101f;
-
-    color: white;
-
-    border-radius: 25px;
-
-    box-shadow:
-        0 20px 55px rgba(15,23,42,.15);
 }
 
 
 .benefits-head {
 
-    margin-bottom: 27px;
+    margin-bottom:
+        24px;
 
-    text-align: center;
+    text-align:
+        center;
+
+}
+
+
+.benefits-head .section-kicker {
+
+    margin-bottom:
+        8px;
+
 }
 
 
@@ -1130,90 +1972,132 @@ input {
     margin:
         0 0 8px;
 
-    font-size: 26px;
+    font-size:
+        28px;
+
 }
 
 
 .benefits-head p {
 
-    margin: 0;
+    max-width:
+        650px;
+
+    margin:
+        auto;
 
     color:
-        rgba(255,255,255,.60);
+        var(--muted);
 
-    font-size: 12px;
+    font-size:
+        11px;
+
+    line-height:
+        1.6;
+
 }
 
 
 .benefits-grid {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-        repeat(3,1fr);
+        repeat(4,1fr);
 
-    gap: 15px;
+    gap:
+        14px;
+
 }
 
 
 .benefit {
 
     padding:
-        24px 20px;
+        23px 19px;
 
     background:
-        rgba(255,255,255,.055);
+        white;
 
     border:
-        1px solid rgba(255,255,255,.08);
+        1px solid #e5e9ef;
 
-    border-radius: 17px;
+    border-radius:
+        17px;
+
+    box-shadow:
+        0 8px 25px rgba(15,23,42,.045);
+
 }
 
 
 .benefit-icon {
 
-    width: 38px;
+    width:
+        39px;
 
-    height: 38px;
+    height:
+        39px;
 
-    margin-bottom: 14px;
+    margin-bottom:
+        14px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
+
+    border-radius:
+        10px;
 
     background:
-        rgba(37,99,235,.25);
+        #eff6ff;
 
-    border-radius: 10px;
+    color:
+        var(--primary);
 
-    font-size: 17px;
+    font-size:
+        15px;
+
+    font-weight:
+        900;
+
 }
 
 
 .benefit strong {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 7px;
+    margin-bottom:
+        7px;
 
-    font-size: 14px;
+    font-size:
+        12px;
+
 }
 
 
 .benefit p {
 
-    margin: 0;
+    margin:
+        0;
 
     color:
-        rgba(255,255,255,.60);
+        var(--muted);
 
-    font-size: 11px;
+    font-size:
+        9px;
 
-    line-height: 1.55;
+    line-height:
+        1.55;
+
 }
 
 
@@ -1221,7 +2105,8 @@ input {
    LOADING
 ========================================================== */
 
-.loading-box {
+.loading-box,
+.empty-box {
 
     grid-column:
         1 / -1;
@@ -1229,24 +2114,31 @@ input {
     padding:
         55px 25px;
 
-    background: white;
+    background:
+        white;
 
     border:
         1px solid #e7ebf0;
 
-    border-radius: 20px;
+    border-radius:
+        20px;
 
-    text-align: center;
+    text-align:
+        center;
 
-    color: var(--muted);
+    color:
+        var(--muted);
+
 }
 
 
 .spinner {
 
-    width: 37px;
+    width:
+        38px;
 
-    height: 37px;
+    height:
+        38px;
 
     margin:
         0 auto 14px;
@@ -1257,10 +2149,12 @@ input {
     border-top-color:
         var(--primary);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     animation:
         spin .8s linear infinite;
+
 }
 
 
@@ -1270,61 +2164,38 @@ input {
 
         transform:
             rotate(360deg);
+
     }
 
 }
 
 
-.loading-box strong {
-
-    display: block;
-
-    margin-bottom: 6px;
-
-    color: #111827;
-
-    font-size: 15px;
-}
-
-
-/* ==========================================================
-   EMPTY STATE
-========================================================== */
-
-.empty-box {
-
-    grid-column:
-        1 / -1;
-
-    padding:
-        60px 25px;
-
-    background: white;
-
-    border:
-        1px solid #e7ebf0;
-
-    border-radius: 20px;
-
-    text-align: center;
-}
-
-
+.loading-box strong,
 .empty-box strong {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 7px;
+    margin-bottom:
+        6px;
 
-    font-size: 18px;
+    color:
+        #111827;
+
+    font-size:
+        14px;
+
 }
 
 
 .empty-box span {
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 12px;
+    font-size:
+        10px;
+
 }
 
 
@@ -1334,102 +2205,136 @@ input {
 
 .footer {
 
-    background: #050b16;
+    background:
+        #050b16;
 
-    color: white;
+    color:
+        white;
 
     border-top:
         1px solid rgba(255,255,255,.06);
+
 }
 
 
 .footer-content {
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: 1450px;
+    max-width:
+        1450px;
 
-    margin: auto;
+    margin:
+        auto;
 
     padding:
         43px 24px 30px;
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         1.4fr 1fr 1fr;
 
-    gap: 40px;
+    gap:
+        40px;
+
 }
 
 
 .footer-logo {
 
-    width: auto;
+    width:
+        auto;
 
-    height: 45px;
+    height:
+        45px;
 
-    max-width: 225px;
+    max-width:
+        225px;
 
-    object-fit: contain;
+    margin-bottom:
+        13px;
 
-    margin-bottom: 13px;
+    object-fit:
+        contain;
+
 }
 
 
 .footer-description {
 
-    max-width: 370px;
+    max-width:
+        370px;
 
-    margin: 0;
+    margin:
+        0;
 
     color:
-        rgba(255,255,255,.55);
+        rgba(255,255,255,.52);
 
-    font-size: 11px;
+    font-size:
+        10px;
 
-    line-height: 1.6;
+    line-height:
+        1.65;
+
 }
 
 
 .footer-column strong {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 13px;
+    margin-bottom:
+        13px;
 
-    font-size: 12px;
+    font-size:
+        10px;
+
 }
 
 
 .footer-column a {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 9px;
+    margin-bottom:
+        9px;
 
     color:
-        rgba(255,255,255,.55);
+        rgba(255,255,255,.50);
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    font-size: 11px;
+    font-size:
+        9px;
+
 }
 
 
 .footer-column a:hover {
 
-    color: white;
+    color:
+        white;
+
 }
 
 
 .footer-bottom {
 
-    width: 100%;
+    width:
+        100%;
 
-    max-width: 1450px;
+    max-width:
+        1450px;
 
-    margin: auto;
+    margin:
+        auto;
 
     padding:
         18px 24px 27px;
@@ -1438,273 +2343,426 @@ input {
         1px solid rgba(255,255,255,.06);
 
     color:
-        rgba(255,255,255,.40);
+        rgba(255,255,255,.35);
 
-    font-size: 10px;
+    font-size:
+        8px;
+
 }
 
 
 /* ==========================================================
-   RESPONSIVE - TABLET
+   RESPONSIVE TABLET
 ========================================================== */
 
-@media (max-width: 1050px) {
+@media(max-width:1050px) {
 
     .events-grid {
 
         grid-template-columns:
-            repeat(2,minmax(0,1fr));
+            repeat(2,1fr);
+
     }
 
 
     .hero-content {
 
         grid-template-columns:
-            220px minmax(0,1fr);
+            225px minmax(0,1fr);
 
-        gap: 35px;
+        gap:
+            35px;
+
     }
 
 
     .hero-poster {
 
-        width: 220px;
+        width:
+            225px;
+
+    }
+
+
+    .trust-bar {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+
+    .trust-item:nth-child(2) {
+
+        border-right:
+            none;
+
+    }
+
+
+    .trust-item:nth-child(-n+2) {
+
+        border-bottom:
+            1px solid #edf0f4;
+
     }
 
 
     .benefits-grid {
 
         grid-template-columns:
-            1fr 1fr 1fr;
+            repeat(2,1fr);
+
     }
 
 }
 
 
 /* ==========================================================
-   RESPONSIVE - MOBILE
+   RESPONSIVE MOBILE
 ========================================================== */
 
-@media (max-width: 760px) {
-
-
-    /* HEADER */
+@media(max-width:760px) {
 
     .nav {
 
-        min-height: 66px;
+        min-height:
+            64px;
 
         padding:
-            0 14px;
+            0 12px;
+
+        gap:
+            8px;
+
     }
 
 
     .brand-logo {
 
-        height: 36px;
+        height:
+            34px;
 
-        max-width: 180px;
+        max-width:
+            170px;
+
     }
 
 
     .nav-links {
 
-        display: none;
+        display:
+            none;
+
     }
 
 
-    .nav-button {
+    .nav-actions {
+
+        margin-left:
+            auto;
+
+        gap:
+            5px;
+
+    }
+
+
+    .nav-events {
+
+        display:
+            none;
+
+    }
+
+
+    .nav-pass {
+
+        min-height:
+            36px;
 
         padding:
-            9px 12px;
+            0 11px;
 
-        font-size: 9px;
+        font-size:
+            8px;
+
     }
 
-
-    /* HERO */
 
     .hero {
 
-        min-height: auto;
+        min-height:
+            auto;
+
     }
 
 
     .hero-content {
 
-        min-height: auto;
+        min-height:
+            auto;
 
         padding:
-            28px 14px 70px;
+            28px 13px 70px;
 
         grid-template-columns:
-            105px minmax(0,1fr);
+            108px minmax(0,1fr);
 
-        gap: 18px;
+        gap:
+            18px;
 
-        align-items: center;
     }
 
 
     .hero-poster {
 
-        width: 105px;
+        width:
+            108px;
 
-        border-radius: 13px;
+        border-radius:
+            13px;
+
     }
 
 
     .hero-info h1 {
 
-        margin-bottom: 11px;
+        margin-bottom:
+            10px;
 
-        font-size: 25px;
+        font-size:
+            25px;
 
-        line-height: 1.04;
+        line-height:
+            1.04;
 
         letter-spacing:
             -.7px;
+
     }
 
 
     .hero-badge {
 
-        margin-bottom: 9px;
+        margin-bottom:
+            8px;
 
         padding:
-            6px 9px;
+            5px 8px;
 
-        font-size: 8px;
+        font-size:
+            7px;
+
     }
 
 
     .hero-meta {
 
-        display: grid;
+        margin-bottom:
+            10px;
 
-        gap: 5px;
+        display:
+            grid;
 
-        margin-bottom: 11px;
+        gap:
+            4px;
 
-        font-size: 10px;
+        font-size:
+            9px;
+
     }
 
 
     .hero-price-label {
 
-        display: none;
+        display:
+            none;
+
     }
 
 
     .hero-price {
 
-        margin-bottom: 12px;
+        margin-bottom:
+            11px;
 
-        font-size: 19px;
+        font-size:
+            18px;
+
     }
 
 
     .hero-price small {
 
-        font-size: 9px;
+        display:
+            none;
+
     }
 
 
     .hero-actions {
 
-        gap: 8px;
+        gap:
+            6px;
+
     }
 
 
-    .hero-primary {
+    .hero-primary,
+    .hero-pass {
 
-        min-height: 39px;
+        min-height:
+            38px;
 
         padding:
-            0 13px;
+            0 11px;
 
-        border-radius: 9px;
+        border-radius:
+            8px;
 
-        font-size: 9px;
+        font-size:
+            8px;
+
     }
 
 
     .hero-secondary {
 
-        display: none;
+        display:
+            none;
+
     }
 
 
-    /* BUSCADOR */
-
-    .search-area {
+    .trust-wrapper {
 
         margin-top:
             -34px;
 
         padding:
-            0 12px;
+            0 11px;
+
+    }
+
+
+    .trust-bar {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        border-radius:
+            15px;
+
+    }
+
+
+    .trust-item {
+
+        min-height:
+            67px;
+
+        padding:
+            10px;
+
+        justify-content:
+            flex-start;
+
+    }
+
+
+    .trust-icon {
+
+        width:
+            30px;
+
+        height:
+            30px;
+
+    }
+
+
+    .trust-copy strong {
+
+        font-size:
+            8px;
+
+    }
+
+
+    .trust-copy span {
+
+        font-size:
+            6px;
+
+    }
+
+
+    .search-area {
+
+        margin-top:
+            18px;
+
+        padding:
+            0 11px;
+
     }
 
 
     .search-box {
 
-        padding: 14px;
+        grid-template-columns:
+            1fr;
 
-        grid-template-columns: 1fr;
+        padding:
+            13px;
 
-        gap: 10px;
+        border-radius:
+            15px;
 
-        border-radius: 17px;
     }
 
 
     .search-button {
 
-        width: 100%;
+        width:
+            100%;
+
     }
 
-
-    /* MAIN */
 
     .main {
 
         padding:
-            48px 13px 60px;
-    }
+            48px 12px 60px;
 
-
-    .section-head {
-
-        margin-bottom: 18px;
     }
 
 
     .section-head h2 {
 
-        font-size: 23px;
+        font-size:
+            23px;
+
     }
 
-
-    .section-head p {
-
-        font-size: 11px;
-    }
-
-
-    /* EVENTOS */
 
     .events-grid {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
-        gap: 17px;
+        gap:
+            16px;
+
     }
 
 
     .event-card {
 
-        border-radius: 17px;
+        border-radius:
+            16px;
+
     }
 
 
@@ -1713,59 +2771,88 @@ input {
         aspect-ratio:
             16 / 9;
 
-        background-position:
-            center 25%;
     }
 
 
     .event-body {
 
-        padding: 17px;
+        padding:
+            16px;
+
     }
 
 
-    .event-title {
+    .livepass-section {
 
-        font-size: 19px;
+        margin-top:
+            48px;
+
     }
 
 
-    /* BENEFICIOS */
+    .livepass-card {
+
+        min-height:
+            0;
+
+        padding:
+            26px 19px;
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            27px;
+
+        border-radius:
+            20px;
+
+    }
+
+
+    .livepass-copy h2 {
+
+        font-size:
+            29px;
+
+    }
+
 
     .benefits {
 
-        margin-top: 48px;
+        margin-top:
+            48px;
 
-        padding:
-            27px 17px;
-
-        border-radius: 20px;
     }
 
 
     .benefits-grid {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
+
     }
 
-
-    /* FOOTER */
 
     .footer-content {
 
         padding:
-            35px 17px 25px;
+            34px 17px 25px;
 
         grid-template-columns:
             1fr;
 
-        gap: 27px;
+        gap:
+            27px;
+
     }
 
 
     .footer-logo {
 
-        height: 38px;
+        height:
+            38px;
+
     }
 
 
@@ -1773,47 +2860,66 @@ input {
 
         padding:
             16px 17px 24px;
+
     }
 
 }
 
 
 /* ==========================================================
-   MOBILE PEQUEÑO
+   MOBILE SMALL
 ========================================================== */
 
-@media (max-width: 410px) {
+@media(max-width:410px) {
 
     .hero-content {
 
         grid-template-columns:
-            86px minmax(0,1fr);
+            88px minmax(0,1fr);
 
-        gap: 14px;
+        gap:
+            13px;
+
     }
 
 
     .hero-poster {
 
-        width: 86px;
+        width:
+            88px;
+
     }
 
 
     .hero-info h1 {
 
-        font-size: 21px;
+        font-size:
+            21px;
+
     }
 
 
     .hero-meta {
 
-        font-size: 9px;
+        font-size:
+            8px;
+
     }
 
 
     .hero-price {
 
-        font-size: 17px;
+        font-size:
+            16px;
+
+    }
+
+
+    .hero-pass {
+
+        display:
+            none;
+
     }
 
 }
@@ -1835,8 +2941,6 @@ input {
     <div class="nav">
 
 
-        <!-- LOGO -->
-
         <a
             href="index.html"
             class="brand">
@@ -1849,32 +2953,46 @@ input {
         </a>
 
 
-        <!-- MENU -->
-
         <nav class="nav-links">
 
             <a href="#eventos">
                 Eventos
             </a>
 
-            <a href="#como-funciona">
-                Cómo funciona
+            <a href="#live-pass">
+                Live Pass
             </a>
 
-            <a href="#informacion">
-                Información
+            <a href="#como-funciona">
+                Cómo funciona
             </a>
 
         </nav>
 
 
-        <a
-            href="#eventos"
-            class="nav-button">
+        <div class="nav-actions">
 
-            VER EVENTOS
 
-        </a>
+            <a
+                href="mis-entradas.html"
+                class="nav-pass">
+
+                🎟 MIS ENTRADAS
+
+            </a>
+
+
+            <a
+                href="#eventos"
+                class="nav-events">
+
+                VER EVENTOS
+
+            </a>
+
+
+        </div>
+
 
     </div>
 
@@ -1882,11 +3000,12 @@ input {
 
 
 <!-- ======================================================
-     HERO / EVENTO DESTACADO
+     HERO
 ====================================================== -->
 
-<section class="hero"
-         id="hero">
+<section
+    class="hero"
+    id="hero">
 
 
     <div
@@ -1902,15 +3021,11 @@ input {
     <div class="hero-content">
 
 
-        <!-- FLYER -->
-
         <div
             class="hero-poster"
             id="heroPoster">
         </div>
 
-
-        <!-- INFO -->
 
         <div class="hero-info">
 
@@ -1934,6 +3049,7 @@ input {
 
             <div class="hero-meta">
 
+
                 <span id="heroDate">
 
                     📅 30 de octubre de 2026
@@ -1947,12 +3063,13 @@ input {
 
                 </span>
 
+
             </div>
 
 
             <div class="hero-price-label">
 
-                Precio por asiento
+                PRECIO POR ASIENTO
 
             </div>
 
@@ -1966,9 +3083,7 @@ input {
                 </span>
 
                 <small>
-
                     / por persona
-
                 </small>
 
             </div>
@@ -1982,7 +3097,7 @@ input {
                     id="heroButton"
                     class="hero-primary">
 
-                    VER ASIENTOS
+                    COMPRAR ENTRADAS
 
                 </a>
 
@@ -1991,14 +3106,25 @@ input {
                     href="#eventos"
                     class="hero-secondary">
 
-                    VER TODOS LOS EVENTOS
+                    VER EVENTOS
+
+                </a>
+
+
+                <a
+                    href="mis-entradas.html"
+                    class="hero-pass">
+
+                    MIS ENTRADAS
 
                 </a>
 
 
             </div>
 
+
         </div>
+
 
     </div>
 
@@ -2006,7 +3132,105 @@ input {
 
 
 <!-- ======================================================
-     BUSCADOR
+     TRUST
+====================================================== -->
+
+<div class="trust-wrapper">
+
+    <div class="trust-bar">
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                ✓
+            </div>
+
+            <div class="trust-copy">
+
+                <strong>
+                    Entrada digital
+                </strong>
+
+                <span>
+                    Acceso directo desde tu teléfono
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                ▦
+            </div>
+
+            <div class="trust-copy">
+
+                <strong>
+                    QR individual
+                </strong>
+
+                <span>
+                    Un código único por cada entrada
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                🔒
+            </div>
+
+            <div class="trust-copy">
+
+                <strong>
+                    Acceso seguro
+                </strong>
+
+                <span>
+                    Validación digital en el evento
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                🎟
+            </div>
+
+            <div class="trust-copy">
+
+                <strong>
+                    Live Pass
+                </strong>
+
+                <span>
+                    Recupera todas tus entradas
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     SEARCH
 ====================================================== -->
 
 <div class="search-area">
@@ -2014,14 +3238,10 @@ input {
     <div class="search-box">
 
 
-        <!-- EVENTO -->
-
         <div class="search-field">
 
             <label>
-
                 EVENTO O ARTISTA
-
             </label>
 
             <input
@@ -2032,14 +3252,10 @@ input {
         </div>
 
 
-        <!-- LUGAR -->
-
         <div class="search-field">
 
             <label>
-
                 CIUDAD O VENUE
-
             </label>
 
             <input
@@ -2050,8 +3266,6 @@ input {
         </div>
 
 
-        <!-- BOTÓN -->
-
         <button
             class="search-button"
             onclick="filterEvents()">
@@ -2059,6 +3273,7 @@ input {
             BUSCAR
 
         </button>
+
 
     </div>
 
@@ -2073,7 +3288,7 @@ input {
 
 
 <!-- ======================================================
-     EVENTOS
+     EVENTS
 ====================================================== -->
 
 <section id="eventos">
@@ -2083,9 +3298,15 @@ input {
 
         <div>
 
+            <div class="section-kicker">
+
+                LIVE TICKETS
+
+            </div>
+
             <h2>
 
-                Eventos disponibles
+                Próximos eventos
 
             </h2>
 
@@ -2123,11 +3344,138 @@ input {
 
     </div>
 
+
 </section>
 
 
 <!-- ======================================================
-     BENEFICIOS
+     LIVE PASS
+====================================================== -->
+
+<section
+    class="livepass-section"
+    id="live-pass">
+
+
+    <div class="livepass-card">
+
+
+        <div class="livepass-copy">
+
+
+            <div class="livepass-badge">
+
+                LIVE PASS
+
+            </div>
+
+
+            <h2>
+
+                Tus entradas.
+                Siempre contigo.
+
+            </h2>
+
+
+            <p>
+
+                Accede a todas tus compras de Live Tickets
+                desde cualquier dispositivo. Solo necesitas
+                el correo utilizado en tu compra y un código
+                de seguridad.
+
+            </p>
+
+
+            <a
+                href="mis-entradas.html"
+                class="livepass-button">
+
+                ABRIR MIS ENTRADAS
+
+            </a>
+
+
+        </div>
+
+
+        <div class="livepass-features">
+
+
+            <div class="livepass-feature">
+
+                <div class="livepass-feature-icon">
+                    ✉
+                </div>
+
+                <div>
+
+                    <strong>
+                        Sin contraseña
+                    </strong>
+
+                    <span>
+                        Recibe un código seguro en tu correo.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="livepass-feature">
+
+                <div class="livepass-feature-icon">
+                    🎟
+                </div>
+
+                <div>
+
+                    <strong>
+                        Todos tus boletos
+                    </strong>
+
+                    <span>
+                        Tus compras reunidas en un solo lugar.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="livepass-feature">
+
+                <div class="livepass-feature-icon">
+                    ▦
+                </div>
+
+                <div>
+
+                    <strong>
+                        QR listo para ingresar
+                    </strong>
+
+                    <span>
+                        Presenta tu entrada directamente desde el teléfono.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     HOW IT WORKS
 ====================================================== -->
 
 <section
@@ -2137,6 +3485,12 @@ input {
 
     <div class="benefits-head">
 
+        <div class="section-kicker">
+
+            SIMPLE Y DIGITAL
+
+        </div>
+
         <h2>
 
             Tu experiencia comienza aquí
@@ -2145,8 +3499,9 @@ input {
 
         <p>
 
-            Compra tus entradas de forma sencilla,
-            selecciona tus asientos y recibe tu acceso digital.
+            Desde la selección del evento hasta el ingreso,
+            Live Tickets mantiene tus entradas organizadas
+            y disponibles digitalmente.
 
         </p>
 
@@ -2156,80 +3511,73 @@ input {
     <div class="benefits-grid">
 
 
-        <!-- 1 -->
-
         <div class="benefit">
 
             <div class="benefit-icon">
-
                 01
-
             </div>
 
             <strong>
-
                 Elige tu evento
-
             </strong>
 
             <p>
-
-                Consulta nuestros eventos disponibles
-                y revisa todos los detalles antes de comprar.
-
+                Consulta los eventos disponibles,
+                fecha, lugar y precio de las entradas.
             </p>
 
         </div>
 
 
-        <!-- 2 -->
-
         <div class="benefit">
 
             <div class="benefit-icon">
-
                 02
-
             </div>
 
             <strong>
-
-                Selecciona tus asientos
-
+                Selecciona tu asiento
             </strong>
 
             <p>
-
-                Consulta disponibilidad en tiempo real
-                y elige exactamente dónde quieres estar.
-
+                Revisa la disponibilidad y elige
+                exactamente dónde quieres estar.
             </p>
 
         </div>
 
 
-        <!-- 3 -->
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                03
+            </div>
+
+            <strong>
+                Recibe tu QR
+            </strong>
+
+            <p>
+                Cada asiento genera una entrada digital
+                individual para el ingreso al evento.
+            </p>
+
+        </div>
+
 
         <div class="benefit">
 
             <div class="benefit-icon">
-
-                03
-
+                04
             </div>
 
             <strong>
-
-                Recibe tu entrada QR
-
+                Guarda en Live Pass
             </strong>
 
             <p>
-
-                Después de confirmar tu compra,
-                recibirás un código QR individual
-                para el ingreso al evento.
-
+                Recupera tus entradas cuando quieras
+                usando únicamente tu correo electrónico.
             </p>
 
         </div>
@@ -2247,15 +3595,11 @@ input {
      FOOTER
 ====================================================== -->
 
-<footer
-    class="footer"
-    id="informacion">
+<footer class="footer">
 
 
     <div class="footer-content">
 
-
-        <!-- MARCA -->
 
         <div>
 
@@ -2267,80 +3611,66 @@ input {
 
             <p class="footer-description">
 
-                Live Tickets es una plataforma
-                para la venta, reservación
-                y control digital de entradas
-                para eventos en vivo.
+                Live Tickets es una plataforma digital
+                para la venta, reservación y control
+                de entradas para eventos en vivo.
 
             </p>
 
         </div>
 
 
-        <!-- EVENTOS -->
-
         <div class="footer-column">
 
             <strong>
-
                 LIVE TICKETS
-
             </strong>
 
             <a href="#eventos">
-
                 Eventos
+            </a>
 
+            <a href="mis-entradas.html">
+                Mis Entradas
             </a>
 
             <a href="#como-funciona">
-
                 Cómo comprar
-
             </a>
 
         </div>
 
-
-        <!-- INFORMACIÓN -->
 
         <div class="footer-column">
 
             <strong>
-
                 INFORMACIÓN
-
             </strong>
 
-            <a href="#informacion">
-
+            <a href="#">
                 Ayuda
-
             </a>
 
-            <a href="#informacion">
-
+            <a href="#">
                 Términos y condiciones
-
             </a>
 
-            <a href="#informacion">
-
+            <a href="#">
                 Política de privacidad
-
             </a>
 
         </div>
+
 
     </div>
 
 
     <div class="footer-bottom">
 
-        © 2026 Live Tickets.
-        Todos los derechos reservados.
+        © 2026 Live Tickets · Honduras · Todos los derechos reservados.
 
     </div>
+
 
 </footer>
 
@@ -2348,12 +3678,8 @@ input {
 <script>
 
 /* ==========================================================
-   ARCHIVOS VISUALES
+   DEFAULT FLYER
 ========================================================== */
-
-/*
-Tus archivos están en la raíz del repositorio.
-*/
 
 const DEFAULT_FLYER =
     "FLYER%201080X1350.png";
@@ -2379,28 +3705,36 @@ const db =
 
 
 /* ==========================================================
-   VARIABLES
+   STATE
 ========================================================== */
 
-let allEvents = [];
+let allEvents =
+    [];
 
-let filteredEvents = [];
+
+let filteredEvents =
+    [];
 
 
 /* ==========================================================
-   DINERO
+   MONEY
 ========================================================== */
 
 function money(value) {
 
-    return "L " +
-
-        Number(value || 0)
+    return "L "
+        +
+        Number(
+            value || 0
+        )
         .toLocaleString(
             "es-HN",
             {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+                minimumFractionDigits:
+                    2,
+
+                maximumFractionDigits:
+                    2
             }
         );
 
@@ -2408,87 +3742,141 @@ function money(value) {
 
 
 /* ==========================================================
-   FECHA
+   DATE
 ========================================================== */
 
-function formatDate(date) {
+function formatDate(value) {
 
-    if (!date) {
+    if (!value) {
 
         return "Fecha por confirmar";
 
     }
 
 
-    return new Date(date)
-        .toLocaleDateString(
-            "es-HN",
-            {
-                day: "2-digit",
-                month: "long",
-                year: "numeric"
-            }
+    const date =
+        new Date(
+            value
         );
 
-}
 
-
-/* ==========================================================
-   FECHA CORTA
-========================================================== */
-
-function formatDateShort(date) {
-
-    if (!date) {
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
 
         return "Fecha por confirmar";
 
     }
 
 
-    return new Date(date)
-        .toLocaleDateString(
-            "es-HN",
-            {
-                weekday: "short",
-                day: "2-digit",
-                month: "short",
-                year: "numeric"
-            }
-        );
+    return new Intl.DateTimeFormat(
+        "es-HN",
+        {
+            day:
+                "2-digit",
 
-}
+            month:
+                "long",
 
+            year:
+                "numeric",
 
-/* ==========================================================
-   IMAGEN EVENTO
-========================================================== */
-
-function getEventImage(evento) {
-
-    return (
-
-        evento.flyer_url ||
-
-        evento.flyer ||
-
-        evento.imagen_url ||
-
-        evento.imagen ||
-
-        evento.portada_url ||
-
-        evento.banner_url ||
-
-        DEFAULT_FLYER
-
+            timeZone:
+                "America/Tegucigalpa"
+        }
+    )
+    .format(
+        date
     );
 
 }
 
 
 /* ==========================================================
-   TEXTO SEGURO
+   SHORT DATE
+========================================================== */
+
+function formatDateShort(value) {
+
+    if (!value) {
+
+        return "Fecha por confirmar";
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "Fecha por confirmar";
+
+    }
+
+
+    return new Intl.DateTimeFormat(
+        "es-HN",
+        {
+            weekday:
+                "short",
+
+            day:
+                "2-digit",
+
+            month:
+                "short",
+
+            year:
+                "numeric",
+
+            timeZone:
+                "America/Tegucigalpa"
+        }
+    )
+    .format(
+        date
+    );
+
+}
+
+
+/* ==========================================================
+   IMAGE
+========================================================== */
+
+function getEventImage(evento) {
+
+    return (
+        evento.flyer_url
+        ||
+        evento.flyer
+        ||
+        evento.imagen_url
+        ||
+        evento.imagen
+        ||
+        evento.portada_url
+        ||
+        evento.banner_url
+        ||
+        DEFAULT_FLYER
+    );
+
+}
+
+
+/* ==========================================================
+   ESCAPE HTML
 ========================================================== */
 
 function escapeHTML(value) {
@@ -2498,8 +3886,10 @@ function escapeHTML(value) {
             "div"
         );
 
+
     div.textContent =
         value ?? "";
+
 
     return div.innerHTML;
 
@@ -2507,7 +3897,7 @@ function escapeHTML(value) {
 
 
 /* ==========================================================
-   CARGAR EVENTOS
+   LOAD EVENTS
 ========================================================== */
 
 async function loadEvents() {
@@ -2519,22 +3909,22 @@ async function loadEvents() {
             data,
             error
         } =
-
         await db
-
-            .from("eventos")
-
-            .select("*")
-
+            .from(
+                "eventos"
+            )
+            .select(
+                "*"
+            )
             .eq(
                 "activo",
                 true
             )
-
             .order(
                 "fecha",
                 {
-                    ascending: true
+                    ascending:
+                        true
                 }
             );
 
@@ -2547,17 +3937,22 @@ async function loadEvents() {
 
 
         allEvents =
-            data || [];
+            data
+            ||
+            [];
 
 
         filteredEvents =
-            [...allEvents];
+            [
+                ...allEvents
+            ];
 
 
         renderFeaturedEvent();
 
 
         renderEvents();
+
 
     }
 
@@ -2571,8 +3966,8 @@ async function loadEvents() {
 
 
         const grid =
-
-            document.getElementById(
+            document
+            .getElementById(
                 "eventsGrid"
             );
 
@@ -2599,7 +3994,7 @@ async function loadEvents() {
 
 
 /* ==========================================================
-   EVENTO DESTACADO
+   FEATURED EVENT
 ========================================================== */
 
 function renderFeaturedEvent() {
@@ -2612,11 +4007,6 @@ function renderFeaturedEvent() {
 
     }
 
-
-    /*
-    El primer evento activo
-    por fecha será el destacado.
-    */
 
     const evento =
         allEvents[0];
@@ -2634,7 +4024,8 @@ function renderFeaturedEvent() {
         )
         .textContent =
 
-        evento.nombre ||
+        evento.nombre
+        ||
         "Evento";
 
 
@@ -2644,7 +4035,8 @@ function renderFeaturedEvent() {
         )
         .textContent =
 
-        "📅 " +
+        "📅 "
+        +
         formatDate(
             evento.fecha
         );
@@ -2656,10 +4048,11 @@ function renderFeaturedEvent() {
         )
         .textContent =
 
-        "📍 " +
-
+        "📍 "
+        +
         (
-            evento.lugar ||
+            evento.lugar
+            ||
             "Lugar por confirmar"
         );
 
@@ -2705,14 +4098,14 @@ function renderFeaturedEvent() {
 
 
 /* ==========================================================
-   RENDER EVENTOS
+   RENDER EVENTS
 ========================================================== */
 
 function renderEvents() {
 
     const grid =
-
-        document.getElementById(
+        document
+        .getElementById(
             "eventsGrid"
         );
 
@@ -2720,10 +4113,6 @@ function renderEvents() {
     grid.innerHTML =
         "";
 
-
-    /*
-    SIN RESULTADOS
-    */
 
     if (
         !filteredEvents.length
@@ -2739,8 +4128,8 @@ function renderEvents() {
                 </strong>
 
                 <span>
-                    Prueba con otro nombre,
-                    artista o lugar.
+                    Prueba con otro artista,
+                    evento o lugar.
                 </span>
 
             </div>
@@ -2753,40 +4142,36 @@ function renderEvents() {
     }
 
 
-    /*
-    CREAR TARJETAS
-    */
-
-    filteredEvents.forEach(
+    filteredEvents
+    .forEach(
         evento => {
 
 
             const image =
-
                 getEventImage(
                     evento
                 );
 
 
             const nombre =
-
                 escapeHTML(
-                    evento.nombre ||
+                    evento.nombre
+                    ||
                     "Evento"
                 );
 
 
             const lugar =
-
                 escapeHTML(
-                    evento.lugar ||
+                    evento.lugar
+                    ||
                     "Lugar por confirmar"
                 );
 
 
             const card =
-
-                document.createElement(
+                document
+                .createElement(
                     "article"
                 );
 
@@ -2797,8 +4182,6 @@ function renderEvents() {
 
             card.innerHTML = `
 
-
-                <!-- IMAGEN -->
 
                 <div
                     class="event-image"
@@ -2811,17 +4194,20 @@ function renderEvents() {
 
                     </div>
 
+
                 </div>
 
-
-                <!-- INFORMACIÓN -->
 
                 <div class="event-body">
 
 
                     <div class="event-date-small">
 
-                        ${formatDateShort(evento.fecha)}
+                        ${escapeHTML(
+                            formatDateShort(
+                                evento.fecha
+                            )
+                        )}
 
                     </div>
 
@@ -2844,7 +4230,11 @@ function renderEvents() {
 
                             <span>
 
-                                ${formatDate(evento.fecha)}
+                                ${escapeHTML(
+                                    formatDate(
+                                        evento.fecha
+                                    )
+                                )}
 
                             </span>
 
@@ -2885,22 +4275,20 @@ function renderEvents() {
                     </div>
 
 
-                    <!-- FOOTER CARD -->
-
                     <div class="event-footer">
 
 
                         <div class="event-price-box">
 
                             <small>
-
                                 Precio por asiento
-
                             </small>
 
                             <strong>
 
-                                ${money(evento.precio_asiento)}
+                                ${money(
+                                    evento.precio_asiento
+                                )}
 
                             </strong>
 
@@ -2918,6 +4306,7 @@ function renderEvents() {
 
                     </div>
 
+
                 </div>
 
             `;
@@ -2934,52 +4323,59 @@ function renderEvents() {
 
 
 /* ==========================================================
-   FILTRAR EVENTOS
+   FILTER
 ========================================================== */
 
 function filterEvents() {
 
     const eventText =
-
         document
-            .getElementById(
-                "searchEvent"
-            )
-            .value
-            .trim()
-            .toLowerCase();
+        .getElementById(
+            "searchEvent"
+        )
+        .value
+        .trim()
+        .toLowerCase();
 
 
     const placeText =
-
         document
-            .getElementById(
-                "searchPlace"
-            )
-            .value
-            .trim()
-            .toLowerCase();
+        .getElementById(
+            "searchPlace"
+        )
+        .value
+        .trim()
+        .toLowerCase();
 
 
     filteredEvents =
-
-        allEvents.filter(
+        allEvents
+        .filter(
             evento => {
 
 
                 const nombre =
-
-                    (
-                        evento.nombre ||
+                    String(
+                        evento.nombre
+                        ||
                         ""
                     )
                     .toLowerCase();
 
 
                 const lugar =
+                    String(
+                        evento.lugar
+                        ||
+                        ""
+                    )
+                    .toLowerCase();
 
-                    (
-                        evento.lugar ||
+
+                const descripcion =
+                    String(
+                        evento.descripcion
+                        ||
                         ""
                     )
                     .toLowerCase();
@@ -2992,6 +4388,12 @@ function filterEvents() {
                     ||
 
                     nombre.includes(
+                        eventText
+                    )
+
+                    ||
+
+                    descripcion.includes(
                         eventText
                     );
 
@@ -3008,13 +4410,9 @@ function filterEvents() {
 
 
                 return (
-
                     matchEvent
-
                     &&
-
                     matchPlace
-
                 );
 
             }
@@ -3030,7 +4428,8 @@ function filterEvents() {
         )
         .scrollIntoView(
             {
-                behavior: "smooth"
+                behavior:
+                    "smooth"
             }
         );
 
@@ -3038,29 +4437,39 @@ function filterEvents() {
 
 
 /* ==========================================================
-   BUSCAR CON ENTER
+   ENTER SEARCH
 ========================================================== */
 
-document.addEventListener(
+document
+.addEventListener(
     "keydown",
     function(event) {
 
 
         if (
-            event.key ===
+            event.key !==
             "Enter"
+        ) {
 
-            &&
+            return;
 
-            (
-                document.activeElement.id ===
-                "searchEvent"
+        }
 
-                ||
 
-                document.activeElement.id ===
-                "searchPlace"
-            )
+        const activeId =
+            document
+            .activeElement
+            ?.id;
+
+
+        if (
+            activeId ===
+            "searchEvent"
+
+            ||
+
+            activeId ===
+            "searchPlace"
         ) {
 
             filterEvents();
@@ -3072,12 +4481,13 @@ document.addEventListener(
 
 
 /* ==========================================================
-   INICIAR
+   START
 ========================================================== */
 
 loadEvents();
 
 </script>
+
 
 </body>
 
