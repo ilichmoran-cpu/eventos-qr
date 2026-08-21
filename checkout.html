@@ -31,6 +31,10 @@
 
 <style>
 
+/* ==========================================================
+   GENERAL
+========================================================== */
+
 * {
     box-sizing: border-box;
 }
@@ -53,11 +57,19 @@
 
     --green: #16a34a;
 
+    --green-light: #ecfdf5;
+
     --purple: #7c3aed;
+
+    --purple-light: #f5f3ff;
 
     --red: #dc2626;
 
     --orange: #f97316;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -71,9 +83,14 @@ body {
         Arial,
         sans-serif;
 
-    background: var(--bg);
+    background:
+        var(--bg);
 
-    color: var(--text);
+    color:
+        var(--text);
+
+    -webkit-font-smoothing:
+        antialiased;
 }
 
 button,
@@ -95,17 +112,23 @@ input {
 
     z-index: 1000;
 
-    background: #08101f;
+    background:
+        rgba(8,16,31,.98);
 
     border-bottom:
         1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.15);
 }
 
 .nav {
 
+    width: 100%;
+
     max-width: 1250px;
 
-    min-height: 75px;
+    min-height: 76px;
 
     margin: auto;
 
@@ -126,13 +149,17 @@ input {
     display: flex;
 
     align-items: center;
+
+    text-decoration: none;
 }
 
 .brand-logo {
 
-    height: 47px;
+    display: block;
 
     width: auto;
+
+    height: 48px;
 
     max-width: 240px;
 
@@ -141,16 +168,22 @@ input {
 
 .secure-label {
 
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
     padding:
         9px 13px;
-
-    color:
-        rgba(255,255,255,.8);
 
     border:
         1px solid rgba(255,255,255,.16);
 
     border-radius: 999px;
+
+    color:
+        rgba(255,255,255,.78);
 
     font-size: 10px;
 
@@ -162,7 +195,7 @@ input {
    HERO
 ========================================================== */
 
-.hero {
+.checkout-hero {
 
     position: relative;
 
@@ -170,27 +203,35 @@ input {
 
     min-height: 205px;
 
-    background: #08101f;
+    background:
+        #08101f;
 
     color: white;
 }
 
-.hero-bg {
+.checkout-hero-bg {
 
     position: absolute;
 
-    inset: -40px;
+    inset: -50px;
 
-    background:
-        url("FLYER%201080X1350.png")
-        center/cover;
+    background-image:
+        url("FLYER%201080X1350.png");
 
-    filter: blur(35px);
+    background-size: cover;
+
+    background-position: center;
+
+    filter:
+        blur(35px);
+
+    transform:
+        scale(1.2);
 
     opacity: .35;
 }
 
-.hero-overlay {
+.checkout-hero-overlay {
 
     position: absolute;
 
@@ -200,15 +241,17 @@ input {
         linear-gradient(
             90deg,
             rgba(5,10,20,.98),
-            rgba(5,10,20,.80)
+            rgba(5,10,20,.82)
         );
 }
 
-.hero-content {
+.checkout-hero-content {
 
     position: relative;
 
     z-index: 2;
+
+    width: 100%;
 
     max-width: 1250px;
 
@@ -225,35 +268,49 @@ input {
 
     justify-content: space-between;
 
-    gap: 25px;
+    gap: 30px;
+}
+
+.hero-info {
+
+    max-width: 780px;
 }
 
 .hero-label {
 
     display: inline-flex;
 
+    margin-bottom: 10px;
+
     padding:
         7px 11px;
 
-    margin-bottom: 10px;
-
     background:
-        rgba(37,99,235,.2);
+        rgba(37,99,235,.18);
+
+    border:
+        1px solid rgba(96,165,250,.25);
 
     border-radius: 999px;
 
     font-size: 9px;
 
     font-weight: 800;
+
+    letter-spacing: .9px;
 }
 
 .hero-info h1 {
 
     margin:
-        0 0 9px;
+        0 0 10px;
 
     font-size:
-        clamp(27px,4vw,43px);
+        clamp(28px,4vw,44px);
+
+    line-height: 1.05;
+
+    letter-spacing: -1px;
 }
 
 .hero-info p {
@@ -263,25 +320,31 @@ input {
     color:
         rgba(255,255,255,.65);
 
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .hero-poster {
 
-    width: 100px;
+    flex: 0 0 auto;
 
-    aspect-ratio: 4/5;
+    width: 105px;
 
-    flex-shrink: 0;
-
-    background:
-        url("FLYER%201080X1350.png")
-        center/cover;
+    aspect-ratio: 4 / 5;
 
     border-radius: 12px;
 
+    background-image:
+        url("FLYER%201080X1350.png");
+
+    background-size: cover;
+
+    background-position: center;
+
     box-shadow:
         0 15px 35px rgba(0,0,0,.35);
+
+    border:
+        1px solid rgba(255,255,255,.12);
 }
 
 
@@ -291,12 +354,14 @@ input {
 
 .page {
 
+    width: 100%;
+
     max-width: 1120px;
 
     margin: auto;
 
     padding:
-        30px 20px 80px;
+        34px 20px 80px;
 }
 
 .checkout-layout {
@@ -304,8 +369,7 @@ input {
     display: grid;
 
     grid-template-columns:
-        minmax(0,1fr)
-        360px;
+        minmax(0,1fr) 360px;
 
     gap: 22px;
 
@@ -314,18 +378,17 @@ input {
 
 
 /* ==========================================================
-   CARDS
+   CARD
 ========================================================== */
 
-.card,
-.order-card {
+.card {
 
     background: white;
 
     border:
         1px solid #e5e9ef;
 
-    border-radius: 20px;
+    border-radius: 21px;
 
     overflow: hidden;
 
@@ -333,47 +396,37 @@ input {
         0 12px 35px rgba(15,23,42,.07);
 }
 
-.card-header,
-.order-head {
+.card-header {
 
     padding:
-        20px 21px;
+        21px 22px;
 
     border-bottom:
         1px solid var(--line);
 }
 
-.card-header h2,
-.order-head h3 {
+.card-header h2 {
 
     margin:
         0 0 5px;
-}
-
-.card-header h2 {
 
     font-size: 19px;
 }
 
-.order-head h3 {
-
-    font-size: 17px;
-}
-
-.card-header p,
-.order-head p {
+.card-header p {
 
     margin: 0;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 10px;
+    font-size: 11px;
 }
 
-.card-content,
-.order-content {
+.card-content {
 
-    padding: 20px;
+    padding:
+        22px;
 }
 
 
@@ -383,25 +436,26 @@ input {
 
 .timer-box {
 
-    padding:
-        15px 16px;
-
-    margin-bottom: 20px;
-
     display: flex;
-
-    align-items: center;
 
     justify-content: space-between;
 
+    align-items: center;
+
     gap: 15px;
 
-    background: #f5f3ff;
+    margin-bottom: 23px;
+
+    padding:
+        16px 17px;
+
+    background:
+        var(--purple-light);
 
     border:
         1px solid #ddd6fe;
 
-    border-radius: 13px;
+    border-radius: 14px;
 }
 
 .timer-info strong {
@@ -410,25 +464,35 @@ input {
 
     margin-bottom: 4px;
 
-    color: #5b21b6;
+    color:
+        #5b21b6;
 
     font-size: 12px;
 }
 
 .timer-info span {
 
-    color: #7c3aed;
+    color:
+        #7c3aed;
 
-    font-size: 9px;
+    font-size: 10px;
 }
 
 .timer {
 
-    color: #5b21b6;
+    min-width: 78px;
+
+    text-align: right;
+
+    color:
+        #5b21b6;
 
     font-size: 23px;
 
     font-weight: 800;
+
+    font-variant-numeric:
+        tabular-nums;
 }
 
 
@@ -438,25 +502,27 @@ input {
 
 .status-box {
 
-    padding:
-        14px 15px;
-
-    margin-bottom: 20px;
-
     display: flex;
 
     align-items: center;
 
-    gap: 11px;
+    gap: 12px;
+
+    margin-bottom: 22px;
+
+    padding:
+        15px 16px;
 
     border-radius: 13px;
 }
 
 .status-icon {
 
-    width: 37px;
+    width: 38px;
 
-    height: 37px;
+    height: 38px;
+
+    flex-shrink: 0;
 
     display: flex;
 
@@ -464,11 +530,11 @@ input {
 
     justify-content: center;
 
-    flex-shrink: 0;
-
     border-radius: 50%;
 
     color: white;
+
+    font-size: 16px;
 
     font-weight: 800;
 }
@@ -479,19 +545,23 @@ input {
 
     margin-bottom: 3px;
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .status-content span {
 
-    color: #667085;
+    color:
+        var(--muted);
 
-    font-size: 9px;
+    font-size: 10px;
+
+    line-height: 1.5;
 }
 
 .status-pending {
 
-    background: #f5f3ff;
+    background:
+        #f5f3ff;
 
     border:
         1px solid #ddd6fe;
@@ -499,12 +569,20 @@ input {
 
 .status-pending .status-icon {
 
-    background: #7c3aed;
+    background:
+        #7c3aed;
+}
+
+.status-pending strong {
+
+    color:
+        #5b21b6;
 }
 
 .status-paid {
 
-    background: #ecfdf5;
+    background:
+        #ecfdf5;
 
     border:
         1px solid #bbf7d0;
@@ -512,7 +590,14 @@ input {
 
 .status-paid .status-icon {
 
-    background: #16a34a;
+    background:
+        #16a34a;
+}
+
+.status-paid strong {
+
+    color:
+        #166534;
 }
 
 
@@ -520,22 +605,27 @@ input {
    DETAILS
 ========================================================== */
 
+.detail-list {
+
+    display: grid;
+}
+
 .detail-row {
 
-    min-height: 46px;
+    min-height: 48px;
 
     display: flex;
 
-    align-items: center;
-
     justify-content: space-between;
+
+    align-items: center;
 
     gap: 20px;
 
     border-bottom:
         1px solid #eef1f4;
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .detail-row:last-child {
@@ -545,12 +635,27 @@ input {
 
 .detail-row span {
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
 .detail-row strong {
 
     text-align: right;
+
+    color:
+        #111827;
+}
+
+.reservation-code {
+
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        monospace;
+
+    letter-spacing: .5px;
 }
 
 
@@ -562,7 +667,55 @@ input {
 
     position: sticky;
 
-    top: 95px;
+    top: 98px;
+
+    background:
+        white;
+
+    border:
+        1px solid #e5e9ef;
+
+    border-radius:
+        21px;
+
+    overflow:
+        hidden;
+
+    box-shadow:
+        0 15px 40px rgba(15,23,42,.09);
+}
+
+.order-head {
+
+    padding:
+        20px;
+
+    border-bottom:
+        1px solid var(--line);
+}
+
+.order-head h3 {
+
+    margin:
+        0 0 5px;
+
+    font-size: 17px;
+}
+
+.order-head p {
+
+    margin: 0;
+
+    color:
+        var(--muted);
+
+    font-size: 10px;
+}
+
+.order-content {
+
+    padding:
+        20px;
 }
 
 .order-row {
@@ -571,27 +724,34 @@ input {
 
     justify-content: space-between;
 
+    align-items: center;
+
+    gap: 15px;
+
     margin-bottom: 13px;
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .order-row span {
 
-    color: var(--muted);
+    color:
+        var(--muted);
 }
 
 .order-total {
-
-    padding-top: 17px;
-
-    margin-top: 17px;
 
     display: flex;
 
     justify-content: space-between;
 
-    align-items: end;
+    align-items: flex-end;
+
+    gap: 15px;
+
+    margin-top: 19px;
+
+    padding-top: 18px;
 
     border-top:
         1px solid var(--line);
@@ -599,9 +759,10 @@ input {
 
 .order-total span {
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .order-total strong {
@@ -611,21 +772,24 @@ input {
 
 
 /* ==========================================================
-   TEST MODE
+   ADMIN TEST BOX
 ========================================================== */
 
 .test-box {
 
     margin-top: 20px;
 
-    padding: 15px;
+    padding:
+        15px;
 
-    background: #fff7ed;
+    background:
+        #fff7ed;
 
     border:
         1px solid #fed7aa;
 
-    border-radius: 13px;
+    border-radius:
+        13px;
 }
 
 .test-title {
@@ -638,14 +802,17 @@ input {
 
     gap: 10px;
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .test-title strong {
 
-    color: #9a3412;
+    color:
+        #9a3412;
 
-    font-size: 11px;
+    font-size: 10px;
+
+    font-weight: 800;
 }
 
 .test-badge {
@@ -653,11 +820,14 @@ input {
     padding:
         5px 8px;
 
-    background: #f97316;
+    background:
+        #f97316;
 
-    color: white;
+    color:
+        white;
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
     font-size: 7px;
 
@@ -668,18 +838,19 @@ input {
 
     margin-bottom: 12px;
 
-    color: #9a3412;
+    color:
+        #9a3412;
 
     font-size: 9px;
 
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
 .test-input {
 
     width: 100%;
 
-    min-height: 40px;
+    min-height: 41px;
 
     margin-bottom: 8px;
 
@@ -689,28 +860,39 @@ input {
     border:
         1px solid #fdba74;
 
-    border-radius: 9px;
+    border-radius:
+        9px;
 
-    outline: none;
+    outline:
+        none;
+
+    background: white;
+
+    font-size: 11px;
 }
 
 .test-login {
 
     width: 100%;
 
-    min-height: 40px;
+    min-height: 41px;
 
-    border: none;
+    border:
+        none;
 
-    border-radius: 9px;
+    border-radius:
+        9px;
 
-    background: #111827;
+    background:
+        #111827;
 
-    color: white;
+    color:
+        white;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    font-size: 10px;
+    font-size: 9px;
 
     font-weight: 800;
 }
@@ -719,11 +901,12 @@ input {
 
     display: none;
 
-    color: #166534;
+    color:
+        #166534;
 
-    font-size: 10px;
+    font-size: 9px;
 
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
 .test-logout {
@@ -734,15 +917,19 @@ input {
 
     border: none;
 
-    background: transparent;
+    background:
+        transparent;
 
-    color: #9a3412;
+    color:
+        #9a3412;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    text-decoration: underline;
+    text-decoration:
+        underline;
 
-    font-size: 9px;
+    font-size: 8px;
 }
 
 
@@ -754,92 +941,125 @@ input {
 
     width: 100%;
 
-    min-height: 52px;
+    min-height: 54px;
 
-    margin-top: 17px;
+    margin-top: 18px;
 
     border: none;
 
-    border-radius: 12px;
+    border-radius: 13px;
 
-    background: var(--primary);
+    background:
+        var(--primary);
 
-    color: white;
+    color:
+        white;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
     font-size: 12px;
 
     font-weight: 800;
+
+    transition:
+        .2s;
+}
+
+.pay-button:hover:not(:disabled) {
+
+    background:
+        var(--primary-dark);
+
+    transform:
+        translateY(-1px);
 }
 
 .pay-button:disabled {
 
-    background: #9ca3af;
+    background:
+        #9ca3af;
 
-    cursor: not-allowed;
+    cursor:
+        not-allowed;
+
+    transform:
+        none;
 }
 
 .payment-note {
 
-    margin-top: 10px;
+    margin-top: 11px;
 
-    color: #667085;
+    padding:
+        10px 11px;
 
-    text-align: center;
+    background:
+        #f8fafc;
 
-    font-size: 8px;
+    border:
+        1px solid #e5e7eb;
 
-    line-height: 1.5;
+    border-radius:
+        10px;
+
+    color:
+        #667085;
+
+    text-align:
+        center;
+
+    font-size:
+        8px;
+
+    line-height:
+        1.55;
 }
 
 
 /* ==========================================================
-   SUCCESS / EXPIRED
+   SUCCESS
 ========================================================== */
 
-.success-card,
-.expired-card {
+.success-card {
 
     display: none;
 
     margin-bottom: 22px;
 
-    padding: 26px;
+    padding:
+        26px;
 
-    background: white;
-
-    border-radius: 20px;
-
-    text-align: center;
-}
-
-.success-card {
+    background:
+        linear-gradient(
+            135deg,
+            #ecfdf5,
+            #f0fdf4
+        );
 
     border:
         1px solid #bbf7d0;
+
+    border-radius:
+        20px;
+
+    text-align:
+        center;
 }
 
-.expired-card {
-
-    border:
-        1px solid #fecaca;
-}
-
-.success-card.show,
-.expired-card.show {
+.success-card.show {
 
     display: block;
 }
 
-.big-icon {
+.success-icon {
 
-    width: 55px;
+    width: 56px;
 
-    height: 55px;
+    height: 56px;
 
     margin:
-        0 auto 12px;
+        0 auto 13px;
 
     display: flex;
 
@@ -847,44 +1067,206 @@ input {
 
     justify-content: center;
 
-    border-radius: 50%;
+    background:
+        #16a34a;
 
-    color: white;
+    color:
+        white;
+
+    border-radius:
+        50%;
+
+    font-size:
+        25px;
+
+    font-weight: 800;
+}
+
+.success-card h2 {
+
+    margin:
+        0 0 7px;
+
+    color:
+        #166534;
+
+    font-size:
+        23px;
+}
+
+.success-card p {
+
+    max-width:
+        570px;
+
+    margin:
+        auto;
+
+    color:
+        #4b5563;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.6;
+}
+
+
+/* ==========================================================
+   EMAIL STATUS
+========================================================== */
+
+.email-success {
+
+    display: none;
+
+    margin-top: 14px;
+
+    padding:
+        11px 14px;
+
+    background:
+        #ffffff;
+
+    border:
+        1px solid #bbf7d0;
+
+    border-radius:
+        11px;
+
+    color:
+        #166534;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+}
+
+.email-success.show {
+
+    display: inline-block;
+}
+
+
+/* ==========================================================
+   EXPIRED
+========================================================== */
+
+.expired-card {
+
+    display: none;
+
+    padding:
+        40px 24px;
+
+    background: white;
+
+    border:
+        1px solid #fecaca;
+
+    border-radius:
+        20px;
+
+    text-align:
+        center;
+
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.07);
+}
+
+.expired-card.show {
+
+    display: block;
+}
+
+.expired-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    margin:
+        0 auto 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #dc2626;
+
+    color:
+        white;
+
+    border-radius:
+        50%;
 
     font-size: 24px;
 
     font-weight: 800;
 }
 
-.success-card .big-icon {
-
-    background: #16a34a;
-}
-
-.expired-card .big-icon {
-
-    background: #dc2626;
-}
-
-.success-card h2,
 .expired-card h2 {
 
     margin:
-        0 0 7px;
+        0 0 8px;
+
+    font-size: 22px;
 }
 
-.success-card p,
 .expired-card p {
 
-    margin: auto;
+    max-width:
+        510px;
 
-    max-width: 550px;
+    margin:
+        0 auto 20px;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 10px;
+    font-size:
+        11px;
 
-    line-height: 1.6;
+    line-height:
+        1.6;
+}
+
+.back-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding:
+        0 17px;
+
+    background:
+        #111827;
+
+    color:
+        white;
+
+    border-radius:
+        11px;
+
+    text-decoration:
+        none;
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
 }
 
 
@@ -896,7 +1278,8 @@ input {
 
     display: none;
 
-    margin-top: 27px;
+    margin-top:
+        28px;
 }
 
 .tickets-section.show {
@@ -906,24 +1289,29 @@ input {
 
 .tickets-title {
 
-    margin-bottom: 17px;
+    margin-bottom:
+        18px;
 }
 
 .tickets-title h2 {
 
     margin:
-        0 0 5px;
+        0 0 6px;
 
-    font-size: 23px;
+    font-size:
+        24px;
 }
 
 .tickets-title p {
 
-    margin: 0;
+    margin:
+        0;
 
-    color: var(--muted);
+    color:
+        var(--muted);
 
-    font-size: 10px;
+    font-size:
+        11px;
 }
 
 .tickets-grid {
@@ -933,453 +1321,925 @@ input {
     grid-template-columns:
         repeat(2,minmax(0,1fr));
 
-    gap: 18px;
+    gap:
+        20px;
 }
+
+
+/* ==========================================================
+   DIGITAL TICKET
+========================================================== */
 
 .ticket {
 
+    position: relative;
+
     overflow: hidden;
 
-    background: white;
+    background:
+        white;
 
     border:
         1px solid #e2e7ed;
 
-    border-radius: 20px;
+    border-radius:
+        22px;
 
     box-shadow:
-        0 12px 30px rgba(15,23,42,.08);
+        0 14px 35px rgba(15,23,42,.09);
 }
 
 .ticket-header {
 
     position: relative;
 
-    min-height: 135px;
+    min-height:
+        135px;
 
-    padding: 18px;
+    padding:
+        19px 20px;
 
-    overflow: hidden;
-
-    background: #08101f;
-
-    color: white;
-}
-
-.ticket-bg {
-
-    position: absolute;
-
-    inset: -20px;
+    overflow:
+        hidden;
 
     background:
-        url("FLYER%201080X1350.png")
-        center/cover;
+        #08101f;
 
-    filter: blur(18px);
-
-    opacity: .28;
+    color:
+        white;
 }
 
-.ticket-overlay {
+.ticket-header-bg {
 
-    position: absolute;
+    position:
+        absolute;
 
-    inset: 0;
+    inset:
+        -25px;
+
+    background-image:
+        url("FLYER%201080X1350.png");
+
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    filter:
+        blur(18px);
+
+    opacity:
+        .32;
+}
+
+.ticket-header-overlay {
+
+    position:
+        absolute;
+
+    inset:
+        0;
 
     background:
-        rgba(8,16,31,.78);
+        linear-gradient(
+            90deg,
+            rgba(8,16,31,.92),
+            rgba(8,16,31,.70)
+        );
 }
 
-.ticket-head-content {
+.ticket-header-content {
 
-    position: relative;
+    position:
+        relative;
 
-    z-index: 2;
+    z-index:
+        2;
 }
 
 .ticket-brand {
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: space-between;
+    align-items:
+        center;
 
-    align-items: center;
+    justify-content:
+        space-between;
 
-    gap: 15px;
+    gap:
+        12px;
 
-    margin-bottom: 13px;
+    margin-bottom:
+        14px;
 }
 
-.ticket-logo {
+.ticket-mini-logo {
 
-    height: 23px;
+    width:
+        auto;
 
-    max-width: 120px;
+    height:
+        24px;
 
-    object-fit: contain;
+    max-width:
+        115px;
+
+    object-fit:
+        contain;
 }
 
-.ticket-label {
+.ticket-badge {
+
+    display:
+        inline-flex;
 
     padding:
-        5px 8px;
+        6px 9px;
 
     border:
-        1px solid rgba(255,255,255,.17);
+        1px solid rgba(255,255,255,.16);
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
-    font-size: 7px;
+    background:
+        rgba(255,255,255,.08);
 
-    font-weight: 800;
+    color:
+        rgba(255,255,255,.78);
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .7px;
 }
 
-.ticket-header h3 {
+.ticket-event-name {
 
     margin:
-        0 0 7px;
+        0 0 8px;
 
-    font-size: 16px;
+    font-size:
+        17px;
+
+    line-height:
+        1.25;
+
+    font-weight:
+        800;
 }
 
-.ticket-meta {
+.ticket-event-meta {
 
-    display: grid;
+    display:
+        grid;
 
-    gap: 3px;
+    gap:
+        4px;
 
     color:
         rgba(255,255,255,.68);
 
-    font-size: 8px;
+    font-size:
+        9px;
+
+    line-height:
+        1.45;
 }
 
 .ticket-body {
 
-    padding: 18px;
+    padding:
+        20px;
 }
 
-.seat-grid {
+.ticket-seat-row {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-        1fr 1fr;
+        repeat(2,minmax(0,1fr));
 
-    gap: 9px;
+    gap:
+        10px;
 
-    margin-bottom: 17px;
+    margin-bottom:
+        18px;
 }
 
-.seat-box {
+.ticket-seat-box {
 
-    padding: 11px;
+    padding:
+        12px;
 
-    background: #f7f9fc;
+    background:
+        #f7f9fc;
 
     border:
         1px solid #e7ebf0;
 
-    border-radius: 11px;
+    border-radius:
+        12px;
 
-    text-align: center;
+    text-align:
+        center;
 }
 
-.seat-box small {
+.ticket-seat-box small {
 
-    display: block;
+    display:
+        block;
 
-    margin-bottom: 3px;
+    margin-bottom:
+        4px;
 
-    color: var(--muted);
+    color:
+        #6b7280;
 
-    font-size: 7px;
+    font-size:
+        8px;
 
-    font-weight: 800;
+    font-weight:
+        700;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .6px;
 }
 
-.seat-box strong {
+.ticket-seat-box strong {
 
-    font-size: 17px;
+    color:
+        #111827;
+
+    font-size:
+        17px;
+
+    font-weight:
+        800;
+}
+
+.ticket-details {
+
+    display:
+        grid;
+
+    margin-bottom:
+        18px;
 }
 
 .ticket-detail {
 
-    min-height: 34px;
+    min-height:
+        38px;
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: space-between;
+    align-items:
+        center;
 
-    align-items: center;
+    justify-content:
+        space-between;
 
-    gap: 15px;
+    gap:
+        15px;
 
     border-bottom:
         1px solid #eef1f4;
 
-    font-size: 9px;
+    font-size:
+        10px;
+}
+
+.ticket-detail:last-child {
+
+    border-bottom:
+        none;
 }
 
 .ticket-detail span {
 
-    color: var(--muted);
+    color:
+        #6b7280;
 }
 
-.ticket-qr {
+.ticket-detail strong {
 
-    padding-top: 17px;
+    max-width:
+        65%;
 
-    margin-top: 15px;
+    text-align:
+        right;
+
+    color:
+        #111827;
+
+    word-break:
+        break-word;
+}
+
+.ticket-qr-wrap {
+
+    margin-top:
+        15px;
+
+    padding-top:
+        18px;
 
     border-top:
         1px dashed #d5dbe3;
 
-    text-align: center;
+    text-align:
+        center;
 }
 
-.qr-title {
+.qr-label {
 
-    margin-bottom: 10px;
+    margin-bottom:
+        12px;
 
-    font-size: 9px;
+    color:
+        #111827;
 
-    font-weight: 800;
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .5px;
 }
 
 .qr-box {
 
-    width: 190px;
+    width:
+        195px;
 
-    min-height: 190px;
-
-    padding: 10px;
+    min-height:
+        195px;
 
     margin:
-        0 auto 11px;
+        0 auto 12px;
 
-    display: flex;
+    padding:
+        11px;
 
-    align-items: center;
+    display:
+        flex;
 
-    justify-content: center;
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        white;
 
     border:
         1px solid #e5e7eb;
 
-    border-radius: 14px;
+    border-radius:
+        16px;
 
-    background: white;
+    box-shadow:
+        0 5px 18px rgba(15,23,42,.05);
 }
 
 .qr-box img {
 
-    max-width: 100%;
+    display:
+        block !important;
 
-    height: auto !important;
+    max-width:
+        100%;
+
+    height:
+        auto !important;
 }
 
-.token {
+.ticket-token {
 
-    color: #9ca3af;
+    max-width:
+        310px;
 
-    font-size: 6px;
+    margin:
+        auto;
 
-    word-break: break-all;
+    color:
+        #9ca3af;
+
+    font-size:
+        7px;
+
+    line-height:
+        1.45;
+
+    word-break:
+        break-all;
 }
 
-.valid {
+.ticket-footer {
 
-    display: inline-flex;
+    margin-top:
+        17px;
 
-    margin-top: 14px;
+    padding-top:
+        14px;
+
+    border-top:
+        1px solid #eef1f4;
+}
+
+.ticket-valid {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    margin-bottom:
+        10px;
 
     padding:
-        7px 9px;
+        7px 10px;
 
-    background: #ecfdf5;
+    background:
+        #ecfdf5;
 
-    color: #166534;
+    color:
+        #166534;
 
-    border-radius: 999px;
+    border:
+        1px solid #bbf7d0;
 
-    font-size: 7px;
+    border-radius:
+        999px;
 
-    font-weight: 800;
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .3px;
+}
+
+.ticket-valid-dot {
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        #16a34a;
+}
+
+.ticket-footer-note {
+
+    color:
+        #6b7280;
+
+    font-size:
+        8px;
+
+    line-height:
+        1.6;
 }
 
 
 /* ==========================================================
-   ERROR / LOADING
+   ERROR
 ========================================================== */
 
-.error {
+.error-card {
 
-    display: none;
+    display:
+        none;
 
-    margin: 30px auto;
+    max-width:
+        600px;
 
-    padding: 30px;
+    margin:
+        50px auto;
 
-    max-width: 600px;
+    padding:
+        35px 22px;
 
-    background: white;
+    background:
+        white;
 
     border:
         1px solid #fecaca;
 
-    border-radius: 18px;
+    border-radius:
+        20px;
 
-    text-align: center;
+    text-align:
+        center;
 }
 
-.error.show {
+.error-card.show {
 
-    display: block;
+    display:
+        block;
 }
+
+.error-card strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        18px;
+}
+
+.error-card p {
+
+    color:
+        var(--muted);
+
+    font-size:
+        11px;
+}
+
+
+/* ==========================================================
+   LOADING
+========================================================== */
 
 .loading-screen {
 
-    position: fixed;
+    position:
+        fixed;
 
-    inset: 0;
+    inset:
+        0;
 
-    z-index: 9999;
+    z-index:
+        9999;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    background: var(--bg);
-}
-
-.spinner {
-
-    width: 42px;
-
-    height: 42px;
-
-    border:
-        4px solid #dbe3ed;
-
-    border-top-color:
-        var(--primary);
-
-    border-radius: 50%;
-
-    animation:
-        spin .8s linear infinite;
-
-    margin:
-        0 auto 12px;
+    background:
+        #f4f7fb;
 }
 
 .loader {
 
-    text-align: center;
+    text-align:
+        center;
 }
 
-.loader strong {
+.spinner {
 
-    display: block;
+    width:
+        42px;
 
-    margin-bottom: 4px;
-}
+    height:
+        42px;
 
-.loader span {
+    margin:
+        0 auto 14px;
 
-    color: var(--muted);
+    border:
+        4px solid #dce3ec;
 
-    font-size: 10px;
+    border-top-color:
+        var(--primary);
+
+    border-radius:
+        50%;
+
+    animation:
+        spin .8s linear infinite;
 }
 
 @keyframes spin {
 
     to {
-        transform: rotate(360deg);
+
+        transform:
+            rotate(360deg);
+
     }
+
+}
+
+.loader strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        4px;
+
+    font-size:
+        14px;
+}
+
+.loader span {
+
+    color:
+        var(--muted);
+
+    font-size:
+        10px;
 }
 
 
 /* ==========================================================
-   RESPONSIVE
+   FOOTER
 ========================================================== */
 
-@media(max-width:850px) {
+.footer {
+
+    margin-top:
+        50px;
+
+    background:
+        #050b16;
+
+    color:
+        white;
+}
+
+.footer-content {
+
+    width:
+        100%;
+
+    max-width:
+        1250px;
+
+    margin:
+        auto;
+
+    padding:
+        28px 22px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap:
+        20px;
+}
+
+.footer-logo {
+
+    height:
+        35px;
+
+    width:
+        auto;
+
+    max-width:
+        180px;
+
+    object-fit:
+        contain;
+}
+
+.footer-copy {
+
+    color:
+        rgba(255,255,255,.40);
+
+    text-align:
+        right;
+
+    font-size:
+        9px;
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 850px) {
 
     .checkout-layout {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
     .order-card {
 
-        position: relative;
+        position:
+            relative;
 
-        top: auto;
+        top:
+            auto;
     }
 
     .tickets-grid {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
+
 }
 
 
-@media(max-width:600px) {
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 650px) {
 
     .nav {
 
-        min-height: 64px;
+        min-height:
+            64px;
 
         padding:
-            0 13px;
+            0 14px;
     }
 
     .brand-logo {
 
-        height: 34px;
+        height:
+            35px;
+
+        max-width:
+            180px;
     }
 
-    .hero-content {
-
-        min-height: 170px;
+    .secure-label {
 
         padding:
-            22px 13px;
+            8px 10px;
+
+        font-size:
+            8px;
+    }
+
+    .checkout-hero-content {
+
+        min-height:
+            170px;
+
+        padding:
+            24px 14px;
+
+        gap:
+            15px;
     }
 
     .hero-poster {
 
-        width: 75px;
+        width:
+            78px;
     }
 
     .hero-info h1 {
 
-        font-size: 22px;
+        font-size:
+            22px;
+    }
+
+    .hero-info p {
+
+        font-size:
+            10px;
+    }
+
+    .hero-label {
+
+        font-size:
+            8px;
     }
 
     .page {
 
         padding:
-            16px 10px 50px;
+            18px 11px 55px;
     }
 
-    .card-content,
+    .card {
+
+        border-radius:
+            16px;
+    }
+
+    .card-header {
+
+        padding:
+            18px 16px;
+    }
+
+    .card-content {
+
+        padding:
+            16px;
+    }
+
+    .timer {
+
+        font-size:
+            20px;
+    }
+
+    .order-card {
+
+        border-radius:
+            16px;
+    }
+
     .order-content {
 
-        padding: 16px;
+        padding:
+            17px;
+    }
+
+    .ticket {
+
+        border-radius:
+            18px;
+    }
+
+    .ticket-header {
+
+        min-height:
+            125px;
+
+        padding:
+            17px;
+    }
+
+    .ticket-body {
+
+        padding:
+            17px;
     }
 
     .qr-box {
 
-        width: 175px;
+        width:
+            180px;
 
-        min-height: 175px;
+        min-height:
+            180px;
     }
+
+    .footer-content {
+
+        padding:
+            25px 16px;
+
+        display:
+            grid;
+
+        gap:
+            13px;
+    }
+
+    .footer-copy {
+
+        text-align:
+            left;
+    }
+
 }
 
 </style>
@@ -1390,13 +2250,18 @@ input {
 <body>
 
 
+<!-- ======================================================
+     LOADING
+====================================================== -->
+
 <div
     class="loading-screen"
     id="loadingScreen">
 
     <div class="loader">
 
-        <div class="spinner"></div>
+        <div class="spinner">
+        </div>
 
         <strong>
             Cargando tu reserva
@@ -1411,18 +2276,25 @@ input {
 </div>
 
 
+<!-- ======================================================
+     HEADER
+====================================================== -->
+
 <header class="topbar">
 
     <div class="nav">
 
-        <a href="index.html">
+        <a
+            href="index.html"
+            class="brand">
 
             <img
                 src="LIVE_TICKETS_BLANCO.png"
-                class="brand-logo"
-                alt="Live Tickets">
+                alt="Live Tickets"
+                class="brand-logo">
 
         </a>
+
 
         <div class="secure-label">
 
@@ -1435,110 +2307,192 @@ input {
 </header>
 
 
-<section class="hero">
+<!-- ======================================================
+     HERO
+====================================================== -->
 
-    <div class="hero-bg"></div>
+<section class="checkout-hero">
 
-    <div class="hero-overlay"></div>
+    <div class="checkout-hero-bg">
+    </div>
 
-    <div class="hero-content">
+    <div class="checkout-hero-overlay">
+    </div>
+
+
+    <div class="checkout-hero-content">
+
 
         <div class="hero-info">
 
             <div class="hero-label">
+
                 TU RESERVA
+
             </div>
 
+
             <h1 id="heroEventName">
+
                 Live Tickets
+
             </h1>
 
+
             <p>
-                Revisa la información antes de continuar.
+
+                Revisa la información de tu compra antes de continuar.
+
             </p>
 
         </div>
 
+
         <div class="hero-poster">
         </div>
+
 
     </div>
 
 </section>
 
 
+<!-- ======================================================
+     MAIN
+====================================================== -->
+
 <main class="page">
 
+
+<!-- ======================================================
+     PAGO APROBADO
+====================================================== -->
 
 <div
     class="success-card"
     id="successCard">
 
-    <div class="big-icon">
+    <div class="success-icon">
+
         ✓
+
     </div>
 
     <h2>
+
         Pago aprobado
+
     </h2>
 
     <p>
+
         Tu compra fue confirmada correctamente.
         Tus entradas digitales están listas.
+        Cada código QR corresponde a un acceso individual.
+
     </p>
+
+    <div
+        class="email-success"
+        id="emailSuccess">
+
+        ✓ Entradas enviadas al correo del comprador.
+
+    </div>
 
 </div>
 
+
+<!-- ======================================================
+     EXPIRADA
+====================================================== -->
 
 <div
     class="expired-card"
     id="expiredCard">
 
-    <div class="big-icon">
+    <div class="expired-icon">
+
         ×
+
     </div>
 
     <h2>
-        Reserva expirada
+
+        La reserva ha expirado
+
     </h2>
 
     <p>
-        El tiempo disponible terminó y los asientos
-        fueron liberados.
+
+        El tiempo disponible para completar esta reserva terminó
+        y los asientos fueron liberados para ser seleccionados
+        nuevamente.
+
     </p>
+
+    <a
+        href="index.html"
+        class="back-button">
+
+        VER EVENTOS
+
+    </a>
 
 </div>
 
 
+<!-- ======================================================
+     ERROR
+====================================================== -->
+
 <div
-    class="error"
+    class="error-card"
     id="errorCard">
 
     <strong>
+
         No se pudo cargar la reserva
+
     </strong>
 
     <p id="errorMessage">
+
+        Revisa el enlace o intenta nuevamente.
+
     </p>
 
 </div>
 
+
+<!-- ======================================================
+     CHECKOUT
+====================================================== -->
 
 <div
     class="checkout-layout"
     id="checkoutLayout">
 
 
+<!-- ======================================================
+     DETALLES
+====================================================== -->
+
 <section class="card">
+
 
     <div class="card-header">
 
         <h2>
+
             Detalles de tu reserva
+
         </h2>
 
         <p>
-            Mantén esta página abierta durante el proceso.
+
+            Mantén esta página abierta mientras completas tu compra.
+
         </p>
 
     </div>
@@ -1547,6 +2501,8 @@ input {
     <div class="card-content">
 
 
+        <!-- TIMER -->
+
         <div
             class="timer-box"
             id="timerBox">
@@ -1554,14 +2510,19 @@ input {
             <div class="timer-info">
 
                 <strong>
+
                     Tus asientos están en proceso
+
                 </strong>
 
                 <span>
-                    Completa la operación antes de terminar el tiempo.
+
+                    Completa el pago antes de que finalice el tiempo.
+
                 </span>
 
             </div>
+
 
             <div
                 class="timer"
@@ -1574,9 +2535,12 @@ input {
         </div>
 
 
+        <!-- STATUS -->
+
         <div
             class="status-box status-pending"
             id="statusBox">
+
 
             <div
                 class="status-icon"
@@ -1586,14 +2550,19 @@ input {
 
             </div>
 
+
             <div class="status-content">
 
                 <strong id="statusTitle">
+
                     Esperando pago
+
                 </strong>
 
                 <span id="statusDescription">
+
                     Tus asientos están bloqueados temporalmente.
+
                 </span>
 
             </div>
@@ -1601,64 +2570,120 @@ input {
         </div>
 
 
-        <div class="detail-row">
+        <!-- INFO -->
 
-            <span>Evento</span>
+        <div class="detail-list">
 
-            <strong id="eventName">
-                —
-            </strong>
+
+            <div class="detail-row">
+
+                <span>
+                    Evento
+                </span>
+
+                <strong id="eventName">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Comprador
+                </span>
+
+                <strong id="buyerName">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Correo
+                </span>
+
+                <strong id="buyerEmail">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Código de reserva
+                </span>
+
+                <strong
+                    class="reservation-code"
+                    id="reservationCode">
+
+                    —
+
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Estado
+                </span>
+
+                <strong id="reservationStatus">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span>
+                    Entradas
+                </span>
+
+                <strong id="ticketQuantity">
+                    0
+                </strong>
+
+            </div>
+
 
         </div>
 
-
-        <div class="detail-row">
-
-            <span>Reserva</span>
-
-            <strong id="reservationCode">
-                —
-            </strong>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <span>Estado</span>
-
-            <strong id="reservationStatus">
-                —
-            </strong>
-
-        </div>
-
-
-        <div class="detail-row">
-
-            <span>Entradas</span>
-
-            <strong id="ticketQuantity">
-                0
-            </strong>
-
-        </div>
 
     </div>
 
 </section>
 
 
+<!-- ======================================================
+     RESUMEN
+====================================================== -->
+
 <aside class="order-card">
+
 
     <div class="order-head">
 
         <h3>
+
             Resumen de compra
+
         </h3>
 
         <p>
+
             Modo de prueba temporal.
+
         </p>
 
     </div>
@@ -1669,7 +2694,9 @@ input {
 
         <div class="order-row">
 
-            <span>Entradas</span>
+            <span>
+                Entradas
+            </span>
 
             <strong id="orderQuantity">
                 0
@@ -1680,7 +2707,9 @@ input {
 
         <div class="order-row">
 
-            <span>Precio unitario</span>
+            <span>
+                Precio unitario
+            </span>
 
             <strong id="unitPrice">
                 L 0.00
@@ -1691,7 +2720,9 @@ input {
 
         <div class="order-total">
 
-            <span>Total</span>
+            <span>
+                Total
+            </span>
 
             <strong id="orderTotal">
                 L 0.00
@@ -1700,20 +2731,27 @@ input {
         </div>
 
 
-        <!-- MODO PRUEBA -->
+        <!-- ==================================================
+             MODO PRUEBA ADMIN
+        =================================================== -->
 
         <div
             class="test-box"
             id="testBox">
 
+
             <div class="test-title">
 
                 <strong>
+
                     MODO DE PRUEBA
+
                 </strong>
 
                 <span class="test-badge">
+
                     ADMIN
+
                 </span>
 
             </div>
@@ -1721,33 +2759,40 @@ input {
 
             <div class="test-description">
 
-                Inicia sesión como administrador para
-                habilitar el pago simulado.
+                Inicia sesión como administrador para habilitar
+                temporalmente el pago simulado.
 
             </div>
 
 
             <div id="testLoginArea">
 
+
                 <input
-                    type="email"
-                    id="testEmail"
+                    type="text"
+                    id="testUser"
                     class="test-input"
-                    placeholder="Correo administrador">
+                    placeholder="Usuario administrador"
+                    autocomplete="username">
+
 
                 <input
                     type="password"
                     id="testPassword"
                     class="test-input"
-                    placeholder="Contraseña">
+                    placeholder="Contraseña"
+                    autocomplete="current-password">
+
 
                 <button
                     class="test-login"
+                    id="testLoginButton"
                     onclick="loginTestAdmin()">
 
                     INICIAR SESIÓN DE PRUEBA
 
                 </button>
+
 
             </div>
 
@@ -1757,6 +2802,9 @@ input {
                 id="testReady">
 
                 ✓ Administrador verificado.
+
+                <br>
+
                 Puedes simular el pago de esta reserva.
 
                 <br>
@@ -1771,8 +2819,11 @@ input {
 
             </div>
 
+
         </div>
 
+
+        <!-- BOTÓN PAGO -->
 
         <button
             class="pay-button"
@@ -1780,17 +2831,19 @@ input {
             disabled
             onclick="simulatePayment()">
 
-            PAGAR L 0.00
+            SIMULAR PAGO L 0.00
 
         </button>
 
 
         <div class="payment-note">
 
-            Este botón actualmente simula un pago aprobado.
-            No procesa ninguna tarjeta ni dinero real.
+            Este botón no procesa dinero real.
+            Únicamente simula un pago aprobado para realizar
+            pruebas internas de Live Tickets.
 
         </div>
+
 
     </div>
 
@@ -1800,26 +2853,38 @@ input {
 </div>
 
 
+<!-- ======================================================
+     ENTRADAS
+====================================================== -->
+
 <section
     class="tickets-section"
     id="ticketsSection">
 
+
     <div class="tickets-title">
 
         <h2>
+
             Tus entradas digitales
+
         </h2>
 
         <p>
-            Cada QR corresponde a un ingreso individual.
+
+            Presenta cada código QR en el acceso al evento.
+            Cada entrada permite un solo ingreso.
+
         </p>
 
     </div>
+
 
     <div
         class="tickets-grid"
         id="ticketsGrid">
     </div>
+
 
 </section>
 
@@ -1827,10 +2892,36 @@ input {
 </main>
 
 
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <img
+            src="LIVE_TICKETS_BLANCO.png"
+            alt="Live Tickets"
+            class="footer-logo">
+
+
+        <div class="footer-copy">
+
+            © 2026 Live Tickets.
+            Todos los derechos reservados.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
 <script>
 
 /* ==========================================================
-   CONFIG
+   CONFIGURACIÓN
 ========================================================== */
 
 const SUPABASE_URL =
@@ -1841,6 +2932,10 @@ const SUPABASE_KEY =
     "sb_publishable_zDHgY0bQDhtD60u8B3xQlA_F8w0Lv5L";
 
 
+const ADMIN_DOMAIN =
+    "admin.liveticketshn.com";
+
+
 const db =
     supabase.createClient(
         SUPABASE_URL,
@@ -1848,15 +2943,25 @@ const db =
     );
 
 
-const params =
+/* ==========================================================
+   TOKEN
+========================================================== */
+
+const urlParams =
     new URLSearchParams(
-        location.search
+        window.location.search
     );
 
 
 const PUBLIC_TOKEN =
-    params.get("token");
+    urlParams.get(
+        "token"
+    );
 
+
+/* ==========================================================
+   VARIABLES
+========================================================== */
 
 let reservation =
     null;
@@ -1875,14 +2980,16 @@ let pollingInterval =
 
 
 /* ==========================================================
-   UTIL
+   DINERO
 ========================================================== */
 
 function money(value) {
 
     return "L " +
 
-        Number(value || 0)
+        Number(
+            value || 0
+        )
         .toLocaleString(
             "es-HN",
             {
@@ -1894,56 +3001,98 @@ function money(value) {
 }
 
 
-function valueOf(
-    object,
-    keys,
-    fallback = null
-) {
-
-    for (
-        const key
-        of keys
-    ) {
-
-        if (
-            object &&
-            object[key] !== null &&
-            object[key] !== undefined
-        ) {
-
-            return object[key];
-
-        }
-
-    }
-
-    return fallback;
-
-}
-
+/* ==========================================================
+   RESULT OBJECT
+========================================================== */
 
 function resultObject(data) {
 
+    if (!data) {
+
+        return null;
+
+    }
+
+
     if (
-        Array.isArray(data)
+        Array.isArray(
+            data
+        )
     ) {
 
         return data[0] || null;
 
     }
 
+
     return data;
 
 }
 
 
+/* ==========================================================
+   GET VALUE
+========================================================== */
+
+function getValue(
+    object,
+    names,
+    fallback = null
+) {
+
+    for (
+        const name
+        of names
+    ) {
+
+        if (
+            object &&
+            object[name] !== undefined &&
+            object[name] !== null
+        ) {
+
+            return object[name];
+
+        }
+
+    }
+
+
+    return fallback;
+
+}
+
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+function normalizeStatus(value) {
+
+    return String(
+        value || ""
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* ==========================================================
+   ESCAPE HTML
+========================================================== */
+
 function escapeHTML(value) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     div.textContent =
         value ?? "";
+
 
     return div.innerHTML;
 
@@ -1951,55 +3100,138 @@ function escapeHTML(value) {
 
 
 /* ==========================================================
-   ADMIN TEST AUTH
+   FORMAT DATE
+========================================================== */
+
+function formatEventDate(value) {
+
+    if (!value) {
+
+        return null;
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return null;
+
+    }
+
+
+    return date.toLocaleDateString(
+        "es-HN",
+        {
+            weekday:
+                "long",
+
+            day:
+                "2-digit",
+
+            month:
+                "long",
+
+            year:
+                "numeric"
+        }
+    );
+
+}
+
+
+/* ==========================================================
+   COMPROBAR ADMIN TEST
 ========================================================== */
 
 async function checkTestAdmin() {
 
-    const {
-        data: sessionData
-    } =
-    await db.auth.getSession();
+
+    try {
 
 
-    const session =
-        sessionData?.session;
+        const {
+            data: sessionData
+        } =
+        await db.auth
+            .getSession();
 
 
-    if (!session) {
+        const session =
+            sessionData?.session;
 
-        setTestAdmin(false);
 
-        return;
+        if (!session) {
+
+            setTestAdmin(
+                false
+            );
+
+            return;
+
+        }
+
+
+        const {
+            data,
+            error
+        } =
+        await db.rpc(
+            "puede_administrar"
+        );
+
+
+        if (
+            error ||
+            data !== true
+        ) {
+
+            setTestAdmin(
+                false
+            );
+
+            return;
+
+        }
+
+
+        setTestAdmin(
+            true
+        );
+
 
     }
 
-
-    const {
-        data,
-        error
-    } =
-    await db.rpc(
-        "puede_administrar"
-    );
+    catch(error) {
 
 
-    if (
-        error ||
-        data !== true
-    ) {
+        console.error(
+            "checkTestAdmin:",
+            error
+        );
 
-        setTestAdmin(false);
 
-        return;
+        setTestAdmin(
+            false
+        );
 
     }
-
-
-    setTestAdmin(true);
 
 }
 
+
+/* ==========================================================
+   SET ADMIN
+========================================================== */
 
 function setTestAdmin(value) {
 
@@ -2034,18 +3266,25 @@ function setTestAdmin(value) {
 }
 
 
+/* ==========================================================
+   LOGIN ADMIN DE PRUEBA
+========================================================== */
+
 async function loginTestAdmin() {
 
-    const email =
+    const username =
+
         document
         .getElementById(
-            "testEmail"
+            "testUser"
         )
         .value
-        .trim();
+        .trim()
+        .toLowerCase();
 
 
     const password =
+
         document
         .getElementById(
             "testPassword"
@@ -2053,13 +3292,21 @@ async function loginTestAdmin() {
         .value;
 
 
+    const button =
+
+        document
+        .getElementById(
+            "testLoginButton"
+        );
+
+
     if (
-        !email ||
+        !username ||
         !password
     ) {
 
         alert(
-            "Ingresa correo y contraseña."
+            "Ingresa usuario y contraseña."
         );
 
         return;
@@ -2067,54 +3314,152 @@ async function loginTestAdmin() {
     }
 
 
-    const {
-        error
-    } =
-    await db.auth
-        .signInWithPassword(
-            {
-                email,
-                password
-            }
-        );
+    let internalEmail;
 
 
-    if (error) {
+    /*
+    Permite:
 
-        alert(
-            "No fue posible iniciar sesión."
-        );
+    admin1
 
-        return;
+    o también un correo completo
+    de un administrador existente.
+    */
+
+    if (
+        username.includes("@")
+    ) {
+
+        internalEmail =
+            username;
+
+    }
+
+    else {
+
+
+        if (
+            !/^[a-z0-9._-]{2,30}$/
+            .test(
+                username
+            )
+        ) {
+
+            alert(
+                "Usuario no válido."
+            );
+
+            return;
+
+        }
+
+
+        internalEmail =
+            `${username}@${ADMIN_DOMAIN}`;
 
     }
 
 
-    await checkTestAdmin();
+    button.disabled =
+        true;
 
 
-    if (!isTestAdmin) {
+    button.textContent =
+        "VERIFICANDO...";
 
-        alert(
-            "Este usuario no tiene rol de administrador."
-        );
+
+    try {
+
+
+        const {
+            error
+        } =
+        await db.auth
+            .signInWithPassword(
+                {
+                    email:
+                        internalEmail,
+
+                    password:
+                        password
+                }
+            );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        await checkTestAdmin();
+
+
+        if (!isTestAdmin) {
+
+            await db.auth.signOut();
+
+
+            alert(
+                "Este usuario no tiene permisos de administrador."
+            );
+
+        }
+
 
     }
 
-}
+    catch(error) {
 
 
-async function logoutTestAdmin() {
+        console.error(
+            "Login admin:",
+            error
+        );
 
-    await db.auth.signOut();
 
-    setTestAdmin(false);
+        alert(
+            "Usuario o contraseña incorrectos."
+        );
+
+
+    }
+
+    finally {
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "INICIAR SESIÓN DE PRUEBA";
+
+    }
 
 }
 
 
 /* ==========================================================
-   RESERVA
+   LOGOUT ADMIN
+========================================================== */
+
+async function logoutTestAdmin() {
+
+    await db.auth
+        .signOut();
+
+
+    setTestAdmin(
+        false
+    );
+
+}
+
+
+/* ==========================================================
+   CARGAR RESERVA
 ========================================================== */
 
 async function loadReservation(
@@ -2124,7 +3469,7 @@ async function loadReservation(
     if (!PUBLIC_TOKEN) {
 
         showError(
-            "Token de reserva no válido."
+            "El enlace no contiene un token de reserva válido."
         );
 
         return;
@@ -2139,7 +3484,6 @@ async function loadReservation(
             data,
             error
         } =
-
         await db.rpc(
             "consultar_reserva",
             {
@@ -2162,18 +3506,30 @@ async function loadReservation(
             );
 
 
+        if (!result) {
+
+            throw new Error(
+                "La reserva no fue encontrada."
+            );
+
+        }
+
+
         if (
-            !result ||
             result.success === false
         ) {
 
             throw new Error(
 
-                result?.message
+                result.message
 
                 ||
 
-                "Reserva no encontrada."
+                result.mensaje
+
+                ||
+
+                "No fue posible consultar la reserva."
 
             );
 
@@ -2186,21 +3542,28 @@ async function loadReservation(
 
         renderReservation();
 
+
     }
 
     catch(error) {
 
 
-        console.error(error);
+        console.error(
+            "Reserva:",
+            error
+        );
 
 
         if (!silent) {
 
             showError(
                 error.message
+                ||
+                "No fue posible cargar la reserva."
             );
 
         }
+
 
     }
 
@@ -2224,39 +3587,86 @@ async function loadReservation(
 
 
 /* ==========================================================
-   RENDER
+   RENDER RESERVA
 ========================================================== */
 
 function renderReservation() {
 
+    if (!reservation) {
+
+        return;
+
+    }
+
+
     const status =
 
-        String(
-            reservation.estado || ""
-        )
-        .toLowerCase();
+        normalizeStatus(
+
+            getValue(
+                reservation,
+                [
+                    "estado",
+                    "status",
+                    "reserva_estado"
+                ],
+                ""
+            )
+
+        );
 
 
     const eventName =
 
-        valueOf(
+        getValue(
             reservation,
             [
                 "evento_nombre",
                 "nombre_evento",
+                "event_name",
                 "evento"
             ],
             "Evento Live Tickets"
         );
 
 
-    const code =
+    const reservationCode =
 
-        valueOf(
+        getValue(
             reservation,
             [
                 "codigo_reserva",
-                "codigo"
+                "codigo",
+                "reservation_code"
+            ],
+            "LT-" +
+            String(
+                reservation.reserva_id || ""
+            )
+        );
+
+
+    const buyerName =
+
+        getValue(
+            reservation,
+            [
+                "nombre_cliente",
+                "cliente",
+                "customer_name"
+            ],
+            "—"
+        );
+
+
+    const email =
+
+        getValue(
+            reservation,
+            [
+                "email",
+                "correo",
+                "customer_email"
             ],
             "—"
         );
@@ -2265,25 +3675,56 @@ function renderReservation() {
     const quantity =
 
         Number(
-            reservation.cantidad_asientos ||
-            0
+
+            getValue(
+                reservation,
+                [
+                    "cantidad_asientos",
+                    "cantidad",
+                    "ticket_count"
+                ],
+                0
+            )
+
         );
 
 
     const price =
 
         Number(
-            reservation.precio_unitario ||
-            0
+
+            getValue(
+                reservation,
+                [
+                    "precio_unitario",
+                    "precio_asiento",
+                    "unit_price"
+                ],
+                0
+            )
+
         );
 
 
     const total =
 
         Number(
-            reservation.total_reserva ||
-            quantity * price
+
+            getValue(
+                reservation,
+                [
+                    "total_reserva",
+                    "total",
+                    "amount"
+                ],
+                quantity * price
+            )
+
         );
+
+
+    document.title =
+        `${eventName} | Live Tickets`;
 
 
     document
@@ -2304,10 +3745,26 @@ function renderReservation() {
 
     document
         .getElementById(
+            "buyerName"
+        )
+        .textContent =
+        buyerName;
+
+
+    document
+        .getElementById(
+            "buyerEmail"
+        )
+        .textContent =
+        email;
+
+
+    document
+        .getElementById(
             "reservationCode"
         )
         .textContent =
-        code;
+        reservationCode;
 
 
     document
@@ -2331,7 +3788,9 @@ function renderReservation() {
             "unitPrice"
         )
         .textContent =
-        money(price);
+        money(
+            price
+        );
 
 
     document
@@ -2339,7 +3798,9 @@ function renderReservation() {
             "orderTotal"
         )
         .textContent =
-        money(total);
+        money(
+            total
+        );
 
 
     document
@@ -2347,15 +3808,20 @@ function renderReservation() {
             "payButton"
         )
         .textContent =
+
         "SIMULAR PAGO " +
-        money(total);
+        money(
+            total
+        );
 
 
     if (
-        status === "pagada"
+        status === "pagada" ||
+        status === "pagado" ||
+        status === "confirmada"
     ) {
 
-        renderPaid();
+        renderPaidState();
 
         return;
 
@@ -2367,28 +3833,41 @@ function renderReservation() {
         status === "cancelada"
     ) {
 
-        renderExpired();
+        renderExpiredState();
 
         return;
 
     }
 
 
-    renderPending();
+    renderPendingState();
+
+
+    const expiresAt =
+
+        getValue(
+            reservation,
+            [
+                "expires_at",
+                "expira_en",
+                "fecha_expiracion"
+            ],
+            null
+        );
 
 
     startCountdown(
-        reservation.expires_at
+        expiresAt
     );
 
 }
 
 
 /* ==========================================================
-   PENDING
+   PENDIENTE
 ========================================================== */
 
-function renderPending() {
+function renderPendingState() {
 
     document
         .getElementById(
@@ -2400,18 +3879,22 @@ function renderPending() {
 
     document
         .getElementById(
-            "successCard"
+            "expiredCard"
         )
         .classList
-        .remove("show");
+        .remove(
+            "show"
+        );
 
 
     document
         .getElementById(
-            "expiredCard"
+            "successCard"
         )
         .classList
-        .remove("show");
+        .remove(
+            "show"
+        );
 
 
     document
@@ -2419,7 +3902,9 @@ function renderPending() {
             "ticketsSection"
         )
         .classList
-        .remove("show");
+        .remove(
+            "show"
+        );
 
 
     document
@@ -2432,13 +3917,22 @@ function renderPending() {
 
     document
         .getElementById(
-            "reservationStatus"
+            "testBox"
         )
-        .textContent =
-        "En proceso";
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById(
+            "payButton"
+        )
+        .style.display =
+        "block";
 
 
     const statusBox =
+
         document
         .getElementById(
             "statusBox"
@@ -2465,16 +3959,33 @@ function renderPending() {
         "Esperando pago";
 
 
+    document
+        .getElementById(
+            "statusDescription"
+        )
+        .textContent =
+
+        "Tus asientos están en proceso y bloqueados temporalmente.";
+
+
+    document
+        .getElementById(
+            "reservationStatus"
+        )
+        .textContent =
+        "En proceso";
+
+
     updatePayButton();
 
 }
 
 
 /* ==========================================================
-   PAID
+   PAGADA
 ========================================================== */
 
-function renderPaid() {
+function renderPaidState() {
 
     clearInterval(
         countdownInterval
@@ -2491,21 +4002,34 @@ function renderPaid() {
 
     document
         .getElementById(
-            "successCard"
+            "checkoutLayout"
         )
-        .classList
-        .add("show");
+        .style.display =
+        "grid";
 
 
     document
         .getElementById(
-            "reservationStatus"
+            "expiredCard"
         )
-        .textContent =
-        "Pagada";
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    document
+        .getElementById(
+            "successCard"
+        )
+        .classList
+        .add(
+            "show"
+        );
 
 
     const statusBox =
+
         document
         .getElementById(
             "statusBox"
@@ -2537,7 +4061,16 @@ function renderPaid() {
             "statusDescription"
         )
         .textContent =
-        "La reserva fue pagada correctamente.";
+
+        "Tu compra fue confirmada y tus entradas están listas.";
+
+
+    document
+        .getElementById(
+            "reservationStatus"
+        )
+        .textContent =
+        "Pagada";
 
 
     document
@@ -2562,10 +4095,10 @@ function renderPaid() {
 
 
 /* ==========================================================
-   EXPIRED
+   EXPIRADA
 ========================================================== */
 
-function renderExpired() {
+function renderExpiredState() {
 
     clearInterval(
         countdownInterval
@@ -2582,21 +4115,44 @@ function renderExpired() {
 
     document
         .getElementById(
+            "successCard"
+        )
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    document
+        .getElementById(
+            "ticketsSection"
+        )
+        .classList
+        .remove(
+            "show"
+        );
+
+
+    document
+        .getElementById(
             "expiredCard"
         )
         .classList
-        .add("show");
+        .add(
+            "show"
+        );
 
 }
 
 
 /* ==========================================================
-   BUTTON
+   UPDATE PAY BUTTON
 ========================================================== */
 
 function updatePayButton() {
 
     const button =
+
         document
         .getElementById(
             "payButton"
@@ -2613,25 +4169,40 @@ function updatePayButton() {
     }
 
 
+    const state =
+
+        normalizeStatus(
+            reservation.estado
+        );
+
+
     const pending =
 
-        reservation.estado ===
+        state ===
         "pendiente_pago";
 
 
     button.disabled =
 
-        !pending ||
+        !pending
+
+        ||
+
         !isTestAdmin;
 
 }
 
 
 /* ==========================================================
-   SIMULAR PAGO
+   SIMULAR PAGO + ENVIAR CORREO
 ========================================================== */
 
 async function simulatePayment() {
+
+
+    /* ========================================================
+       VALIDAR ADMIN
+    ======================================================== */
 
     if (!isTestAdmin) {
 
@@ -2644,9 +4215,22 @@ async function simulatePayment() {
     }
 
 
+    /* ========================================================
+       CONFIRMACIÓN
+    ======================================================== */
+
     const confirmed =
+
         confirm(
-            "¿Confirmar este pago de PRUEBA? La reserva pasará a pagada y los asientos a vendidos."
+
+            "¿Confirmar este pago de PRUEBA?\n\n" +
+
+            "La reserva pasará a PAGADA, los asientos a VENDIDOS, " +
+
+            "se generarán los QR y se intentarán enviar las entradas " +
+
+            "al correo del comprador."
+
         );
 
 
@@ -2658,6 +4242,7 @@ async function simulatePayment() {
 
 
     const button =
+
         document
         .getElementById(
             "payButton"
@@ -2669,63 +4254,979 @@ async function simulatePayment() {
 
 
     button.textContent =
-        "PROCESANDO...";
+        "PROCESANDO PAGO...";
 
 
-    const {
-        data,
-        error
-    } =
-
-    await db.rpc(
-        "confirmar_pago_prueba",
-        {
-            p_token:
-                PUBLIC_TOKEN
-        }
-    );
+    try {
 
 
-    if (error) {
+        /* ====================================================
+           1. CONFIRMAR PAGO
+        ==================================================== */
 
-        console.error(error);
-
-        alert(
-            error.message
+        const {
+            data,
+            error
+        } =
+        await db.rpc(
+            "confirmar_pago_prueba",
+            {
+                p_token:
+                    PUBLIC_TOKEN
+            }
         );
 
-        updatePayButton();
 
-        return;
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        const result =
+
+            resultObject(
+                data
+            );
+
+
+        if (
+            !result ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+
+                result?.message
+
+                ||
+
+                "No fue posible confirmar el pago."
+
+            );
+
+        }
+
+
+        console.log(
+            "Pago confirmado:",
+            result
+        );
+
+
+        /* ====================================================
+           2. ACTUALIZAR RESERVA Y MOSTRAR QR
+        ==================================================== */
+
+        button.textContent =
+            "GENERANDO ENTRADAS...";
+
+
+        await loadReservation(
+            false
+        );
+
+
+        /* ====================================================
+           3. OBTENER SESIÓN ADMIN
+        ==================================================== */
+
+        const {
+            data: sessionData,
+            error: sessionError
+        } =
+        await db.auth
+            .getSession();
+
+
+        if (
+            sessionError
+        ) {
+
+            console.error(
+                "Sesión:",
+                sessionError
+            );
+
+        }
+
+
+        const session =
+            sessionData?.session;
+
+
+        if (!session) {
+
+            alert(
+
+                "✓ Pago aprobado y QR generados.\n\n" +
+
+                "No fue posible comprobar la sesión del administrador " +
+
+                "para realizar el envío del correo."
+
+            );
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           4. LLAMAR API DE CORREO
+        ==================================================== */
+
+        let emailResponse;
+
+
+        try {
+
+
+            emailResponse =
+
+                await fetch(
+                    "/api/enviar-boletos",
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                `Bearer ${session.access_token}`
+
+                        },
+
+                        body:
+
+                            JSON.stringify(
+                                {
+                                    token:
+                                        PUBLIC_TOKEN
+                                }
+                            )
+
+                    }
+                );
+
+
+        }
+
+        catch(networkError) {
+
+
+            console.error(
+                "Conexión correo:",
+                networkError
+            );
+
+
+            alert(
+
+                "✓ Pago aprobado y QR generados.\n\n" +
+
+                "No fue posible conectar con el servidor de correo.\n\n" +
+
+                "El pago no se perdió y las entradas siguen disponibles."
+
+            );
+
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           5. LEER RESPUESTA
+        ==================================================== */
+
+        let emailResult;
+
+
+        try {
+
+
+            emailResult =
+                await emailResponse
+                    .json();
+
+
+        }
+
+        catch {
+
+
+            emailResult =
+                {
+
+                    success:
+                        false,
+
+                    message:
+                        "El servidor de correo devolvió una respuesta no válida."
+
+                };
+
+        }
+
+
+        console.log(
+            "Email:",
+            emailResult
+        );
+
+
+        /* ====================================================
+           6. EMAIL EXITOSO
+        ==================================================== */
+
+        if (
+            emailResponse.ok &&
+            emailResult.success === true
+        ) {
+
+
+            const emailSuccess =
+
+                document
+                .getElementById(
+                    "emailSuccess"
+                );
+
+
+            emailSuccess.textContent =
+
+                `✓ Entradas enviadas a ${emailResult.email}`;
+
+
+            emailSuccess
+                .classList
+                .add(
+                    "show"
+                );
+
+
+            if (
+                emailResult.already_sent
+            ) {
+
+                alert(
+
+                    "✓ PAGO APROBADO\n\n" +
+
+                    "Los boletos ya habían sido enviados anteriormente a:\n\n" +
+
+                    emailResult.email
+
+                );
+
+            }
+
+            else {
+
+                alert(
+
+                    "✓ PAGO APROBADO\n\n" +
+
+                    "✓ QR GENERADOS\n\n" +
+
+                    "✓ BOLETOS ENVIADOS A:\n" +
+
+                    emailResult.email
+
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           7. RESERVA SIN EMAIL
+        ==================================================== */
+
+        if (
+            emailResult.code ===
+            "MISSING_EMAIL"
+        ) {
+
+            alert(
+
+                "✓ Pago aprobado y QR generados.\n\n" +
+
+                "⚠ No fue posible enviar las entradas porque " +
+
+                "esta reserva no tiene un correo electrónico válido.\n\n" +
+
+                "Los boletos siguen disponibles en esta página."
+
+            );
+
+
+            return;
+
+        }
+
+
+        /* ====================================================
+           8. OTRO ERROR EMAIL
+        ==================================================== */
+
+        console.error(
+            "Correo:",
+            emailResult
+        );
+
+
+        alert(
+
+            "✓ Pago aprobado y QR generados.\n\n" +
+
+            "⚠ Hubo un problema enviando el correo.\n\n" +
+
+            (
+                emailResult.message
+
+                ||
+
+                "El servidor de correo devolvió un error."
+            )
+
+            +
+
+            "\n\nEl pago no se perdió."
+
+        );
+
 
     }
 
+    catch(error) {
 
-    const result =
-        resultObject(
-            data
+
+        console.error(
+            "Pago:",
+            error
+        );
+
+
+        alert(
+
+            "No fue posible confirmar el pago.\n\n" +
+
+            (
+                error.message
+
+                ||
+
+                "Error desconocido."
+            )
+
+        );
+
+
+        updatePayButton();
+
+
+    }
+
+    finally {
+
+
+        /*
+        Si por alguna razón continúa pendiente,
+        habilitamos nuevamente según permisos.
+        */
+
+        if (
+            reservation
+
+            &&
+
+            normalizeStatus(
+                reservation.estado
+            ) ===
+            "pendiente_pago"
+        ) {
+
+            updatePayButton();
+
+        }
+
+    }
+
+}
+
+
+/* ==========================================================
+   OBTENER BOLETOS
+========================================================== */
+
+function getTickets() {
+
+    let tickets =
+
+        getValue(
+            reservation,
+            [
+                "boletos",
+                "tickets",
+                "entradas"
+            ],
+            []
         );
 
 
     if (
-        !result ||
-        result.success !== true
+        typeof tickets ===
+        "string"
     ) {
 
-        alert(
-            result?.message ||
-            "No se pudo confirmar el pago."
+        try {
+
+            tickets =
+                JSON.parse(
+                    tickets
+                );
+
+        }
+
+        catch(error) {
+
+            tickets =
+                [];
+
+        }
+
+    }
+
+
+    if (
+        !Array.isArray(
+            tickets
+        )
+    ) {
+
+        tickets =
+            [];
+
+    }
+
+
+    return tickets;
+
+}
+
+
+/* ==========================================================
+   RENDER ENTRADAS
+========================================================== */
+
+function renderTickets() {
+
+    const tickets =
+        getTickets();
+
+
+    const section =
+
+        document
+        .getElementById(
+            "ticketsSection"
         );
 
-        updatePayButton();
+
+    const grid =
+
+        document
+        .getElementById(
+            "ticketsGrid"
+        );
+
+
+    grid.innerHTML =
+        "";
+
+
+    section
+        .classList
+        .add(
+            "show"
+        );
+
+
+    if (
+        !tickets.length
+    ) {
+
+
+        grid.innerHTML = `
+
+            <div
+                class="card"
+                style="grid-column:1/-1;">
+
+                <div
+                    class="card-content"
+                    style="
+                        text-align:center;
+                        color:#6b7280;
+                        font-size:12px;
+                        padding:35px;
+                    ">
+
+                    Tu pago está confirmado.
+                    Estamos preparando tus entradas digitales...
+
+                </div>
+
+            </div>
+
+        `;
+
 
         return;
 
     }
 
 
-    await loadReservation(
-        false
+    const eventName =
+
+        getValue(
+            reservation,
+            [
+                "evento_nombre",
+                "nombre_evento",
+                "evento"
+            ],
+            "Evento Live Tickets"
+        );
+
+
+    const eventDate =
+
+        formatEventDate(
+
+            getValue(
+                reservation,
+                [
+                    "evento_fecha",
+                    "fecha_evento",
+                    "fecha"
+                ],
+                null
+            )
+
+        );
+
+
+    const eventPlace =
+
+        getValue(
+            reservation,
+            [
+                "evento_lugar",
+                "lugar_evento",
+                "lugar",
+                "venue"
+            ],
+            null
+        );
+
+
+    const reservationCode =
+
+        getValue(
+            reservation,
+            [
+                "codigo_reserva",
+                "codigo",
+                "reservation_code"
+            ],
+            "LT-" +
+            String(
+                reservation.reserva_id || ""
+            )
+        );
+
+
+    const customerName =
+
+        getValue(
+            reservation,
+            [
+                "nombre_cliente",
+                "cliente",
+                "customer_name"
+            ],
+            "Comprador"
+        );
+
+
+    tickets.forEach(
+        (
+            ticket,
+            index
+        ) => {
+
+
+            const token =
+
+                getValue(
+                    ticket,
+                    [
+                        "token",
+                        "qr_token",
+                        "boleto_token"
+                    ],
+                    null
+                );
+
+
+            if (!token) {
+
+                return;
+
+            }
+
+
+            const mesa =
+
+                getValue(
+                    ticket,
+                    [
+                        "mesa",
+                        "mesa_numero",
+                        "numero_mesa"
+                    ],
+                    "—"
+                );
+
+
+            const asiento =
+
+                getValue(
+                    ticket,
+                    [
+                        "asiento",
+                        "asiento_numero",
+                        "numero_asiento"
+                    ],
+                    "—"
+                );
+
+
+            const card =
+
+                document
+                .createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "ticket";
+
+
+            card.innerHTML = `
+
+                <div class="ticket-header">
+
+
+                    <div class="ticket-header-bg">
+                    </div>
+
+
+                    <div class="ticket-header-overlay">
+                    </div>
+
+
+                    <div class="ticket-header-content">
+
+
+                        <div class="ticket-brand">
+
+
+                            <img
+                                src="LIVE_TICKETS_BLANCO.png"
+                                alt="Live Tickets"
+                                class="ticket-mini-logo">
+
+
+                            <div class="ticket-badge">
+
+                                ENTRADA DIGITAL
+
+                            </div>
+
+
+                        </div>
+
+
+                        <h3 class="ticket-event-name">
+
+                            ${escapeHTML(
+                                eventName
+                            )}
+
+                        </h3>
+
+
+                        <div class="ticket-event-meta">
+
+
+                            ${
+                                eventDate
+
+                                ?
+
+                                `<div>
+                                    📅 ${escapeHTML(eventDate)}
+                                </div>`
+
+                                :
+
+                                ""
+                            }
+
+
+                            ${
+                                eventPlace
+
+                                ?
+
+                                `<div>
+                                    📍 ${escapeHTML(eventPlace)}
+                                </div>`
+
+                                :
+
+                                ""
+                            }
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="ticket-body">
+
+
+                    <div class="ticket-seat-row">
+
+
+                        <div class="ticket-seat-box">
+
+                            <small>
+
+                                MESA
+
+                            </small>
+
+                            <strong>
+
+                                ${escapeHTML(
+                                    mesa
+                                )}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="ticket-seat-box">
+
+                            <small>
+
+                                ASIENTO
+
+                            </small>
+
+                            <strong>
+
+                                ${escapeHTML(
+                                    asiento
+                                )}
+
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="ticket-details">
+
+
+                        <div class="ticket-detail">
+
+                            <span>
+
+                                Código de reserva
+
+                            </span>
+
+                            <strong>
+
+                                ${escapeHTML(
+                                    reservationCode
+                                )}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="ticket-detail">
+
+                            <span>
+
+                                Entrada
+
+                            </span>
+
+                            <strong>
+
+                                ${index + 1}
+                                de
+                                ${tickets.length}
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="ticket-detail">
+
+                            <span>
+
+                                Titular
+
+                            </span>
+
+                            <strong>
+
+                                ${escapeHTML(
+                                    customerName
+                                )}
+
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="ticket-qr-wrap">
+
+
+                        <div class="qr-label">
+
+                            CÓDIGO DE ACCESO
+
+                        </div>
+
+
+                        <div
+                            class="qr-box"
+                            id="qr-${index}">
+                        </div>
+
+
+                        <div class="ticket-token">
+
+                            ${escapeHTML(
+                                token
+                            )}
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="ticket-footer">
+
+
+                        <div class="ticket-valid">
+
+                            <span class="ticket-valid-dot">
+                            </span>
+
+                            VÁLIDO PARA 1 INGRESO
+
+                        </div>
+
+
+                        <div class="ticket-footer-note">
+
+                            Presenta este código QR al ingresar al evento.
+                            Cada entrada es individual y únicamente podrá
+                            validarse una vez. Evita compartir capturas
+                            del código QR.
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(
+                card
+            );
+
+
+            const qrContainer =
+
+                document
+                .getElementById(
+                    `qr-${index}`
+                );
+
+
+            new QRCode(
+                qrContainer,
+                {
+
+                    text:
+                        String(
+                            token
+                        ),
+
+                    width:
+                        170,
+
+                    height:
+                        170,
+
+                    correctLevel:
+                        QRCode.CorrectLevel.H
+
+                }
+            );
+
+
+        }
     );
 
 }
@@ -2746,6 +5247,14 @@ function startCountdown(
 
     if (!expiresAt) {
 
+        document
+            .getElementById(
+                "countdown"
+            )
+            .textContent =
+            "--:--";
+
+
         return;
 
     }
@@ -2753,25 +5262,28 @@ function startCountdown(
 
     function update() {
 
-        const difference =
+
+        const now =
+            Date.now();
+
+
+        const end =
 
             new Date(
                 expiresAt
             )
-            .getTime()
+            .getTime();
 
-            -
 
-            Date.now();
+        const difference =
+
+            end -
+            now;
 
 
         if (
             difference <= 0
         ) {
-
-            clearInterval(
-                countdownInterval
-            );
 
 
             document
@@ -2782,8 +5294,20 @@ function startCountdown(
                 "00:00";
 
 
-            loadReservation(
-                true
+            clearInterval(
+                countdownInterval
+            );
+
+
+            setTimeout(
+                () => {
+
+                    loadReservation(
+                        true
+                    );
+
+                },
+                800
             );
 
 
@@ -2793,6 +5317,7 @@ function startCountdown(
 
 
         const minutes =
+
             Math.floor(
                 difference /
                 60000
@@ -2800,6 +5325,7 @@ function startCountdown(
 
 
         const seconds =
+
             Math.floor(
                 (
                     difference %
@@ -2816,8 +5342,13 @@ function startCountdown(
             )
             .textContent =
 
-            String(minutes)
-            .padStart(2,"0")
+            String(
+                minutes
+            )
+            .padStart(
+                2,
+                "0"
+            )
 
             +
 
@@ -2825,8 +5356,13 @@ function startCountdown(
 
             +
 
-            String(seconds)
-            .padStart(2,"0");
+            String(
+                seconds
+            )
+            .padStart(
+                2,
+                "0"
+            );
 
     }
 
@@ -2835,368 +5371,11 @@ function startCountdown(
 
 
     countdownInterval =
+
         setInterval(
             update,
             1000
         );
-
-}
-
-
-/* ==========================================================
-   TICKETS
-========================================================== */
-
-function getTickets() {
-
-    let tickets =
-        reservation.boletos ||
-        reservation.tickets ||
-        [];
-
-
-    if (
-        typeof tickets ===
-        "string"
-    ) {
-
-        try {
-
-            tickets =
-                JSON.parse(tickets);
-
-        }
-
-        catch {
-
-            tickets = [];
-
-        }
-
-    }
-
-
-    return Array.isArray(tickets)
-        ? tickets
-        : [];
-
-}
-
-
-function renderTickets() {
-
-    const tickets =
-        getTickets();
-
-
-    const section =
-        document
-        .getElementById(
-            "ticketsSection"
-        );
-
-
-    const grid =
-        document
-        .getElementById(
-            "ticketsGrid"
-        );
-
-
-    section.classList.add(
-        "show"
-    );
-
-
-    grid.innerHTML =
-        "";
-
-
-    if (!tickets.length) {
-
-        grid.innerHTML = `
-
-            <div class="card">
-
-                <div
-                    class="card-content"
-                    style="text-align:center">
-
-                    Preparando entradas digitales...
-
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    const eventName =
-        reservation.evento_nombre ||
-        "Evento Live Tickets";
-
-
-    const date =
-
-        reservation.evento_fecha
-
-        ? new Date(
-            reservation.evento_fecha
-        )
-        .toLocaleDateString(
-            "es-HN",
-            {
-                day: "2-digit",
-                month: "long",
-                year: "numeric"
-            }
-        )
-
-        : "";
-
-
-    const place =
-        reservation.evento_lugar ||
-        "";
-
-
-    tickets.forEach(
-        (
-            ticket,
-            index
-        ) => {
-
-
-            const token =
-                ticket.token;
-
-
-            if (!token) {
-
-                return;
-
-            }
-
-
-            const mesa =
-                ticket.mesa ??
-                ticket.mesa_numero ??
-                "—";
-
-
-            const asiento =
-                ticket.asiento ??
-                ticket.asiento_numero ??
-                "—";
-
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "ticket";
-
-
-            card.innerHTML = `
-
-                <div class="ticket-header">
-
-                    <div class="ticket-bg">
-                    </div>
-
-                    <div class="ticket-overlay">
-                    </div>
-
-                    <div class="ticket-head-content">
-
-
-                        <div class="ticket-brand">
-
-                            <img
-                                src="LIVE_TICKETS_BLANCO.png"
-                                class="ticket-logo">
-
-                            <span class="ticket-label">
-
-                                ENTRADA DIGITAL
-
-                            </span>
-
-                        </div>
-
-
-                        <h3>
-
-                            ${escapeHTML(eventName)}
-
-                        </h3>
-
-
-                        <div class="ticket-meta">
-
-                            ${
-                                date
-                                ? `<div>📅 ${escapeHTML(date)}</div>`
-                                : ""
-                            }
-
-                            ${
-                                place
-                                ? `<div>📍 ${escapeHTML(place)}</div>`
-                                : ""
-                            }
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="ticket-body">
-
-
-                    <div class="seat-grid">
-
-                        <div class="seat-box">
-
-                            <small>
-                                MESA
-                            </small>
-
-                            <strong>
-                                ${escapeHTML(mesa)}
-                            </strong>
-
-                        </div>
-
-
-                        <div class="seat-box">
-
-                            <small>
-                                ASIENTO
-                            </small>
-
-                            <strong>
-                                ${escapeHTML(asiento)}
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="ticket-detail">
-
-                        <span>
-                            Reserva
-                        </span>
-
-                        <strong>
-                            ${escapeHTML(
-                                reservation.codigo_reserva
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-detail">
-
-                        <span>
-                            Entrada
-                        </span>
-
-                        <strong>
-                            ${index + 1} de ${tickets.length}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-detail">
-
-                        <span>
-                            Titular
-                        </span>
-
-                        <strong>
-                            ${escapeHTML(
-                                reservation.nombre_cliente ||
-                                "Comprador"
-                            )}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-qr">
-
-                        <div class="qr-title">
-
-                            CÓDIGO DE ACCESO
-
-                        </div>
-
-                        <div
-                            class="qr-box"
-                            id="qr-${index}">
-                        </div>
-
-                        <div class="token">
-
-                            ${escapeHTML(token)}
-
-                        </div>
-
-
-                        <div class="valid">
-
-                            ● VÁLIDO PARA 1 INGRESO
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            grid.appendChild(
-                card
-            );
-
-
-            new QRCode(
-                document
-                .getElementById(
-                    `qr-${index}`
-                ),
-                {
-                    text:
-                        String(token),
-
-                    width:
-                        165,
-
-                    height:
-                        165,
-
-                    correctLevel:
-                        QRCode.CorrectLevel.H
-                }
-            );
-
-        }
-    );
 
 }
 
@@ -3225,10 +5404,27 @@ function showError(message) {
 
     document
         .getElementById(
-            "errorCard"
+            "expiredCard"
         )
         .classList
-        .add("show");
+        .remove(
+            "show"
+        );
+
+
+    const errorCard =
+
+        document
+        .getElementById(
+            "errorCard"
+        );
+
+
+    errorCard
+        .classList
+        .add(
+            "show"
+        );
 
 
     document
@@ -3242,10 +5438,40 @@ function showError(message) {
 
 
 /* ==========================================================
-   START
+   POLLING
+========================================================== */
+
+function startPolling() {
+
+    clearInterval(
+        pollingInterval
+    );
+
+
+    pollingInterval =
+
+        setInterval(
+            () => {
+
+
+                loadReservation(
+                    true
+                );
+
+
+            },
+            5000
+        );
+
+}
+
+
+/* ==========================================================
+   INICIAR
 ========================================================== */
 
 async function initialize() {
+
 
     await checkTestAdmin();
 
@@ -3255,17 +5481,7 @@ async function initialize() {
     );
 
 
-    pollingInterval =
-        setInterval(
-            () => {
-
-                loadReservation(
-                    true
-                );
-
-            },
-            5000
-        );
+    startPolling();
 
 }
 
