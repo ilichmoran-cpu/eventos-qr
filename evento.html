@@ -9,7 +9,13 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-<meta name="referrer" content="no-referrer">
+<meta
+    name="theme-color"
+    content="#08101f">
+
+<meta
+    name="referrer"
+    content="no-referrer">
 
 <title>Evento | Live Tickets</title>
 
@@ -86,7 +92,8 @@ input {
     font-family: inherit;
 }
 
-button {
+button,
+a {
 
     -webkit-tap-highlight-color:
         transparent;
@@ -108,11 +115,14 @@ button {
     background:
         rgba(8,16,31,.98);
 
+    backdrop-filter:
+        blur(18px);
+
     border-bottom:
-        1px solid rgba(255,255,255,.07);
+        1px solid rgba(255,255,255,.08);
 
     box-shadow:
-        0 5px 25px rgba(0,0,0,.15);
+        0 4px 25px rgba(0,0,0,.16);
 }
 
 .nav {
@@ -132,9 +142,7 @@ button {
 
     align-items: center;
 
-    justify-content: space-between;
-
-    gap: 20px;
+    gap: 28px;
 }
 
 .brand {
@@ -143,21 +151,74 @@ button {
 
     align-items: center;
 
+    flex-shrink: 0;
+
     text-decoration: none;
 }
 
 .brand-logo {
 
-    height: 48px;
+    display: block;
 
     width: auto;
 
-    max-width: 240px;
+    height: 49px;
+
+    max-width: 245px;
 
     object-fit: contain;
 }
 
-.back-link {
+
+/* ==========================================================
+   NAVIGATION
+========================================================== */
+
+.nav-links {
+
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 26px;
+}
+
+.nav-links a {
+
+    color:
+        rgba(255,255,255,.74);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.nav-links a:hover {
+
+    color: white;
+}
+
+.nav-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.nav-pass {
+
+    min-height: 39px;
+
+    padding:
+        0 16px;
 
     display: inline-flex;
 
@@ -165,24 +226,73 @@ button {
 
     justify-content: center;
 
-    min-height: 38px;
-
-    padding:
-        0 13px;
+    gap: 7px;
 
     border:
-        1px solid rgba(255,255,255,.14);
+        1px solid rgba(96,165,250,.35);
 
     border-radius: 999px;
 
-    color:
-        rgba(255,255,255,.78);
+    background:
+        rgba(37,99,235,.14);
+
+    color: white;
 
     text-decoration: none;
 
-    font-size: 9px;
+    white-space: nowrap;
+
+    font-size: 10px;
 
     font-weight: 800;
+
+    transition: .2s;
+}
+
+.nav-pass:hover {
+
+    background:
+        rgba(37,99,235,.28);
+
+    border-color:
+        rgba(96,165,250,.55);
+}
+
+.nav-events {
+
+    min-height: 39px;
+
+    padding:
+        0 16px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    border-radius: 999px;
+
+    color: white;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    transition: .2s;
+}
+
+.nav-events:hover {
+
+    background:
+        rgba(255,255,255,.08);
 }
 
 
@@ -1977,9 +2087,7 @@ button {
 
         transform:
             rotate(360deg);
-
     }
-
 }
 
 .loader strong {
@@ -2067,7 +2175,6 @@ button {
         top:
             auto;
     }
-
 }
 
 
@@ -2079,25 +2186,52 @@ button {
             64px;
 
         padding:
-            0 13px;
+            0 12px;
+
+        gap:
+            8px;
     }
 
     .brand-logo {
 
         height:
-            35px;
-    }
-
-    .back-link {
-
-        min-height:
             34px;
 
+        max-width:
+            170px;
+    }
+
+    .nav-links {
+
+        display:
+            none;
+    }
+
+    .nav-actions {
+
+        margin-left:
+            auto;
+
+        gap:
+            5px;
+    }
+
+    .nav-events {
+
+        display:
+            none;
+    }
+
+    .nav-pass {
+
+        min-height:
+            36px;
+
         padding:
-            0 10px;
+            0 11px;
 
         font-size:
-            7px;
+            8px;
     }
 
     .event-hero {
@@ -2234,7 +2368,6 @@ button {
         border-radius:
             18px;
     }
-
 }
 
 
@@ -2272,7 +2405,6 @@ button {
         font-size:
             8px;
     }
-
 }
 
 </style>
@@ -2317,6 +2449,7 @@ button {
 
     <div class="nav">
 
+
         <a
             href="index.html"
             class="brand">
@@ -2329,13 +2462,42 @@ button {
         </a>
 
 
-        <a
-            href="index.html"
-            class="back-link">
+        <nav class="nav-links">
 
-            ← TODOS LOS EVENTOS
+            <a href="index.html#eventos">
+                Eventos
+            </a>
 
-        </a>
+            <a href="index.html#live-pass">
+                Live Pass
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+
+            <a
+                href="mis-entradas.html"
+                class="nav-pass">
+
+                🎟 MIS ENTRADAS
+
+            </a>
+
+
+            <a
+                href="index.html#eventos"
+                class="nav-events">
+
+                VER EVENTOS
+
+            </a>
+
+
+        </div>
+
 
     </div>
 
@@ -3112,7 +3274,6 @@ let refreshing =
 /* ==========================================================
    ZOOM CONFIG
 
-   AHORA:
    mínimo = 20%
    normal = 100%
    máximo = 180%
@@ -5459,7 +5620,6 @@ async function createPreReservation() {
             `checkout.html?token=${encodeURIComponent(
                 token
             )}`;
-
 
     }
 
