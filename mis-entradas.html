@@ -19,9 +19,11 @@
 
 <title>Mis Entradas | Live Tickets</title>
 
+<meta
+    name="description"
+    content="Accede a tus entradas digitales de Live Tickets y presenta tus códigos QR para ingresar a tus eventos.">
 
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
 
 <link
     rel="preconnect"
@@ -47,17 +49,16 @@
     box-sizing: border-box;
 }
 
-
 :root {
 
     --bg:
-        #f3f6fa;
+        #f4f7fb;
 
     --dark:
         #08101f;
 
-    --dark2:
-        #101c31;
+    --dark-soft:
+        #101a31;
 
     --text:
         #111827;
@@ -66,19 +67,28 @@
         #667085;
 
     --line:
-        #e5e9ef;
+        #e5e7eb;
 
-    --blue:
+    --primary:
         #2563eb;
 
-    --blue-dark:
+    --primary-dark:
         #1d4ed8;
+
+    --primary-soft:
+        #eff6ff;
 
     --green:
         #16a34a;
 
     --green-soft:
         #ecfdf5;
+
+    --red:
+        #dc2626;
+
+    --red-soft:
+        #fef2f2;
 
     --orange:
         #f97316;
@@ -88,7 +98,6 @@
 
     --gray:
         #64748b;
-
 }
 
 
@@ -97,9 +106,11 @@ html {
     min-height:
         100%;
 
+    scroll-behavior:
+        smooth;
+
     background:
         var(--bg);
-
 }
 
 
@@ -124,7 +135,6 @@ body {
 
     -webkit-font-smoothing:
         antialiased;
-
 }
 
 
@@ -133,15 +143,14 @@ input {
 
     font-family:
         inherit;
-
 }
 
 
-button {
+button,
+a {
 
     -webkit-tap-highlight-color:
         transparent;
-
 }
 
 
@@ -161,14 +170,16 @@ button {
         1000;
 
     background:
-        rgba(8,16,31,.985);
+        rgba(8,16,31,.98);
+
+    backdrop-filter:
+        blur(18px);
 
     border-bottom:
         1px solid rgba(255,255,255,.08);
 
     box-shadow:
-        0 6px 25px rgba(0,0,0,.14);
-
+        0 4px 25px rgba(0,0,0,.16);
 }
 
 
@@ -178,16 +189,16 @@ button {
         100%;
 
     max-width:
-        1320px;
+        1450px;
 
     min-height:
-        72px;
+        76px;
 
     margin:
         auto;
 
     padding:
-        0 20px;
+        0 24px;
 
     display:
         flex;
@@ -195,12 +206,24 @@ button {
     align-items:
         center;
 
-    justify-content:
-        space-between;
-
     gap:
-        15px;
+        28px;
+}
 
+
+.brand {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    flex-shrink:
+        0;
+
+    text-decoration:
+        none;
 }
 
 
@@ -209,18 +232,70 @@ button {
     display:
         block;
 
-    height:
-        43px;
-
     width:
         auto;
 
+    height:
+        49px;
+
     max-width:
-        220px;
+        245px;
 
     object-fit:
         contain;
+}
 
+
+/* ==========================================================
+   NAVIGATION
+========================================================== */
+
+.nav-links {
+
+    margin-left:
+        auto;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        26px;
+}
+
+
+.nav-links a {
+
+    color:
+        rgba(255,255,255,.74);
+
+    text-decoration:
+        none;
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+    transition:
+        .2s;
+}
+
+
+.nav-links a:hover {
+
+    color:
+        white;
+}
+
+
+.nav-links a.active {
+
+    color:
+        white;
 }
 
 
@@ -233,18 +308,63 @@ button {
         center;
 
     gap:
-        8px;
-
+        9px;
 }
 
 
-.nav-button {
+.nav-pass {
 
     min-height:
-        36px;
+        39px;
 
     padding:
-        0 13px;
+        0 16px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        7px;
+
+    border:
+        1px solid rgba(96,165,250,.45);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(37,99,235,.26);
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    white-space:
+        nowrap;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+}
+
+
+.nav-events {
+
+    min-height:
+        39px;
+
+    padding:
+        0 16px;
 
     display:
         inline-flex;
@@ -256,7 +376,7 @@ button {
         center;
 
     border:
-        1px solid rgba(255,255,255,.14);
+        1px solid rgba(255,255,255,.15);
 
     border-radius:
         999px;
@@ -270,15 +390,27 @@ button {
     text-decoration:
         none;
 
-    cursor:
-        pointer;
+    white-space:
+        nowrap;
 
     font-size:
-        8px;
+        10px;
 
     font-weight:
         800;
 
+    cursor:
+        pointer;
+
+    transition:
+        .2s;
+}
+
+
+.nav-events:hover {
+
+    background:
+        rgba(255,255,255,.08);
 }
 
 
@@ -286,7 +418,6 @@ button {
 
     display:
         none;
-
 }
 
 
@@ -315,8 +446,7 @@ button {
         center;
 
     background:
-        #f3f6fa;
-
+        #f4f7fb;
 }
 
 
@@ -324,7 +454,13 @@ button {
 
     display:
         none;
+}
 
+
+.loading-inner {
+
+    text-align:
+        center;
 }
 
 
@@ -343,14 +479,13 @@ button {
         4px solid #dce3ec;
 
     border-top-color:
-        var(--blue);
+        var(--primary);
 
     border-radius:
         50%;
 
     animation:
         spin .75s linear infinite;
-
 }
 
 
@@ -366,14 +501,6 @@ button {
 }
 
 
-.loading-inner {
-
-    text-align:
-        center;
-
-}
-
-
 .loading-inner strong {
 
     display:
@@ -384,7 +511,6 @@ button {
 
     font-size:
         13px;
-
 }
 
 
@@ -395,7 +521,6 @@ button {
 
     font-size:
         9px;
-
 }
 
 
@@ -406,10 +531,10 @@ button {
 .auth-section {
 
     min-height:
-        calc(100vh - 72px);
+        calc(100vh - 76px);
 
     padding:
-        45px 18px;
+        55px 18px;
 
     display:
         none;
@@ -423,19 +548,18 @@ button {
     background:
 
         radial-gradient(
-            circle at 15% 10%,
+            circle at 14% 10%,
             rgba(37,99,235,.12),
-            transparent 28%
+            transparent 27%
         ),
 
         radial-gradient(
-            circle at 90% 80%,
+            circle at 90% 82%,
             rgba(124,58,237,.09),
             transparent 30%
         ),
 
-        #f3f6fa;
-
+        #f4f7fb;
 }
 
 
@@ -443,77 +567,103 @@ button {
 
     display:
         flex;
-
 }
 
 
-.auth-card {
+.auth-wrapper {
 
     width:
-        min(470px,100%);
+        min(940px,100%);
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        390px;
+
+    gap:
+        20px;
+
+    align-items:
+        stretch;
+}
+
+
+/* ==========================================================
+   AUTH INTRO
+========================================================== */
+
+.auth-intro {
+
+    position:
+        relative;
 
     overflow:
         hidden;
 
-    background:
-        white;
+    min-height:
+        520px;
 
-    border:
-        1px solid #e5e9ef;
+    padding:
+        42px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        space-between;
 
     border-radius:
         26px;
 
-    box-shadow:
-        0 25px 70px rgba(15,23,42,.12);
-
-}
-
-
-.auth-top {
-
-    padding:
-        29px 27px;
-
     background:
 
         radial-gradient(
-            circle at 80% 20%,
-            rgba(37,99,235,.34),
-            transparent 38%
+            circle at 85% 12%,
+            rgba(37,99,235,.46),
+            transparent 34%
+        ),
+
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(124,58,237,.18),
+            transparent 30%
         ),
 
         linear-gradient(
             145deg,
             #08101f,
-            #111e35
+            #101c31
         );
 
     color:
         white;
 
+    box-shadow:
+        0 25px 70px rgba(15,23,42,.14);
 }
 
 
-.auth-badge {
+.auth-intro-badge {
 
-    display:
-        inline-flex;
-
-    margin-bottom:
-        12px;
+    width:
+        fit-content;
 
     padding:
-        6px 9px;
-
-    background:
-        rgba(37,99,235,.20);
+        7px 10px;
 
     border:
-        1px solid rgba(96,165,250,.20);
+        1px solid rgba(96,165,250,.25);
 
     border-radius:
         999px;
+
+    background:
+        rgba(37,99,235,.17);
 
     color:
         #bfdbfe;
@@ -525,53 +675,246 @@ button {
         900;
 
     letter-spacing:
-        .8px;
-
+        1px;
 }
 
 
-.auth-top h1 {
-
-    margin:
-        0 0 8px;
-
-    font-size:
-        29px;
-
-    line-height:
-        1.1;
-
-    letter-spacing:
-        -.8px;
-
-}
-
-
-.auth-top p {
+.auth-intro h1 {
 
     max-width:
-        360px;
+        510px;
+
+    margin:
+        18px 0 13px;
+
+    font-size:
+        clamp(35px,5vw,53px);
+
+    line-height:
+        1.03;
+
+    letter-spacing:
+        -1.8px;
+}
+
+
+.auth-intro-copy {
+
+    max-width:
+        520px;
 
     margin:
         0;
 
     color:
-        rgba(255,255,255,.62);
+        rgba(255,255,255,.60);
 
     font-size:
-        10px;
+        11px;
 
     line-height:
-        1.65;
+        1.7;
+}
 
+
+.auth-benefits {
+
+    display:
+        grid;
+
+    gap:
+        9px;
+}
+
+
+.auth-benefit {
+
+    padding:
+        13px 14px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        11px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius:
+        13px;
+
+    background:
+        rgba(255,255,255,.05);
+}
+
+
+.auth-benefit-icon {
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(37,99,235,.24);
+
+    font-size:
+        14px;
+}
+
+
+.auth-benefit strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    font-size:
+        9px;
+}
+
+
+.auth-benefit span {
+
+    display:
+        block;
+
+    color:
+        rgba(255,255,255,.48);
+
+    font-size:
+        7px;
+
+    line-height:
+        1.4;
+}
+
+
+/* ==========================================================
+   AUTH CARD
+========================================================== */
+
+.auth-card {
+
+    overflow:
+        hidden;
+
+    align-self:
+        center;
+
+    background:
+        white;
+
+    border:
+        1px solid #e5e9ef;
+
+    border-radius:
+        24px;
+
+    box-shadow:
+        0 20px 55px rgba(15,23,42,.10);
+}
+
+
+.auth-top {
+
+    padding:
+        27px 25px 17px;
+}
+
+
+.auth-badge {
+
+    display:
+        inline-flex;
+
+    margin-bottom:
+        11px;
+
+    padding:
+        6px 9px;
+
+    background:
+        #eff6ff;
+
+    border:
+        1px solid #bfdbfe;
+
+    border-radius:
+        999px;
+
+    color:
+        #1d4ed8;
+
+    font-size:
+        7px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        .9px;
+}
+
+
+.auth-top h2 {
+
+    margin:
+        0 0 8px;
+
+    font-size:
+        25px;
+
+    line-height:
+        1.1;
+
+    letter-spacing:
+        -.6px;
+}
+
+
+.auth-top p {
+
+    margin:
+        0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        9px;
+
+    line-height:
+        1.6;
 }
 
 
 .auth-body {
 
     padding:
-        25px 27px 27px;
-
+        10px 25px 26px;
 }
 
 
@@ -594,7 +937,6 @@ button {
 
     letter-spacing:
         .4px;
-
 }
 
 
@@ -626,25 +968,23 @@ button {
 
     font-size:
         13px;
-
 }
 
 
 .form-input:focus {
 
     border-color:
-        var(--blue);
+        var(--primary);
 
     box-shadow:
         0 0 0 3px rgba(37,99,235,.08);
-
 }
 
 
 .code-input {
 
     height:
-        65px;
+        67px;
 
     text-align:
         center;
@@ -657,7 +997,6 @@ button {
 
     letter-spacing:
         10px;
-
 }
 
 
@@ -679,7 +1018,7 @@ button {
         12px;
 
     background:
-        var(--blue);
+        var(--primary);
 
     color:
         white;
@@ -693,14 +1032,18 @@ button {
     font-weight:
         900;
 
+    transition:
+        .2s;
 }
 
 
 .primary-button:hover:not(:disabled) {
 
     background:
-        var(--blue-dark);
+        var(--primary-dark);
 
+    transform:
+        translateY(-1px);
 }
 
 
@@ -712,6 +1055,8 @@ button {
     cursor:
         not-allowed;
 
+    transform:
+        none;
 }
 
 
@@ -731,7 +1076,6 @@ button {
 
     line-height:
         1.55;
-
 }
 
 
@@ -747,7 +1091,7 @@ button {
         11px;
 
     background:
-        #fef2f2;
+        var(--red-soft);
 
     border:
         1px solid #fecaca;
@@ -766,7 +1110,6 @@ button {
 
     line-height:
         1.5;
-
 }
 
 
@@ -774,7 +1117,6 @@ button {
 
     display:
         block;
-
 }
 
 
@@ -807,20 +1149,21 @@ button {
     line-height:
         1.6;
 
+    word-break:
+        break-word;
 }
 
 
 .resend-row {
 
     margin-top:
-        14px;
+        13px;
 
     display:
         flex;
 
     justify-content:
         center;
-
 }
 
 
@@ -833,7 +1176,7 @@ button {
         transparent;
 
     color:
-        var(--blue);
+        var(--primary);
 
     cursor:
         pointer;
@@ -843,7 +1186,6 @@ button {
 
     font-weight:
         800;
-
 }
 
 
@@ -854,7 +1196,6 @@ button {
 
     cursor:
         not-allowed;
-
 }
 
 
@@ -866,7 +1207,6 @@ button {
 
     display:
         none;
-
 }
 
 
@@ -874,12 +1214,11 @@ button {
 
     display:
         block;
-
 }
 
 
 /* ==========================================================
-   HERO
+   LIVE PASS HERO
 ========================================================== */
 
 .pass-hero {
@@ -894,7 +1233,7 @@ button {
 
         radial-gradient(
             circle at 78% 15%,
-            rgba(37,99,235,.38),
+            rgba(37,99,235,.42),
             transparent 30%
         ),
 
@@ -912,7 +1251,6 @@ button {
 
     color:
         white;
-
 }
 
 
@@ -925,7 +1263,7 @@ button {
         1320px;
 
     min-height:
-        270px;
+        280px;
 
     margin:
         auto;
@@ -934,25 +1272,24 @@ button {
         48px 20px;
 
     display:
-        flex;
+        grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        300px;
 
     align-items:
         center;
 
-    justify-content:
-        space-between;
-
     gap:
-        30px;
-
+        35px;
 }
 
 
 .pass-hero-text {
 
     max-width:
-        650px;
-
+        680px;
 }
 
 
@@ -987,7 +1324,6 @@ button {
 
     letter-spacing:
         .9px;
-
 }
 
 
@@ -1001,11 +1337,13 @@ button {
 
     letter-spacing:
         -1.8px;
-
 }
 
 
 .pass-hero p {
+
+    max-width:
+        600px;
 
     margin:
         0;
@@ -1017,18 +1355,18 @@ button {
         11px;
 
     line-height:
-        1.6;
-
+        1.65;
 }
 
 
+/* ==========================================================
+   ACCOUNT CARD
+========================================================== */
+
 .pass-user {
 
-    min-width:
-        240px;
-
     padding:
-        18px;
+        20px;
 
     background:
         rgba(255,255,255,.07);
@@ -1037,15 +1375,14 @@ button {
         1px solid rgba(255,255,255,.10);
 
     border-radius:
-        17px;
+        18px;
 
     backdrop-filter:
         blur(12px);
-
 }
 
 
-.pass-user small {
+.pass-user-label {
 
     display:
         block;
@@ -1062,10 +1399,12 @@ button {
     font-weight:
         800;
 
+    letter-spacing:
+        .4px;
 }
 
 
-.pass-user strong {
+.pass-user-value {
 
     display:
         block;
@@ -1076,9 +1415,91 @@ button {
     font-size:
         12px;
 
+    font-weight:
+        800;
+
     word-break:
         break-word;
+}
 
+
+.pass-user-separator {
+
+    height:
+        1px;
+
+    margin:
+        15px 0;
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+.pass-stats {
+
+    margin-top:
+        16px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:
+        8px;
+}
+
+
+.pass-stat {
+
+    padding:
+        11px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius:
+        11px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    text-align:
+        center;
+}
+
+
+.pass-stat strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+    color:
+        white;
+
+    font-size:
+        18px;
+}
+
+
+.pass-stat span {
+
+    color:
+        rgba(255,255,255,.44);
+
+    font-size:
+        6px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .4px;
 }
 
 
@@ -1098,15 +1519,14 @@ button {
         auto;
 
     padding:
-        30px 20px 80px;
-
+        34px 20px 80px;
 }
 
 
 .section-head {
 
     margin-bottom:
-        17px;
+        18px;
 
     display:
         flex;
@@ -1119,7 +1539,6 @@ button {
 
     gap:
         15px;
-
 }
 
 
@@ -1129,11 +1548,10 @@ button {
         0 0 5px;
 
     font-size:
-        23px;
+        25px;
 
     letter-spacing:
         -.5px;
-
 }
 
 
@@ -1147,7 +1565,50 @@ button {
 
     font-size:
         9px;
+}
 
+
+.refresh-button {
+
+    min-height:
+        38px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid #dbe1e8;
+
+    border-radius:
+        10px;
+
+    background:
+        white;
+
+    color:
+        #344054;
+
+    cursor:
+        pointer;
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+}
+
+
+.refresh-button:hover {
+
+    border-color:
+        #bfdbfe;
+
+    background:
+        #eff6ff;
+
+    color:
+        #1d4ed8;
 }
 
 
@@ -1162,7 +1623,6 @@ button {
 
     gap:
         20px;
-
 }
 
 
@@ -1182,9 +1642,12 @@ button {
 
     box-shadow:
         0 10px 32px rgba(15,23,42,.055);
-
 }
 
+
+/* ==========================================================
+   EVENT HEADER
+========================================================== */
 
 .event-head {
 
@@ -1192,44 +1655,42 @@ button {
         grid;
 
     grid-template-columns:
-        150px 1fr;
+        160px 1fr;
 
     min-height:
-        180px;
+        190px;
 
     background:
         #08101f;
 
     color:
         white;
-
 }
 
 
 .event-image {
 
     width:
-        150px;
+        160px;
 
     height:
         100%;
 
     min-height:
-        180px;
+        190px;
 
     object-fit:
         cover;
 
     background:
         #111827;
-
 }
 
 
 .event-info {
 
     padding:
-        24px;
+        25px;
 
     display:
         flex;
@@ -1239,7 +1700,6 @@ button {
 
     justify-content:
         center;
-
 }
 
 
@@ -1262,7 +1722,6 @@ button {
 
     letter-spacing:
         .8px;
-
 }
 
 
@@ -1276,7 +1735,6 @@ button {
 
     line-height:
         1.12;
-
 }
 
 
@@ -1294,6 +1752,8 @@ button {
     font-size:
         9px;
 
+    line-height:
+        1.5;
 }
 
 
@@ -1310,7 +1770,6 @@ button {
 
     flex-wrap:
         wrap;
-
 }
 
 
@@ -1342,7 +1801,13 @@ button {
 
     font-weight:
         800;
+}
 
+
+.event-action:hover {
+
+    background:
+        rgba(255,255,255,.13);
 }
 
 
@@ -1375,7 +1840,6 @@ button {
 
     border-bottom:
         1px solid #e8ecf1;
-
 }
 
 
@@ -1392,7 +1856,6 @@ button {
 
     flex-wrap:
         wrap;
-
 }
 
 
@@ -1413,6 +1876,8 @@ button {
     font-weight:
         900;
 
+    letter-spacing:
+        .3px;
 }
 
 
@@ -1423,7 +1888,6 @@ button {
 
     font-size:
         10px;
-
 }
 
 
@@ -1433,11 +1897,10 @@ button {
         #111827;
 
     font-size:
-        15px;
+        16px;
 
     font-weight:
         900;
-
 }
 
 
@@ -1458,7 +1921,6 @@ button {
 
     gap:
         13px;
-
 }
 
 
@@ -1476,6 +1938,15 @@ button {
     background:
         white;
 
+    transition:
+        .2s;
+}
+
+
+.ticket:hover {
+
+    box-shadow:
+        0 10px 25px rgba(15,23,42,.07);
 }
 
 
@@ -1484,6 +1955,8 @@ button {
     opacity:
         .68;
 
+    box-shadow:
+        none;
 }
 
 
@@ -1509,7 +1982,6 @@ button {
 
     border-bottom:
         1px solid #e7ebef;
-
 }
 
 
@@ -1523,7 +1995,6 @@ button {
 
     font-weight:
         900;
-
 }
 
 
@@ -1547,6 +2018,8 @@ button {
     font-weight:
         900;
 
+    letter-spacing:
+        .3px;
 }
 
 
@@ -1557,7 +2030,6 @@ button {
 
     color:
         #4b5563;
-
 }
 
 
@@ -1574,7 +2046,6 @@ button {
 
     gap:
         9px;
-
 }
 
 
@@ -1594,7 +2065,6 @@ button {
 
     text-align:
         center;
-
 }
 
 
@@ -1614,7 +2084,6 @@ button {
 
     font-weight:
         800;
-
 }
 
 
@@ -1628,7 +2097,6 @@ button {
 
     font-weight:
         900;
-
 }
 
 
@@ -1638,7 +2106,7 @@ button {
         calc(100% - 28px);
 
     min-height:
-        41px;
+        43px;
 
     margin:
         0 14px 14px;
@@ -1650,7 +2118,7 @@ button {
         10px;
 
     background:
-        var(--blue);
+        var(--primary);
 
     color:
         white;
@@ -1664,14 +2132,15 @@ button {
     font-weight:
         900;
 
+    transition:
+        .2s;
 }
 
 
 .ticket-button:hover {
 
     background:
-        var(--blue-dark);
-
+        var(--primary-dark);
 }
 
 
@@ -1701,6 +2170,8 @@ button {
     font-weight:
         800;
 
+    line-height:
+        1.5;
 }
 
 
@@ -1731,6 +2202,8 @@ button {
     text-align:
         center;
 
+    box-shadow:
+        inset 0 0 0 1px rgba(37,99,235,.02);
 }
 
 
@@ -1738,7 +2211,25 @@ button {
 
     display:
         block;
+}
 
+
+.qr-title {
+
+    margin-bottom:
+        11px;
+
+    color:
+        #111827;
+
+    font-size:
+        8px;
+
+    font-weight:
+        900;
+
+    letter-spacing:
+        .5px;
 }
 
 
@@ -1756,6 +2247,9 @@ button {
     margin:
         auto;
 
+    padding:
+        8px;
+
     display:
         flex;
 
@@ -1765,6 +2259,14 @@ button {
     justify-content:
         center;
 
+    background:
+        white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        12px;
 }
 
 
@@ -1776,14 +2278,25 @@ button {
 
     height:
         auto !important;
-
 }
 
 
 .qr-warning {
 
     margin-top:
-        10px;
+        11px;
+
+    padding:
+        9px;
+
+    background:
+        #fff7ed;
+
+    border:
+        1px solid #fed7aa;
+
+    border-radius:
+        8px;
 
     color:
         #b45309;
@@ -1796,7 +2309,6 @@ button {
 
     line-height:
         1.5;
-
 }
 
 
@@ -1820,7 +2332,6 @@ button {
 
     text-align:
         center;
-
 }
 
 
@@ -1848,14 +2359,13 @@ button {
         #eff6ff;
 
     color:
-        var(--blue);
+        var(--primary);
 
     border-radius:
         50%;
 
     font-size:
         25px;
-
 }
 
 
@@ -1866,7 +2376,6 @@ button {
 
     font-size:
         18px;
-
 }
 
 
@@ -1876,7 +2385,7 @@ button {
         430px;
 
     margin:
-        auto;
+        0 auto 17px;
 
     color:
         var(--muted);
@@ -1886,7 +2395,144 @@ button {
 
     line-height:
         1.6;
+}
 
+
+.empty-button {
+
+    min-height:
+        39px;
+
+    padding:
+        0 14px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        9px;
+
+    background:
+        var(--primary);
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        8px;
+
+    font-weight:
+        900;
+}
+
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.footer {
+
+    background:
+        #050b16;
+
+    color:
+        white;
+}
+
+
+.footer-content {
+
+    width:
+        100%;
+
+    max-width:
+        1320px;
+
+    margin:
+        auto;
+
+    padding:
+        29px 20px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap:
+        20px;
+}
+
+
+.footer-logo {
+
+    width:
+        auto;
+
+    height:
+        35px;
+
+    max-width:
+        180px;
+
+    object-fit:
+        contain;
+}
+
+
+.footer-links {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        18px;
+}
+
+
+.footer-links a {
+
+    color:
+        rgba(255,255,255,.52);
+
+    text-decoration:
+        none;
+
+    font-size:
+        8px;
+}
+
+
+.footer-links a:hover {
+
+    color:
+        white;
+}
+
+
+.footer-copy {
+
+    color:
+        rgba(255,255,255,.36);
+
+    font-size:
+        8px;
 }
 
 
@@ -1934,7 +2580,6 @@ button {
 
     line-height:
         1.55;
-
 }
 
 
@@ -1942,7 +2587,6 @@ button {
 
     display:
         block;
-
 }
 
 
@@ -1950,27 +2594,36 @@ button {
 
     background:
         #991b1b;
-
 }
 
 
 /* ==========================================================
-   RESPONSIVE
+   TABLET
 ========================================================== */
 
 @media(max-width:1000px) {
+
+    .auth-wrapper {
+
+        grid-template-columns:
+            1fr 370px;
+    }
+
 
     .ticket-list {
 
         grid-template-columns:
             repeat(2,1fr);
-
     }
 
 }
 
 
-@media(max-width:700px) {
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:760px) {
 
     .nav {
 
@@ -1980,6 +2633,8 @@ button {
         padding:
             0 12px;
 
+        gap:
+            8px;
     }
 
 
@@ -1988,17 +2643,165 @@ button {
         height:
             34px;
 
+        max-width:
+            170px;
     }
 
 
-    .nav-button {
+    .nav-links {
+
+        display:
+            none;
+    }
+
+
+    .nav-actions {
+
+        margin-left:
+            auto;
+
+        gap:
+            5px;
+    }
+
+
+    .nav-pass {
+
+        min-height:
+            36px;
+
+        padding:
+            0 10px;
+
+        font-size:
+            8px;
+    }
+
+
+    .nav-events {
+
+        min-height:
+            36px;
 
         padding:
             0 10px;
 
         font-size:
             7px;
+    }
 
+
+    .auth-section {
+
+        min-height:
+            calc(100vh - 64px);
+
+        padding:
+            25px 11px;
+    }
+
+
+    .auth-wrapper {
+
+        display:
+            grid;
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            13px;
+    }
+
+
+    .auth-intro {
+
+        min-height:
+            0;
+
+        padding:
+            27px 21px;
+
+        border-radius:
+            20px;
+    }
+
+
+    .auth-intro h1 {
+
+        margin-top:
+            13px;
+
+        font-size:
+            31px;
+    }
+
+
+    .auth-intro-copy {
+
+        font-size:
+            9px;
+    }
+
+
+    .auth-benefits {
+
+        margin-top:
+            24px;
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+        gap:
+            6px;
+    }
+
+
+    .auth-benefit {
+
+        padding:
+            10px;
+
+        display:
+            block;
+
+        text-align:
+            center;
+    }
+
+
+    .auth-benefit-icon {
+
+        margin:
+            0 auto 7px;
+    }
+
+
+    .auth-benefit span {
+
+        display:
+            none;
+    }
+
+
+    .auth-card {
+
+        border-radius:
+            19px;
+    }
+
+
+    .auth-top {
+
+        padding:
+            22px 19px 13px;
+    }
+
+
+    .auth-body {
+
+        padding:
+            8px 19px 22px;
     }
 
 
@@ -2010,25 +2813,32 @@ button {
         padding:
             34px 14px;
 
-        display:
-            grid;
+        grid-template-columns:
+            1fr;
 
+        gap:
+            24px;
     }
 
 
     .pass-user {
 
-        min-width:
-            0;
-
+        width:
+            100%;
     }
 
 
     .page {
 
         padding:
-            20px 10px 60px;
+            23px 10px 60px;
+    }
 
+
+    .section-head {
+
+        align-items:
+            center;
     }
 
 
@@ -2039,7 +2849,6 @@ button {
 
         min-height:
             155px;
-
     }
 
 
@@ -2050,7 +2859,6 @@ button {
 
         min-height:
             155px;
-
     }
 
 
@@ -2058,7 +2866,6 @@ button {
 
         padding:
             17px 14px;
-
     }
 
 
@@ -2066,7 +2873,6 @@ button {
 
         font-size:
             18px;
-
     }
 
 
@@ -2074,7 +2880,6 @@ button {
 
         min-height:
             32px;
-
     }
 
 
@@ -2085,36 +2890,51 @@ button {
 
         padding:
             12px;
-
     }
 
 
-    .auth-card {
-
-        border-radius:
-            21px;
-
-    }
-
-
-    .auth-top,
-    .auth-body {
+    .footer-content {
 
         padding:
-            23px 20px;
+            25px 15px;
 
+        display:
+            grid;
+
+        gap:
+            13px;
+    }
+
+
+    .footer-links {
+
+        flex-wrap:
+            wrap;
+
+        gap:
+            11px;
     }
 
 }
 
 
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
 @media(max-width:430px) {
+
+    .nav-events {
+
+        display:
+            none;
+    }
+
 
     .event-head {
 
         grid-template-columns:
             90px 1fr;
-
     }
 
 
@@ -2122,7 +2942,6 @@ button {
 
         width:
             90px;
-
     }
 
 
@@ -2130,7 +2949,6 @@ button {
 
         font-size:
             8px;
-
     }
 
 
@@ -2138,7 +2956,44 @@ button {
 
         gap:
             5px;
+    }
 
+
+    .auth-benefits {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .auth-benefit {
+
+        display:
+            flex;
+
+        text-align:
+            left;
+    }
+
+
+    .auth-benefit-icon {
+
+        margin:
+            0;
+    }
+
+
+    .auth-benefit span {
+
+        display:
+            block;
+    }
+
+
+    .section-head h2 {
+
+        font-size:
+            21px;
     }
 
 }
@@ -2196,7 +3051,9 @@ button {
     <div class="nav">
 
 
-        <a href="index.html">
+        <a
+            href="index.html"
+            class="brand">
 
             <img
                 src="LIVE_TICKETS_BLANCO.png"
@@ -2206,20 +3063,52 @@ button {
         </a>
 
 
+        <nav class="nav-links">
+
+            <a href="index.html#eventos">
+                Eventos
+            </a>
+
+            <a
+                href="mis-entradas.html"
+                class="active">
+
+                Live Pass
+
+            </a>
+
+            <a href="index.html#como-funciona">
+                Cómo funciona
+            </a>
+
+        </nav>
+
+
         <div class="nav-actions">
 
 
             <a
-                href="index.html"
-                class="nav-button">
+                href="mis-entradas.html"
+                class="nav-pass">
 
-                EVENTOS
+                🎟 MIS ENTRADAS
+
+            </a>
+
+
+            <a
+                href="index.html#eventos"
+                class="nav-events"
+                id="eventsButton">
+
+                VER EVENTOS
 
             </a>
 
 
             <button
-                class="nav-button"
+                type="button"
+                class="nav-events"
                 id="logoutButton"
                 onclick="logoutLivePass()">
 
@@ -2245,80 +3134,196 @@ button {
     id="emailScreen">
 
 
-    <div class="auth-card">
+    <div class="auth-wrapper">
 
 
-        <div class="auth-top">
+        <!-- ==================================================
+             INTRO
+        =================================================== -->
+
+        <div class="auth-intro">
 
 
-            <div class="auth-badge">
+            <div>
 
-                LIVE PASS
+                <div class="auth-intro-badge">
+
+                    LIVE PASS
+
+                </div>
+
+
+                <h1>
+
+                    Tus entradas.
+                    Siempre contigo.
+
+                </h1>
+
+
+                <p class="auth-intro-copy">
+
+                    Accede a todas tus compras de Live Tickets
+                    desde cualquier dispositivo. No necesitas
+                    crear una contraseña.
+
+                </p>
 
             </div>
 
 
-            <h1>
-
-                Tus entradas.
-                Siempre contigo.
-
-            </h1>
+            <div class="auth-benefits">
 
 
-            <p>
+                <div class="auth-benefit">
 
-                Ingresa el correo utilizado en tu compra.
-                Te enviaremos un código de seguridad para acceder.
+                    <div class="auth-benefit-icon">
+                        ✉
+                    </div>
 
-            </p>
+                    <div>
+
+                        <strong>
+                            Acceso por correo
+                        </strong>
+
+                        <span>
+                            Recibe un código temporal de seguridad.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        🎟
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Todas tus entradas
+                        </strong>
+
+                        <span>
+                            Tus compras confirmadas en un solo lugar.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        ▦
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            QR para ingresar
+                        </strong>
+
+                        <span>
+                            Presenta tu código directamente desde tu teléfono.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
 
 
         </div>
 
 
-        <div class="auth-body">
+        <!-- ==================================================
+             LOGIN
+        =================================================== -->
+
+        <div class="auth-card">
 
 
-            <label class="form-label">
-
-                CORREO ELECTRÓNICO
-
-            </label>
+            <div class="auth-top">
 
 
-            <input
-                type="email"
-                id="emailInput"
-                class="form-input"
-                placeholder="cliente@gmail.com"
-                autocomplete="email"
-                inputmode="email"
-                autocapitalize="none"
-                spellcheck="false">
+                <div class="auth-badge">
+
+                    ACCESO SEGURO
+
+                </div>
 
 
-            <button
-                class="primary-button"
-                id="requestCodeButton"
-                onclick="requestCode()">
+                <h2>
 
-                ENVIAR CÓDIGO
+                    Mis Entradas
 
-            </button>
+                </h2>
 
 
-            <div class="auth-help">
+                <p>
 
-                No necesitas crear una contraseña.
-                El código tendrá una duración de 10 minutos.
+                    Ingresa el correo utilizado al realizar tu compra.
+
+                </p>
+
 
             </div>
 
 
-            <div
-                class="auth-error"
-                id="emailError">
+            <div class="auth-body">
+
+
+                <label class="form-label">
+
+                    CORREO ELECTRÓNICO
+
+                </label>
+
+
+                <input
+                    type="email"
+                    id="emailInput"
+                    class="form-input"
+                    placeholder="cliente@gmail.com"
+                    autocomplete="email"
+                    inputmode="email"
+                    autocapitalize="none"
+                    spellcheck="false">
+
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    id="requestCodeButton"
+                    onclick="requestCode()">
+
+                    ENVIAR CÓDIGO
+
+                </button>
+
+
+                <div class="auth-help">
+
+                    Te enviaremos un código de 6 números.
+                    El código tendrá una duración de 10 minutos.
+
+                </div>
+
+
+                <div
+                    class="auth-error"
+                    id="emailError">
+                </div>
+
+
             </div>
 
 
@@ -2339,103 +3344,220 @@ button {
     id="codeScreen">
 
 
-    <div class="auth-card">
+    <div class="auth-wrapper">
 
 
-        <div class="auth-top">
+        <!-- ==================================================
+             INTRO
+        =================================================== -->
+
+        <div class="auth-intro">
 
 
-            <div class="auth-badge">
+            <div>
 
-                VERIFICACIÓN
+                <div class="auth-intro-badge">
+
+                    VERIFICACIÓN
+
+                </div>
+
+
+                <h1>
+
+                    Un paso más.
+
+                </h1>
+
+
+                <p class="auth-intro-copy">
+
+                    Revisa tu correo e ingresa el código de
+                    seguridad que acabamos de enviarte.
+
+                </p>
 
             </div>
 
 
-            <h1>
-
-                Revisa tu correo
-
-            </h1>
+            <div class="auth-benefits">
 
 
-            <p>
+                <div class="auth-benefit">
 
-                Ingresa el código de 6 números
-                que enviamos para verificar tu identidad.
+                    <div class="auth-benefit-icon">
+                        🔒
+                    </div>
 
-            </p>
+                    <div>
+
+                        <strong>
+                            Código temporal
+                        </strong>
+
+                        <span>
+                            El acceso solamente funciona durante un tiempo limitado.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Verificación de identidad
+                        </strong>
+
+                        <span>
+                            Tus entradas solamente se muestran después de verificar tu correo.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-benefit">
+
+                    <div class="auth-benefit-icon">
+                        🎟
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Acceso inmediato
+                        </strong>
+
+                        <span>
+                            Después de verificar el código verás tus entradas.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
 
 
         </div>
 
 
-        <div class="auth-body">
+        <!-- ==================================================
+             CODE CARD
+        =================================================== -->
+
+        <div class="auth-card">
 
 
-            <div
-                class="code-email"
-                id="codeEmailText">
+            <div class="auth-top">
+
+
+                <div class="auth-badge">
+
+                    CÓDIGO DE SEGURIDAD
+
+                </div>
+
+
+                <h2>
+
+                    Revisa tu correo
+
+                </h2>
+
+
+                <p>
+
+                    Ingresa los 6 números que te enviamos.
+
+                </p>
+
+
             </div>
 
 
-            <label class="form-label">
-
-                CÓDIGO DE SEGURIDAD
-
-            </label>
+            <div class="auth-body">
 
 
-            <input
-                type="text"
-                id="codeInput"
-                class="form-input code-input"
-                placeholder="000000"
-                inputmode="numeric"
-                autocomplete="one-time-code"
-                maxlength="6">
+                <div
+                    class="code-email"
+                    id="codeEmailText">
+                </div>
 
 
-            <button
-                class="primary-button"
-                id="verifyCodeButton"
-                onclick="verifyCode()">
+                <label class="form-label">
 
-                VER MIS ENTRADAS
+                    CÓDIGO DE SEGURIDAD
 
-            </button>
+                </label>
 
 
-            <div
-                class="auth-error"
-                id="codeError">
-            </div>
+                <input
+                    type="text"
+                    id="codeInput"
+                    class="form-input code-input"
+                    placeholder="000000"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    maxlength="6">
 
-
-            <div class="resend-row">
 
                 <button
-                    class="text-button"
-                    id="resendButton"
-                    onclick="resendCode()"
-                    disabled>
+                    type="button"
+                    class="primary-button"
+                    id="verifyCodeButton"
+                    onclick="verifyCode()">
 
-                    REENVIAR CÓDIGO EN 60s
+                    VER MIS ENTRADAS
 
                 </button>
 
-            </div>
+
+                <div
+                    class="auth-error"
+                    id="codeError">
+                </div>
 
 
-            <div class="resend-row">
+                <div class="resend-row">
 
-                <button
-                    class="text-button"
-                    onclick="changeEmail()">
+                    <button
+                        type="button"
+                        class="text-button"
+                        id="resendButton"
+                        onclick="resendCode()"
+                        disabled>
 
-                    USAR OTRO CORREO
+                        REENVIAR CÓDIGO EN 60s
 
-                </button>
+                    </button>
+
+                </div>
+
+
+                <div class="resend-row">
+
+                    <button
+                        type="button"
+                        class="text-button"
+                        onclick="changeEmail()">
+
+                        USAR OTRO CORREO
+
+                    </button>
+
+                </div>
+
 
             </div>
 
@@ -2456,6 +3578,10 @@ button {
     class="live-pass"
     id="livePass">
 
+
+<!-- ======================================================
+     LIVE PASS HERO
+====================================================== -->
 
 <section class="pass-hero">
 
@@ -2483,7 +3609,8 @@ button {
             <p>
 
                 Todos tus boletos de Live Tickets en un solo lugar.
-                Presenta el QR correspondiente al ingresar al evento.
+                Presenta el QR correspondiente al ingresar.
+                Cada código es individual y permite un solo acceso.
 
             </p>
 
@@ -2494,31 +3621,72 @@ button {
         <div class="pass-user">
 
 
-            <small>
-                TITULAR
-            </small>
+            <span class="pass-user-label">
 
-            <strong id="passName">
+                TITULAR
+
+            </span>
+
+
+            <strong
+                class="pass-user-value"
+                id="passName">
 
                 Cliente Live Tickets
 
             </strong>
 
 
-            <small
-                style="
-                    margin-top:12px;
-                ">
+            <div class="pass-user-separator">
+            </div>
 
-                CUENTA
 
-            </small>
+            <span class="pass-user-label">
 
-            <strong id="passEmail">
+                CUENTA LIVE PASS
+
+            </span>
+
+
+            <strong
+                class="pass-user-value"
+                id="passEmail">
 
                 —
 
             </strong>
+
+
+            <div class="pass-stats">
+
+
+                <div class="pass-stat">
+
+                    <strong id="passReservations">
+                        0
+                    </strong>
+
+                    <span>
+                        COMPRAS
+                    </span>
+
+                </div>
+
+
+                <div class="pass-stat">
+
+                    <strong id="passTickets">
+                        0
+                    </strong>
+
+                    <span>
+                        ENTRADAS
+                    </span>
+
+                </div>
+
+
+            </div>
 
 
         </div>
@@ -2529,6 +3697,10 @@ button {
 
 </section>
 
+
+<!-- ======================================================
+     PURCHASES
+====================================================== -->
 
 <main class="page">
 
@@ -2543,10 +3715,21 @@ button {
             </h2>
 
             <p>
-                Entradas correspondientes a compras confirmadas.
+                Aquí aparecen únicamente tus compras confirmadas.
             </p>
 
         </div>
+
+
+        <button
+            type="button"
+            class="refresh-button"
+            id="refreshButton"
+            onclick="refreshLivePass()">
+
+            ↻ ACTUALIZAR
+
+        </button>
 
 
     </div>
@@ -2559,6 +3742,52 @@ button {
 
 
 </main>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+
+    <div class="footer-content">
+
+
+        <img
+            src="LIVE_TICKETS_BLANCO.png"
+            alt="Live Tickets"
+            class="footer-logo">
+
+
+        <div class="footer-links">
+
+            <a href="index.html#eventos">
+                Eventos
+            </a>
+
+            <a href="mis-entradas.html">
+                Mis Entradas
+            </a>
+
+            <a href="index.html#como-funciona">
+                Cómo funciona
+            </a>
+
+        </div>
+
+
+        <div class="footer-copy">
+
+            © 2026 Live Tickets · Honduras
+
+        </div>
+
+
+    </div>
+
+
+</footer>
 
 
 </div>
@@ -2591,7 +3820,7 @@ const generatedQR =
 
 
 /* ==========================================================
-   HELPERS
+   ESCAPE HTML
 ========================================================== */
 
 function escapeHTML(value) {
@@ -2611,6 +3840,10 @@ function escapeHTML(value) {
 }
 
 
+/* ==========================================================
+   VALID EMAIL
+========================================================== */
+
 function validEmail(value) {
 
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -2623,6 +3856,10 @@ function validEmail(value) {
 
 }
 
+
+/* ==========================================================
+   MONEY
+========================================================== */
 
 function money(value) {
 
@@ -2644,6 +3881,10 @@ function money(value) {
 
 }
 
+
+/* ==========================================================
+   DATE
+========================================================== */
 
 function formatDate(value) {
 
@@ -2703,6 +3944,10 @@ function formatDate(value) {
 }
 
 
+/* ==========================================================
+   SHORT DATE
+========================================================== */
+
 function formatShortDate(value) {
 
     if (!value) {
@@ -2716,6 +3961,17 @@ function formatShortDate(value) {
         new Date(
             value
         );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "—";
+
+    }
 
 
     return new Intl.DateTimeFormat(
@@ -2740,6 +3996,67 @@ function formatShortDate(value) {
 
 }
 
+
+/* ==========================================================
+   SAFE JSON RESPONSE
+
+   Evita mensajes como:
+   Unexpected token...
+   cuando un servidor devuelve HTML o texto.
+========================================================== */
+
+async function readJSONResponse(response) {
+
+    const text =
+        await response.text();
+
+
+    if (!text) {
+
+        return {};
+
+    }
+
+
+    try {
+
+        return JSON.parse(
+            text
+        );
+
+    }
+
+    catch(error) {
+
+
+        console.error(
+            "Respuesta no JSON:",
+            text
+        );
+
+
+        throw new Error(
+
+            response.ok
+
+            ?
+
+            "El servidor devolvió una respuesta no válida."
+
+            :
+
+            "No fue posible completar la solicitud. Intenta nuevamente."
+
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   TOAST
+========================================================== */
 
 function showToast(
     message,
@@ -2780,6 +4097,10 @@ function showToast(
 }
 
 
+/* ==========================================================
+   ERROR
+========================================================== */
+
 function showError(
     elementId,
     message
@@ -2802,6 +4123,10 @@ function showError(
 
 }
 
+
+/* ==========================================================
+   CLEAR ERROR
+========================================================== */
 
 function clearError(
     elementId
@@ -2863,6 +4188,10 @@ function hideAllScreens() {
 }
 
 
+/* ==========================================================
+   EMAIL SCREEN
+========================================================== */
+
 function showEmailScreen() {
 
     hideAllScreens();
@@ -2874,6 +4203,14 @@ function showEmailScreen() {
         )
         .style.display =
         "none";
+
+
+    document
+        .getElementById(
+            "eventsButton"
+        )
+        .style.display =
+        "inline-flex";
 
 
     document
@@ -2902,6 +4239,10 @@ function showEmailScreen() {
 }
 
 
+/* ==========================================================
+   CODE SCREEN
+========================================================== */
+
 function showCodeScreen() {
 
     hideAllScreens();
@@ -2913,6 +4254,14 @@ function showCodeScreen() {
         )
         .style.display =
         "none";
+
+
+    document
+        .getElementById(
+            "eventsButton"
+        )
+        .style.display =
+        "inline-flex";
 
 
     document
@@ -2958,9 +4307,21 @@ function showCodeScreen() {
 }
 
 
+/* ==========================================================
+   LIVE PASS SCREEN
+========================================================== */
+
 function showLivePass() {
 
     hideAllScreens();
+
+
+    document
+        .getElementById(
+            "eventsButton"
+        )
+        .style.display =
+        "none";
 
 
     document
@@ -3050,6 +4411,9 @@ async function requestCode() {
                     method:
                         "POST",
 
+                    credentials:
+                        "same-origin",
+
                     headers:
                         {
                             "Content-Type":
@@ -3069,7 +4433,9 @@ async function requestCode() {
 
 
         const result =
-            await response.json();
+            await readJSONResponse(
+                response
+            );
 
 
         if (
@@ -3106,6 +4472,12 @@ async function requestCode() {
     }
 
     catch(error) {
+
+
+        console.error(
+            "requestCode:",
+            error
+        );
 
 
         showError(
@@ -3224,7 +4596,9 @@ async function verifyCode() {
 
 
         const result =
-            await response.json();
+            await readJSONResponse(
+                response
+            );
 
 
         if (
@@ -3247,12 +4621,28 @@ async function verifyCode() {
         );
 
 
-        await loadLivePass();
+        const loaded =
+            await loadLivePass();
+
+
+        if (!loaded) {
+
+            throw new Error(
+                "No fue posible cargar tus entradas."
+            );
+
+        }
 
 
     }
 
     catch(error) {
+
+
+        console.error(
+            "verifyCode:",
+            error
+        );
 
 
         showError(
@@ -3281,7 +4671,7 @@ async function verifyCode() {
 
 
 /* ==========================================================
-   RESEND
+   RESEND CODE
 ========================================================== */
 
 async function resendCode() {
@@ -3322,6 +4712,9 @@ async function resendCode() {
                     method:
                         "POST",
 
+                    credentials:
+                        "same-origin",
+
                     headers:
                         {
                             "Content-Type":
@@ -3341,7 +4734,9 @@ async function resendCode() {
 
 
         const result =
-            await response.json();
+            await readJSONResponse(
+                response
+            );
 
 
         if (
@@ -3391,9 +4786,17 @@ async function resendCode() {
     catch(error) {
 
 
+        console.error(
+            "resendCode:",
+            error
+        );
+
+
         showError(
             "codeError",
             error.message
+            ||
+            "No fue posible reenviar el código."
         );
 
 
@@ -3410,7 +4813,7 @@ async function resendCode() {
 
 
 /* ==========================================================
-   COUNTDOWN
+   RESEND COUNTDOWN
 ========================================================== */
 
 function startResendCountdown(seconds) {
@@ -3513,6 +4916,11 @@ function changeEmail() {
         "";
 
 
+    clearError(
+        "codeError"
+    );
+
+
     showEmailScreen();
 
 }
@@ -3563,7 +4971,9 @@ async function loadLivePass() {
 
 
         const result =
-            await response.json();
+            await readJSONResponse(
+                response
+            );
 
 
         if (
@@ -3603,6 +5013,7 @@ async function loadLivePass() {
 
 
         console.error(
+            "loadLivePass:",
             error
         );
 
@@ -3623,6 +5034,60 @@ async function loadLivePass() {
 
 
 /* ==========================================================
+   REFRESH LIVE PASS
+========================================================== */
+
+async function refreshLivePass() {
+
+    const button =
+        document
+        .getElementById(
+            "refreshButton"
+        );
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        "ACTUALIZANDO...";
+
+
+    try {
+
+
+        const success =
+            await loadLivePass();
+
+
+        if (success) {
+
+            showToast(
+                "✓ Tus entradas están actualizadas."
+            );
+
+        }
+
+
+    }
+
+    finally {
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "↻ ACTUALIZAR";
+
+    }
+
+}
+
+
+/* ==========================================================
    RENDER LIVE PASS
 ========================================================== */
 
@@ -3633,6 +5098,36 @@ function renderLivePass() {
         return;
 
     }
+
+
+    const reservations =
+        livePassData.reservas
+        ||
+        [];
+
+
+    const ticketCount =
+        reservations
+        .reduce(
+            (
+                total,
+                reservation
+            ) => {
+
+                return (
+                    total
+                    +
+                    (
+                        reservation.boletos
+                        ||
+                        []
+                    )
+                    .length
+                );
+
+            },
+            0
+        );
 
 
     document
@@ -3657,17 +5152,37 @@ function renderLivePass() {
         "—";
 
 
+    document
+        .getElementById(
+            "passReservations"
+        )
+        .textContent =
+
+        Number(
+            livePassData.cantidad_reservas
+            ??
+            reservations.length
+        );
+
+
+    document
+        .getElementById(
+            "passTickets"
+        )
+        .textContent =
+
+        Number(
+            livePassData.cantidad_boletos
+            ??
+            ticketCount
+        );
+
+
     const list =
         document
         .getElementById(
             "reservationsList"
         );
-
-
-    const reservations =
-        livePassData.reservas
-        ||
-        [];
 
 
     if (
@@ -3692,10 +5207,19 @@ function renderLivePass() {
 
                 <p>
 
-                    Cuando realices una compra con este correo,
+                    Cuando realices una compra confirmada
+                    utilizando este correo electrónico,
                     tus entradas aparecerán automáticamente aquí.
 
                 </p>
+
+                <a
+                    href="index.html#eventos"
+                    class="empty-button">
+
+                    VER EVENTOS
+
+                </a>
 
             </div>
 
@@ -3750,6 +5274,14 @@ function renderLivePass() {
                             const used =
                                 ticket.utilizado ===
                                 true;
+
+
+                            const safeToken =
+                                String(
+                                    ticket.token
+                                    ||
+                                    ""
+                                );
 
 
                             return `
@@ -3837,16 +5369,20 @@ function renderLivePass() {
 
                                             <div class="ticket-used-message">
 
-                                                ✓ Esta entrada fue utilizada
+                                                ✓ Esta entrada ya fue utilizada
+
                                                 ${
                                                     ticket.fecha_ingreso
                                                     ?
-                                                    `el ${escapeHTML(
-                                                        formatShortDate(
+
+                                                    `<br>${escapeHTML(
+                                                        formatDate(
                                                             ticket.fecha_ingreso
                                                         )
                                                     )}`
+
                                                     :
+
                                                     ""
                                                 }
 
@@ -3859,12 +5395,12 @@ function renderLivePass() {
                                         `
 
                                             <button
+                                                type="button"
                                                 class="ticket-button"
                                                 id="button-${uniqueId}"
-                                                onclick="toggleQR(
-                                                    '${uniqueId}',
-                                                    '${ticket.token}'
-                                                )">
+                                                data-qr-id="${uniqueId}"
+                                                data-token="${escapeHTML(safeToken)}"
+                                                onclick="toggleQRFromButton(this)">
 
                                                 MOSTRAR QR
 
@@ -3876,6 +5412,13 @@ function renderLivePass() {
                                                 id="panel-${uniqueId}">
 
 
+                                                <div class="qr-title">
+
+                                                    CÓDIGO DE ACCESO
+
+                                                </div>
+
+
                                                 <div
                                                     class="qr-container"
                                                     id="${uniqueId}">
@@ -3884,8 +5427,9 @@ function renderLivePass() {
 
                                                 <div class="qr-warning">
 
-                                                    No compartas este código.
-                                                    Permite un solo ingreso.
+                                                    🔒 No compartas este código QR.
+                                                    Cada entrada permite un solo ingreso
+                                                    y la primera validación será la válida.
 
                                                 </div>
 
@@ -3920,7 +5464,8 @@ function renderLivePass() {
                                     event.nombre
                                     ||
                                     "Evento"
-                                )}">
+                                )}"
+                                onerror="this.src='FLYER%201080X1350.png'">
 
 
                             <div class="event-info">
@@ -3928,7 +5473,7 @@ function renderLivePass() {
 
                                 <small>
 
-                                    COMPRA CONFIRMADA
+                                    ✓ COMPRA CONFIRMADA
 
                                 </small>
 
@@ -3978,6 +5523,7 @@ function renderLivePass() {
 
 
                                     <button
+                                        type="button"
                                         class="event-action"
                                         onclick="addToCalendar(${reservationIndex})">
 
@@ -3994,6 +5540,7 @@ function renderLivePass() {
                                         `
 
                                             <button
+                                                type="button"
                                                 class="event-action"
                                                 onclick="openLocation(${reservationIndex})">
 
@@ -4034,6 +5581,8 @@ function renderLivePass() {
 
                                         ${escapeHTML(
                                             reservation.codigo
+                                            ||
+                                            "—"
                                         )}
 
                                     </strong>
@@ -4109,6 +5658,28 @@ function renderLivePass() {
 
 
 /* ==========================================================
+   QR BUTTON
+========================================================== */
+
+function toggleQRFromButton(button) {
+
+    const id =
+        button.dataset.qrId;
+
+
+    const token =
+        button.dataset.token;
+
+
+    toggleQR(
+        id,
+        token
+    );
+
+}
+
+
+/* ==========================================================
    QR
 ========================================================== */
 
@@ -4131,7 +5702,11 @@ function toggleQR(
         );
 
 
-    if (!panel) {
+    if (
+        !panel
+        ||
+        !token
+    ) {
 
         return;
 
@@ -4193,6 +5768,13 @@ function toggleQR(
             .getElementById(
                 id
             );
+
+
+        if (!target) {
+
+            return;
+
+        }
 
 
         target.innerHTML =
@@ -4275,7 +5857,7 @@ function openLocation(
 
 
 /* ==========================================================
-   CALENDAR
+   ICS ESCAPE
 ========================================================== */
 
 function escapeICS(value) {
@@ -4292,6 +5874,10 @@ function escapeICS(value) {
 
 }
 
+
+/* ==========================================================
+   ICS DATE
+========================================================== */
 
 function formatICSDate(date) {
 
@@ -4355,6 +5941,10 @@ function formatICSDate(date) {
 }
 
 
+/* ==========================================================
+   CALENDAR
+========================================================== */
+
 function addToCalendar(
     reservationIndex
 ) {
@@ -4405,14 +5995,21 @@ function addToCalendar(
 
 
     /*
-    Duración orientativa de 4 horas.
+    Duración estimada:
+    4 horas.
     */
 
     const end =
         new Date(
             start.getTime()
             +
-            4 * 60 * 60 * 1000
+            4
+            *
+            60
+            *
+            60
+            *
+            1000
         );
 
 
@@ -4502,28 +6099,65 @@ END:VCALENDAR`;
 
 async function logoutLivePass() {
 
+    const button =
+        document
+        .getElementById(
+            "logoutButton"
+        );
+
+
+    button.disabled =
+        true;
+
+
     try {
 
 
-        await fetch(
-            "/api/cerrar-sesion-cliente",
-            {
+        const response =
+            await fetch(
+                "/api/cerrar-sesion-cliente",
+                {
 
-                method:
-                    "POST",
+                    method:
+                        "POST",
 
-                credentials:
-                    "same-origin"
+                    credentials:
+                        "same-origin"
 
-            }
-        );
+                }
+            );
+
+
+        /*
+        Intentamos leer la respuesta,
+        pero no bloqueamos el logout si falla.
+        */
+
+        try {
+
+            await readJSONResponse(
+                response
+            );
+
+        }
+
+        catch(error) {
+
+            console.warn(
+                "Respuesta logout:",
+                error
+            );
+
+        }
 
 
     }
 
     catch(error) {
 
+
         console.warn(
+            "logoutLivePass:",
             error
         );
 
@@ -4534,15 +6168,44 @@ async function logoutLivePass() {
         null;
 
 
+    activeEmail =
+        "";
+
+
     generatedQR.clear();
+
+
+    clearInterval(
+        resendTimer
+    );
+
+
+    document
+        .getElementById(
+            "emailInput"
+        )
+        .value =
+        "";
+
+
+    document
+        .getElementById(
+            "codeInput"
+        )
+        .value =
+        "";
 
 
     showEmailScreen();
 
 
     showToast(
-        "Sesión cerrada."
+        "Sesión cerrada correctamente."
     );
+
+
+    button.disabled =
+        false;
 
 }
 
@@ -4579,6 +6242,10 @@ document
         }
     );
 
+
+/* ==========================================================
+   EMAIL INPUT
+========================================================== */
 
 document
     .getElementById(
@@ -4670,6 +6337,20 @@ async function initialize() {
             showEmailScreen();
 
         }
+
+
+    }
+
+    catch(error) {
+
+
+        console.error(
+            "initialize:",
+            error
+        );
+
+
+        showEmailScreen();
 
 
     }
