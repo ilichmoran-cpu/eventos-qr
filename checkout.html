@@ -9,7 +9,13 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0">
 
-<meta name="referrer" content="no-referrer">
+<meta
+    name="theme-color"
+    content="#08101f">
+
+<meta
+    name="referrer"
+    content="no-referrer">
 
 <title>Checkout | Live Tickets</title>
 
@@ -25,7 +31,7 @@
     crossorigin>
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
 
@@ -99,6 +105,13 @@ input {
     font-family: inherit;
 }
 
+button,
+a {
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
 
 /* ==========================================================
    HEADER
@@ -115,33 +128,34 @@ input {
     background:
         rgba(8,16,31,.98);
 
+    backdrop-filter:
+        blur(18px);
+
     border-bottom:
         1px solid rgba(255,255,255,.08);
 
     box-shadow:
-        0 5px 25px rgba(0,0,0,.15);
+        0 4px 25px rgba(0,0,0,.16);
 }
 
 .nav {
 
     width: 100%;
 
-    max-width: 1250px;
+    max-width: 1450px;
 
     min-height: 76px;
 
     margin: auto;
 
     padding:
-        0 22px;
+        0 24px;
 
     display: flex;
 
     align-items: center;
 
-    justify-content: space-between;
-
-    gap: 20px;
+    gap: 28px;
 }
 
 .brand {
@@ -149,6 +163,8 @@ input {
     display: flex;
 
     align-items: center;
+
+    flex-shrink: 0;
 
     text-decoration: none;
 }
@@ -159,35 +175,131 @@ input {
 
     width: auto;
 
-    height: 48px;
+    height: 49px;
 
-    max-width: 240px;
+    max-width: 245px;
 
     object-fit: contain;
 }
 
-.secure-label {
+
+/* ==========================================================
+   NAVIGATION
+========================================================== */
+
+.nav-links {
+
+    margin-left: auto;
 
     display: flex;
 
     align-items: center;
 
-    gap: 7px;
+    gap: 26px;
+}
+
+.nav-links a {
+
+    color:
+        rgba(255,255,255,.74);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: .2s;
+}
+
+.nav-links a:hover {
+
+    color: white;
+}
+
+.nav-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.nav-pass {
+
+    min-height: 39px;
 
     padding:
-        9px 13px;
+        0 16px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
 
     border:
-        1px solid rgba(255,255,255,.16);
+        1px solid rgba(96,165,250,.35);
 
     border-radius: 999px;
 
-    color:
-        rgba(255,255,255,.78);
+    background:
+        rgba(37,99,235,.14);
+
+    color: white;
+
+    text-decoration: none;
+
+    white-space: nowrap;
 
     font-size: 10px;
 
-    font-weight: 700;
+    font-weight: 800;
+
+    transition: .2s;
+}
+
+.nav-pass:hover {
+
+    background:
+        rgba(37,99,235,.28);
+}
+
+.secure-label {
+
+    min-height: 39px;
+
+    padding:
+        0 14px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    border-radius:
+        999px;
+
+    color:
+        rgba(255,255,255,.82);
+
+    white-space:
+        nowrap;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
 }
 
 
@@ -218,9 +330,11 @@ input {
     background-image:
         url("FLYER%201080X1350.png");
 
-    background-size: cover;
+    background-size:
+        cover;
 
-    background-position: center;
+    background-position:
+        center;
 
     filter:
         blur(35px);
@@ -228,7 +342,8 @@ input {
     transform:
         scale(1.2);
 
-    opacity: .35;
+    opacity:
+        .35;
 }
 
 .checkout-hero-overlay {
@@ -238,6 +353,7 @@ input {
     inset: 0;
 
     background:
+
         linear-gradient(
             90deg,
             rgba(5,10,20,.98),
@@ -325,26 +441,166 @@ input {
 
 .hero-poster {
 
-    flex: 0 0 auto;
+    flex:
+        0 0 auto;
 
-    width: 105px;
+    width:
+        105px;
 
-    aspect-ratio: 4 / 5;
+    aspect-ratio:
+        4 / 5;
 
-    border-radius: 12px;
+    border-radius:
+        12px;
 
     background-image:
         url("FLYER%201080X1350.png");
 
-    background-size: cover;
+    background-size:
+        cover;
 
-    background-position: center;
+    background-position:
+        center;
 
     box-shadow:
         0 15px 35px rgba(0,0,0,.35);
 
     border:
         1px solid rgba(255,255,255,.12);
+}
+
+
+/* ==========================================================
+   TRUST STRIP
+========================================================== */
+
+.trust-wrapper {
+
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin:
+        -21px auto 0;
+
+    position:
+        relative;
+
+    z-index:
+        20;
+
+    padding:
+        0 20px;
+}
+
+.trust-strip {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    background:
+        white;
+
+    border:
+        1px solid #e5e9ef;
+
+    border-radius:
+        15px;
+
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.10);
+
+    overflow:
+        hidden;
+}
+
+.trust-item {
+
+    min-height:
+        60px;
+
+    padding:
+        12px 15px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        9px;
+
+    border-right:
+        1px solid #edf0f4;
+}
+
+.trust-item:last-child {
+
+    border-right:
+        none;
+}
+
+.trust-icon {
+
+    width:
+        30px;
+
+    height:
+        30px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        9px;
+
+    background:
+        #eff6ff;
+
+    color:
+        #2563eb;
+
+    font-size:
+        13px;
+}
+
+.trust-item strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        2px;
+
+    font-size:
+        9px;
+}
+
+.trust-item span {
+
+    display:
+        block;
+
+    color:
+        #667085;
+
+    font-size:
+        7px;
 }
 
 
@@ -361,7 +617,7 @@ input {
     margin: auto;
 
     padding:
-        34px 20px 80px;
+        55px 20px 80px;
 }
 
 .checkout-layout {
@@ -369,7 +625,8 @@ input {
     display: grid;
 
     grid-template-columns:
-        minmax(0,1fr) 360px;
+        minmax(0,1fr)
+        360px;
 
     gap: 22px;
 
@@ -675,8 +932,7 @@ input {
     border:
         1px solid #e5e9ef;
 
-    border-radius:
-        21px;
+    border-radius: 21px;
 
     overflow:
         hidden;
@@ -768,6 +1024,62 @@ input {
 .order-total strong {
 
     font-size: 27px;
+}
+
+
+/* ==========================================================
+   PURCHASE SECURITY
+========================================================== */
+
+.purchase-security {
+
+    margin-top:
+        18px;
+
+    padding:
+        13px;
+
+    display:
+        grid;
+
+    gap:
+        9px;
+
+    background:
+        #f8fafc;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        12px;
+}
+
+.purchase-security-row {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    color:
+        #475569;
+
+    font-size:
+        8px;
+
+    line-height:
+        1.4;
+}
+
+.purchase-security-row strong {
+
+    color:
+        #111827;
 }
 
 
@@ -1009,11 +1321,9 @@ input {
     text-align:
         center;
 
-    font-size:
-        8px;
+    font-size: 8px;
 
-    line-height:
-        1.55;
+    line-height: 1.55;
 }
 
 
@@ -1028,7 +1338,7 @@ input {
     margin-bottom: 22px;
 
     padding:
-        26px;
+        28px;
 
     background:
         linear-gradient(
@@ -1076,8 +1386,7 @@ input {
     border-radius:
         50%;
 
-    font-size:
-        25px;
+    font-size: 25px;
 
     font-weight: 800;
 }
@@ -1090,8 +1399,7 @@ input {
     color:
         #166534;
 
-    font-size:
-        23px;
+    font-size: 23px;
 }
 
 .success-card p {
@@ -1105,11 +1413,78 @@ input {
     color:
         #4b5563;
 
-    font-size:
-        11px;
+    font-size: 11px;
 
-    line-height:
-        1.6;
+    line-height: 1.6;
+}
+
+.success-actions {
+
+    margin-top:
+        18px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        9px;
+}
+
+.success-button {
+
+    min-height:
+        43px;
+
+    padding:
+        0 16px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        10px;
+
+    background:
+        #166534;
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        9px;
+
+    font-weight:
+        800;
+}
+
+.success-button-secondary {
+
+    background:
+        white;
+
+    color:
+        #166534;
+
+    border:
+        1px solid #bbf7d0;
 }
 
 
@@ -1233,8 +1608,7 @@ input {
     font-size:
         11px;
 
-    line-height:
-        1.6;
+    line-height: 1.6;
 }
 
 .back-button {
@@ -1953,9 +2327,7 @@ input {
 
         transform:
             rotate(360deg);
-
     }
-
 }
 
 .loader strong {
@@ -2038,6 +2410,36 @@ input {
         contain;
 }
 
+.footer-links {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        18px;
+}
+
+.footer-links a {
+
+    color:
+        rgba(255,255,255,.55);
+
+    text-decoration:
+        none;
+
+    font-size:
+        8px;
+}
+
+.footer-links a:hover {
+
+    color:
+        white;
+}
+
 .footer-copy {
 
     color:
@@ -2047,7 +2449,7 @@ input {
         right;
 
     font-size:
-        9px;
+        8px;
 }
 
 
@@ -2077,7 +2479,6 @@ input {
         grid-template-columns:
             1fr;
     }
-
 }
 
 
@@ -2085,7 +2486,7 @@ input {
    MOBILE
 ========================================================== */
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
 
     .nav {
 
@@ -2093,22 +2494,49 @@ input {
             64px;
 
         padding:
-            0 14px;
+            0 12px;
+
+        gap:
+            7px;
     }
 
     .brand-logo {
 
         height:
-            35px;
+            34px;
 
         max-width:
-            180px;
+            165px;
+    }
+
+    .nav-links {
+
+        display:
+            none;
+    }
+
+    .nav-actions {
+
+        margin-left:
+            auto;
+
+        gap:
+            5px;
     }
 
     .secure-label {
 
+        display:
+            none;
+    }
+
+    .nav-pass {
+
+        min-height:
+            36px;
+
         padding:
-            8px 10px;
+            0 10px;
 
         font-size:
             8px;
@@ -2150,10 +2578,49 @@ input {
             8px;
     }
 
+    .trust-wrapper {
+
+        margin-top:
+            -18px;
+
+        padding:
+            0 11px;
+    }
+
+    .trust-strip {
+
+        grid-template-columns:
+            1fr;
+
+        border-radius:
+            13px;
+    }
+
+    .trust-item {
+
+        min-height:
+            51px;
+
+        justify-content:
+            flex-start;
+
+        border-right:
+            none;
+
+        border-bottom:
+            1px solid #edf0f4;
+    }
+
+    .trust-item:last-child {
+
+        border-bottom:
+            none;
+    }
+
     .page {
 
         padding:
-            18px 11px 55px;
+            35px 11px 55px;
     }
 
     .card {
@@ -2234,12 +2701,20 @@ input {
             13px;
     }
 
+    .footer-links {
+
+        flex-wrap:
+            wrap;
+
+        gap:
+            11px;
+    }
+
     .footer-copy {
 
         text-align:
             left;
     }
-
 }
 
 </style>
@@ -2284,6 +2759,7 @@ input {
 
     <div class="nav">
 
+
         <a
             href="index.html"
             class="brand">
@@ -2296,11 +2772,40 @@ input {
         </a>
 
 
-        <div class="secure-label">
+        <nav class="nav-links">
 
-            🔒 CHECKOUT SEGURO
+            <a href="index.html#eventos">
+                Eventos
+            </a>
+
+            <a href="index.html#live-pass">
+                Live Pass
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+
+            <div class="secure-label">
+
+                🔒 CHECKOUT SEGURO
+
+            </div>
+
+
+            <a
+                href="mis-entradas.html"
+                class="nav-pass">
+
+                🎟 MIS ENTRADAS
+
+            </a>
+
 
         </div>
+
 
     </div>
 
@@ -2313,7 +2818,9 @@ input {
 
 <section class="checkout-hero">
 
-    <div class="checkout-hero-bg">
+    <div
+        class="checkout-hero-bg"
+        id="checkoutHeroBg">
     </div>
 
     <div class="checkout-hero-overlay">
@@ -2348,13 +2855,92 @@ input {
         </div>
 
 
-        <div class="hero-poster">
+        <div
+            class="hero-poster"
+            id="heroPoster">
         </div>
 
 
     </div>
 
 </section>
+
+
+<!-- ======================================================
+     TRUST
+====================================================== -->
+
+<div class="trust-wrapper">
+
+    <div class="trust-strip">
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                🔒
+            </div>
+
+            <div>
+
+                <strong>
+                    Compra protegida
+                </strong>
+
+                <span>
+                    Proceso seguro de Live Tickets
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                🎟
+            </div>
+
+            <div>
+
+                <strong>
+                    Entrada digital
+                </strong>
+
+                <span>
+                    QR individual por cada asiento
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <div class="trust-icon">
+                ✉
+            </div>
+
+            <div>
+
+                <strong>
+                    Entrega digital
+                </strong>
+
+                <span>
+                    Tus entradas llegan a tu correo
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
 
 
 <!-- ======================================================
@@ -2392,11 +2978,33 @@ input {
 
     </p>
 
+
     <div
         class="email-success"
         id="emailSuccess">
 
         ✓ Entradas enviadas al correo del comprador.
+
+    </div>
+
+
+    <div class="success-actions">
+
+        <a
+            href="mis-entradas.html"
+            class="success-button">
+
+            🎟 ABRIR MIS ENTRADAS
+
+        </a>
+
+        <a
+            href="index.html#eventos"
+            class="success-button success-button-secondary">
+
+            VER MÁS EVENTOS
+
+        </a>
 
     </div>
 
@@ -2432,7 +3040,7 @@ input {
     </p>
 
     <a
-        href="index.html"
+        href="index.html#eventos"
         class="back-button">
 
         VER EVENTOS
@@ -2682,7 +3290,7 @@ input {
 
         <p>
 
-            Modo de prueba temporal.
+            Revisa el total antes de continuar.
 
         </p>
 
@@ -2727,6 +3335,50 @@ input {
             <strong id="orderTotal">
                 L 0.00
             </strong>
+
+        </div>
+
+
+        <div class="purchase-security">
+
+            <div class="purchase-security-row">
+
+                <span>
+                    ✓
+                </span>
+
+                <div>
+                    <strong>Entrada digital oficial</strong>
+                    de Live Tickets.
+                </div>
+
+            </div>
+
+            <div class="purchase-security-row">
+
+                <span>
+                    ✓
+                </span>
+
+                <div>
+                    <strong>QR individual</strong>
+                    para cada asiento comprado.
+                </div>
+
+            </div>
+
+            <div class="purchase-security-row">
+
+                <span>
+                    ✓
+                </span>
+
+                <div>
+                    Recupera tus boletos posteriormente desde
+                    <strong>Mis Entradas.</strong>
+                </div>
+
+            </div>
 
         </div>
 
@@ -2900,18 +3552,36 @@ input {
 
     <div class="footer-content">
 
+
         <img
             src="LIVE_TICKETS_BLANCO.png"
             alt="Live Tickets"
             class="footer-logo">
 
 
-        <div class="footer-copy">
+        <div class="footer-links">
 
-            © 2026 Live Tickets.
-            Todos los derechos reservados.
+            <a href="index.html#eventos">
+                Eventos
+            </a>
+
+            <a href="mis-entradas.html">
+                Mis Entradas
+            </a>
+
+            <a href="index.html#live-pass">
+                Live Pass
+            </a>
 
         </div>
+
+
+        <div class="footer-copy">
+
+            © 2026 Live Tickets · Honduras
+
+        </div>
+
 
     </div>
 
@@ -2934,6 +3604,10 @@ const SUPABASE_KEY =
 
 const ADMIN_DOMAIN =
     "admin.liveticketshn.com";
+
+
+const DEFAULT_FLYER =
+    "FLYER%201080X1350.png";
 
 
 const db =
@@ -3129,7 +3803,7 @@ function formatEventDate(value) {
     }
 
 
-    return date.toLocaleDateString(
+    return new Intl.DateTimeFormat(
         "es-HN",
         {
             weekday:
@@ -3142,9 +3816,64 @@ function formatEventDate(value) {
                 "long",
 
             year:
-                "numeric"
+                "numeric",
+
+            timeZone:
+                "America/Tegucigalpa"
         }
+    )
+    .format(
+        date
     );
+
+}
+
+
+/* ==========================================================
+   ACTUALIZAR IMAGEN
+========================================================== */
+
+function updateEventImage() {
+
+    const image =
+        getValue(
+            reservation,
+            [
+                "flyer_url",
+                "evento_flyer_url",
+                "imagen",
+                "imagen_url"
+            ],
+            DEFAULT_FLYER
+        );
+
+
+    const heroBackground =
+        document.getElementById(
+            "checkoutHeroBg"
+        );
+
+
+    const heroPoster =
+        document.getElementById(
+            "heroPoster"
+        );
+
+
+    if (heroBackground) {
+
+        heroBackground.style.backgroundImage =
+            `url("${image}")`;
+
+    }
+
+
+    if (heroPoster) {
+
+        heroPoster.style.backgroundImage =
+            `url("${image}")`;
+
+    }
 
 }
 
@@ -3316,15 +4045,6 @@ async function loginTestAdmin() {
 
     let internalEmail;
 
-
-    /*
-    Permite:
-
-    admin1
-
-    o también un correo completo
-    de un administrador existente.
-    */
 
     if (
         username.includes("@")
@@ -3815,6 +4535,9 @@ function renderReservation() {
         );
 
 
+    updateEventImage();
+
+
     if (
         status === "pagada" ||
         status === "pagado" ||
@@ -4200,10 +4923,6 @@ function updatePayButton() {
 async function simulatePayment() {
 
 
-    /* ========================================================
-       VALIDAR ADMIN
-    ======================================================== */
-
     if (!isTestAdmin) {
 
         alert(
@@ -4214,10 +4933,6 @@ async function simulatePayment() {
 
     }
 
-
-    /* ========================================================
-       CONFIRMACIÓN
-    ======================================================== */
 
     const confirmed =
 
@@ -4259,10 +4974,6 @@ async function simulatePayment() {
 
     try {
 
-
-        /* ====================================================
-           1. CONFIRMAR PAGO
-        ==================================================== */
 
         const {
             data,
@@ -4315,10 +5026,6 @@ async function simulatePayment() {
         );
 
 
-        /* ====================================================
-           2. ACTUALIZAR RESERVA Y MOSTRAR QR
-        ==================================================== */
-
         button.textContent =
             "GENERANDO ENTRADAS...";
 
@@ -4327,10 +5034,6 @@ async function simulatePayment() {
             false
         );
 
-
-        /* ====================================================
-           3. OBTENER SESIÓN ADMIN
-        ==================================================== */
 
         const {
             data: sessionData,
@@ -4372,10 +5075,6 @@ async function simulatePayment() {
 
         }
 
-
-        /* ====================================================
-           4. LLAMAR API DE CORREO
-        ==================================================== */
 
         let emailResponse;
 
@@ -4442,10 +5141,6 @@ async function simulatePayment() {
         }
 
 
-        /* ====================================================
-           5. LEER RESPUESTA
-        ==================================================== */
-
         let emailResult;
 
 
@@ -4481,10 +5176,6 @@ async function simulatePayment() {
             emailResult
         );
 
-
-        /* ====================================================
-           6. EMAIL EXITOSO
-        ==================================================== */
 
         if (
             emailResponse.ok &&
@@ -4550,10 +5241,6 @@ async function simulatePayment() {
         }
 
 
-        /* ====================================================
-           7. RESERVA SIN EMAIL
-        ==================================================== */
-
         if (
             emailResult.code ===
             "MISSING_EMAIL"
@@ -4577,10 +5264,6 @@ async function simulatePayment() {
         }
 
 
-        /* ====================================================
-           8. OTRO ERROR EMAIL
-        ==================================================== */
-
         console.error(
             "Correo:",
             emailResult
@@ -4594,11 +5277,13 @@ async function simulatePayment() {
             "⚠ Hubo un problema enviando el correo.\n\n" +
 
             (
+
                 emailResult.message
 
                 ||
 
                 "El servidor de correo devolvió un error."
+
             )
 
             +
@@ -4624,11 +5309,13 @@ async function simulatePayment() {
             "No fue posible confirmar el pago.\n\n" +
 
             (
+
                 error.message
 
                 ||
 
                 "Error desconocido."
+
             )
 
         );
@@ -4642,12 +5329,8 @@ async function simulatePayment() {
     finally {
 
 
-        /*
-        Si por alguna razón continúa pendiente,
-        habilitamos nuevamente según permisos.
-        */
-
         if (
+
             reservation
 
             &&
@@ -4656,6 +5339,7 @@ async function simulatePayment() {
                 reservation.estado
             ) ===
             "pendiente_pago"
+
         ) {
 
             updatePayButton();
