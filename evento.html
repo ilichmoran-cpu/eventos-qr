@@ -1495,8 +1495,7 @@ a {
     color:
         #98a2b3;
 
-    text-align:
-        center;
+    text-align: center;
 
     font-size: 8px;
 
@@ -2656,10 +2655,6 @@ a {
     <div class="map-wrapper">
 
 
-        <!-- ==================================================
-             ZOOM CONTROLS
-        =================================================== -->
-
         <div class="zoom-controls">
 
 
@@ -2716,10 +2711,6 @@ a {
 
         </div>
 
-
-        <!-- ==================================================
-             MAP SCROLL
-        =================================================== -->
 
         <div
             class="map-scroll"
@@ -2982,8 +2973,6 @@ a {
         <div class="modal-content">
 
 
-            <!-- NOMBRE -->
-
             <div class="form-group">
 
                 <label>
@@ -3015,8 +3004,6 @@ a {
 
             </div>
 
-
-            <!-- TELÉFONO -->
 
             <div class="form-group">
 
@@ -3057,8 +3044,6 @@ a {
             </div>
 
 
-            <!-- EMAIL -->
-
             <div class="form-group">
 
                 <label>
@@ -3094,8 +3079,6 @@ a {
             </div>
 
 
-            <!-- EMAIL INFO -->
-
             <div class="email-notice">
 
 
@@ -3128,8 +3111,6 @@ a {
 
             </div>
 
-
-            <!-- ORDER -->
 
             <div class="modal-order">
 
@@ -3274,8 +3255,13 @@ let refreshing =
 /* ==========================================================
    ZOOM CONFIG
 
+   MÓVIL:
+   inicia = 20%
+
+   WEB:
+   inicia = 70%
+
    mínimo = 20%
-   normal = 100%
    máximo = 180%
 ========================================================== */
 
@@ -3289,6 +3275,18 @@ const ZOOM_MAX =
 
 const ZOOM_STEP =
     0.10;
+
+
+const MOBILE_BREAKPOINT =
+    700;
+
+
+const MOBILE_DEFAULT_ZOOM =
+    0.20;
+
+
+const DESKTOP_DEFAULT_ZOOM =
+    0.70;
 
 
 let currentZoom =
@@ -3317,6 +3315,27 @@ let pinchContentX =
 
 let pinchContentY =
     0;
+
+
+/* ==========================================================
+   DEFAULT ZOOM SEGÚN DISPOSITIVO
+========================================================== */
+
+function getDefaultZoom() {
+
+    if (
+        window.innerWidth <=
+        MOBILE_BREAKPOINT
+    ) {
+
+        return MOBILE_DEFAULT_ZOOM;
+
+    }
+
+
+    return DESKTOP_DEFAULT_ZOOM;
+
+}
 
 
 /* ==========================================================
@@ -4713,12 +4732,15 @@ function zoomOut() {
 
 /* ==========================================================
    RESET ZOOM
+
+   móvil = 20%
+   web = 70%
 ========================================================== */
 
 function resetZoom() {
 
     applyZoom(
-        1
+        getDefaultZoom()
     );
 
 }
@@ -6026,6 +6048,9 @@ function showPageError(message) {
 
 /* ==========================================================
    INITIALIZE
+
+   móvil = 20%
+   web = 70%
 ========================================================== */
 
 async function initialize() {
@@ -6045,15 +6070,19 @@ async function initialize() {
         setupPinchZoom();
 
 
+        const initialZoom =
+            getDefaultZoom();
+
+
         currentZoom =
-            1;
+            initialZoom;
 
 
         requestAnimationFrame(
             () => {
 
                 applyZoom(
-                    1,
+                    initialZoom,
                     false
                 );
 
